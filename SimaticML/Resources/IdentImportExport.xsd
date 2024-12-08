@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright © Siemens AG 2008-2023. All rights reserved. -->
+
+<!-- Mit XMLSpy v2015 rel. 4 sp1 (x64) (http://www.altova.com) von Tom Bola (Siemens AG) bearbeitet -->
+<xs:schema xmlns="http://www.siemens.com/automation/2010/IdentExportImport" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ident="http://www.siemens.com/automation/2010/IECPL" targetNamespace="http://www.siemens.com/automation/2010/IECPL" elementFormDefault="qualified">
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:element name="Ident" type="ident:IdentType"/>
+  <!-- Ident ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="IdentType">
+    <xs:sequence>
+      <xs:element name="CrossRefInfo" type="ident:CrossRefInfoType" minOccurs="0"/>
+      <xs:element name="Access" type="ident:AccessType"/>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="Scope" type="xs:string" use="required"/>
+    <xs:attribute name="RefId" type="xs:int"/>
+    <xs:attribute name="Version" type="ident:IdentVersionT" use="required"/>
+    <xs:attribute name="FailSafe" type="xs:string" use="optional"/>
+    <xs:attribute name="IdentState" type="xs:long" use="optional"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- CrossRefInfo +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="CrossRefInfoType">
+    <xs:sequence>
+      <xs:element name="XRefItem" type="ident:XRefItemType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- XRefItem +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="XRefItemType">
+    <xs:attribute name="UId" type="xs:int" use="required"/>
+    <xs:attribute name="Usage" type="xs:string" use="required"/>
+    <xs:attribute name="NetId" type="xs:int" use="optional"/>
+    <xs:attribute name="LineNo" type="xs:int" use="optional" default="0"/>
+    <xs:attribute name="Instruction" type="xs:int" use="optional" default="0"/>
+    <xs:attribute name="Name" type="xs:string" use="optional" default=""/>
+    <xs:attribute name="XRefHidden" type="xs:string" use="optional" default="false"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- Access +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="AccessType">
+    <xs:choice minOccurs="0">
+      <!--Idents of base type "Ident" have no access-->
+      <xs:element name="Address" type="ident:AddressType"/>
+      <xs:element name="Alarm" type="ident:AlarmType"/>
+      <xs:element name="BlockInterfaceInfo" type="ident:BlockInterfaceInfoType"/>
+      <xs:element name="Constant" type="ident:ConstantType"/>
+      <xs:element name="Expression" type="ident:ExpressionType"/>
+      <xs:element name="GlobalAccess" type="ident:GlobalAccessType"/>
+      <xs:element name="InterfaceAccess" type="ident:InterfaceAccessType"/>
+      <xs:element name="SimaticStorage" type="ident:SimaticStorageType"/>
+      <xs:element name="Instruction" type="ident:InstructionType"/>
+      <xs:element name="Label"/>
+      <xs:element name="ThisBlock"/>
+      <xs:element name="MultiInstanceAccess" type="ident:MultiInstAccessType"/>
+      <xs:element name="SimpleAccess" type="ident:SimpleAccessType"/>
+      <xs:element name="FBBlock" type="ident:FBBlockType"/>
+      <xs:element name="FCBlock" type="ident:FCBlockType"/>
+      <xs:element name="OBBlock" type="ident:OBBlockType"/>
+      <xs:element name="CBBlock" type="ident:CBBlockType"/>
+      <xs:element name="MTHBlock" type="ident:MTHBlockType"/>
+      <xs:element name="AufDBBlock" type="ident:AufDBBlockType"/>
+      <xs:element name="DepDBBlock" type="ident:DepDBBlockType"/>
+      <xs:element name="Ident" type="ident:EmptyIdentType"/>
+      <xs:element name="StructuredTagAccess" type="ident:StructuredTagAccessType"/>
+      <xs:element name="DataTypeBlock" type="ident:DataTypeBlockType"/>
+      <xs:element name="DirectType" type="ident:DirectTypeType"/>
+      <xs:element name="DataTypeAccess" type="ident:DataTypeAccessType"/>
+      <xs:element name="ReferenceOperand" type="ident:ReferenceOperandType"/>
+      <xs:element name="FBTBlock" type="ident:FBTBlockType"/>
+      <xs:element name="IndirectDBAccess" type="ident:IndirectDBAccessType"/>
+      <xs:element name="NamedValueType" type="ident:NamedValueTypeType"/>
+      <xs:element name="NamedValue" type="ident:NamedValueType"/>
+    </xs:choice>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- Address ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="AddressType">
+    <xs:sequence>
+      <!--SimaticStorage ident-->
+      <xs:element name="Ident" type="ident:IdentType"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="ident:TypeData_T"/>
+    <xs:attribute name="Type" type="xs:string" use="required"/>
+    <xs:attribute name="TypeName" type="xs:string" use="required"/>
+    <xs:attribute name="RId" type="xs:int" use="required"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- Alarm ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="AlarmType">
+    <xs:sequence>
+      <!--InstanceRefId ident (CodeBlockOperand or MultiInstAccess)-->
+      <xs:element name="Ident" type="ident:IdentType" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="ident:TypeData_T"/>
+    <xs:attribute name="BlockParameterInfoName" type="xs:string" use="required"/>
+    <xs:attribute name="Type" type="xs:string" use="required"/>
+    <xs:attribute name="TypeName" type="xs:string" use="required"/>
+    <xs:attribute name="RId" type="xs:int" use="required"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- BlockInterfaceInfo +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="BlockInterfaceInfoType">
+    <xs:sequence>
+      <xs:element name="Parameter" type="ident:ParameterType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Ident" type="ident:IdentType"/>
+      <!--TypeOperand ident-->
+    </xs:sequence>
+    <xs:attribute name="ParameterModifiedTS" type="xs:string" use="required"/>
+    <xs:attribute name="StructureModifiedTS" type="xs:string" use="required"/>
+    <xs:attribute name="CreationId" type="xs:string" use="required"/>
+    <xs:attribute name="BlockType" type="xs:string" use="required"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- Parameter ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="ParameterType">
+    <xs:attributeGroup ref="ident:TypeData_T"/>
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="Section" type="xs:string" use="required"/>
+    <xs:attribute name="Area" type="xs:string" use="optional"/>
+    <xs:attribute name="Type" type="xs:string" use="required"/>
+    <xs:attribute name="InterfaceFlags" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- Constant +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="ConstantType">
+    <xs:attributeGroup ref="ident:TypeData_T"/>
+    <xs:attribute name="Type" type="xs:string" use="required"/>
+    <xs:attribute name="TypeName" type="xs:string" use="required"/>
+    <xs:attribute name="RId" type="xs:int" use="required"/>
+    <xs:attribute name="Format" type="xs:string" use="required"/>
+    <xs:attribute name="Value" type="xs:string" use="required"/>
+    <xs:attribute name="ValueString" type="xs:string" use="optional"/>
+    <xs:attribute name="FormatFlags" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- Expression +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="ExpressionType">
+    <xs:attributeGroup ref="ident:TypeData_T"/>
+      <xs:attribute name="SCL_UId" type="xs:int" use="required"/>
+      <xs:attribute name="ConstantValue" type="xs:int" use="optional"/>
+      <xs:attribute name="Type" type="xs:string" use="required"/>
+      <xs:attribute name="TypeName" type="xs:string" use="required"/>
+      <xs:attribute name="RId" type="xs:int" use="required"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- GlobalAccess +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="GlobalAccessType">
+    <xs:complexContent>
+        <xs:extension base="ident:SimaticStorageType">
+        <xs:attributeGroup ref="ident:TypeData_T"/>
+            <xs:attribute name="DbNumber" type="xs:unsignedInt" use="required"/>
+            <xs:attribute name="AccessedArea" type="xs:string" use="optional"/>
+            <xs:attribute name="AbsOffset" type="xs:unsignedInt" use="required"/>
+            <xs:attribute name="Type" type="xs:string" use="required"/>
+            <xs:attribute name="TypeName" type="xs:string" use="required"/>
+            <xs:attribute name="RId" type="xs:int" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- DataTypeAccess +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="DataTypeAccessType">
+    <xs:complexContent>
+        <xs:extension base="ident:SimaticStorageType">
+        <xs:attributeGroup ref="ident:TypeData_T"/>
+            <xs:attribute name="AbsOffset" type="xs:unsignedInt" use="required"/>
+            <xs:attribute name="Type" type="xs:string" use="required"/>
+            <xs:attribute name="TypeName" type="xs:string" use="required"/>
+            <xs:attribute name="RId" type="xs:int" use="required"/>
+        </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- InterfaceAccess +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="InterfaceAccessType">
+    <xs:complexContent>
+      <xs:extension base="ident:SimaticStorageType">
+        <xs:attributeGroup ref="ident:TypeData_T"/>
+            <xs:attribute name="AbsOffset" type="xs:unsignedInt" use="required"/>
+        <xs:attribute name="Type" type="xs:string" use="required"/>
+        <xs:attribute name="TypeName" type="xs:string" use="required"/>
+        <xs:attribute name="RId" type="xs:int" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- SimaticStorage +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="SimaticStorageType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="AccessObject" type="ident:AccessObjectType"/>
+    </xs:sequence>
+    <xs:attribute name="AccessModifier" type="xs:string" use="required"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- AccessObject +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="AccessObjectType">
+    <xs:sequence>
+      <!--Indexes of an access object-->
+      <xs:element name="Ident" type="ident:IdentType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="ident:TypeData_T"/>
+    <xs:attributeGroup ref="ident:ArrayTypeData_T"/>
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="Type" type="xs:string" use="required"/>
+    <xs:attribute name="ArrayType" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>For an array access the attribute contains the arraytype</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="DerefFlags" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Info for dereferencing the access</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <!--Path element of an access object-->
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- Instruction ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="InstructionUsages_Type">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="InstructionUsage" type="ident:InstructionUsage_Type"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InstructionUsage_Type">
+    <xs:annotation>
+      <xs:documentation>Saves implementation and template value selection for a specific location of a instruction ident</xs:documentation>
+    </xs:annotation>
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="Location" type="ident:Location_Type"/>
+      <xs:element name="ImplementationDetails" type="ident:ImplementationDetails_Type"/>
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TemplateValue" type="ident:TemplateValue_Type"/>
+      </xs:sequence>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Location_Type">
+    <xs:attribute name="NetId" type="xs:integer" use="required"/>
+    <xs:attribute name="UId" type="xs:integer" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="TemplateValue_Type">
+    <xs:attribute name="TemplateType" type="xs:string" use="required"/>
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="Value" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="ImplementationDetails_Type">
+    <xs:sequence minOccurs="0">
+      <xs:element name="DetailsBlock">
+        <xs:complexType>
+          <xs:attribute name="Number" type="xs:integer" use="required"/>
+          <xs:attribute name="OrigPartName" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Type" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="LibraryParameterType">
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="Section" type="xs:string" use="required"/>
+    <xs:attribute name="Type" type="xs:string" use="required"/>
+    <xs:attribute name="TemplateReference" type="xs:string" use="optional"/>
+    <xs:attribute name="TemplateCardinality" type="xs:string" use="optional"/>
+    <xs:attribute name="InterfaceFlags" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="TemplateParameterInfoType">
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="Min" type="xs:integer" use="required"/>
+    <xs:attribute name="Max" type="xs:integer" use="required"/>
+    <xs:attribute name="Type" type="xs:string" use="required"/>
+    <xs:attribute name="Pos" type="xs:string" use="required"/>
+    <xs:attribute name="Visible" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="InstructionType">
+    <xs:sequence>
+      <xs:element name="Parameter" type="ident:LibraryParameterType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="TemplateParameterInfo" type="ident:TemplateParameterInfoType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="InstructionUsages" type="ident:InstructionUsages_Type" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="LibraryObjId" type="xs:string" use="required"/>
+    <xs:attribute name="VersionId" type="xs:string" use="required"/>
+    <xs:attribute name="NeedsInstance" type="xs:string" use="optional"/>
+    <xs:attribute name="CompatibleVersionId" type="xs:string" use="optional"/>
+    <xs:attribute name="SymbolInformation" type="xs:integer" use="optional"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- MultiInstAccess ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="MultiInstAccessType">
+    <xs:complexContent>
+      <xs:extension base="ident:SimaticStorageType">
+        <xs:attributeGroup ref="ident:TypeData_T"/>
+        <xs:attribute name="ClassicAbsOffset" type="xs:unsignedInt" use="required"/>
+        <xs:attribute name="RetainAbsOffset" type="xs:unsignedInt" use="required"/>
+        <xs:attribute name="VolatileAbsOffset" type="xs:unsignedInt" use="required"/>
+        <xs:attribute name="AbsOffset" type="xs:unsignedInt" use="required"/>
+        <xs:attribute name="Type" type="xs:string" use="required"/>
+        <xs:attribute name="TypeName" type="xs:string" use="required"/>
+        <xs:attribute name="RId" type="xs:int" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- SimpleAccess +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="SimpleAccessType">
+    <xs:attributeGroup ref="ident:TypeData_T"/>
+      <xs:attribute name="Type" type="xs:string" use="required"/>
+      <xs:attribute name="TypeName" type="xs:string" use="required"/>
+      <xs:attribute name="RId" type="xs:int" use="required"/>
+      <xs:attribute name="Range" type="xs:string" use="required"/>
+      <xs:attribute name="AbsOffset" type="xs:unsignedInt" use="required"/>
+      <xs:attribute name="AccessModifier" type="xs:string" use="required"/>
+      <xs:attribute name="SimpleAccessModifier" type="xs:string" use="required"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- StructuredTagAccess +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="StructuredTagAccessType">
+    <xs:complexContent>
+        <xs:extension base="ident:SimaticStorageType">
+        <xs:attributeGroup ref="ident:TypeData_T"/>
+            <xs:attribute name="AbsOffset" type="xs:unsignedInt" use="required"/>
+            <xs:attribute name="Range" type="xs:string" use="required"/>
+            <xs:attribute name="SimpleAccessModifier" type="xs:string" use="required"/>
+            <xs:attribute name="UDTName" type="xs:string" use="required"/>
+            <xs:attribute name="Type" type="xs:string" use="required"/>
+            <xs:attribute name="TypeName" type="xs:string" use="required"/>
+            <xs:attribute name="RId" type="xs:int" use="required"/>
+        </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- TypeOperand ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="TypeOperandType">
+    <xs:attributeGroup ref="ident:TypeData_T"/>
+      <xs:attribute name="BlockNumber" type="xs:unsignedInt" use="required"/>
+      <xs:attribute name="BlockType" type="xs:string" use="required"/>
+      <xs:attribute name="Type" type="xs:string" use="required"/>
+      <xs:attribute name="TypeName" type="xs:string" use="required"/>
+      <xs:attribute name="RId" type="xs:int" use="required"/>
+      <xs:attribute name="StructureModifiedTS" type="xs:string" use="required"/>
+      <xs:attribute name="TrackingGuid" type="xs:string" use="optional"/>  
+    <xs:attribute name="VersionId" type="xs:string" use="optional"/>
+      <xs:attribute name="TypeObjectId" type="xs:string" use="optional"/>
+    <xs:attribute name="HasNamespace" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- FBBlock ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="FBBlockType">
+    <xs:complexContent>
+      <xs:extension base="ident:TypeOperandType">
+          <xs:attribute name="ParameterModifiedTS" type="xs:string" use="required"/>
+          <xs:attribute name="InterfaceModifiedTS" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- FCBlock ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="FCBlockType">
+    <xs:complexContent>
+      <xs:extension base="ident:TypeOperandType">
+          <xs:attribute name="ParameterModifiedTS" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- OBBlock ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="OBBlockType">
+    <xs:complexContent>
+      <xs:extension base="ident:TypeOperandType">
+        <xs:attribute name="ParameterModifiedTS" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- CBBlock ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="CBBlockType">
+    <xs:complexContent>
+      <xs:extension base="ident:TypeOperandType">
+        <xs:attribute name="ParameterModifiedTS" type="xs:string" use="required"/>
+        <xs:attribute name="InterfaceModifiedTS" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- MTHBlock ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="MTHBlockType">
+    <xs:complexContent>
+      <xs:extension base="ident:TypeOperandType">
+        <xs:attribute name="ParameterModifiedTS" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- AufDBBlock +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="AufDBBlockType">
+    <xs:complexContent>
+      <xs:extension base="ident:TypeOperandType">
+          <xs:attribute name="InterfaceModifiedTS" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- DepDBBlock +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="DepDBBlockType">
+    <xs:complexContent>
+      <xs:extension base="ident:TypeOperandType">
+          <xs:attribute name="InterfaceModifiedTS" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- DataTypeBlock +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="DataTypeBlockType">
+    <xs:complexContent>
+      <xs:extension base="ident:TypeOperandType">
+          <xs:attribute name="InterfaceModifiedTS" type="xs:string" use="required"/>
+          <xs:attribute name="TypeRId" type="xs:string" use="required"/>       
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- DirectType +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="DirectTypeType">
+    <xs:attributeGroup ref="ident:TypeData_T"/>
+    <xs:attribute name="TypeRId" type="xs:unsignedInt" use="required"/>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ReferenceOperand +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="ReferenceOperandType">
+    <xs:sequence minOccurs="1" maxOccurs="1">
+      <xs:element name="ReferencedIdent" type="ident:ReferencedIdentType"/>  
+    </xs:sequence>
+    <xs:attributeGroup ref="ident:TypeData_T"/>
+  </xs:complexType>
+
+  <xs:complexType name="ReferencedIdentType">
+    <xs:sequence minOccurs="1" maxOccurs="1">
+      <!--Referenced ident-->
+      <xs:element name="Ident" type="ident:IdentType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- FbtBlock ident +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="FBTBlockType">
+    <xs:complexContent>
+      <xs:extension base="ident:TypeOperandType" />
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- IndirectDBAccess ident +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="IndirectDBAccessType">
+      <xs:sequence>
+        <xs:element name="AccessObject" type="ident:AccessObjectType" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="ident:TypeData_T"/>
+      <xs:attribute name="AbsOffset" type="xs:unsignedInt" use="required"/>
+      <xs:attribute name="Type" type="xs:string" use="required"/>
+      <xs:attribute name="TypeName" type="xs:string" use="required"/>
+      <xs:attribute name="RId" type="xs:int" use="required"/>
+    </xs:complexType>
+    
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- NamedValueType +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="NamedValueTypeType">
+      <xs:sequence>
+          <xs:element name="DefaultValue" type="ident:NamedValueTypeDefaultValueType" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="Type" type="xs:string" use="required"/>
+      <xs:attribute name="TypeRId" type="xs:int" use="required"/>
+      <xs:attribute name="AccessQualifier" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- DefaultValue of NamedValueType +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="NamedValueTypeDefaultValueType">
+      <xs:attribute name="SourceDefaultValue" type="xs:string" use="required"/>
+      <xs:attribute name="Type" type="xs:string" use="required"/>
+      <xs:attribute name="Format" type="xs:string" use="required"/>
+      <xs:attribute name="Value" type="xs:string" use="required"/>
+      <xs:attribute name="ValueString" type="xs:string" use="required"/>
+      <xs:attribute name="FormatFlags" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+      
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- NamedValue +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="NamedValueType">
+      <xs:complexContent>
+          <xs:extension base="ident:ConstantType">
+              <xs:attribute name="NamedValueTypeName" type="xs:string" use="required"/>
+              <xs:attribute name="NamedValueTypeRefId" type="xs:int" use="required"/>
+          </xs:extension>
+      </xs:complexContent>
+  </xs:complexType>
+
+
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- TypeData +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:simpleType name="TypeDataFormat_T">
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="OST"/>
+        <!-- OperandSoftwareType -->
+        <xs:enumeration value="SPLT"/>
+        <!-- SplType -->
+      </xs:restriction>
+  </xs:simpleType>
+  <xs:attributeGroup name="TypeData_T">
+    <!-- TypeDataFormat (OST/SPLT)-->
+    <xs:attribute name="TDF" type="ident:TypeDataFormat_T" use="optional"/>
+    <!-- Type Value-->
+    <xs:attribute name="TD" type="xs:string" use="required"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="ArrayTypeData_T">
+    <!-- TypeDataFormat (OST/SPLT)-->
+    <xs:attribute name="ATDF" type="ident:TypeDataFormat_T" use="optional"/>
+    <!-- Type Value-->
+    <xs:attribute name="ATD" type="xs:string" use="optional"/>
+  </xs:attributeGroup>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- EmptyIdentType ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:complexType name="EmptyIdentType"/>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- IdentVersionType +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+  <xs:simpleType name="IdentVersionT">
+    <xs:annotation>
+      <xs:documentation>Version aa.b(.c(.d)) (without an introducing "V")</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[1-9][0-9]*(\.[0-9]){1,3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
