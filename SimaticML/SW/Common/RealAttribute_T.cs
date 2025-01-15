@@ -4,8 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    /// <remarks>
+    /// Schema : SW_Common
+    /// </remarks>
     [Serializable]
-    //[XmlRoot("RealAttribute", Namespace = "", IsNullable = false)]
+    [XmlRoot("RealAttribute", Namespace = "", IsNullable = false)]
     public class RealAttribute_T : AttributeBase
     {
         public RealAttribute_T()
@@ -33,8 +36,16 @@ namespace SimaticML.SW.Common
 
         [XmlText]
         public string Value { get; set; }
+    }
 
-        /// <remarks>Add on v2</remarks>
+    /// <remarks>
+    /// Schema : SW_Common_v2
+    ///          SW_Common_v3
+    /// </remarks>
+    [Serializable]
+    [XmlRoot("RealAttribute", Namespace = "", IsNullable = false)]
+    public class RealAttribute_T_v2 : RealAttribute_T
+    {
         [XmlAttribute]
         public int UId { get; set; }
         [XmlIgnore]

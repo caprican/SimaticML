@@ -4,8 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    /// <remarks>
+    /// Schema : SW_Common
+    /// </remarks>
     [Serializable]
-    //[XmlRoot("DateAttribute", Namespace = "", IsNullable = false)]
+    [XmlRoot("DateAttribute", Namespace = "", IsNullable = false)]
     public class DateAttribute_T : AttributeBase
     {
         public DateAttribute_T()
@@ -32,9 +35,17 @@ namespace SimaticML.SW.Common
         public bool SystemDefined { get; set; }
 
         [XmlText]
-        public string Value { get; set; }
+        public System.DateTime Value { get; set; }
+    }
 
-        ///<remarks>Add on v2</remarks>
+    /// <remarks>
+    /// Schema : SW_Common_v2
+    ///          SW_Common_v3
+    /// </remarks>
+    [Serializable]
+    [XmlRoot("DateAttribute", Namespace = "", IsNullable = false)]
+    public class DateAttribute_T_v2 : DateAttribute_T
+    {
         [XmlAttribute]
         public int UId { get; set; }
         [XmlIgnore]

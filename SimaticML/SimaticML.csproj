@@ -5,153 +5,157 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Resources\Common\SW.Common.xsd">
+    <None Update="Schemas\Commons\SW.Common.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\Common\SW.Common_v2.xsd">
+    <None Update="Schemas\Commons\SW.Common_v2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\Common\SW.Common_v3.xsd">
+    <None Update="Schemas\Commons\SW.Common_v3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\InterfaceSections\SW.InterfaceSections_v2.xsd">
+    <None Update="Schemas\InterfaceSections\SW.InterfaceSections_v2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\InterfaceSections\SW.InterfaceSections_v3.xsd">
+    <None Update="Schemas\InterfaceSections\SW.InterfaceSections_v3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\InterfaceSections\SW.InterfaceSections_v4.xsd">
+    <None Update="Schemas\InterfaceSections\SW.InterfaceSections_v4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\InterfaceSections\SW.InterfaceSections_v5.xsd">
+    <None Update="Schemas\InterfaceSections\SW.InterfaceSections_v5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\Access\SW.PlcBlocks.Access.xsd">
+    <None Update="Schemas\PlcBlocks\Access\SW.PlcBlocks.Access.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\Access\SW.PlcBlocks.Access_v2.xsd">
+    <None Update="Schemas\PlcBlocks\Access\SW.PlcBlocks.Access_v2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\Access\SW.PlcBlocks.Access_v3.xsd">
+    <None Update="Schemas\PlcBlocks\Access\SW.PlcBlocks.Access_v3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\Access\SW.PlcBlocks.Access_v4.xsd">
+    <None Update="Schemas\PlcBlocks\Access\SW.PlcBlocks.Access_v4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\Access\SW.PlcBlocks.Access_v5.xsd">
+    <None Update="Schemas\PlcBlocks\Access\SW.PlcBlocks.Access_v5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\CompileUnitCommon\SW.PlcBlocks.CompileUnitCommon.xsd">
+    <None Update="Schemas\PlcBlocks\CompileUnitCommon\SW.PlcBlocks.CompileUnitCommon.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\CompileUnitCommon\SW.PlcBlocks.CompileUnitCommon_v2.xsd">
+    <None Update="Schemas\PlcBlocks\CompileUnitCommon\SW.PlcBlocks.CompileUnitCommon_v2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\CompileUnitCommon\SW.PlcBlocks.CompileUnitCommon_v3.xsd">
+    <None Update="Schemas\PlcBlocks\CompileUnitCommon\SW.PlcBlocks.CompileUnitCommon_v3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\CompileUnitCommon\SW.PlcBlocks.CompileUnitCommon_v4.xsd">
+    <None Update="Schemas\PlcBlocks\CompileUnitCommon\SW.PlcBlocks.CompileUnitCommon_v4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\CompileUnitCommon\SW.PlcBlocks.CompileUnitCommon_v5.xsd">
+    <None Update="Schemas\PlcBlocks\CompileUnitCommon\SW.PlcBlocks.CompileUnitCommon_v5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\Graph\SW.PlcBlocks.Graph.xsd">
+    <None Update="Schemas\PlcBlocks\Graph\SW.PlcBlocks.Graph.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\Graph\SW.PlcBlocks.Graph_v2.xsd">
+    <None Update="Schemas\PlcBlocks\Graph\SW.PlcBlocks.Graph_v2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\Graph\SW.PlcBlocks.Graph_v4.xsd">
+    <None Update="Schemas\PlcBlocks\Graph\SW.PlcBlocks.Graph_v4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\Graph\SW.PlcBlocks.Graph_v5.xsd">
+    <None Update="Schemas\PlcBlocks\Graph\SW.PlcBlocks.Graph_v5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\Graph\SW.PlcBlocks.Graph_v6.xsd">
+    <None Update="Schemas\PlcBlocks\Graph\SW.PlcBlocks.Graph_v6.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\InstanceSupervisions\SW.PlcBlocks.InstanceSupervisions.xsd">
+    <None Update="Schemas\PlcBlocks\InstanceSupervisions\SW.PlcBlocks.InstanceSupervisions.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\InstanceSupervisions\SW.PlcBlocks.InstanceSupervisions_v2.xsd">
+    <None Update="Schemas\PlcBlocks\InstanceSupervisions\SW.PlcBlocks.InstanceSupervisions_v2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\InstanceSupervisions\SW.PlcBlocks.InstanceSupervisions_v3.xsd">
+    <None Update="Schemas\PlcBlocks\InstanceSupervisions\SW.PlcBlocks.InstanceSupervisions_v3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\LADFBD\SW.PlcBlocks.LADFBD.xsd">
+    <None Update="Schemas\PlcBlocks\LADFBD\SW.PlcBlocks.LADFBD.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\LADFBD\SW.PlcBlocks.LADFBD_v2.xsd">
+    <None Update="Schemas\PlcBlocks\LADFBD\SW.PlcBlocks.LADFBD_v2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\LADFBD\SW.PlcBlocks.LADFBD_v3.xsd">
+    <None Update="Schemas\PlcBlocks\LADFBD\SW.PlcBlocks.LADFBD_v3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\LADFBD\SW.PlcBlocks.LADFBD_v4.xsd">
+    <None Update="Schemas\PlcBlocks\LADFBD\SW.PlcBlocks.LADFBD_v4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\LADFBD\SW.PlcBlocks.LADFBD_v5.xsd">
+    <None Update="Schemas\PlcBlocks\LADFBD\SW.PlcBlocks.LADFBD_v5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\SCL\SW.PlcBlocks.SCL.xsd">
+    <None Update="Schemas\PlcBlocks\SCL\SW.PlcBlocks.SCL.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\SCL\SW.PlcBlocks.SCL_v2.xsd">
+    <None Update="Schemas\PlcBlocks\SCL\SW.PlcBlocks.SCL_v2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\SCL\SW.PlcBlocks.SCL_v3.xsd">
+    <None Update="Schemas\PlcBlocks\SCL\SW.PlcBlocks.SCL_v3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\SCL\SW.PlcBlocks.SCL_v4.xsd">
+    <None Update="Schemas\PlcBlocks\SCL\SW.PlcBlocks.SCL_v4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\STL\SW.PlcBlocks.STL.xsd">
+    <None Update="Schemas\PlcBlocks\STL\SW.PlcBlocks.STL.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\STL\SW.PlcBlocks.STL_v2.xsd">
+    <None Update="Schemas\PlcBlocks\STL\SW.PlcBlocks.STL_v2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\STL\SW.PlcBlocks.STL_v3.xsd">
+    <None Update="Schemas\PlcBlocks\STL\SW.PlcBlocks.STL_v3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\STL\SW.PlcBlocks.STL_v4.xsd">
+    <None Update="Schemas\PlcBlocks\STL\SW.PlcBlocks.STL_v4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\STL\SW.PlcBlocks.STL_v5.xsd">
+    <None Update="Schemas\PlcBlocks\STL\SW.PlcBlocks.STL_v5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\TypeSupervisions\SW.PlcBlocks.TypeSupervisions.xsd">
+    <None Update="Schemas\PlcBlocks\TypeSupervisions\SW.PlcBlocks.TypeSupervisions.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\TypeSupervisions\SW.PlcBlocks.TypeSupervisions_v2.xsd">
+    <None Update="Schemas\PlcBlocks\TypeSupervisions\SW.PlcBlocks.TypeSupervisions_v2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\PlcBlocks\TypeSupervisions\SW.PlcBlocks.TypeSupervisions_v3.xsd">
+    <None Update="Schemas\PlcBlocks\TypeSupervisions\SW.PlcBlocks.TypeSupervisions_v3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\SW.Interface.Snapshot.xsd">
+    <None Update="Schemas\SW.Interface.Snapshot.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\TechnologicalObjects\SW.TechnologicalObjects_AdditionalDataAxis_v1.xsd">
+    <None Update="Schemas\TechnologicalObjects\SW.TechnologicalObjects_AdditionalDataAxis_v1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\TechnologicalObjects\SW.TechnologicalObjects_AdditionalDataKinematics_v1.xsd">
+    <None Update="Schemas\TechnologicalObjects\SW.TechnologicalObjects_AdditionalDataKinematics_v1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\TechnologicalObjects\SW.TechnologicalObjects_AdditionalDataMeasuringInput_v1.xsd">
+    <None Update="Schemas\TechnologicalObjects\SW.TechnologicalObjects_AdditionalDataMeasuringInput_v1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\TechnologicalObjects\SW.TechnologicalObjects_AdditionalDataOutputCam_v1.xsd">
+    <None Update="Schemas\TechnologicalObjects\SW.TechnologicalObjects_AdditionalDataOutputCam_v1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\TechnologicalObjects\SW.TechnologicalObjects_Parameters_v1.xsd">
+    <None Update="Schemas\TechnologicalObjects\SW.TechnologicalObjects_Parameters_v1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Update="Resources\TechnologicalObjects\SW.TechnologicalObjects_ProfileDataCam_v1.xsd">
+    <None Update="Schemas\TechnologicalObjects\SW.TechnologicalObjects_ProfileDataCam_v1.xsd">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>

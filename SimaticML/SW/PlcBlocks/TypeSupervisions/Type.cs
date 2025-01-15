@@ -3,7 +3,12 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
-    [Serializable()]
+    /// <remarks>
+    /// Schema : SW.PlcBlocks.TypeSupervisions
+    ///          SW.PlcBlocks.TypeSupervisions_v2
+    ///          SW.PlcBlocks.TypeSupervisions_v3
+    /// </remarks>
+    [Serializable]
     [XmlType(AnonymousType = true)]
     public enum Type
     {

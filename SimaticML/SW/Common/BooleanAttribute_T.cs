@@ -4,8 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    /// <remarks>
+    /// Schema : SW_Common
+    /// </remarks>
     [Serializable]
-    //[XmlRoot("BooleanAttribute", Namespace = "", IsNullable = false)]
+    [XmlRoot("BooleanAttribute", Namespace = "", IsNullable = false)]
     public class BooleanAttribute_T : AttributeBase
     {
         public BooleanAttribute_T()
@@ -31,10 +34,18 @@ namespace SimaticML.SW.Common
         [DefaultValue(true)]
         public bool SystemDefined { get; set; }
 
-        //[XmlText]
+        [XmlText]
         public bool Value  { get; set;  }
+    }
 
-        ///<remarks>Add on v2</remarks>
+    /// <remarks>
+    /// Schema : SW_Common_v2
+    ///          SW_Common_v3
+    /// </remarks>
+    [Serializable]
+    [XmlRoot("BooleanAttribute", Namespace = "", IsNullable = false)]
+    public class BooleanAttribute_T_v2 : BooleanAttribute_T
+    {
         [XmlAttribute]
         public int UId { get; set; }
         [XmlIgnore]

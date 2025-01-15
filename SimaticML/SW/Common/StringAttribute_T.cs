@@ -5,9 +5,12 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    /// <remarks>
+    /// Schema : SW_Common
+    /// </remarks>
     [Serializable]
-    //[XmlRoot("StringAttribute", Namespace = "", IsNullable = false)]
-    [DebuggerDisplay("{Value}")]
+    [XmlRoot("StringAttribute", Namespace = "", IsNullable = false)]
+    [DebuggerDisplay("{Name} = {Value}")]
     public class StringAttribute_T : AttributeBase
     {
         public StringAttribute_T()
@@ -35,8 +38,17 @@ namespace SimaticML.SW.Common
 
         [XmlText]
         public string Value { get; set; }
+    }
 
-        /// <remarks>Add on V2</remarks>
+    /// <remarks>
+    /// Schema : SW_Common_v2
+    ///          SW_Common_v3
+    /// </remarks>
+    [Serializable]
+    [XmlRoot("StringAttribute", Namespace = "", IsNullable = false)]
+    [DebuggerDisplay("{Name} = {Value}")]
+    public class StringAttribute_T_v2 : StringAttribute_T
+    {
         [XmlAttribute]
         public int UId { get; set; }
         [XmlIgnore]

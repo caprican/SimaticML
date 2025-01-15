@@ -4,7 +4,14 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    /// <remarks>
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_Common</item>
+    /// </list>
+    /// </remarks>
     [Serializable]
+    [XmlRoot("Comment", Namespace = "", IsNullable = false)]
     public class Comment_T : Comment_G
     {
         public Comment_T()
@@ -35,12 +42,31 @@ namespace SimaticML.SW.Common
         [XmlAttribute]
         [DefaultValue(false)]
         public bool Informative { get; set; }
+    }
 
-        /// <remarks> Add on V2</remarks>
+    /// <remarks>
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_Common_v2</item>
+    /// <item>SW_Common_v3</item>
+    /// </list>
+    /// </remarks>
+    [Serializable]
+    [XmlRoot("Comment", Namespace = "", IsNullable = false)]
+    public class Comment_T_v2 : Comment_T
+    {
+        /// <summary>
+        /// For NumBLs. NumBLs is the count of the blank spaces before the actual text in the Comment.
+        /// This is informative.
+        /// </summary>
+        public new IntegerAttribute_T_v2 IntegerAttribute { get; set; }
+
+        [XmlElement("MultiLanguageText")]
+        public new MultiLanguageText_T_v2[] MultiLanguageText { get; set; }
+
         [XmlAttribute]
         public int UId { get; set; }
         [XmlIgnore]
         public bool UIdSpecified { get; set; }
     }
-
 }

@@ -3,8 +3,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    /// <remarks>
+    /// Schema : SW_Common
+    /// </remarks>
     [Serializable]
-    //[XmlRoot("ViewInfo", Namespace = "", IsNullable = false)]
+    [XmlRoot("ViewInfo", Namespace = "", IsNullable = false)]
     public class ViewInfo_T
     {
         [XmlAttribute]
@@ -31,7 +34,16 @@ namespace SimaticML.SW.Common
         public int Height { get; set; }
         [XmlIgnore]
         public bool HeightSpecified { get; set; }
+    }
 
+    /// <remarks>
+    /// Schema : SW_Common_v2
+    ///          SW_Common_v3
+    /// </remarks>
+    [Serializable]
+    [XmlRoot("ViewInfo", Namespace = "", IsNullable = false)]
+    public class ViewInfo_T_v2 : ViewInfo_T
+    {
         [XmlAttribute]
         public int UId { get; set; }
         [XmlIgnore]

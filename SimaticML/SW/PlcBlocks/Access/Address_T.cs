@@ -2,11 +2,13 @@
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-using SimaticML.SW.Common;
-
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    /// <remarks>
+    /// Schema : SW_PlcBlocks_Access (SW.Common)
+    /// </remarks>
     [Serializable]
+    [XmlRoot("Address", Namespace="", IsNullable=false)]
     public class Address_T
     {
         public Address_T()
@@ -42,10 +44,20 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlAttribute]
         [DefaultValue(false)]
         public bool Informative { get; set; }
+    }
 
-        /// <remarks>Add on v2</remarks>
+    /// <remarks>
+    /// Schema : SW_PlcBlocks_Access_v2 (SW.Common_v2)
+    ///          SW_PlcBlocks_Access_v3 (SW.Common_v2)
+    ///          SW_PlcBlocks_Access_v4 (SW.Common_v3)
+    ///          SW_PlcBlocks_Access_v5 (SW.Common_v3)
+    /// </remarks>
+    [Serializable]
+    [XmlRoot("Address", Namespace = "", IsNullable = false)]
+    public class Address_T_v2 : Address_T
+    {
         [XmlElement("BooleanAttribute")]
-        public BooleanAttribute_T[] Items { get; set; }
+        public Common.BooleanAttribute_T_v2[] Items { get; set; }
 
         [XmlAttribute]
         public int UId { get; set; }

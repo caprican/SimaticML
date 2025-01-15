@@ -4,20 +4,20 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
-    /// <remark>
-    /// Inseted on v2
-    /// </remark>
+    /// <remarks>
+    /// Schema : 
+    /// <list type="bullet">
+    ///<item>SW_Common_v2</item>
+    ///<item>SW_Common_v3</item>
+    ///</list>
+    /// </remarks>
     [Serializable]
+    [XmlRoot("Blank", Namespace = "", IsNullable = false)]
     public class Blank_T : Comment_G
     {
-        public Blank_T()
-        {
-            Num = "1";
-        }
-
         [XmlAttribute(DataType = "positiveInteger")]
         [DefaultValue("1")]
-        public string Num { get; set; }
+        public string Num { get; set; } = "1";
 
         [XmlAttribute]
         public int UId { get; set; }
