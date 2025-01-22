@@ -5,7 +5,8 @@ using System.Xml.Serialization;
 namespace SimaticML.SW.Blocks
 {
     [Serializable]
-    //[XmlType(AnonymousType = true)]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(Namespace = "", IsNullable = false)]
     public class GlobalDB : Object_T
     {
         public AttributeGlobalDB AttributeList { get; set; }
@@ -23,7 +24,6 @@ namespace SimaticML.SW.Blocks
                 RetainMemoryReserve = 0;
 
                 DownloadWithoutReinit = false;
-
             }
 
             [DefaultValue(false)]
@@ -37,6 +37,8 @@ namespace SimaticML.SW.Blocks
             public bool IsPLCDBSpecified { get; set; }
 
             public bool IsWriteProtectedInAS { get; set; }
+            [XmlIgnore]
+            public bool IsWriteProtectedInASSpecified { get; set; }
 
             [DefaultValue(false)]
             public bool IsIECCheckEnabled { get; set; }
@@ -52,6 +54,14 @@ namespace SimaticML.SW.Blocks
 
             [DefaultValue(false)]
             public bool DownloadWithoutReinit { get; set; }
+
+            public bool DBAccessibleFromOPCUA { get; set; }
+            [XmlIgnore]
+            public bool DBAccessibleFromOPCUASpecified { get; set; }
+
+            public bool DBAccessibleFromWebserver { get; set; }
+            [XmlIgnore]
+            public bool DBAccessibleFromWebserverSpecified { get; set; }
         }
     }
 

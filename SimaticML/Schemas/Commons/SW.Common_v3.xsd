@@ -212,9 +212,9 @@
   <xs:simpleType name="SimaticName_TP">
     <xs:restriction base="xs:string"/>
   </xs:simpleType>
-  <xs:simpleType name="SimaticType_TE">
+  <!--<xs:simpleType name="SimaticType_TE">
     <xs:restriction base="xs:string"/>
-  </xs:simpleType>
+  </xs:simpleType>-->
   <xs:element name="StringAttribute" type="StringAttribute_T">
     <xs:annotation>
       <xs:documentation>A member attribute with a type restriction of string.</xs:documentation>

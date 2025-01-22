@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace SimaticML.SW.Interface
 {
     [Serializable]
-    //[XmlRoot("SnapshotValues", Namespace = "", IsNullable = false)]
+    [XmlRoot("SnapshotValues", Namespace = "", IsNullable = false)]
     public class SnapshotValues_T
     {
         [XmlElement("Value")]
@@ -12,7 +12,7 @@ namespace SimaticML.SW.Interface
     }
 
     [Serializable]
-    //[XmlRoot("Value", Namespace = "", IsNullable = false)]
+    [XmlRoot("Value", Namespace = "", IsNullable = false)]
     public class Value_T
     {
         [XmlAttribute]

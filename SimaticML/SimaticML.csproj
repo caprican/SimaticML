@@ -5,13 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Schemas\Commons\SW.Common_v3.xsd" />
+    <None Remove="Schemas\InterfaceSections\SW.InterfaceSections_v5.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Schemas\Commons\SW.Common_v3.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Schemas\InterfaceSections\SW.InterfaceSections_v5.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Schemas\Commons\SW.Common.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Update="Schemas\Commons\SW.Common_v2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Update="Schemas\Commons\SW.Common_v3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Update="Schemas\InterfaceSections\SW.InterfaceSections_v2.xsd">
@@ -21,9 +34,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Update="Schemas\InterfaceSections\SW.InterfaceSections_v4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Update="Schemas\InterfaceSections\SW.InterfaceSections_v5.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Update="Schemas\PlcBlocks\Access\SW.PlcBlocks.Access.xsd">

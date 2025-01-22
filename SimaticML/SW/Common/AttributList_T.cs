@@ -3,9 +3,14 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
-    /// <remarks>Schema : SW_Common</remarks>
+    /// <remarks>
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_Common</item>
+    /// </list>
+    /// </remarks>
     [Serializable]
-    public class AttributList_T
+    public class AttributList_T 
     {
         [XmlElement("BooleanAttribute", typeof(BooleanAttribute_T))]        // A member attribute with a type restriction of boolean
         [XmlElement("IntegerAttribute", typeof(IntegerAttribute_T))]        // A member attribute with a type restriction of integer.
@@ -14,7 +19,13 @@ namespace SimaticML.SW.Common
         public AttributeBase[] Items { get; set; }
     }
 
-    /// <remarks>Schema : SW_Common_v2</remarks>
+    /// <remarks>
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_Common_v2</item>
+    /// <item>SW_Common_v3</item>
+    /// </list>
+    /// </remarks>
     [Serializable]
     public class AttributList_T_v2 : AttributList_T
     {

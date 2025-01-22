@@ -79,7 +79,7 @@ namespace SimaticML
         public bool IsKnowHowProtectedPrecified { get; set; }
 
         [DefaultValue(false)]
-        public  bool IsWriteProtected { get; set; }
+        public bool IsWriteProtected { get; set; }
         [XmlIgnore]
         public bool IsWriteProtectedSpecified { get; set; }
 
