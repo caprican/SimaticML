@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
@@ -14,7 +16,8 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    public class CallInfo_T
+    [XmlRoot("CallInfo", IsNullable = false)]
+    public class CallInfo_T : Object_G
     {
         //[XmlElement(Order = 0)]
         //public IntegerAttribute_T IntegerAttribute { get; set; }
@@ -29,7 +32,7 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Token", typeof(Common.Token_T), Order = 3)]
         [XmlElement("Instance", typeof(Instance_T), Order = 5)]
         [XmlElement("Parameter", typeof(Parameter_T), Order = 6)]
-        public object[] Items { get; set; }
+        public Object_G[] Items { get; set; }
 
         //[XmlElement(Order = 3)]
         //public Token_T Token { get; set; }
@@ -49,6 +52,69 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         [XmlAttribute]
         public BlockType_TE BlockType { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<BlockType_TE>(reader.GetAttribute("BlockType"), out var blockType);
+            BlockType = blockType;
+
+            Name = reader.GetAttribute("Name");
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "IntegerAttribute":
+                            var integerAttribute = new Common.IntegerAttribute_T();
+                            integerAttribute.ReadXml(reader);
+                            items.Add(integerAttribute);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "DateAttribute":
+                            var dateAttribute = new Common.DateAttribute_T();
+                            dateAttribute.ReadXml(reader);
+                            items.Add(dateAttribute);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                        case "Instance":
+                            var instance = new Instance_T();
+                            instance.ReadXml(reader);
+                            items.Add(instance);
+                            break;
+                        case "Parameter":
+                            var parameter = new Parameter_T();
+                            parameter.ReadXml(reader);
+                            items.Add(parameter);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+        }
     }
 
     /// <summary>
@@ -61,7 +127,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("CallInfo", Namespace = "", IsNullable = false)]
+    [XmlRoot("CallInfo", IsNullable = false)]
     public class CallInfo_T_v2 : CallInfo_T
     {
         [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3 | 6 | 9)]
@@ -75,7 +141,7 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("NamelessParameter", typeof(NamelessParameter_T), Order = 4)]
         [XmlElement("Token", typeof(Common.Token_T_v2), Order = 5 | 8)]
         [XmlElement("Parameter", typeof(Parameter_T_v2), Order = 7)]
-        public new object[] Items { get; set; }
+        public new Object_G[] Items { get; set; }
 
         //[XmlElement(Order = 1)]
         //public Instance_T Instance { get; set; }
@@ -129,7 +195,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("CallInfo", Namespace = "", IsNullable = false)]
+    [XmlRoot("CallInfo", IsNullable = false)]
     public class CallInfo_T_v3 : CallInfo_T_v2
     {
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -142,7 +208,7 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Parameter", typeof(Parameter_T_v3))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new object[] Items { get; set; }
+        public new Object_G[] Items { get; set; }
     }
 
     /// <summary>
@@ -155,7 +221,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("CallInfo", Namespace = "", IsNullable = false)]
+    [XmlRoot("CallInfo", IsNullable = false)]
     public class CallInfo_T_v4 : CallInfo_T_v3
     {
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -168,7 +234,7 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Parameter", typeof(Parameter_T_v4))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new object[] Items { get; set; }
+        public new Object_G[] Items { get; set; }
     }
 
     /// <summary>
@@ -194,6 +260,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Parameter", typeof(Parameter_T_v5))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new object[] Items { get; set; }
+        public new Object_G[] Items { get; set; }
     }
 }

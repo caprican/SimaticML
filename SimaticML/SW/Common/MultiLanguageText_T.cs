@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
@@ -11,15 +12,31 @@ namespace SimaticML.SW.Common
     /// </list>
     /// </remarks>
     [Serializable]
-    [DebuggerDisplay("{Value}")]
-    [XmlRoot("MultiLanguageText", Namespace = "", IsNullable = false)]
-    public class MultiLanguageText_T
+    [DebuggerDisplay("{Lang} = {Value}")]
+    [XmlRoot("MultiLanguageText", IsNullable = false)]
+    public class MultiLanguageText_T : Object_G
     {
         [XmlAttribute]
         public string Lang { get; set; }
 
         [XmlText]
         public string Value { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            Lang = reader.GetAttribute("Lang");
+
+            reader.Read();
+            Value = reader.Value;
+            reader.Read();
+
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+
+        }
     }
 
     /// <remarks>
@@ -30,13 +47,32 @@ namespace SimaticML.SW.Common
     /// </list>
     /// </remarks>
     [Serializable]
-    [DebuggerDisplay("{Value}")]
-    [XmlRoot("MultiLanguageText", Namespace = "", IsNullable = false)]
+    [DebuggerDisplay("{Lang} = {Value}")]
+    [XmlRoot("MultiLanguageText", IsNullable = false)]
     public class MultiLanguageText_T_v2 : MultiLanguageText_T
     {
         [XmlAttribute]
-        public int UId { get; set; }
+        public int? UId { get; set; } = null;
         [XmlIgnore]
         public bool UIdSpecified { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            Lang = reader.GetAttribute("Lang");
+
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if(UIdSpecified) UId = uId;
+
+            reader.Read();
+            Value = reader.Value;
+            reader.Read();
+
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+
+        }
     }
 }

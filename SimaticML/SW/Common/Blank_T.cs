@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
@@ -12,16 +13,32 @@ namespace SimaticML.SW.Common
     ///</list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Blank", Namespace = "", IsNullable = false)]
+    [XmlRoot("Blank", IsNullable = false)]
     public class Blank_T : Comment_G
     {
         [XmlAttribute(DataType = "positiveInteger")]
         [DefaultValue("1")]
-        public string Num { get; set; } = "1";
+        public uint Num { get; set; } = 1;
 
         [XmlAttribute]
-        public int UId { get; set; }
+        public int? UId { get; set; } = null;
         [XmlIgnore]
         public bool UIdSpecified { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if(UIdSpecified) UId = uId;
+
+            _ = uint.TryParse(reader.GetAttribute("Num"), out var num);
+            Num = num;
+
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            
+        }
     }
 }

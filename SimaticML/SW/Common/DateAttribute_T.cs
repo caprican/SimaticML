@@ -1,14 +1,19 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
     /// <remarks>
-    /// Schema : SW_Common
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_Common</item>
+    /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("DateAttribute", Namespace = "", IsNullable = false)]
+    [XmlRoot("DateAttribute", IsNullable = false)]
     public class DateAttribute_T : AttributeBase
     {
         public DateAttribute_T()
@@ -34,21 +39,71 @@ namespace SimaticML.SW.Common
         [DefaultValue(true)]
         public bool SystemDefined { get; set; }
 
-        [XmlText]
+        //[XmlText]
         public System.DateTime Value { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            Name = reader.GetAttribute("Name");
+
+            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
+            Informative = informative;
+
+            _ = bool.TryParse(reader.GetAttribute("SystemDefined"), out var systemDefined);
+            SystemDefined = systemDefined;
+
+            reader.Read();
+            _ = DateTime.TryParse(reader.Value, out var value);
+            Value = value;
+            reader.Read();
+
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+        }
     }
 
     /// <remarks>
-    /// Schema : SW_Common_v2
-    ///          SW_Common_v3
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_Common_v2</item>
+    /// <item>SW_Common_v3</item>
+    /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("DateAttribute", Namespace = "", IsNullable = false)]
+    [XmlRoot("DateAttribute", IsNullable = false)]
     public class DateAttribute_T_v2 : DateAttribute_T
     {
         [XmlAttribute]
-        public int UId { get; set; }
+        public int? UId { get; set; } = null;
         [XmlIgnore]
         public bool UIdSpecified { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            Name = reader.GetAttribute("Name");
+
+            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
+            Informative = informative;
+
+            _ = bool.TryParse(reader.GetAttribute("SystemDefined"), out var systemDefined);
+            SystemDefined = systemDefined;
+
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if (UIdSpecified) UId = uId;
+
+            reader.Read();
+            _ = DateTime.TryParse(reader.Value, out var value);
+            Value = value;
+            reader.Read();
+
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+        }
     }
 }

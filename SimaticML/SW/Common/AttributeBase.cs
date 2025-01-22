@@ -1,6 +1,6 @@
 ﻿namespace SimaticML.SW.Common
 {
-    public class AttributeBase
+    public abstract class AttributeBase : Object_G
     {
     }
 }
