@@ -114,6 +114,7 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void WriteXml(XmlWriter writer)
         {
+            throw new NotImplementedException();
         }
     }
 
@@ -136,10 +137,9 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), Order = 0)]          // for BlockNumber. BlockNumber is informative.
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 0 | 3 | 6 | 9)]
         [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 3 | 6 | 9)]
-        [XmlElement("Token", typeof(Common.Token_T_v2), Order = 0 | 2)]
+        [XmlElement("Token", typeof(Common.Token_T_v2), Order = 0 | 2 | 5 | 8)]
         [XmlElement("Instance", typeof(Instance_T_v2), Order = 1)]
         [XmlElement("NamelessParameter", typeof(NamelessParameter_T), Order = 4)]
-        [XmlElement("Token", typeof(Common.Token_T_v2), Order = 5 | 8)]
         [XmlElement("Parameter", typeof(Parameter_T_v2), Order = 7)]
         public new Object_G[] Items { get; set; }
 
@@ -180,9 +180,91 @@ namespace SimaticML.SW.PlcBlocks.Access
         //public object[] Items3 { get; set; }
 
         [XmlAttribute]
-        public int UId { get; set; }
+        public int? UId { get; set; } = null;
         [XmlIgnore]
         public bool UIdSpecified { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<BlockType_TE>(reader.GetAttribute("BlockType"), out var blockType);
+            BlockType = blockType;
+
+            Name = reader.GetAttribute("Name");
+
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if (UIdSpecified) UId = uId;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Blank":
+                            var blank = new Common.Blank_T();
+                            blank.ReadXml(reader);
+                            items.Add(blank);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "DateAttribute":
+                            var dateAttribute = new Common.DateAttribute_T_v2();
+                            dateAttribute.ReadXml(reader);
+                            items.Add(dateAttribute);
+                            break;
+                        case "IntegerAttribute":
+                            var integerAttribute = new Common.IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            items.Add(integerAttribute);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v2();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "NewLine":
+                            var newLine = new Common.NewLine_T();
+                            newLine.ReadXml(reader);
+                            items.Add(newLine);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                        case "Instance":
+                            var instance = new Instance_T_v2();
+                            instance.ReadXml(reader);
+                            items.Add(instance);
+                            break;
+                        case "NamelessParameter":
+                            var namelessParameter = new NamelessParameter_T();
+                            namelessParameter.ReadXml(reader);
+                            items.Add(namelessParameter);
+                            break;
+                        case "Parameter":
+                            var parameter = new Parameter_T_v2();
+                            parameter.ReadXml(reader);
+                            items.Add(parameter);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
@@ -203,12 +285,94 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("DateAttribute", typeof(Common.DateAttribute_T_v2))]                // for ParameterModifiedTS. ParameterModifiedTS is informative
         [XmlElement("Instance", typeof(Instance_T_v3))]
         [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2))]          // for BlockNumber. BlockNumber is informative.
-        [XmlElement("LineComment", typeof(Common.LineComment_T))]
+        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NamelessParameter", typeof(NamelessParameter_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Parameter", typeof(Parameter_T_v3))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
         public new Object_G[] Items { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<BlockType_TE>(reader.GetAttribute("BlockType"), out var blockType);
+            BlockType = blockType;
+
+            Name = reader.GetAttribute("Name");
+
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if (UIdSpecified) UId = uId;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Blank":
+                            var blank = new Common.Blank_T();
+                            blank.ReadXml(reader);
+                            items.Add(blank);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "DateAttribute":
+                            var dateAttribute = new Common.DateAttribute_T_v2();
+                            dateAttribute.ReadXml(reader);
+                            items.Add(dateAttribute);
+                            break;
+                        case "IntegerAttribute":
+                            var integerAttribute = new Common.IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            items.Add(integerAttribute);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v2();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "NewLine":
+                            var newLine = new Common.NewLine_T();
+                            newLine.ReadXml(reader);
+                            items.Add(newLine);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                        case "Instance":
+                            var instance = new Instance_T_v3();
+                            instance.ReadXml(reader);
+                            items.Add(instance);
+                            break;
+                        case "NamelessParameter":
+                            var namelessParameter = new NamelessParameter_T_v3();
+                            namelessParameter.ReadXml(reader);
+                            items.Add(namelessParameter);
+                            break;
+                        case "Parameter":
+                            var parameter = new Parameter_T_v3();
+                            parameter.ReadXml(reader);
+                            items.Add(parameter);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
@@ -235,6 +399,88 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Parameter", typeof(Parameter_T_v4))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
         public new Object_G[] Items { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<BlockType_TE>(reader.GetAttribute("BlockType"), out var blockType);
+            BlockType = blockType;
+
+            Name = reader.GetAttribute("Name");
+
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if (UIdSpecified) UId = uId;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Blank":
+                            var blank = new Common.Blank_T();
+                            blank.ReadXml(reader);
+                            items.Add(blank);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "DateAttribute":
+                            var dateAttribute = new Common.DateAttribute_T_v2();
+                            dateAttribute.ReadXml(reader);
+                            items.Add(dateAttribute);
+                            break;
+                        case "IntegerAttribute":
+                            var integerAttribute = new Common.IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            items.Add(integerAttribute);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v3();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "NewLine":
+                            var newLine = new Common.NewLine_T();
+                            newLine.ReadXml(reader);
+                            items.Add(newLine);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                        case "Instance":
+                            var instance = new Instance_T_v4();
+                            instance.ReadXml(reader);
+                            items.Add(instance);
+                            break;
+                        case "NamelessParameter":
+                            var namelessParameter = new NamelessParameter_T_v4();
+                            namelessParameter.ReadXml(reader);
+                            items.Add(namelessParameter);
+                            break;
+                        case "Parameter":
+                            var parameter = new Parameter_T_v4();
+                            parameter.ReadXml(reader);
+                            items.Add(parameter);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
@@ -247,7 +493,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("CallInfo", Namespace = "", IsNullable = false)]
+    [XmlRoot("CallInfo", IsNullable = false)]
     public class CallInfo_T_v5 : CallInfo_T_v4
     {
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -261,5 +507,87 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Parameter", typeof(Parameter_T_v5))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
         public new Object_G[] Items { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<BlockType_TE>(reader.GetAttribute("BlockType"), out var blockType);
+            BlockType = blockType;
+
+            Name = reader.GetAttribute("Name");
+
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if (UIdSpecified) UId = uId;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Blank":
+                            var blank = new Common.Blank_T();
+                            blank.ReadXml(reader);
+                            items.Add(blank);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "DateAttribute":
+                            var dateAttribute = new Common.DateAttribute_T_v2();
+                            dateAttribute.ReadXml(reader);
+                            items.Add(dateAttribute);
+                            break;
+                        case "IntegerAttribute":
+                            var integerAttribute = new Common.IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            items.Add(integerAttribute);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v2();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "NewLine":
+                            var newLine = new Common.NewLine_T();
+                            newLine.ReadXml(reader);
+                            items.Add(newLine);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                        case "Instance":
+                            var instance = new Instance_T_v5();
+                            instance.ReadXml(reader);
+                            items.Add(instance);
+                            break;
+                        case "NamelessParameter":
+                            var namelessParameter = new NamelessParameter_T_v5();
+                            namelessParameter.ReadXml(reader);
+                            items.Add(namelessParameter);
+                            break;
+                        case "Parameter":
+                            var parameter = new Parameter_T_v5();
+                            parameter.ReadXml(reader);
+                            items.Add(parameter);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
