@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.InterfaceSections
@@ -16,7 +15,7 @@ namespace SimaticML.SW.InterfaceSections
     /// </remarks>
     [Serializable]
     [XmlRoot("StartValue", Namespace = "", IsNullable = false)]
-    public class StartValue_T : Object_G
+    public class StartValue_T
     {
         [XmlAttribute]
         public string ConstantName { get; set; }
@@ -31,28 +30,6 @@ namespace SimaticML.SW.InterfaceSections
 
         [XmlText]
         public string Value { get; set; }
-
-        public override void ReadXml(XmlReader reader)
-        {
-            ConstantName = reader.GetAttribute("ConstantName");
-
-            _ = bool.TryParse(reader.GetAttribute("IsBulkValue"), out var systemDefined);
-            IsBulkValue = systemDefined;
-
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
-
-            reader.Read();
-            Value = reader.Value;
-            reader.Read();
-
-            reader.ReadEndElement();
-        }
-
-        public override void WriteXml(XmlWriter writer)
-        {
-            
-        }
     }
 
 }

@@ -14,8 +14,8 @@ namespace SimaticML.SW.InterfaceSections
     /// </remarks>
     [Serializable]
     [DebuggerDisplay("{Name}")]
-    [XmlRoot("Section", Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v2", IsNullable = false)]
-    public class Section_T : Object_G
+    [XmlRoot("Section", Namespace = "", IsNullable = false)]
+    public class Section_T
     {
         [XmlAttribute]
         public Common.SectionName_TE Name { get; set; }
@@ -26,44 +26,10 @@ namespace SimaticML.SW.InterfaceSections
         public Sections_T Sections { get; set; }
 
         [XmlElement("Member")]
-        public Member_T[] Members { get; set; }
+        public Member_T[] Member { get; set; }
 
-        public override void ReadXml(XmlReader reader)
-        {
-            _ = Enum.TryParse<Common.SectionName_TE>(reader.GetAttribute("Name"), out var name);
-            Name = name;
-
-            if (!reader.IsEmptyElement)
-            {
-                reader.Read();
-
-                var members = new List<Member_T>();
-                while (reader.MoveToContent() == XmlNodeType.Element)
-                {
-                    switch (reader.Name)
-                    {
-                        case "Member":
-                            var member = new Member_T();
-                            member.ReadXml(reader);
-                            members.Add(member);
-                            break;
-                        case "Sections":
-                            var sections = new Sections_T();
-                            sections.ReadXml(reader);
-                            Sections = sections;
-                            break;
-                    }
-                }
-                if (members.Count > 0) Members = members.ToArray();
-
-                reader.ReadEndElement();
-            }
-        }
-
-        public override void WriteXml(XmlWriter writer)
-        {
-            
-        }
+        [XmlAttribute]
+        public Common.SectionName_TE Name { get; set; }
     }
 
     /// <remarks>
@@ -140,44 +106,7 @@ namespace SimaticML.SW.InterfaceSections
         public new Sections_T_v4 Sections { get; set; }
 
         [XmlElement("Member")]
-        public new Member_T_v4[] Members { get; set; }
-
-        public override void ReadXml(XmlReader reader)
-        {
-            _ = Enum.TryParse<Common.SectionName_TE>(reader.GetAttribute("Name"), out var name);
-            Name = name;
-
-            if (!reader.IsEmptyElement)
-            {
-                reader.Read();
-
-                var members = new List<Member_T_v4>();
-                while (reader.MoveToContent() == XmlNodeType.Element)
-                {
-                    switch (reader.Name)
-                    {
-                        case "Member":
-                            var member = new Member_T_v4();
-                            member.ReadXml(reader);
-                            members.Add(member);
-                            break;
-                        case "Sections":
-                            var sections = new Sections_T_v4();
-                            sections.ReadXml(reader);
-                            Sections = sections;
-                            break;
-                    }
-                }
-                if (members.Count > 0) Members = members.ToArray();
-
-                reader.ReadEndElement();
-            }
-        }
-
-        public override void WriteXml(XmlWriter writer)
-        {
-
-        }
+        public new Member_T_v3[] Member { get; set; }
     }
 
     /// <remarks>
