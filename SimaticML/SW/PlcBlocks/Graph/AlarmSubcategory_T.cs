@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -12,10 +13,21 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("AlarmSubcategory1Interlock", Namespace = "", IsNullable = false)]
-    public class AlarmSubcategory_T
+    [XmlRoot("AlarmSubcategory1Interlock", IsNullable = false)]
+    public class AlarmSubcategory_T : Object_G
     {
         [XmlAttribute]
         public ushort Id { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = ushort.TryParse(reader.GetAttribute("Id"), out var id);
+            Id = id;
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

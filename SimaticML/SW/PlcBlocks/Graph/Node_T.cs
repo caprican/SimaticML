@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -14,13 +15,51 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("NodeFrom", Namespace = "", IsNullable = false)]
-    public class Node_T
+    [XmlRoot("NodeFrom", IsNullable = false)]
+    public class Node_T : Object_G
     {
         [XmlElement("BranchRef", typeof(BranchRef_T))]
-        [XmlElement("EndConnection", typeof(object))]
+        [XmlElement("EndConnection", typeof(EndConnection_T))]
         [XmlElement("StepRef", typeof(StepRef_T))]
         [XmlElement("TransitionRef", typeof(TransitionRef_T))]
-        public object Item { get; set; }
+        public Object_G Item { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "BranchRef":
+                            Item = new BranchRef_T();
+                            Item.ReadXml(reader);
+                            break;
+                        case "EndConnection":
+                            Item = new EndConnection_T();
+                            Item.ReadXml(reader);
+                            break;
+                        case "StepRef":
+                            Item = new StepRef_T();
+                            Item.ReadXml(reader);
+                            break;
+                        case "TransitionRef":
+                            Item = new TransitionRef_T();
+                            Item.ReadXml(reader);
+                            break;
+                    }
+                }
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

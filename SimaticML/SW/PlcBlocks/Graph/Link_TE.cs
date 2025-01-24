@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
@@ -12,7 +11,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// <item>SW.PlcBlocks.Graph_v6 => SW.PlcBlocks.LADFBD_v5 + SW.PlcBlocks.CompileUnitCommon_v5 + SW.PlcBlocks.Access_v5 + SW.Common_v3</item>
     /// </list>
     [Serializable]
-    [XmlRoot("LinkType", Namespace = "", IsNullable = false)]
     public enum Link_TE
     {
         Direct,

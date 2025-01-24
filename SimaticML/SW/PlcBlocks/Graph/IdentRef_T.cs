@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -10,8 +12,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("IdentRef", Namespace = "", IsNullable = false)]
-    public class IdentRef_T
+    [XmlRoot("IdentRef", IsNullable = false)]
+    public class IdentRef_T : Object_G
     {
         public Common.Comment_T Comment { get; set; }
 
@@ -19,6 +21,39 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         [XmlAttribute]
         public int UId { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            UId = uId;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Comment":
+                            Comment = new Common.Comment_T();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "ViewInfo":
+                            ViewInfo = new Common.ViewInfo_T();
+                            ViewInfo.ReadXml(reader);
+                            break;
+                    }
+                }
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -31,11 +66,44 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("IdentRef", Namespace = "", IsNullable = false)]
+    [XmlRoot("IdentRef", IsNullable = false)]
     public class IdentRef_T_v2 : IdentRef_T
     {
         public new Common.Comment_T_v2 Comment { get; set; }
 
         public new Common.ViewInfo_T_v2 ViewInfo { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            UId = uId;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "ViewInfo":
+                            ViewInfo = new Common.ViewInfo_T_v2();
+                            ViewInfo.ReadXml(reader);
+                            break;
+                    }
+                }
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

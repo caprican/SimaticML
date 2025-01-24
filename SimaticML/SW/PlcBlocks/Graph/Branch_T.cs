@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -14,8 +15,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Branch", Namespace = "", IsNullable = false)]
-    public class Branch_T
+    [XmlRoot("Branch", IsNullable = false)]
+    public class Branch_T : Object_G
     {
         [XmlAttribute]
         public int Number { get; set; }
@@ -25,5 +26,29 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         [XmlAttribute]
         public int Cardinality { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<Branch_TE>(reader.GetAttribute("Type"), out var type);
+            Type = type;
+
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = int.TryParse(reader.GetAttribute("Cardinality"), out var cardinality);
+            Cardinality = cardinality;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -14,10 +16,38 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Branches", Namespace = "", IsNullable = false)]
-    public class Branches_T
+    [XmlRoot("Branches", IsNullable = false)]
+    public class Branches_T : Object_G
     {
         [XmlElement("Branch")]
-        public Branch_T[] Branch { get; set; }
+        public Branch_T[] Branchs { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var branchs = new List<Branch_T>();
+                while (reader.NodeType == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Branch":
+                            var branch = new Branch_T();
+                            branch.ReadXml(reader);
+                            branchs.Add(branch);
+                            break;
+                    }
+                }
+                if(branchs.Count == 0) Branchs = branchs.ToArray();
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

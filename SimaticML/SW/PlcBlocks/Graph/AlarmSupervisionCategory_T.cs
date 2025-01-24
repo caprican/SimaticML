@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -10,8 +13,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("AlarmSupervisionCategory", Namespace = "", IsNullable = false)]
-    public class AlarmSupervisionCategory_T
+    [XmlRoot("AlarmSupervisionCategory", IsNullable = false)]
+    public class AlarmSupervisionCategory_T : Object_G
     {
         /// <summary>
         /// Enabler token
@@ -23,6 +26,39 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         [XmlAttribute]
         public ushort DisplayClass { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = ushort.TryParse(reader.GetAttribute("Id"), out var id);
+            Id = id;
+
+            _ = ushort.TryParse(reader.GetAttribute("DisplayClass"), out var displayClass);
+            DisplayClass = displayClass;
+
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Token":
+                            Token = new Common.Token_T();
+                            Token.ReadXml(reader);
+                            break;
+                    }
+                }
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -35,12 +71,45 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("AlarmSupervisionCategory", Namespace = "", IsNullable = false)]
+    [XmlRoot("AlarmSupervisionCategory", IsNullable = false)]
     public class AlarmSupervisionCategory_T_v2 : AlarmSupervisionCategory_T
     {
         /// <summary>
         /// Enabler token
         /// </summary>
         public new Common.Token_T_v2 Token { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = ushort.TryParse(reader.GetAttribute("Id"), out var id);
+            Id = id;
+
+            _ = ushort.TryParse(reader.GetAttribute("DisplayClass"), out var displayClass);
+            DisplayClass = displayClass;
+
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Token":
+                            Token = new Common.Token_T_v2();
+                            Token.ReadXml(reader);
+                            break;
+                    }
+                }
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

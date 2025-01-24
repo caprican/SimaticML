@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -14,20 +16,37 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("BranchRef", Namespace = "", IsNullable = false)]
-    public class BranchRef_T
+    [XmlRoot("BranchRef", IsNullable = false)]
+    public class BranchRef_T : Object_G
     {
         [XmlAttribute]
         public int Number { get; set; }
 
         [XmlAttribute]
-        public int In { get; set; }
+        public int? In { get; set; } = null;
         [XmlIgnore]
         public bool InSpecified { get; set; }
 
         [XmlAttribute]
-        public int Out { get; set; }
+        public int? Out { get; set; } = null;
         [XmlIgnore]
         public bool OutSpecified { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            InSpecified = int.TryParse(reader.GetAttribute("In"), out var _in);
+            if (InSpecified) In = _in;
+
+            OutSpecified = int.TryParse(reader.GetAttribute("Out"), out var _out);
+            if (OutSpecified) In = _out;
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

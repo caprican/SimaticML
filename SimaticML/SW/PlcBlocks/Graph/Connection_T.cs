@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -14,13 +15,46 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Connection", Namespace = "", IsNullable = false)]
-    public class Connection_T
+    [XmlRoot("Connection", IsNullable = false)]
+    public class Connection_T : Object_G
     {
         public Node_T NodeFrom { get; set; }
 
         public Node_T NodeTo { get; set; }
 
         public Link_TE LinkType { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<Link_TE>(reader.GetAttribute("LinkType"), out var linkType);
+            LinkType = linkType;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "NodeFrom":
+                            NodeFrom = new Node_T();
+                            NodeFrom.ReadXml(reader);
+                            break;
+                        case "NodeTo":
+                            NodeTo = new Node_T();
+                            NodeTo.ReadXml(reader);
+                            break;
+                    }
+                }
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -16,21 +15,17 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("AlarmInterlockCategory", IsNullable = false)]
-    public class AlarmCategory_T : Object_G
+    [XmlRoot("EndConnection", IsNullable = false)]
+    public class EndConnection_T : Object_G
     {
-        [XmlAttribute]
-        public ushort Id { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
-            _ = ushort.TryParse(reader.GetAttribute("Id"), out var id);
-            Id = id;
+            reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

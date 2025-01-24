@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -14,11 +17,40 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Connections", Namespace = "", IsNullable = false)]
-    public class Connections_T
+    [XmlRoot("Connections", IsNullable = false)]
+    public class Connections_T : Object_G
     {
         [XmlElement("Connection")]
-        public Connection_T[] Connection { get; set; }
+        public Connection_T[] Connections { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var connections = new List<Connection_T>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Connection":
+                            var connexion = new Connection_T();
+                            connexion.ReadXml(reader);
+                            connections.Add(connexion);
+                            break;
+                    }
+                }
+                if (connections.Count > 0) Connections = connections.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

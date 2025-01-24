@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -10,14 +12,48 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("AlarmsSettings", Namespace = "", IsNullable = false)]
-    public class AlarmsSettings_T
+    [XmlRoot("AlarmsSettings", IsNullable = false)]
+    public class AlarmsSettings_T : Object_G
     {
         public AlarmSupervisionCategories_T AlarmSupervisionCategories { get; set; }
 
         public AlarmCategory_T AlarmInterlockCategory { get; set; }
 
         public AlarmCategory_T AlarmWarningCategory { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "AlarmSupervisionCategories":
+                            AlarmSupervisionCategories = new AlarmSupervisionCategories_T();
+                            AlarmSupervisionCategories.ReadXml(reader);
+                            break;
+                        case "AlarmInterlockCategory":
+                            AlarmInterlockCategory = new AlarmCategory_T();
+                            AlarmInterlockCategory.ReadXml(reader);
+                            break;
+                        case "AlarmWarningCategory":
+                            AlarmWarningCategory = new AlarmCategory_T();
+                            AlarmWarningCategory.ReadXml(reader);
+                            break;
+                    }
+                }
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -27,10 +63,44 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("AlarmsSettings", Namespace = "", IsNullable = false)]
+    [XmlRoot("AlarmsSettings", IsNullable = false)]
     public class AlarmsSettings_T_v2 : AlarmsSettings_T
     {
         public new AlarmSupervisionCategories_T_v2 AlarmSupervisionCategories { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "AlarmSupervisionCategories":
+                            AlarmSupervisionCategories = new AlarmSupervisionCategories_T_v2();
+                            AlarmSupervisionCategories.ReadXml(reader);
+                            break;
+                        case "AlarmInterlockCategory":
+                            AlarmInterlockCategory = new AlarmCategory_T();
+                            AlarmInterlockCategory.ReadXml(reader);
+                            break;
+                        case "AlarmWarningCategory":
+                            AlarmWarningCategory = new AlarmCategory_T();
+                            AlarmWarningCategory.ReadXml(reader);
+                            break;
+                    }
+                }
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -42,7 +112,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("AlarmsSettings", Namespace = "", IsNullable = false)]
+    [XmlRoot("AlarmsSettings", IsNullable = false)]
     public class AlarmsSettings_T_v4 : AlarmsSettings_T_v2
     {
         public AlarmSubcategory_T AlarmSubcategory1Interlock { get; set; }
@@ -56,5 +126,63 @@ namespace SimaticML.SW.PlcBlocks.Graph
         public AlarmSubcategory_T AlarmSubcategory1Warning { get; set; }
 
         public AlarmSubcategory_T AlarmSubcategory2Warning { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "AlarmSupervisionCategories":
+                            AlarmSupervisionCategories = new AlarmSupervisionCategories_T_v2();
+                            AlarmSupervisionCategories.ReadXml(reader);
+                            break;
+                        case "AlarmInterlockCategory":
+                            AlarmInterlockCategory = new AlarmCategory_T();
+                            AlarmInterlockCategory.ReadXml(reader);
+                            break;
+                        case "AlarmWarningCategory":
+                            AlarmWarningCategory = new AlarmCategory_T();
+                            AlarmWarningCategory.ReadXml(reader);
+                            break;
+                        case "AlarmSubcategory1Interlock":
+                            AlarmSubcategory1Interlock = new AlarmSubcategory_T();
+                            AlarmSubcategory1Interlock.ReadXml(reader);
+                            break;
+                        case "AlarmSubcategory2Interlock":
+                            AlarmSubcategory2Interlock = new AlarmSubcategory_T();
+                            AlarmSubcategory2Interlock.ReadXml(reader);
+                            break;
+                        case "AlarmSubcategory1Supervision":
+                            AlarmSubcategory1Supervision = new AlarmSubcategory_T();
+                            AlarmSubcategory1Supervision.ReadXml(reader);
+                            break;
+                        case "AlarmSubcategory2Supervision":
+                            AlarmSubcategory2Supervision = new AlarmSubcategory_T();
+                            AlarmSubcategory2Supervision.ReadXml(reader);
+                            break;
+                        case "AlarmSubcategory1Warning":
+                            AlarmSubcategory1Warning = new AlarmSubcategory_T();
+                            AlarmSubcategory1Warning.ReadXml(reader);
+                            break;
+                        case "AlarmSubcategory2Warning":
+                            AlarmSubcategory2Warning = new AlarmSubcategory_T();
+                            AlarmSubcategory2Warning.ReadXml(reader);
+                            break;
+                    }
+                }
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
