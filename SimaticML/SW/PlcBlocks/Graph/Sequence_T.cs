@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -10,8 +11,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Sequence", Namespace = "", IsNullable = false)]
-    public class Sequence_T
+    [XmlRoot("Sequence", IsNullable = false)]
+    public class Sequence_T : Object_G
     {
         public Common.Comment_T Title { get; set; }
 
@@ -24,6 +25,51 @@ namespace SimaticML.SW.PlcBlocks.Graph
         public Branches_T Branches { get; set; }
 
         public Connections_T Connections { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Title":
+                            Title = new Common.Comment_T();
+                            Title.ReadXml(reader);
+                            break;
+                        case "Comment":
+                            Comment = new Common.Comment_T();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "Steps":
+                            Steps = new Steps_T();
+                            Steps.ReadXml(reader);
+                            break;
+                        case "Transitions":
+                            Transitions = new Transitions_T();
+                            Transitions.ReadXml(reader);
+                            break;
+                        case "Branches":
+                            Branches = new Branches_T();
+                            Branches.ReadXml(reader);
+                            break;
+                        case "Connections":
+                            Connections = new Connections_T();
+                            Connections.ReadXml(reader);
+                            break;
+                    }
+                }
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -33,7 +79,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Sequence", Namespace = "", IsNullable = false)]
+    [XmlRoot("Sequence", IsNullable = false)]
     public class Sequence_T_v2 : Sequence_T
     {
         public new Common.Comment_T_v2 Title { get; set; }
@@ -43,6 +89,51 @@ namespace SimaticML.SW.PlcBlocks.Graph
         public new Steps_T_v2 Steps { get; set; }
 
         public new Transitions_T_v2 Transitions { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Title":
+                            Title = new Common.Comment_T_v2();
+                            Title.ReadXml(reader);
+                            break;
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "Steps":
+                            Steps = new Steps_T_v2();
+                            Steps.ReadXml(reader);
+                            break;
+                        case "Transitions":
+                            Transitions = new Transitions_T_v2();
+                            Transitions.ReadXml(reader);
+                            break;
+                        case "Branches":
+                            Branches = new Branches_T();
+                            Branches.ReadXml(reader);
+                            break;
+                        case "Connections":
+                            Connections = new Connections_T();
+                            Connections.ReadXml(reader);
+                            break;
+                    }
+                }
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -52,10 +143,57 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Sequence", Namespace = "", IsNullable = false)]
+    [XmlRoot("Sequence", IsNullable = false)]
     public class Sequence_T_v4 : Sequence_T_v2
     {
+        public new Steps_T_v4 Steps { get; set; }
+
         public new Transitions_T_v4 Transitions { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Title":
+                            Title = new Common.Comment_T_v2();
+                            Title.ReadXml(reader);
+                            break;
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "Steps":
+                            Steps = new Steps_T_v4();
+                            Steps.ReadXml(reader);
+                            break;
+                        case "Transitions":
+                            Transitions = new Transitions_T_v4();
+                            Transitions.ReadXml(reader);
+                            break;
+                        case "Branches":
+                            Branches = new Branches_T();
+                            Branches.ReadXml(reader);
+                            break;
+                        case "Connections":
+                            Connections = new Connections_T();
+                            Connections.ReadXml(reader);
+                            break;
+                    }
+                }
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -65,12 +203,57 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Sequence", Namespace = "", IsNullable = false)]
+    [XmlRoot("Sequence", IsNullable = false)]
     public class Sequence_T_v5 : Sequence_T_v4
     {
         public new Steps_T_v5 Steps { get; set; }
 
         public new Transitions_T_v5 Transitions { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Title":
+                            Title = new Common.Comment_T_v2();
+                            Title.ReadXml(reader);
+                            break;
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "Steps":
+                            Steps = new Steps_T_v5();
+                            Steps.ReadXml(reader);
+                            break;
+                        case "Transitions":
+                            Transitions = new Transitions_T_v5();
+                            Transitions.ReadXml(reader);
+                            break;
+                        case "Branches":
+                            Branches = new Branches_T();
+                            Branches.ReadXml(reader);
+                            break;
+                        case "Connections":
+                            Connections = new Connections_T();
+                            Connections.ReadXml(reader);
+                            break;
+                    }
+                }
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -80,9 +263,57 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Sequence", Namespace = "", IsNullable = false)]
+    [XmlRoot("Sequence", IsNullable = false)]
     public class Sequence_T_v6 : Sequence_T_v5
     {
+        public new Steps_T_v6 Steps { get; set; }
+
+
         public new Transitions_T_v6 Transitions { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Title":
+                            Title = new Common.Comment_T_v2();
+                            Title.ReadXml(reader);
+                            break;
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "Steps":
+                            Steps = new Steps_T_v6();
+                            Steps.ReadXml(reader);
+                            break;
+                        case "Transitions":
+                            Transitions = new Transitions_T_v6();
+                            Transitions.ReadXml(reader);
+                            break;
+                        case "Branches":
+                            Branches = new Branches_T();
+                            Branches.ReadXml(reader);
+                            break;
+                        case "Connections":
+                            Connections = new Connections_T();
+                            Connections.ReadXml(reader);
+                            break;
+                    }
+                }
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -13,8 +15,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("TransitionName", Namespace = "", IsNullable = false)]
-    public class TransitionName_T
+    [XmlRoot("TransitionName", IsNullable = false)]
+    public class TransitionName_T : Object_G
     {
         /// <summary>
         /// For translated transiton names
@@ -22,5 +24,34 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         [XmlElement("MultiLanguageText")]
         public Common.MultiLanguageText_T_v2[] MultiLanguageText { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var texts = new List<Common.MultiLanguageText_T_v2>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "MultiLanguageText":
+                            var text = new Common.MultiLanguageText_T_v2();
+                            text.ReadXml(reader);
+                            texts.Add(text);
+                            break;
+                    }
+                }
+                if (texts.Count > 0) MultiLanguageText = texts.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

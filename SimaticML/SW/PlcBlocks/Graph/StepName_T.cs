@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -13,13 +15,42 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("StepName", Namespace = "", IsNullable = false)]
-    public class StepName_T
+    [XmlRoot("StepName", IsNullable = false)]
+    public class StepName_T : Object_G
     {
         /// <summary>
         /// For translated step names
         /// </summary>
         [XmlElement("MultiLanguageText")]
         public Common.MultiLanguageText_T_v2[] MultiLanguageText { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var texts = new List<Common.MultiLanguageText_T_v2>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Access":
+                            var text = new Common.MultiLanguageText_T_v2();
+                            text.ReadXml(reader);
+                            texts.Add(text);
+                            break;
+                    }
+                }
+                if (texts.Count > 0) MultiLanguageText = texts.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

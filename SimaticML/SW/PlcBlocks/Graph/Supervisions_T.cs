@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -10,10 +12,36 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Supervisions", Namespace = "", IsNullable = false)]
-    public class Supervisions_T
+    [XmlRoot("Supervisions", IsNullable = false)]
+    public class Supervisions_T : Object_G
     {
         public AlarmSupportingLanguageModule_T Supervision { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Supervision":
+                            Supervision = new AlarmSupportingLanguageModule_T();
+                            Supervision.ReadXml(reader);
+                            break;
+                    }
+                }
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -23,10 +51,36 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Supervisions", Namespace = "", IsNullable = false)]
+    [XmlRoot("Supervisions", IsNullable = false)]
     public class Supervisions_T_v2 : Supervisions_T
     {
         public new AlarmSupportingLanguageModule_T_v2 Supervision { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Supervision":
+                            Supervision = new AlarmSupportingLanguageModule_T_v2();
+                            Supervision.ReadXml(reader);
+                            break;
+                    }
+                }
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -36,10 +90,36 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Supervisions", Namespace = "", IsNullable = false)]
+    [XmlRoot("Supervisions", IsNullable = false)]
     public class Supervisions_T_v4 : Supervisions_T_v2
     {
         public new AlarmSupportingLanguageModule_T_v4 Supervision { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Supervision":
+                            Supervision = new AlarmSupportingLanguageModule_T_v4();
+                            Supervision.ReadXml(reader);
+                            break;
+                    }
+                }
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -49,10 +129,36 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Supervisions", Namespace = "", IsNullable = false)]
+    [XmlRoot("Supervisions", IsNullable = false)]
     public class Supervisions_T_v5 : Supervisions_T_v4
     {
         public new AlarmSupportingLanguageModule_T_v5 Supervision { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Supervision":
+                            Supervision = new AlarmSupportingLanguageModule_T_v5();
+                            Supervision.ReadXml(reader);
+                            break;
+                    }
+                }
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -62,9 +168,35 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Supervisions", Namespace = "", IsNullable = false)]
+    [XmlRoot("Supervisions", IsNullable = false)]
     public class Supervisions_T_v6 : Supervisions_T_v5
     {
         public new AlarmSupportingLanguageModule_T_v6 Supervision { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Supervision":
+                            Supervision = new AlarmSupportingLanguageModule_T_v6();
+                            Supervision.ReadXml(reader);
+                            break;
+                    }
+                }
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

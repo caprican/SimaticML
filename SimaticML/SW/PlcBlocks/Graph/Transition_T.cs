@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -11,21 +13,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Transition", Namespace = "", IsNullable = false)]
-    public class Transition_T
+    [XmlRoot("Transition", IsNullable = false)]
+    public class Transition_T : Object_G
     {
-        public Transition_T()
-        {
-            IsMissing = false;
-        }
-
         public Common.Comment_T Comment { get; set; }
 
         public LADFBD.FlgNet_T FlgNet { get; set; }
 
         [XmlAttribute]
         [DefaultValue(false)]
-        public bool IsMissing { get; set; }
+        public bool IsMissing { get; set; } = false;
 
         [XmlAttribute]
         public string Name { get; set; }
@@ -34,7 +31,49 @@ namespace SimaticML.SW.PlcBlocks.Graph
         public int Number { get; set; }
 
         [XmlAttribute]
-        public ProgrammingLanguage_TE? ProgrammingLanguage { get; set; }    }
+        public ProgrammingLanguage_TE ProgrammingLanguage { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
+            IsMissing = isMissing;
+
+            Name = reader.GetAttribute("name");
+
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
+            ProgrammingLanguage = programmingLanguage;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Comment":
+                            Comment = new Common.Comment_T();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "FlgNet":
+                            FlgNet = new LADFBD.FlgNet_T();
+                            FlgNet.ReadXml(reader);
+                            break;
+                    }
+                }
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     /// <remarks>
     /// Schema : 
@@ -43,7 +82,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Transition", Namespace = "", IsNullable = false)]
+    [XmlRoot("Transition", IsNullable = false)]
     public class Transition_T_v2 : Transition_T
     {
         public new Common.Comment_T_v2 Comment { get; set; }
@@ -52,6 +91,53 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         [XmlArrayItem("MultiLanguageText", IsNullable = false)]
         public Common.MultiLanguageText_T_v2[] TransitionName { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
+            IsMissing = isMissing;
+
+            Name = reader.GetAttribute("name");
+
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
+            ProgrammingLanguage = programmingLanguage;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var texts = new List<Common.MultiLanguageText_T_v2>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "FlgNet":
+                            FlgNet = new LADFBD.FlgNet_T_v2();
+                            FlgNet.ReadXml(reader);
+                            break;
+                        case "TransitionName":
+                            var text = new Common.MultiLanguageText_T_v2();
+                            text.ReadXml(reader);
+                            texts.Add(text);
+                            break;
+                    }
+                }
+                if (texts.Count > 0) TransitionName = texts.ToArray();
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -61,10 +147,57 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Transition", Namespace = "", IsNullable = false)]
+    [XmlRoot("Transition", IsNullable = false)]
     public class Transition_T_v4 : Transition_T_v2
     {
         public new LADFBD.FlgNet_T_v3 FlgNet { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
+            IsMissing = isMissing;
+
+            Name = reader.GetAttribute("name");
+
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
+            ProgrammingLanguage = programmingLanguage;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var texts = new List<Common.MultiLanguageText_T_v2>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "FlgNet":
+                            FlgNet = new LADFBD.FlgNet_T_v3();
+                            FlgNet.ReadXml(reader);
+                            break;
+                        case "TransitionName":
+                            var text = new Common.MultiLanguageText_T_v2();
+                            text.ReadXml(reader);
+                            texts.Add(text);
+                            break;
+                    }
+                }
+                if (texts.Count > 0) TransitionName = texts.ToArray();
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -74,10 +207,57 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Transition", Namespace = "", IsNullable = false)]
+    [XmlRoot("Transition", IsNullable = false)]
     public class Transition_T_v5 : Transition_T_v4
     {
         public new LADFBD.FlgNet_T_v4 FlgNet { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
+            IsMissing = isMissing;
+
+            Name = reader.GetAttribute("name");
+
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
+            ProgrammingLanguage = programmingLanguage;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var texts = new List<Common.MultiLanguageText_T_v2>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "FlgNet":
+                            FlgNet = new LADFBD.FlgNet_T_v4();
+                            FlgNet.ReadXml(reader);
+                            break;
+                        case "TransitionName":
+                            var text = new Common.MultiLanguageText_T_v2();
+                            text.ReadXml(reader);
+                            texts.Add(text);
+                            break;
+                    }
+                }
+                if (texts.Count > 0) TransitionName = texts.ToArray();
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -87,9 +267,56 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Transition", Namespace = "", IsNullable = false)]
+    [XmlRoot("Transition", IsNullable = false)]
     public class Transition_T_v6 : Transition_T_v5
     {
         public new LADFBD.FlgNet_T_v5 FlgNet { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
+            IsMissing = isMissing;
+
+            Name = reader.GetAttribute("name");
+
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
+            ProgrammingLanguage = programmingLanguage;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var texts = new List<Common.MultiLanguageText_T_v2>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "FlgNet":
+                            FlgNet = new LADFBD.FlgNet_T_v5();
+                            FlgNet.ReadXml(reader);
+                            break;
+                        case "TransitionName":
+                            var text = new Common.MultiLanguageText_T_v2();
+                            text.ReadXml(reader);
+                            texts.Add(text);
+                            break;
+                    }
+                }
+                if (texts.Count > 0) TransitionName = texts.ToArray();
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

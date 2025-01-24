@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -10,11 +12,40 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Transitions", Namespace = "", IsNullable = false)]
-    public class Transitions_T
+    [XmlRoot("Transitions", IsNullable = false)]
+    public class Transitions_T : Object_G
     {
         [XmlElement("Transition")]
         public Transition_T[] Transition { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Transition_T>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Transition":
+                            var transition = new Transition_T();
+                            transition.ReadXml(reader);
+                            items.Add(transition);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Transition = items.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -24,11 +55,40 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Transitions", Namespace = "", IsNullable = false)]
+    [XmlRoot("Transitions", IsNullable = false)]
     public class Transitions_T_v2 : Transitions_T
     {
         [XmlElement("Transition")]
         public new Transition_T_v2[] Transition { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Transition_T_v2>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Transition":
+                            var transition = new Transition_T_v2();
+                            transition.ReadXml(reader);
+                            items.Add(transition);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Transition = items.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -38,11 +98,40 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Transitions", Namespace = "", IsNullable = false)]
+    [XmlRoot("Transitions", IsNullable = false)]
     public class Transitions_T_v4 : Transitions_T_v2
     {
         [XmlElement("Transition")]
         public new Transition_T_v4[] Transition { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Transition_T_v4>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Transition":
+                            var transition = new Transition_T_v4();
+                            transition.ReadXml(reader);
+                            items.Add(transition);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Transition = items.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -52,11 +141,40 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Transitions", Namespace = "", IsNullable = false)]
+    [XmlRoot("Transitions", IsNullable = false)]
     public class Transitions_T_v5 : Transitions_T_v4
     {
         [XmlElement("Transition")]
         public new Transition_T_v5[] Transition { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Transition_T_v5>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Transition":
+                            var transition = new Transition_T_v5();
+                            transition.ReadXml(reader);
+                            items.Add(transition);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Transition = items.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -66,10 +184,39 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Transitions", Namespace = "", IsNullable = false)]
+    [XmlRoot("Transitions", IsNullable = false)]
     public class Transitions_T_v6 : Transitions_T_v5
     {
         [XmlElement("Transition")]
         public new Transition_T_v6[] Transition { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Transition_T_v6>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Transition":
+                            var transition = new Transition_T_v6();
+                            transition.ReadXml(reader);
+                            items.Add(transition);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Transition = items.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

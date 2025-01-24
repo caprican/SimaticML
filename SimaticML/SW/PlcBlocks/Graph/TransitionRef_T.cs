@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -14,10 +15,21 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("TransitionRef", Namespace = "", IsNullable = false)]
-    public class TransitionRef_T
+    [XmlRoot("TransitionRef", IsNullable = false)]
+    public class TransitionRef_T : Object_G
     {
         [XmlAttribute]
         public int Number { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

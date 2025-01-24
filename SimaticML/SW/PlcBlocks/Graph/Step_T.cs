@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
@@ -11,15 +14,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Step", Namespace = "", IsNullable = false)]
-    public class Step_T
+    [XmlRoot("Step", IsNullable = false)]
+    public class Step_T : Object_G
     {
-        public Step_T()
-        {
-            IsMissing = false;
-            Init = false;
-        }
-
         public Common.Comment_T Comment { get; set; }
 
         public Actions_T Actions { get; set; }
@@ -30,14 +27,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         [XmlAttribute]
         [DefaultValue(false)]
-        public bool IsMissing { get; set; }
+        public bool IsMissing { get; set; } = false;
 
         [XmlAttribute]
         public int Number { get; set; }
 
         [XmlAttribute]
         [DefaultValue(false)]
-        public bool Init { get; set; }
+        public bool Init { get; set; } = false;
 
         [XmlAttribute]
         public string Name { get; set; }
@@ -47,6 +44,57 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         [XmlAttribute]
         public string WarningTime { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
+            IsMissing = isMissing;
+
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = bool.TryParse(reader.GetAttribute("Init"), out var init);
+            Init = init;
+
+            Name = reader.GetAttribute("Name");
+            MaximumStepTime = reader.GetAttribute("MaximumStepTime");
+            WarningTime = reader.GetAttribute("WarningTime");
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Comment":
+                            Comment = new Common.Comment_T();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "Actions":
+                            Actions = new Actions_T();
+                            Actions.ReadXml(reader);
+                            break;
+                        case "Supervisions":
+                            Supervisions = new Supervisions_T();
+                            Supervisions.ReadXml(reader);
+                            break;
+                        case "Interlocks":
+                            Interlocks = new Interlocks_T();
+                            Interlocks.ReadXml(reader);
+                            break;
+                    }
+                }
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -56,7 +104,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Step", Namespace = "", IsNullable = false)]
+    [XmlRoot("Step", IsNullable = false)]
     public class Step_T_v2 : Step_T
     {
         public new Common.Comment_T_v2 Comment { get; set; }
@@ -69,6 +117,64 @@ namespace SimaticML.SW.PlcBlocks.Graph
         public new Actions_T_v2 Actions { get; set; }
 
         public new Interlocks_T_v2 Interlocks { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
+            IsMissing = isMissing;
+
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = bool.TryParse(reader.GetAttribute("Init"), out var init);
+            Init = init;
+
+            Name = reader.GetAttribute("Name");
+            MaximumStepTime = reader.GetAttribute("MaximumStepTime");
+            WarningTime = reader.GetAttribute("WarningTime");
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var texts = new List<Common.MultiLanguageText_T_v2>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "Actions":
+                            Actions = new Actions_T_v2();
+                            Actions.ReadXml(reader);
+                            break;
+                        case "Supervisions":
+                            Supervisions = new Supervisions_T_v2();
+                            Supervisions.ReadXml(reader);
+                            break;
+                        case "Interlocks":
+                            Interlocks = new Interlocks_T_v2();
+                            Interlocks.ReadXml(reader);
+                            break;
+                        case "StepName":
+                            var text = new Common.MultiLanguageText_T_v2();
+                            text.ReadXml(reader);
+                            texts.Add(text);
+                            break;
+                    }
+                }
+                if (texts.Count > 0) StepName = texts.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -78,12 +184,72 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Step", Namespace = "", IsNullable = false)]
+    [XmlRoot("Step", IsNullable = false)]
     public class Step_T_v4 : Step_T_v2
     {
+        public new Actions_T_v4 Actions { get; set; }
+
         public new Supervisions_T_v4 Supervisions { get; set; }
 
         public new Interlocks_T_v4 Interlocks { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
+            IsMissing = isMissing;
+
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = bool.TryParse(reader.GetAttribute("Init"), out var init);
+            Init = init;
+
+            Name = reader.GetAttribute("Name");
+            MaximumStepTime = reader.GetAttribute("MaximumStepTime");
+            WarningTime = reader.GetAttribute("WarningTime");
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var texts = new List<Common.MultiLanguageText_T_v2>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "Actions":
+                            Actions = new Actions_T_v4();
+                            Actions.ReadXml(reader);
+                            break;
+                        case "Supervisions":
+                            Supervisions = new Supervisions_T_v4();
+                            Supervisions.ReadXml(reader);
+                            break;
+                        case "Interlocks":
+                            Interlocks = new Interlocks_T_v4();
+                            Interlocks.ReadXml(reader);
+                            break;
+                        case "StepName":
+                            var text = new Common.MultiLanguageText_T_v2();
+                            text.ReadXml(reader);
+                            texts.Add(text);
+                            break;
+                    }
+                }
+                if (texts.Count > 0) StepName = texts.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -93,7 +259,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Step", Namespace = "", IsNullable = false)]
+    [XmlRoot("Step", IsNullable = false)]
     public class Step_T_v5 : Step_T_v4
     {
         public new Supervisions_T_v5 Supervisions { get; set; }
@@ -101,6 +267,64 @@ namespace SimaticML.SW.PlcBlocks.Graph
         public new Actions_T_v5 Actions { get; set; }
 
         public new Interlocks_T_v5 Interlocks { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
+            IsMissing = isMissing;
+
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = bool.TryParse(reader.GetAttribute("Init"), out var init);
+            Init = init;
+
+            Name = reader.GetAttribute("Name");
+            MaximumStepTime = reader.GetAttribute("MaximumStepTime");
+            WarningTime = reader.GetAttribute("WarningTime");
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var texts = new List<Common.MultiLanguageText_T_v2>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "Actions":
+                            Actions = new Actions_T_v5();
+                            Actions.ReadXml(reader);
+                            break;
+                        case "Supervisions":
+                            Supervisions = new Supervisions_T_v5();
+                            Supervisions.ReadXml(reader);
+                            break;
+                        case "Interlocks":
+                            Interlocks = new Interlocks_T_v5();
+                            Interlocks.ReadXml(reader);
+                            break;
+                        case "StepName":
+                            var text = new Common.MultiLanguageText_T_v2();
+                            text.ReadXml(reader);
+                            texts.Add(text);
+                            break;
+                    }
+                }
+                if (texts.Count > 0) StepName = texts.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 
@@ -111,12 +335,71 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Step", Namespace = "", IsNullable = false)]
+    [XmlRoot("Step", IsNullable = false)]
     public class Step_T_v6 : Step_T_v5
     {
+        public new Actions_T_v6 Actions { get; set; }
+
         public new Supervisions_T_v6 Supervisions { get; set; }
 
         public new Interlocks_T_v6 Interlocks { get; set; }
 
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
+            IsMissing = isMissing;
+
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = bool.TryParse(reader.GetAttribute("Init"), out var init);
+            Init = init;
+
+            Name = reader.GetAttribute("Name");
+            MaximumStepTime = reader.GetAttribute("MaximumStepTime");
+            WarningTime = reader.GetAttribute("WarningTime");
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var texts = new List<Common.MultiLanguageText_T_v2>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Comment":
+                            Comment = new Common.Comment_T_v2();
+                            Comment.ReadXml(reader);
+                            break;
+                        case "Actions":
+                            Actions = new Actions_T_v6();
+                            Actions.ReadXml(reader);
+                            break;
+                        case "Supervisions":
+                            Supervisions = new Supervisions_T_v6();
+                            Supervisions.ReadXml(reader);
+                            break;
+                        case "Interlocks":
+                            Interlocks = new Interlocks_T_v6();
+                            Interlocks.ReadXml(reader);
+                            break;
+                        case "StepName":
+                            var text = new Common.MultiLanguageText_T_v2();
+                            text.ReadXml(reader);
+                            texts.Add(text);
+                            break;
+                    }
+                }
+                if (texts.Count > 0) StepName = texts.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
