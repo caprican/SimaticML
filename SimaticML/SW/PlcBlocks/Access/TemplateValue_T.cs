@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
@@ -10,8 +11,8 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("TemplateValue", Namespace = "", IsNullable = false)]
-    public class TemplateValue_T
+    [XmlRoot("TemplateValue", IsNullable = false)]
+    public class TemplateValue_T : Object_G
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -21,6 +22,25 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         [XmlText]
         public string Value { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<TemplateType_TE>(reader.GetAttribute("Type"), out var type);
+            Type = type;
+
+            Name = reader.GetAttribute("Name");
+
+            reader.Read();
+            Value = reader.Value;
+            reader.Read();
+
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -33,12 +53,34 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("TemplateValue", Namespace = "", IsNullable = false)]
+    [XmlRoot("TemplateValue", IsNullable = false)]
     public class TemplateValue_T_v2 : TemplateValue_T
     {
         [XmlAttribute]
-        public int UId { get; set; }
+        public int? UId { get; set; } = null;
         [XmlIgnore]
         public bool UIdSpecified { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<TemplateType_TE>(reader.GetAttribute("Type"), out var type);
+            Type = type;
+
+            Name = reader.GetAttribute("Name");
+
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if (UIdSpecified) UId = uId;
+
+            reader.Read();
+            Value = reader.Value;
+            reader.Read();
+
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

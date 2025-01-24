@@ -55,6 +55,7 @@ namespace SimaticML.SW.Common
 
         public override void WriteXml(XmlWriter writer)
         {
+            throw new NotImplementedException();
         }
     }
 
@@ -97,6 +98,7 @@ namespace SimaticML.SW.Common
 
         public override void WriteXml(XmlWriter writer)
         {
+            throw new NotImplementedException();
         }
     }
 }

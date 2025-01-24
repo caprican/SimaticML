@@ -1,10 +1,13 @@
 ﻿namespace SimaticML.SW.InterfaceSections
 {
     /// <remarks>
-    /// Schema : SW_InterfaceSections_v2 (SW.Common)
-    ///          SW_InterfaceSections_v3 (SW.Common_v2)
-    ///          SW_InterfaceSections_v4 (SW.Common_v3)
-    ///          SW_InterfaceSections_v5 (SW.Common_v3)
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_InterfaceSections_v2 => SW.Common</item>
+    /// <item>SW_InterfaceSections_v3 => SW.Common_v2</item>
+    /// <item>SW_InterfaceSections_v4 => SW.Common_v3</item>
+    /// <item>SW_InterfaceSections_v5 => SW.Common_v3</item>
+    /// </list>
     /// </remarks>
     public enum MemberAttributes_TE
     {

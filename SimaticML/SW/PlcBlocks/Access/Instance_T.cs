@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
@@ -10,8 +13,8 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Instance", Namespace="", IsNullable=false)]
-    public class Instance_T
+    [XmlRoot("Instance", IsNullable=false)]
+    public class Instance_T : Object_G
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         [XmlElement("Component", typeof(Component_T))]
@@ -19,18 +22,78 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T))]
         [XmlElement("LineComment", typeof(Common.LineComment_T))]
         [XmlElement("Address", typeof(Address_T))]                              // additional address for a symbol. it is informative
-        public object[] Items { get; set; }
+        public Object_G[] Items { get; set; }
 
         /// <summary>
         /// Not allowed in STL
         /// </summary>
         [XmlAttribute]
-        public int UId { get; set; }
+        public int? UId { get; set; } = null;
         [XmlIgnore]
         public bool UIdSpecified { get; set; }
 
         [XmlAttribute]
         public Scope_TE Scope { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<Scope_TE>(reader.GetAttribute("Scope"), out var scope);
+            Scope = scope;
+
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if (UIdSpecified) UId = uId;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "AbsoluteOffset":
+                            var absoluteOffset = new AbsoluteOffset_T();
+                            absoluteOffset.ReadXml(reader);
+                            items.Add(absoluteOffset);
+                            break;
+                        case "Component":
+                            var component = new Component_T();
+                            component.ReadXml(reader);
+                            items.Add(component);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "Address":
+                            var address = new Address_T();
+                            address.ReadXml(reader);
+                            items.Add(address);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -40,7 +103,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Instance", Namespace = "", IsNullable = false)]
+    [XmlRoot("Instance", IsNullable = false)]
     public class Instance_T_v2 : Instance_T
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
@@ -51,10 +114,80 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new object[] Items { get; set; }
+        public new Object_G[] Items { get; set; }
 
         [XmlAttribute]
         public new Scope_TE_v2 Scope { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<Scope_TE_v2>(reader.GetAttribute("Scope"), out var scope);
+            Scope = scope;
+
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if (UIdSpecified) UId = uId;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "AbsoluteOffset":
+                            var absoluteOffset = new AbsoluteOffset_T();
+                            absoluteOffset.ReadXml(reader);
+                            items.Add(absoluteOffset);
+                            break;
+                        case "Address":
+                            var address = new Address_T_v2();
+                            address.ReadXml(reader);
+                            items.Add(address);
+                            break;
+                        case "Component":
+                            var component = new Component_T_v2();
+                            component.ReadXml(reader);
+                            items.Add(component);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                        case "Blank":
+                            var blank = new Common.Blank_T();
+                            blank.ReadXml(reader);
+                            items.Add(blank);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v2();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "NewLine":
+                            var newLine = new Common.NewLine_T();
+                            newLine.ReadXml(reader);
+                            items.Add(newLine);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -64,7 +197,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Instance", Namespace = "", IsNullable = false)]
+    [XmlRoot("Instance", IsNullable = false)]
     public class Instance_T_v3 : Instance_T_v2
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
@@ -75,10 +208,80 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new object[] Items { get; set; }
+        public new Object_G[] Items { get; set; }
 
         [XmlAttribute]
         public new Scope_TE_v2 Scope { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<Scope_TE_v2>(reader.GetAttribute("Scope"), out var scope);
+            Scope = scope;
+
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if (UIdSpecified) UId = uId;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "AbsoluteOffset":
+                            var absoluteOffset = new AbsoluteOffset_T();
+                            absoluteOffset.ReadXml(reader);
+                            items.Add(absoluteOffset);
+                            break;
+                        case "Address":
+                            var address = new Address_T_v2();
+                            address.ReadXml(reader);
+                            items.Add(address);
+                            break;
+                        case "Component":
+                            var component = new Component_T_v3();
+                            component.ReadXml(reader);
+                            items.Add(component);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                        case "Blank":
+                            var blank = new Common.Blank_T();
+                            blank.ReadXml(reader);
+                            items.Add(blank);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v2();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "NewLine":
+                            var newLine = new Common.NewLine_T();
+                            newLine.ReadXml(reader);
+                            items.Add(newLine);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -88,7 +291,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Instance", Namespace = "", IsNullable = false)]
+    [XmlRoot("Instance", IsNullable = false)]
     public class Instance_T_v4 : Instance_T_v3
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
@@ -99,7 +302,77 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new object[] Items { get; set; }
+        public new Object_G[] Items { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<Scope_TE_v2>(reader.GetAttribute("Scope"), out var scope);
+            Scope = scope;
+
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if (UIdSpecified) UId = uId;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "AbsoluteOffset":
+                            var absoluteOffset = new AbsoluteOffset_T();
+                            absoluteOffset.ReadXml(reader);
+                            items.Add(absoluteOffset);
+                            break;
+                        case "Address":
+                            var address = new Address_T_v2();
+                            address.ReadXml(reader);
+                            items.Add(address);
+                            break;
+                        case "Component":
+                            var component = new Component_T_v4();
+                            component.ReadXml(reader);
+                            items.Add(component);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                        case "Blank":
+                            var blank = new Common.Blank_T();
+                            blank.ReadXml(reader);
+                            items.Add(blank);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v3();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "NewLine":
+                            var newLine = new Common.NewLine_T();
+                            newLine.ReadXml(reader);
+                            items.Add(newLine);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -109,7 +382,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Instance", Namespace = "", IsNullable = false)]
+    [XmlRoot("Instance", IsNullable = false)]
     public class Instance_T_v5 : Instance_T_v4
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
@@ -120,9 +393,79 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new object[] Items { get; set; }
+        public new Object_G[] Items { get; set; }
 
         [XmlAttribute]
         public new Scope_TE_v5 Scope { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<Scope_TE_v5>(reader.GetAttribute("Scope"), out var scope);
+            Scope = scope;
+
+            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            if (UIdSpecified) UId = uId;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "AbsoluteOffset":
+                            var absoluteOffset = new AbsoluteOffset_T();
+                            absoluteOffset.ReadXml(reader);
+                            items.Add(absoluteOffset);
+                            break;
+                        case "Address":
+                            var address = new Address_T_v2();
+                            address.ReadXml(reader);
+                            items.Add(address);
+                            break;
+                        case "Component":
+                            var component = new Component_T_v5();
+                            component.ReadXml(reader);
+                            items.Add(component);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                        case "Blank":
+                            var blank = new Common.Blank_T();
+                            blank.ReadXml(reader);
+                            items.Add(blank);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v3();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "NewLine":
+                            var newLine = new Common.NewLine_T();
+                            newLine.ReadXml(reader);
+                            items.Add(newLine);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

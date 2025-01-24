@@ -1,19 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
     /// <remarks>
-    /// Schema : SW_PlcBlocks_Access (SW.Common)
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_PlcBlocks_Access => SW.Common</item>
+    /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Indirect", Namespace = "", IsNullable = false)]
-    public class Indirect_T
+    [XmlRoot("Indirect", IsNullable = false)]
+    public class Indirect_T : Object_G
     {
         [XmlElement("Comment", typeof(Common.Comment_T))]
         [XmlElement("LineComment", typeof(Common.LineComment_T))]
         [XmlElement("Token", typeof(Common.Token_T))]
-        public object[] Items { get; set; }
+        public Object_G[] Items { get; set; }
 
         public Access_T Access { get; set; }
 
@@ -26,19 +33,76 @@ namespace SimaticML.SW.PlcBlocks.Access
         public bool AreaSpecified { get; set; }
 
         [XmlAttribute]
-        public Register_TE Register { get; set; }
+        public Register_TE? Register { get; set; } = null;
         [XmlIgnore]
         public bool RegisterSpecified { get; set; }
 
         [XmlAttribute]
         public string BitOffset { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<Width_TE>(reader.GetAttribute("Width"), out var width);
+            Width = width;
+
+            _ = Enum.TryParse<Area_TE>(reader.GetAttribute("Area"), out var area);
+            Area = area;
+
+            RegisterSpecified = Enum.TryParse<Register_TE>(reader.GetAttribute("Register"), out var register);
+            if(RegisterSpecified) Register = register;
+
+            BitOffset = reader.GetAttribute("BitOffset");
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Access":
+                            Access = new Access_T();
+                            Access.ReadXml(reader);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v2();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
-    /// Schema : SW_PlcBlocks_Access_v2 (SW.Common_v2)
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_PlcBlocks_Access_v2 => SW.Common_v2</item>
+    /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Indirect", Namespace = "", IsNullable = false)]
+    [XmlRoot("Indirect", IsNullable = false)]
     public class Indirect_T_v2 : Indirect_T
     {
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -46,26 +110,160 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new object[] Items { get; set; }
+        public new Object_G[] Items { get; set; }
 
         public new Access_T_v2 Access { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<Width_TE>(reader.GetAttribute("Width"), out var width);
+            Width = width;
+
+            _ = Enum.TryParse<Area_TE>(reader.GetAttribute("Area"), out var area);
+            Area = area;
+
+            RegisterSpecified = Enum.TryParse<Register_TE>(reader.GetAttribute("Register"), out var register);
+            if (RegisterSpecified) Register = register;
+
+            BitOffset = reader.GetAttribute("BitOffset");
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Access":
+                            Access = new Access_T_v2();
+                            Access.ReadXml(reader);
+                            break;
+                        case "Blank":
+                            var blank = new Common.Blank_T();
+                            blank.ReadXml(reader);
+                            items.Add(blank);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v2();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "NewLine":
+                            var newLine = new Common.NewLine_T();
+                            newLine.ReadXml(reader);
+                            items.Add(newLine);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
-    /// Schema : SW_PlcBlocks_Access_v3 (SW.Common_v2)
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_PlcBlocks_Access_v3 => SW.Common_v2</item>
+    /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Indirect", Namespace = "", IsNullable = false)]
+    [XmlRoot("Indirect", IsNullable = false)]
     public class Indirect_T_v3 : Indirect_T_v2
     {
         public new Access_T_v3 Access { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<Width_TE>(reader.GetAttribute("Width"), out var width);
+            Width = width;
+
+            _ = Enum.TryParse<Area_TE>(reader.GetAttribute("Area"), out var area);
+            Area = area;
+
+            RegisterSpecified = Enum.TryParse<Register_TE>(reader.GetAttribute("Register"), out var register);
+            if (RegisterSpecified) Register = register;
+
+            BitOffset = reader.GetAttribute("BitOffset");
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Access":
+                            Access = new Access_T_v3();
+                            Access.ReadXml(reader);
+                            break;
+                        case "Blank":
+                            var blank = new Common.Blank_T();
+                            blank.ReadXml(reader);
+                            items.Add(blank);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v2();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "NewLine":
+                            var newLine = new Common.NewLine_T();
+                            newLine.ReadXml(reader);
+                            items.Add(newLine);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
-    /// Schema : SW_PlcBlocks_Access_v4 (SW.Common_v3)
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_PlcBlocks_Access_v4 => SW.Common_v3</item>
+    /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Indirect", Namespace = "", IsNullable = false)]
+    [XmlRoot("Indirect", IsNullable = false)]
     public class Indirect_T_v4 : Indirect_T_v3
     {
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -73,18 +271,149 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new object[] Items { get; set; }
+        public new Object_G[] Items { get; set; }
 
         public new Access_T_v4 Access { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<Width_TE>(reader.GetAttribute("Width"), out var width);
+            Width = width;
+
+            _ = Enum.TryParse<Area_TE>(reader.GetAttribute("Area"), out var area);
+            Area = area;
+
+            RegisterSpecified = Enum.TryParse<Register_TE>(reader.GetAttribute("Register"), out var register);
+            if (RegisterSpecified) Register = register;
+
+            BitOffset = reader.GetAttribute("BitOffset");
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Access":
+                            Access = new Access_T_v4();
+                            Access.ReadXml(reader);
+                            break;
+                        case "Blank":
+                            var blank = new Common.Blank_T();
+                            blank.ReadXml(reader);
+                            items.Add(blank);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v3();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "NewLine":
+                            var newLine = new Common.NewLine_T();
+                            newLine.ReadXml(reader);
+                            items.Add(newLine);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
-    /// Schema : SW_PlcBlocks_Access_v5 (SW.Common_v3)
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_PlcBlocks_Access_v5 => SW.Common_v3</item>
+    /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Indirect", Namespace = "", IsNullable = false)]
+    [XmlRoot("Indirect", IsNullable = false)]
     public class Indirect_T_v5 : Indirect_T_v4
     {
         public new Access_T_v5 Access { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = Enum.TryParse<Width_TE>(reader.GetAttribute("Width"), out var width);
+            Width = width;
+
+            _ = Enum.TryParse<Area_TE>(reader.GetAttribute("Area"), out var area);
+            Area = area;
+
+            RegisterSpecified = Enum.TryParse<Register_TE>(reader.GetAttribute("Register"), out var register);
+            if (RegisterSpecified) Register = register;
+
+            BitOffset = reader.GetAttribute("BitOffset");
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Access":
+                            Access = new Access_T_v5();
+                            Access.ReadXml(reader);
+                            break;
+                        case "Blank":
+                            var blank = new Common.Blank_T();
+                            blank.ReadXml(reader);
+                            items.Add(blank);
+                            break;
+                        case "Comment":
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                        case "LineComment":
+                            var lineComment = new Common.LineComment_T_v3();
+                            lineComment.ReadXml(reader);
+                            items.Add(lineComment);
+                            break;
+                        case "NewLine":
+                            var newLine = new Common.NewLine_T();
+                            newLine.ReadXml(reader);
+                            items.Add(newLine);
+                            break;
+                        case "Token":
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            items.Add(token);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+
+                reader.ReadEndElement();
+            }
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -42,8 +42,8 @@ namespace SimaticML.SW.Interface
     }
 
     [Serializable]
-    //[XmlRoot("Value", Namespace = "", IsNullable = false)]
-    public class Value_T
+    [XmlRoot("Value", IsNullable = false)]
+    public class Value_T : Object_G
     {
         [XmlAttribute]
         public string Path { get; set; }

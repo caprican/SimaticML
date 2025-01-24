@@ -3,7 +3,10 @@
 namespace SimaticML.SW.PlcBlocks.Access
 {
     /// <remarks>
-    /// Schema : SW_PlcBlocks_Access (SW.Common)
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_PlcBlocks_Access => SW.Common</item>
+    /// </list>
     /// </remarks>
     [Serializable]
     public enum Scope_TE
@@ -31,9 +34,12 @@ namespace SimaticML.SW.PlcBlocks.Access
     }
 
     /// <remarks>
-    /// Schema : SW_PlcBlocks_Access_v2 (SW.Common_v2)
-    ///          SW_PlcBlocks_Access_v3 (SW.Common_v2)
-    ///          SW_PlcBlocks_Access_v4 (SW.Common_v3)
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_PlcBlocks_Access_v2 => SW.Common_v2</item>
+    /// <item>SW_PlcBlocks_Access_v3 => SW.Common_v2</item>
+    /// <item>SW_PlcBlocks_Access_v4 => SW.Common_v3</item>
+    /// </list>
     /// </remarks>
     [Serializable]
     public enum Scope_TE_v2
@@ -65,7 +71,10 @@ namespace SimaticML.SW.PlcBlocks.Access
     }
 
     /// <remarks>
-    /// Schema : SW_PlcBlocks_Access_v5 (SW.Common_v3)
+    /// Schema : 
+    /// <list type="bullet">
+    /// <item>SW_PlcBlocks_Access_v5 => SW.Common_v3</item>
+    /// </list>
     /// </remarks>
     [Serializable]
     public enum Scope_TE_v5

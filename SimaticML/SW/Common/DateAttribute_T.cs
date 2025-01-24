@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
@@ -62,6 +61,7 @@ namespace SimaticML.SW.Common
 
         public override void WriteXml(XmlWriter writer)
         {
+            throw new NotImplementedException();
         }
     }
 
@@ -104,6 +104,7 @@ namespace SimaticML.SW.Common
 
         public override void WriteXml(XmlWriter writer)
         {
+            throw new NotImplementedException();
         }
     }
 }
