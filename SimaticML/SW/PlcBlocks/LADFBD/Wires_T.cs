@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
@@ -14,10 +16,39 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Wires", Namespace = "", IsNullable = false)]
-    public class Wires_T
+    [XmlRoot("Wires", IsNullable = false)]
+    public class Wires_T : Object_G
     {
         [XmlElement("Wire")]
         public Wire_T[] Wire { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Wire_T>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Wire":
+                            var wire = new Wire_T();
+                            wire.ReadXml(reader);
+                            items.Add(wire);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Wire = items.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

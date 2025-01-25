@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
@@ -10,10 +12,38 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     /// </remarks>
     [Serializable]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
-    public class AssociatedValues
+    [XmlRoot(IsNullable = false)]
+    public class AssociatedValues : Object_G
     {
         [XmlElement("AssociatedValue")]
         public AssociatedValue[] AssociatedValue { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var associatedValues = new List<AssociatedValue>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "AssociatedValue":
+                            var associatedValue = new AssociatedValue();
+                            associatedValue.ReadXml(reader);
+                            associatedValues.Add(associatedValue);
+                            break;
+                    }
+                }
+                if(associatedValues.Count > 0) AssociatedValue = associatedValues.ToArray();
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

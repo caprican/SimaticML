@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
@@ -13,10 +14,22 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     /// </remarks>
     [Serializable]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
-    public class SupervisionFB
+    [XmlRoot(IsNullable = false)]
+    public class SupervisionFB : Object_G
     {
         [XmlAttribute]
         public string Name { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            Name = reader.GetAttribute("Name");
+
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

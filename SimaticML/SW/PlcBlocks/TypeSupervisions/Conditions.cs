@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
@@ -10,10 +12,39 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     /// </remarks>
     [Serializable]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
-    public class Conditions
+    [XmlRoot(IsNullable = false)]
+    public class Conditions : Object_G
     {
         [XmlElement("Condition")]
         public Condition[] Condition { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var conditions = new List<Condition>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Condition":
+                            var condition = new Condition();
+                            condition.ReadXml(reader);
+                            conditions.Add(condition);
+                            break;
+                    }
+                }
+                if (conditions.Count > 0) Condition = conditions.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

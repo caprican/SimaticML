@@ -518,7 +518,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             Item = address;
                             break;
                         case "CallInfo":
-                            var callInfo = new CallInfo_T_v42();
+                            var callInfo = new CallInfo_T_v4();
                             callInfo.ReadXml(reader);
                             Item = callInfo;
                             break;
@@ -687,7 +687,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             Item = instruction;
                             break;
                         case "Label":
-                            var label = new Label_T_v5();
+                            var label = new Label_T_v4();
                             label.ReadXml(reader);
                             Item = label;
                             break;

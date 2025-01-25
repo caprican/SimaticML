@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
@@ -11,9 +12,19 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(Namespace = "", IsNullable = false)]
-    public class DelayOperand
+    public class DelayOperand : Object_G
     {
         [XmlAttribute]
         public string Name { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            Name = reader.GetAttribute("Name");
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

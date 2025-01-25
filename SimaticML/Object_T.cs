@@ -15,7 +15,7 @@ namespace SimaticML
         public bool CompositionNameSpecified { get; set; }
 
         [XmlArrayItem("MultilingualText", typeof(MultilingualText_T))]
-        //[XmlArrayItem("SW.Blocks.CompileUnit", typeof(CompileUnit))]
+        //[XmlArrayItem("SW.Blocks.CompileUnit", typeof(SW.Blocks.CompileUnit))]
         [XmlArrayItem("MultilingualTextItem", typeof(MultilingualTextItem_T))]
         public Object_T[] ObjectList { get; set; }
     }

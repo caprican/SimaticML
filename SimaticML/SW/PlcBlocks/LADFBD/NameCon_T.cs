@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
@@ -14,13 +15,28 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("NameCon", Namespace = "", IsNullable = false)]
-    public class NameCon_T
+    [XmlRoot("NameCon", IsNullable = false)]
+    public class NameCon_T : Object_G
     {
         [XmlAttribute]
         public int UId { get; set; }
 
         [XmlAttribute]
         public string Name { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
+            UId = uId;
+
+            Name = reader.GetAttribute("Name");
+
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

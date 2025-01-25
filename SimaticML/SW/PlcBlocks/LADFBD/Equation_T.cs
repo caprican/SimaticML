@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
@@ -14,10 +15,24 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Equation", Namespace = "", IsNullable = false)]
-    public class Equation_T
+    [XmlRoot("Equation", IsNullable = false)]
+    public class Equation_T : Object_G
     {
         [XmlText]
         public string Value { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            reader.Read();
+            Value = reader.Value;
+            reader.Read();
+
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

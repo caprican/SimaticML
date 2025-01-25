@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
@@ -12,10 +14,38 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("BlockInstSupervisionGroups", Namespace = "", IsNullable = false)]
-    public class BlockInstSupervisionGroupsType
+    [XmlRoot("BlockInstSupervisionGroups", IsNullable = false)]
+    public class BlockInstSupervisionGroupsType : Object_G
     {
         [XmlElement("BlockInstSupervisionGroup")]
         public BlockInstSupervisionGroup[] BlockInstSupervisionGroup { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var blocks = new List<BlockInstSupervisionGroup>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "BlockInstSupervisionGroup":
+                            var block = new BlockInstSupervisionGroup();
+                            block.ReadXml(reader);
+                            break;
+                    }
+                }
+                if(blocks.Count > 0) BlockInstSupervisionGroup = blocks.ToArray();
+            }
+            reader.ReadEndElement();
+            throw new NotImplementedException();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

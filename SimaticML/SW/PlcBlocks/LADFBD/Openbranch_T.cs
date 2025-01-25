@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
@@ -14,8 +15,17 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Openbranch", Namespace = "", IsNullable = false)]
-    public class Openbranch_T
+    [XmlRoot("Openbranch", IsNullable = false)]
+    public class Openbranch_T : Object_G
     {
+        public override void ReadXml(XmlReader reader)
+        {
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

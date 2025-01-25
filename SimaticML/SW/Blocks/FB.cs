@@ -16,7 +16,7 @@ namespace SimaticML.SW.Blocks
         {
             public AttributeListFB() : base()
             {
-                Supervisions = "​no supervisions";
+                //Supervisions = "​no supervisions";
                 IsIECCheckEnabled = false;
                 IsRetainMemResEnabled = false;
                 MemoryReserve = 0;
@@ -50,11 +50,11 @@ namespace SimaticML.SW.Blocks
             [XmlIgnore]
             public bool ISMultiInstanceCapableSpecified { get; set; }
 
-            [XmlElement("BlockTypeSupervisions", typeof(BlockTypeSupervisions))]
-            [DefaultValue("​no supervisions")]
-            public object Supervisions { get; set; }
-            [XmlIgnore]
-            public bool SupervisionsSpecified { get; set; }
+            //[XmlElement("BlockTypeSupervisions", typeof(PlcBlocks.TypeSupervisions.BlockTypeSupervisions))]
+            //[DefaultValue("​no supervisions")]
+            //public object Supervisions { get; set; }
+            //[XmlIgnore]
+            //public bool SupervisionsSpecified { get; set; }
 
             [DefaultValue(false)]
             public bool IsIECCheckEnabled { get; set; }

@@ -38,8 +38,8 @@ namespace SimaticML.SW.PlcBlocks.Access
             //{
             //    reader.Read();
 
-            //    reader.ReadEndElement();
             //}
+            reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

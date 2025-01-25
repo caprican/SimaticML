@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
@@ -14,8 +15,8 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("AutomaticTyped", Namespace = "", IsNullable = false)]
-    public class AutomaticTyped_T
+    [XmlRoot("AutomaticTyped", IsNullable = false)]
+    public class AutomaticTyped_T : Object_G
     {
         /// <summary>
         /// The name of the automatic chosen template parameter.
@@ -23,5 +24,17 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         /// </summary>
         [XmlAttribute]
         public string Name { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            Name = reader.GetAttribute("Name");
+
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

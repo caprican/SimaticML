@@ -61,9 +61,9 @@ namespace SimaticML
         [XmlIgnore]
         public bool HeaderVersionSpecified { get; set; }
 
-        public SW.Interface_T Interface { get; set; }
-        [XmlIgnore]
-        public bool InterfaceSpecified { get; set; }
+        //public SW.Interface_T Interface { get; set; }
+        //[XmlIgnore]
+        //public bool InterfaceSpecified { get; set; }
 
         public DateTime InterfaceModifiedDate { get; set; }
         [XmlIgnore]

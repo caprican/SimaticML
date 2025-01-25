@@ -10,7 +10,7 @@ namespace SimaticML
         public Attribute_T AttributeList { get; set; }
 
 
-        [DebuggerDisplay("{Text}")]
+        [DebuggerDisplay("{Culture} = {Text}")]
         public class Attribute_T
         {
             public string Culture { get; set; }

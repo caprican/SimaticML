@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
@@ -8,8 +10,8 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     /// </remarks>
     [Serializable]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
-    public class BlockTypeSupervision
+    [XmlRoot(IsNullable = false)]
+    public class BlockTypeSupervision : Object_G
     {
         public SupervisedOperand SupervisedOperand { get; set; }
 
@@ -22,11 +24,11 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public int CategoryNumber { get; set; }
 
-        public long SubCategory1Number { get; set; }
+        public long? SubCategory1Number { get; set; } = null;
         [XmlIgnore]
         public bool SubCategory1NumberSpecified { get; set; }
 
-        public long SubCategory2Number { get; set; }
+        public long? SubCategory2Number { get; set; } = null;
         [XmlIgnore]
         public bool SubCategory2NumberSpecified { get; set; }
 
@@ -37,6 +39,58 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         [XmlAttribute]
         public Type Type { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = Enum.TryParse<Type>(reader.GetAttribute("Type"), out var type);
+            Type = type;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var conditions = new List<Condition>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "SupervisedOperand":
+                            SupervisedOperand = new SupervisedOperand();
+                            SupervisedOperand.ReadXml(reader);
+                            break;
+                        case "DelayOperand":
+                            DelayOperand = new DelayOperand();
+                            DelayOperand.ReadXml(reader);
+                            break;
+                        case "SpecificField":
+                            SpecificField = new SpecificField();
+                            SpecificField.ReadXml(reader);
+                            break;
+                        case "SupervisedStatus":
+
+                            break;
+                        case "Conditions":
+                            var condition = new Condition();
+                            condition.ReadXml(reader);
+                            conditions.Add(condition);
+                            break;
+                        case "CategoryNumber":
+
+                            break;
+                    }
+                }
+                if(conditions.Count > 0) Conditions = conditions.ToArray();
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <remarks>
@@ -45,9 +99,61 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     /// </remarks>
     [Serializable]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
+    [XmlRoot(IsNullable = false)]
     public class BlockTypeSupervision_v2 : BlockTypeSupervision
     {
         public new SpecificField_v2 SpecificField { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
+            Number = number;
+
+            _ = Enum.TryParse<Type>(reader.GetAttribute("Type"), out var type);
+            Type = type;
+
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var conditions = new List<Condition>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "SupervisedOperand":
+                            SupervisedOperand = new SupervisedOperand();
+                            SupervisedOperand.ReadXml(reader);
+                            break;
+                        case "DelayOperand":
+                            DelayOperand = new DelayOperand();
+                            DelayOperand.ReadXml(reader);
+                            break;
+                        case "SpecificField":
+                            SpecificField = new SpecificField_v2();
+                            SpecificField.ReadXml(reader);
+                            break;
+                        case "SupervisedStatus":
+
+                            break;
+                        case "Conditions":
+                            var condition = new Condition();
+                            condition.ReadXml(reader);
+                            conditions.Add(condition);
+                            break;
+                        case "CategoryNumber":
+
+                            break;
+                    }
+                }
+                if (conditions.Count > 0) Conditions = conditions.ToArray();
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

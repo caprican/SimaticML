@@ -6,7 +6,7 @@ namespace SimaticML.SW.Blocks
 {
     [Serializable]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
+    [XmlRoot(IsNullable = false)]
     public class GlobalDB : Object_T
     {
         public AttributeGlobalDB AttributeList { get; set; }

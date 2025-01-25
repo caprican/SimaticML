@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.STL
@@ -11,10 +13,39 @@ namespace SimaticML.SW.PlcBlocks.STL
     ///          SW.PlcBlocks.STL_v5 (SW.PlcBlocks.CompileUnitCommon_v5 + SW.PlcBlocks.Access_v5 + SW.Common_v3)
     /// </remarks>
     [Serializable]
-    [XmlRoot("StatementList", Namespace = "", IsNullable = false)]
-    public class StatementList_T
+    [XmlRoot("StatementList", IsNullable = false)]
+    public class StatementList_T : Object_G
     {
         [XmlElement("StlStatement")]
         public StlStatement_T[] StlStatement { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<StlStatement_T>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "StlStatement":
+                            var state = new StlStatement_T();
+                            state.ReadXml(reader);
+                            items.Add(state);
+                            break;
+                    }
+                }
+                if (items.Count > 0) StlStatement = items.ToArray();
+
+            }
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

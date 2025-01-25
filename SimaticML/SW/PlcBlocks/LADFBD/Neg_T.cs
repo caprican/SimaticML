@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
@@ -17,13 +18,25 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Negated", Namespace = "", IsNullable = false)]
-    public class Neg_T
+    [XmlRoot("Negated", IsNullable = false)]
+    public class Neg_T : Object_G
     {
         /// <summary>
         /// The name of the negated pin.
         /// </summary>
         [XmlAttribute]
         public string Name { get; set; }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            Name = reader.GetAttribute("Name");
+
+            reader.ReadEndElement();
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
