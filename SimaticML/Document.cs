@@ -93,7 +93,28 @@ namespace SimaticML
                             globalDb.ReadXml(reader);
                             items.Add(globalDb);
                             break;
+                        case "SW.Blocks.InstanceDB":
+                            var instanceDb = new SW.Blocks.InstanceDB();
+                            instanceDb.ReadXml(reader);
+                            items.Add(instanceDb);
+                            break;
+                        case "SW.Blocks.ArrayDB":
+                            var arrayDb = new SW.Blocks.ArrayDB();
+                            arrayDb.ReadXml(reader);
+                            items.Add(arrayDb);
+                            break;
 
+                        case "SW.Tags.PlcTagTable":
+                            break;
+
+                        case "SW.Types.PlcStruct":
+                            var plcStruct = new SW.Types.PlcStruct();
+                            plcStruct.ReadXml(reader);
+                            items.Add(plcStruct);
+                            break;
+
+                        case "SW.WatchAndForceTables.PlcWatchTable":
+                            break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
