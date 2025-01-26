@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -8,15 +9,27 @@ namespace SimaticML
 {
     [Serializable]
     [XmlType(AnonymousType = true)]
+    [DebuggerDisplay("{CompositionName} ID={ID}")]
     public class MultilingualText_T : Object_T, IXmlSerializable
     {
         public XmlSchema GetSchema() => null;
 
         public void ReadXml(XmlReader reader)
         {
-            ID = reader.GetAttribute("ID");
-            CompositionName = reader.GetAttribute("CompositionName");
-            CompositionNameSpecified = CompositionName != null;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(ID):
+                        ID = reader.ReadContentAsString();
+                        break;
+
+                    case nameof(CompositionName):
+                        CompositionName = reader.ReadContentAsString();
+                        CompositionNameSpecified = true;
+                        break;
+                }
+            }
 
             reader.Read();
             reader.MoveToContent();
@@ -36,6 +49,7 @@ namespace SimaticML
                             break;
                         case "SW.Blocks.CompileUnit":
                             var compileUnit = new SW.Blocks.CompileUnit();
+                            compileUnit.ReadXml(reader);
                             items.Add(compileUnit);
                             break;
                         case "MultilingualTextItem":

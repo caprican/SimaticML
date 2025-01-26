@@ -19,12 +19,22 @@ namespace SimaticML.SW.Blocks
 
         public void ReadXml(XmlReader reader)
         {
-            ID = reader.GetAttribute("ID");
-            CompositionName = reader.GetAttribute("CompositionName");
-            CompositionNameSpecified = CompositionName == null;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(ID):
+                        ID = reader.ReadContentAsString();
+                        break;
+
+                    case nameof(CompositionName):
+                        CompositionName = reader.ReadContentAsString();
+                        CompositionNameSpecified = true;
+                        break;
+                }
+            }
 
             reader.Read();
-
             reader.MoveToContent();
             if (reader.Name == "AttributeList")
             {
@@ -32,8 +42,8 @@ namespace SimaticML.SW.Blocks
                 attributes.ReadXml(reader);
                 Attributes = attributes;
             }
-            reader.MoveToContent();
 
+            reader.MoveToContent();
             if (reader.Name == "ObjectList")
             {
                 reader.Read();
@@ -49,7 +59,7 @@ namespace SimaticML.SW.Blocks
                             items.Add(text);
                             break;
                         case "SW.Blocks.CompileUnit":
-                            var compileUnit = new SW.Blocks.CompileUnit();
+                            var compileUnit = new CompileUnit();
                             compileUnit.ReadXml(reader);
                             items.Add(compileUnit);
                             break;
@@ -58,12 +68,15 @@ namespace SimaticML.SW.Blocks
                             textItem.ReadXml(reader);
                             items.Add(textItem);
                             break;
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
-
-                Items = items.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
             }
-            reader.Skip();
+
+            reader.ReadEndElement();
         }
 
         public void WriteXml(XmlWriter writer)

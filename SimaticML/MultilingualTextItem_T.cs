@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -18,39 +19,54 @@ namespace SimaticML
 
         public void ReadXml(XmlReader reader)
         {
-            ID = reader.GetAttribute("ID");
-            CompositionName = reader.GetAttribute("CompositionName");
-            CompositionNameSpecified = CompositionName != null;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(ID):
+                        ID = reader.ReadContentAsString();
+                        break;
+
+                    case nameof(CompositionName):
+                        CompositionName = reader.ReadContentAsString();
+                        CompositionNameSpecified = true;
+                        break;
+                }
+            }
 
             reader.Read();
-
-            if (!reader.IsEmptyElement)
+            reader.MoveToContent();
+            if (reader.Name == "AttributeList")
             {
                 reader.Read();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "Culture":
+                            Culture = reader.ReadInnerXml();
+                            break;
+                        case "Text":
+                            Text = reader.ReadInnerXml();
+                            break;
+                        default:
+                            reader.Skip();
+                            break;
+                    }
+                }
+                reader.ReadEndElement();
+            }
+
+            reader.MoveToContent();
+            if (reader.Name == "ObjectList")
+            {
+                reader.Read();
+
                 var items = new List<Object_T>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
-                        case "AttributeList":
-                            reader.Read();
-                            while (reader.MoveToContent() == XmlNodeType.Element)
-                            {
-                                switch (reader.Name)
-                                {
-                                    case "Culture":
-                                        Culture = reader.ReadInnerXml();
-                                        break;
-                                    case "Text":
-                                        Text = reader.ReadInnerXml();
-                                        break;
-                                    default:
-                                        reader.Skip();
-                                        break;
-                                }
-                            }
-                            reader.ReadEndElement();
-                            break;
                         case "MultilingualText":
                             var text = new MultilingualText_T();
                             text.ReadXml(reader);
@@ -58,6 +74,7 @@ namespace SimaticML
                             break;
                         case "SW.Blocks.CompileUnit":
                             var compileUnit = new SW.Blocks.CompileUnit();
+                            compileUnit.ReadXml(reader);
                             items.Add(compileUnit);
                             break;
                         case "MultilingualTextItem":
@@ -68,8 +85,10 @@ namespace SimaticML
                     }
                 }
 
-                Items = items.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
+                reader.ReadEndElement();
             }
+
             reader.ReadEndElement();
         }
 

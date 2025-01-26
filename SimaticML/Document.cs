@@ -73,17 +73,22 @@ namespace SimaticML
                 {
                     switch (reader.Name)
                     {
+                        case "SW.Blocks.FC":
+                            var fc = new SW.Blocks.FC();
+                            fc.ReadXml(reader);
+                            items.Add(fc);
+                            break;
+                        case "SW.Blocks.FB":
+                            var fb = new SW.Blocks.FB();
+                            fb.ReadXml(reader);
+                            items.Add(fb);
+                            break;
                         case "SW.Blocks.GlobalDB":
                             var globalDb = new SW.Blocks.GlobalDB();
                             globalDb.ReadXml(reader);
                             items.Add(globalDb);
                             break;
 
-                        case "SW.Blocks.FB":
-                            var fb = new SW.Blocks.FB();
-                            fb.ReadXml(reader);
-                            items.Add(fb);
-                            break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
