@@ -73,6 +73,11 @@ namespace SimaticML
                 {
                     switch (reader.Name)
                     {
+                        case "SW.Blocks.OB":
+                            var ob = new SW.Blocks.OB();
+                            ob.ReadXml(reader);
+                            items.Add(ob);
+                            break;
                         case "SW.Blocks.FC":
                             var fc = new SW.Blocks.FC();
                             fc.ReadXml(reader);

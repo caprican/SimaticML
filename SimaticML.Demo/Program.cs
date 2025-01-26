@@ -5,8 +5,9 @@ using System.Xml;
 Console.WriteLine("Hello, World!");
 
 //var fileName = @"C:\Users\capri\OneDrive\Documents\Automation\TIA069\UserFiles\Export\N100_Defauts.xml";
-var fileName = @"C:\Users\capri\OneDrive\Documents\Automation\TIA069\UserFiles\Export\LSKF_Motor.xml";
+//var fileName = @"C:\Users\capri\OneDrive\Documents\Automation\TIA069\UserFiles\Export\LSKF_Motor.xml";
 //var fileName = @"C:\Users\capri\OneDrive\Documents\Automation\TIA069\UserFiles\Export\TMA_R1_AlarmesAvertissements.xml";
+var fileName = @"C:\Users\capri\OneDrive\Documents\Automation\TIA069\UserFiles\Export\N100.xml";
 
 var settings = new XmlReaderSettings
 {
