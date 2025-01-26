@@ -33,34 +33,49 @@ namespace SimaticML.SW.Common
         /// the value of the comment
         /// </summary>
         [XmlElement("Text", typeof(Text_T))]
-        public Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("Inserted"), out var inserted);
-            Inserted = inserted;
-
-            reader.Read();
-
-            var items = new List<Object_G>();
-            while (reader.MoveToContent() == XmlNodeType.Element)
+            while (reader.MoveToNextAttribute())
             {
-                switch (reader.Name)
+                switch (reader.LocalName)
                 {
-                    case "IntegerAttribute":
-                        IntegerAttribute = new IntegerAttribute_T();
-                        IntegerAttribute.ReadXml(reader);
-                        break;
-                    case "Text":
-                        var text = new Text_T();
-                        text.ReadXml(reader);
-                        items.Add(text);
+                    case nameof(Inserted):
+                        Inserted = reader.ReadContentAsBoolean();
                         break;
                 }
             }
-            if(items.Count > 0) Items = items.ToArray();
 
-            reader.ReadEndElement();
+            reader.MoveToContent();
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "IntegerAttribute":
+                            IntegerAttribute = new IntegerAttribute_T();
+                            IntegerAttribute.ReadXml(reader);
+                            break;
+                        case "Text":
+                            var text = new Text_T();
+                            text.ReadXml(reader);
+                            items.Add(text);
+                            break;
+                    }
+                }
+                if(items.Count > 0) Items = items.ToArray();
+            }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -89,7 +104,8 @@ namespace SimaticML.SW.Common
         /// the value of the comment
         /// </summary>
         [XmlElement("Text", typeof(Text_T_v2))]
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         [DefaultValue(false)]
@@ -102,36 +118,51 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("Inserted"), out var inserted);
-            Inserted = inserted;
-
-            _ = bool.TryParse(reader.GetAttribute("NoClosingBracket"), out var noClosingBracket);
-            NoClosingBracket = noClosingBracket;
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if(UIdSpecified) UId = uId;
-
-            reader.Read();
-
-            var items = new List<Object_G>();
-            while (reader.MoveToContent() == XmlNodeType.Element)
+            while (reader.MoveToNextAttribute())
             {
-                switch (reader.Name)
+                switch (reader.LocalName)
                 {
-                    case "IntegerAttribute":
-                        IntegerAttribute = new IntegerAttribute_T_v2();
-                        IntegerAttribute.ReadXml(reader);
+                    case nameof(Inserted):
+                        Inserted = reader.ReadContentAsBoolean();
                         break;
-                    case "Text":
-                        var text = new Text_T_v2();
-                        text.ReadXml(reader);
-                        items.Add(text);
+                    case nameof(NoClosingBracket):
+                        NoClosingBracket = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
                         break;
                 }
             }
-            if (items.Count > 0) Items = items.ToArray();
 
-            reader.ReadEndElement();
+            reader.MoveToContent();
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "IntegerAttribute":
+                            IntegerAttribute = new IntegerAttribute_T_v2();
+                            IntegerAttribute.ReadXml(reader);
+                            break;
+                        case "Text":
+                            var text = new Text_T_v2();
+                            text.ReadXml(reader);
+                            items.Add(text);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+            }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -146,7 +177,7 @@ namespace SimaticML.SW.Common
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("LineComment", Namespace = "", IsNullable = false)]
+    [XmlRoot("LineComment", IsNullable = false)]
     public class LineComment_T_v3 : LineComment_T_v2
     {
         /// <summary>
@@ -154,45 +185,61 @@ namespace SimaticML.SW.Common
         /// </summary>
         [XmlElement("Comment", typeof(Comment_T_v2))]
         [XmlElement("Text", typeof(Text_T_v2))]
-        public new object[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("Inserted"), out var inserted);
-            Inserted = inserted;
-
-            _ = bool.TryParse(reader.GetAttribute("NoClosingBracket"), out var noClosingBracket);
-            NoClosingBracket = noClosingBracket;
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
-            reader.Read();
-
-            var items = new List<Object_G>();
-            while (reader.MoveToContent() == XmlNodeType.Element)
+            while (reader.MoveToNextAttribute())
             {
-                switch (reader.Name)
+                switch (reader.LocalName)
                 {
-                    case "IntegerAttribute":
-                        IntegerAttribute = new IntegerAttribute_T_v2();
-                        IntegerAttribute.ReadXml(reader);
+                    case nameof(Inserted):
+                        Inserted = reader.ReadContentAsBoolean();
                         break;
-                    case "Text":
-                        var text = new Text_T_v2();
-                        text.ReadXml(reader);
-                        items.Add(text);
+                    case nameof(NoClosingBracket):
+                        NoClosingBracket = reader.ReadContentAsBoolean();
                         break;
-                    case "Comment":
-                        var comment = new Comment_T_v2();
-                        comment.ReadXml(reader);
-                        items.Add(comment);
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
                         break;
                 }
             }
-            if (items.Count > 0) Items = items.ToArray();
 
-            reader.ReadEndElement();
+            reader.MoveToContent();
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
+
+                var items = new List<Object_G>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "IntegerAttribute":
+                            IntegerAttribute = new IntegerAttribute_T_v2();
+                            IntegerAttribute.ReadXml(reader);
+                            break;
+                        case "Text":
+                            var text = new Text_T_v2();
+                            text.ReadXml(reader);
+                            items.Add(text);
+                            break;
+                        case "Comment":
+                            var comment = new Comment_T_v2();
+                            comment.ReadXml(reader);
+                            items.Add(comment);
+                            break;
+                    }
+                }
+                if (items.Count > 0) Items = items.ToArray();
+            }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

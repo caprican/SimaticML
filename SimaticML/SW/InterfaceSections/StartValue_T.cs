@@ -52,6 +52,7 @@ namespace SimaticML.SW.InterfaceSections
             reader.MoveToContent();
             Value = reader.ReadInnerXml();
         }
+
         public override void WriteXml(XmlWriter writer)
         {
             throw new NotImplementedException();

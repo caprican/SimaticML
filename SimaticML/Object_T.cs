@@ -19,7 +19,6 @@ namespace SimaticML
         [XmlArrayItem("SW.Blocks.CompileUnit", typeof(SW.Blocks.CompileUnit))]
         [XmlArrayItem("MultilingualTextItem", typeof(MultilingualTextItem_T))]
         protected internal Object_T[] Items { get; set; }
-
         public Object_T this[int key] 
         { 
             get => Items[key]; 

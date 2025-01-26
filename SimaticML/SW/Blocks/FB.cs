@@ -12,8 +12,8 @@ namespace SimaticML.SW.Blocks
     [XmlRoot(IsNullable = false)]
     public class FB : Object_T, IXmlSerializable
     {
-        [XmlElement("AttributeList", typeof(AttributeListFB))]
-        public AttributeListFB Attributes { get; set; }
+        [XmlElement("AttributeList", typeof(AttributesFb))]
+        public AttributesFb Attributes { get; set; }
 
         public XmlSchema GetSchema() => null;
 
@@ -28,7 +28,7 @@ namespace SimaticML.SW.Blocks
             reader.MoveToContent();
             if (reader.Name == "AttributeList")
             {
-                var attributes = new AttributeListFB();
+                var attributes = new AttributesFb();
                 attributes.ReadXml(reader);
                 Attributes = attributes;
             }
@@ -50,6 +50,7 @@ namespace SimaticML.SW.Blocks
                             break;
                         case "SW.Blocks.CompileUnit":
                             var compileUnit = new SW.Blocks.CompileUnit();
+                            compileUnit.ReadXml(reader);
                             items.Add(compileUnit);
                             break;
                         case "MultilingualTextItem":
@@ -71,7 +72,7 @@ namespace SimaticML.SW.Blocks
         }
     }
 
-    public class AttributeListFB : AttributeList_G, IXmlSerializable
+    public class AttributesFb : AttributeList_G, IXmlSerializable
     {
         public string AssignedProDiagFB { get; set; } = null;
         [XmlIgnore]
@@ -253,12 +254,9 @@ namespace SimaticML.SW.Blocks
                         HeaderVersionSpecified = true;
                         break;
                     case nameof(Interface):
-                        reader.Read();
                         Interface = new SW.Interface_T();
                         Interface.ReadXml(reader);
                         InterfaceSpecified = true;
-                        //reader.Read();
-                        //reader.ReadEndElement();
                         break;
                     case nameof(InterfaceModifiedDate):
                         InterfaceModifiedDate = reader.ReadElementContentAsDateTime();

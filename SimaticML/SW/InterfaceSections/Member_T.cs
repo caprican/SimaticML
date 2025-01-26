@@ -56,23 +56,39 @@ namespace SimaticML.SW.InterfaceSections
         [XmlElement("Sections", typeof(Sections_T))]
         [XmlElement("StartValue", typeof(StartValue_T))]
         [XmlElement("Subelement", typeof(Subelement_T))]
-        public Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
-            Datatype = reader.GetAttribute("Datatype");
-            Version = reader.GetAttribute("Version");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Datatype):
+                        Datatype = reader.ReadContentAsString();
+                        break;
+                    case nameof(Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Accessibility):
+                        Enum.TryParse<Accessibility_TE>(reader.ReadContentAsString(), out var accessibility);
+                        Accessibility = accessibility;
+                        break;
+                    case nameof(Remanence):
+                        Enum.TryParse<Remanence_TE>(reader.ReadContentAsString(), out var remanence);
+                        Remanence = remanence;
+                        break;
+                }
+            }
 
-            _ = Enum.TryParse<Remanence_TE>(reader.GetAttribute("Remanence"), out var remanence);
-            Remanence = remanence;
-
-            _ = Enum.TryParse<Accessibility_TE>(reader.GetAttribute("Accessibility"), out var accessibility);
-            Accessibility = accessibility;
-
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -89,9 +105,8 @@ namespace SimaticML.SW.InterfaceSections
                             break;
 
                         case "Comment":
-                            var comment = new Common.Comment_T();
-                            comment.ReadXml(reader);
-                            Comment = comment;
+                            Comment = new Common.Comment_T();
+                            Comment.ReadXml(reader);
                             break;
 
                         case "Member":
@@ -117,9 +132,12 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -153,23 +171,39 @@ namespace SimaticML.SW.InterfaceSections
         [XmlElement("Sections", typeof(Sections_T_v3))]
         [XmlElement("StartValue", typeof(StartValue_T))]
         [XmlElement("Subelement", typeof(Subelement_T_v3))]
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
-            Datatype = reader.GetAttribute("Datatype");
-            Version = reader.GetAttribute("Version");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Datatype):
+                        Datatype = reader.ReadContentAsString();
+                        break;
+                    case nameof(Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Accessibility):
+                        Enum.TryParse<Accessibility_TE>(reader.ReadContentAsString(), out var accessibility);
+                        Accessibility = accessibility;
+                        break;
+                    case nameof(Remanence):
+                        Enum.TryParse<Remanence_TE>(reader.ReadContentAsString(), out var remanence);
+                        Remanence = remanence;
+                        break;
+                }
+            }
 
-            _ = Enum.TryParse<Remanence_TE>(reader.GetAttribute("Remanence"), out var remanence);
-            Remanence = remanence;
-
-            _ = Enum.TryParse<Accessibility_TE>(reader.GetAttribute("Accessibility"), out var accessibility);
-            Accessibility = accessibility;
-
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -214,9 +248,12 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -240,23 +277,39 @@ namespace SimaticML.SW.InterfaceSections
         [XmlElement("Sections", typeof(Sections_T_v4))]
         [XmlElement("StartValue", typeof(StartValue_T))]
         [XmlElement("Subelement", typeof(Subelement_T_v3))]
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
-            Datatype = reader.GetAttribute("Datatype");
-            Version = reader.GetAttribute("Version");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Datatype):
+                        Datatype = reader.ReadContentAsString();
+                        break;
+                    case nameof(Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Accessibility):
+                        Enum.TryParse<Accessibility_TE>(reader.ReadContentAsString(), out var accessibility);
+                        Accessibility = accessibility;
+                        break;
+                    case nameof(Remanence):
+                        Enum.TryParse<Remanence_TE>(reader.ReadContentAsString(), out var remanence);
+                        Remanence = remanence;
+                        break;
+                }
+            }
 
-            _ = Enum.TryParse<Remanence_TE>(reader.GetAttribute("Remanence"), out var remanence);
-            Remanence = remanence;
-
-            _ = Enum.TryParse<Accessibility_TE>(reader.GetAttribute("Accessibility"), out var accessibility);
-            Accessibility = accessibility;
-
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -301,8 +354,12 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
         public override void WriteXml(XmlWriter writer)
         {
@@ -326,23 +383,39 @@ namespace SimaticML.SW.InterfaceSections
         [XmlElement("Sections", typeof(Sections_T_v5))]
         [XmlElement("StartValue", typeof(StartValue_T))]
         [XmlElement("Subelement", typeof(Subelement_T_v5))]
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
-            Datatype = reader.GetAttribute("Datatype");
-            Version = reader.GetAttribute("Version");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Datatype):
+                        Datatype = reader.ReadContentAsString();
+                        break;
+                    case nameof(Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Accessibility):
+                        Enum.TryParse<Accessibility_TE>(reader.ReadContentAsString(), out var accessibility);
+                        Accessibility = accessibility;
+                        break;
+                    case nameof(Remanence):
+                        Enum.TryParse<Remanence_TE>(reader.ReadContentAsString(), out var remanence);
+                        Remanence = remanence;
+                        break;
+                }
+            }
 
-            _ = Enum.TryParse<Remanence_TE>(reader.GetAttribute("Remanence"), out var remanence);
-            Remanence = remanence;
-
-            _ = Enum.TryParse<Accessibility_TE>(reader.GetAttribute("Accessibility"), out var accessibility);
-            Accessibility = accessibility;
-
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -392,9 +465,12 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
         public override void WriteXml(XmlWriter writer)
         {

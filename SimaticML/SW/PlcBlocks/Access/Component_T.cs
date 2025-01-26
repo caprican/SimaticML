@@ -21,7 +21,12 @@ namespace SimaticML.SW.PlcBlocks.Access
     public class Component_T : Object_G
     {
         [XmlElement("Access", typeof(Access_T))]                                 // For the indices of an array
-        public Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         [XmlAttribute]
         public string Name { get; set; }
@@ -36,11 +41,23 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(SliceAccessModifier):
+                        SliceAccessModifier = reader.ReadContentAsString();
+                        break;
+                    case nameof(SimpleAccessModifier):
+                        SimpleAccessModifier = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            SliceAccessModifier = reader.GetAttribute("SliceAccessModifier");
-            SimpleAccessModifier = reader.GetAttribute("SimpleAccessModifier");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -58,9 +75,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -79,7 +99,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Component", Namespace = "", IsNullable = false)]
+    [XmlRoot("Component", IsNullable = false)]
     public class Component_T_v2 : Component_T
     {
         [XmlElement("Access", typeof(Access_T_v2))]                                 // For the indices of an array
@@ -89,7 +109,12 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]                // SCL
         [XmlElement("NewLine", typeof(Common.NewLine_T))]                           // SCL
         [XmlElement("Token", typeof(Common.Token_T_v2))]                            // SCL
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         /// <summary>
         /// If component has child AccessModifier is Array else AccessModifier is None
@@ -105,17 +130,31 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(SliceAccessModifier):
+                        SliceAccessModifier = reader.ReadContentAsString();
+                        break;
+                    case nameof(SimpleAccessModifier):
+                        SimpleAccessModifier = reader.ReadContentAsString();
+                        break;
+                    case nameof(AccessModifier):
+                        Enum.TryParse<AccessModifier_TE>(reader.ReadContentAsString(), out var accessModifier);
+                        AccessModifier = accessModifier;
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            SliceAccessModifier = reader.GetAttribute("SliceAccessModifier");
-            SimpleAccessModifier = reader.GetAttribute("SimpleAccessModifier");
-
-            _ = Enum.TryParse<AccessModifier_TE>(reader.GetAttribute("AccessModifier"), out var accessModifier);
-            AccessModifier = accessModifier;
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -163,9 +202,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -184,7 +226,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Component", Namespace = "", IsNullable = false)]
+    [XmlRoot("Component", IsNullable = false)]
     public class Component_T_v3 : Component_T_v2
     {
         [XmlElement("Access", typeof(Access_T_v3))]                                 // For the indices of an array
@@ -194,21 +236,40 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]                // SCL
         [XmlElement("NewLine", typeof(Common.NewLine_T))]                           // SCL
         [XmlElement("Token", typeof(Common.Token_T_v2))]                            // SCL
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(SliceAccessModifier):
+                        SliceAccessModifier = reader.ReadContentAsString();
+                        break;
+                    case nameof(SimpleAccessModifier):
+                        SimpleAccessModifier = reader.ReadContentAsString();
+                        break;
+                    case nameof(AccessModifier):
+                        Enum.TryParse<AccessModifier_TE>(reader.ReadContentAsString(), out var accessModifier);
+                        AccessModifier = accessModifier;
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            SliceAccessModifier = reader.GetAttribute("SliceAccessModifier");
-            SimpleAccessModifier = reader.GetAttribute("SimpleAccessModifier");
-
-            _ = Enum.TryParse<AccessModifier_TE>(reader.GetAttribute("AccessModifier"), out var accessModifier);
-            AccessModifier = accessModifier;
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -256,9 +317,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -277,7 +341,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Component", Namespace = "", IsNullable = false)]
+    [XmlRoot("Component", IsNullable = false)]
     public class Component_T_v4 : Component_T_v3
     {
         [XmlElement("Access", typeof(Access_T_v4))]                                 // For the indices of an array
@@ -287,21 +351,40 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]                // SCL
         [XmlElement("NewLine", typeof(Common.NewLine_T))]                           // SCL
         [XmlElement("Token", typeof(Common.Token_T_v2))]                            // SCL
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(SliceAccessModifier):
+                        SliceAccessModifier = reader.ReadContentAsString();
+                        break;
+                    case nameof(SimpleAccessModifier):
+                        SimpleAccessModifier = reader.ReadContentAsString();
+                        break;
+                    case nameof(AccessModifier):
+                        Enum.TryParse<AccessModifier_TE>(reader.ReadContentAsString(), out var accessModifier);
+                        AccessModifier = accessModifier;
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            SliceAccessModifier = reader.GetAttribute("SliceAccessModifier");
-            SimpleAccessModifier = reader.GetAttribute("SimpleAccessModifier");
-
-            _ = Enum.TryParse<AccessModifier_TE>(reader.GetAttribute("AccessModifier"), out var accessModifier);
-            AccessModifier = accessModifier;
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -349,9 +432,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -370,7 +456,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Component", Namespace = "", IsNullable = false)]
+    [XmlRoot("Component", IsNullable = false)]
     public class Component_T_v5 : Component_T_v4
     {
         [XmlElement("Access", typeof(Access_T_v5))]                                 // For the indices of an array
@@ -380,21 +466,40 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]                // SCL
         [XmlElement("NewLine", typeof(Common.NewLine_T))]                           // SCL
         [XmlElement("Token", typeof(Common.Token_T_v2))]                            // SCL
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(SliceAccessModifier):
+                        SliceAccessModifier = reader.ReadContentAsString();
+                        break;
+                    case nameof(SimpleAccessModifier):
+                        SimpleAccessModifier = reader.ReadContentAsString();
+                        break;
+                    case nameof(AccessModifier):
+                        Enum.TryParse<AccessModifier_TE>(reader.ReadContentAsString(), out var accessModifier);
+                        AccessModifier = accessModifier;
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            SliceAccessModifier = reader.GetAttribute("SliceAccessModifier");
-            SimpleAccessModifier = reader.GetAttribute("SimpleAccessModifier");
-
-            _ = Enum.TryParse<AccessModifier_TE>(reader.GetAttribute("AccessModifier"), out var accessModifier);
-            AccessModifier = accessModifier;
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -442,9 +547,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

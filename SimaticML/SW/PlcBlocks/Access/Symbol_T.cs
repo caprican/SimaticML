@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
@@ -22,7 +21,12 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T))]
         [XmlElement("LineComment", typeof(Common.LineComment_T))]
         [XmlElement("Address", typeof(Address_T))]                              // additional address for a symbol. it is informative
-        public Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         /// <summary>
         /// Not allowed in STL
@@ -39,11 +43,22 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
-            ScopeSpecified = Enum.TryParse<Scope_TE>(reader.GetAttribute("Scope"), out var scope);
-            if(ScopeSpecified) Scope = scope;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Scope):
+                        Enum.TryParse<Scope_TE>(reader.ReadContentAsString(), out var scope);
+                        Scope = scope;
+                        ScopeSpecified = true;
+                        break;
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
             if (!reader.IsEmptyElement)
             {
@@ -87,9 +102,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -117,18 +135,34 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]                        // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         [XmlAttribute]
         public new Scope_TE_v2 Scope { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            ScopeSpecified = Enum.TryParse<Scope_TE_v2>(reader.GetAttribute("Scope"), out var scope);
-            if (ScopeSpecified) Scope = scope;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Scope):
+                        Enum.TryParse<Scope_TE_v2>(reader.ReadContentAsString(), out var scope);
+                        Scope = scope;
+                        ScopeSpecified = true;
+                        break;
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
             if (!reader.IsEmptyElement)
             {
@@ -187,9 +221,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -217,18 +254,34 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]                        // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         [XmlAttribute]
         public new Scope_TE_v2 Scope { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            ScopeSpecified = Enum.TryParse<Scope_TE_v2>(reader.GetAttribute("Scope"), out var scope);
-            if (ScopeSpecified) Scope = scope;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Scope):
+                        Enum.TryParse<Scope_TE_v2>(reader.ReadContentAsString(), out var scope);
+                        Scope = scope;
+                        ScopeSpecified = true;
+                        break;
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
             if (!reader.IsEmptyElement)
             {
@@ -287,9 +340,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -317,15 +373,31 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]                        // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         public override void ReadXml(XmlReader reader)
         {
-            ScopeSpecified = Enum.TryParse<Scope_TE_v2>(reader.GetAttribute("Scope"), out var scope);
-            if (ScopeSpecified) Scope = scope;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Scope):
+                        Enum.TryParse<Scope_TE_v2>(reader.ReadContentAsString(), out var scope);
+                        Scope = scope;
+                        ScopeSpecified = true;
+                        break;
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
             if (!reader.IsEmptyElement)
             {
@@ -384,9 +456,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -414,18 +489,34 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]                        // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         [XmlAttribute]
         public new Scope_TE_v5 Scope { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            ScopeSpecified = Enum.TryParse<Scope_TE_v5>(reader.GetAttribute("Scope"), out var scope);
-            if (ScopeSpecified) Scope = scope;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Scope):
+                        Enum.TryParse<Scope_TE_v5>(reader.ReadContentAsString(), out var scope);
+                        Scope = scope;
+                        ScopeSpecified = true;
+                        break;
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
             if (!reader.IsEmptyElement)
             {
@@ -484,9 +575,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

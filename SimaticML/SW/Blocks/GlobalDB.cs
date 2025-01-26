@@ -154,12 +154,9 @@ namespace SimaticML.SW.Blocks
                         HeaderVersionSpecified = true;
                         break;
                     case nameof(Interface):
-                        reader.Read();
                         Interface = new SW.Interface_T();
                         Interface.ReadXml(reader);
                         InterfaceSpecified = true;
-                        reader.Read();
-                        reader.ReadEndElement();
                         break;
                     case nameof(InterfaceModifiedDate):
                         InterfaceModifiedDate = reader.ReadElementContentAsDateTime();

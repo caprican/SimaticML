@@ -60,6 +60,7 @@ namespace SimaticML.SW.Common
                         break;
                 }
             }
+
             reader.MoveToContent();
             Value = reader.ReadInnerXml();
         }

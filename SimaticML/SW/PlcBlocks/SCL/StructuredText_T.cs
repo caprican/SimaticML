@@ -23,7 +23,12 @@ namespace SimaticML.SW.PlcBlocks.SCL
         [XmlElement("Parameter", typeof(Access.Parameter_T_v2))]
         [XmlElement("Text", typeof(Common.Text_T_v2))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         [XmlAttribute]
         public int? UId { get; set; } = null;
@@ -32,9 +37,18 @@ namespace SimaticML.SW.PlcBlocks.SCL
 
         public override void ReadXml(XmlReader reader)
         {
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -87,9 +101,12 @@ namespace SimaticML.SW.PlcBlocks.SCL
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-    
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -116,13 +133,27 @@ namespace SimaticML.SW.PlcBlocks.SCL
         [XmlElement("Parameter", typeof(Access.Parameter_T_v3))]
         [XmlElement("Text", typeof(Common.Text_T_v2))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         public override void ReadXml(XmlReader reader)
         {
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -175,9 +206,12 @@ namespace SimaticML.SW.PlcBlocks.SCL
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -204,13 +238,27 @@ namespace SimaticML.SW.PlcBlocks.SCL
         [XmlElement("Parameter", typeof(Access.Parameter_T_v4))]
         [XmlElement("Text", typeof(Common.Text_T_v2))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         public override void ReadXml(XmlReader reader)
         {
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -263,9 +311,12 @@ namespace SimaticML.SW.PlcBlocks.SCL
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -292,13 +343,27 @@ namespace SimaticML.SW.PlcBlocks.SCL
         [XmlElement("Parameter", typeof(Access.Parameter_T_v5))]
         [XmlElement("Text", typeof(Common.Text_T_v2))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         public override void ReadXml(XmlReader reader)
         {
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -351,9 +416,12 @@ namespace SimaticML.SW.PlcBlocks.SCL
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

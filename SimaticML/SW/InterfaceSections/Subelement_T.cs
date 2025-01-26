@@ -17,14 +17,25 @@ namespace SimaticML.SW.InterfaceSections
     {
         [XmlElement("Comment", typeof(Common.Comment_T))]
         [XmlElement("StartValue", typeof(StartValue_T))]
-        public Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public Object_G this[int key] { get => Items[key];  set => Items[key] = value; }
 
         [XmlAttribute]
         public string Path { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            Path = reader.GetAttribute("Path");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Path):
+                        Path = reader.ReadContentAsString();
+                        break;
+                }
+            }
+
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -46,9 +57,14 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
+
         public override void WriteXml(XmlWriter writer)
         {
             throw new NotImplementedException();
@@ -68,12 +84,22 @@ namespace SimaticML.SW.InterfaceSections
     {
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("StartValue", typeof(StartValue_T))]
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            Path = reader.GetAttribute("Path");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Path):
+                        Path = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -96,10 +122,14 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
+
         public override void WriteXml(XmlWriter writer)
         {
             throw new NotImplementedException();
@@ -119,11 +149,22 @@ namespace SimaticML.SW.InterfaceSections
         [XmlElement("AssignedProDiagFB", typeof(string))]
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("StartValue", typeof(StartValue_T))]
-        public new Object_G[] Items { get; set; }
+        private Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            Path = reader.GetAttribute("Path");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Path):
+                        Path = reader.ReadContentAsString();
+                        break;
+                }
+            }
+
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -150,9 +191,14 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
+
         public override void WriteXml(XmlWriter writer)
         {
             throw new NotImplementedException();

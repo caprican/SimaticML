@@ -41,20 +41,32 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            StartSpecified = bool.TryParse(reader.GetAttribute("Start"), out var start);
-            if (StartSpecified) Start = start;
-
-            XPosSpecified = int.TryParse(reader.GetAttribute("XPos"), out var xPos);
-            if (XPosSpecified) XPos = xPos;
-
-            YPosSpecified = int.TryParse(reader.GetAttribute("YPos"), out var yPos);
-            if (YPosSpecified) YPos = yPos;
-
-            WidthSpecified = int.TryParse(reader.GetAttribute("Width"), out var width);
-            if (WidthSpecified) Width = width;
-
-            HeightSpecified = int.TryParse(reader.GetAttribute("Height"), out var height);
-            if (HeightSpecified) Height = height;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Start):
+                        Start = reader.ReadContentAsBoolean();
+                        StartSpecified = true;
+                        break;
+                    case nameof(XPos):
+                        XPos = reader.ReadContentAsInt();
+                        XPosSpecified = true;
+                        break;
+                    case nameof(YPos):
+                        YPos = reader.ReadContentAsInt();
+                        YPosSpecified = true;
+                        break;
+                    case nameof(Width):
+                        Width = reader.ReadContentAsInt();
+                        WidthSpecified = true;
+                        break;
+                    case nameof(Height):
+                        Height = reader.ReadContentAsInt();
+                        HeightSpecified = true;
+                        break;
+                }
+            }
 
             reader.ReadEndElement();
         }
@@ -83,23 +95,36 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            StartSpecified = bool.TryParse(reader.GetAttribute("Start"), out var start);
-            if (StartSpecified) Start = start;
-
-            XPosSpecified = int.TryParse(reader.GetAttribute("XPos"), out var xPos);
-            if (XPosSpecified) XPos = xPos;
-
-            YPosSpecified = int.TryParse(reader.GetAttribute("YPos"), out var yPos);
-            if (YPosSpecified) YPos = yPos;
-
-            WidthSpecified = int.TryParse(reader.GetAttribute("Width"), out var width);
-            if (WidthSpecified) Width = width;
-
-            HeightSpecified = int.TryParse(reader.GetAttribute("Height"), out var height);
-            if (HeightSpecified) Height = height;
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Start):
+                        Start = reader.ReadContentAsBoolean();
+                        StartSpecified = true;
+                        break;
+                    case nameof(XPos):
+                        XPos = reader.ReadContentAsInt();
+                        XPosSpecified = true;
+                        break;
+                    case nameof(YPos):
+                        YPos = reader.ReadContentAsInt();
+                        YPosSpecified = true;
+                        break;
+                    case nameof(Width):
+                        Width = reader.ReadContentAsInt();
+                        WidthSpecified = true;
+                        break;
+                    case nameof(Height):
+                        Height = reader.ReadContentAsInt();
+                        HeightSpecified = true;
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
             reader.ReadEndElement();
         }

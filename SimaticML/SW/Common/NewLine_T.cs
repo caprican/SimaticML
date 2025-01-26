@@ -27,11 +27,25 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = uint.TryParse(reader.GetAttribute("Num"), out var num);
-            Num = num;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Num):
+                        Num = (uint)reader.ReadContentAsInt();
+                        break;
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if(UIdSpecified) UId = uId;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

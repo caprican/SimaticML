@@ -30,9 +30,18 @@ namespace SimaticML.SW.InterfaceSections
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Common.SectionName_TE>(reader.GetAttribute("Name"), out var name);
-            Name = name;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var name);
+                        Name = name;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -55,9 +64,12 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (members.Count > 0) Members = members.ToArray();
-
-                reader.Skip();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -87,9 +99,18 @@ namespace SimaticML.SW.InterfaceSections
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Common.SectionName_TE>(reader.GetAttribute("Name"), out var name);
-            Name = name;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var name);
+                        Name = name;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -112,9 +133,12 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (members.Count > 0) Members = members.ToArray();
-
-                reader.Skip();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -144,9 +168,18 @@ namespace SimaticML.SW.InterfaceSections
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Common.SectionName_TE>(reader.GetAttribute("Name"), out var name);
-            Name = name;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var name);
+                        Name = name;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -169,9 +202,12 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (members.Count > 0) Members = members.ToArray();
-
-                reader.Skip();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -201,8 +237,16 @@ namespace SimaticML.SW.InterfaceSections
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Common.SectionName_TE>(reader.GetAttribute("Name"), out var name);
-            Name = name;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var name);
+                        Name = name;
+                        break;
+                }
+            }
 
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
@@ -227,9 +271,12 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (members.Count > 0) Members = members.ToArray();
-
             }
-            reader.Skip();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

@@ -15,12 +15,18 @@ namespace SimaticML.SW
         [XmlArrayItem("Section", Type = typeof(InterfaceSections.Sections_T_v3), Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v3")]
         [XmlArrayItem("Section", Type = typeof(InterfaceSections.Sections_T_v4), Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v4")]
         [XmlArrayItem("Section", Type = typeof(InterfaceSections.Sections_T_v5), Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v5")]
-        public InterfaceSections.Sections_T[] Sections { get; set; }
+        private InterfaceSections.Sections_T[] Sections { get; set; }
+        public InterfaceSections.Sections_T this[int key]
+        {
+            get => Sections[key];
+            set => Sections[key] = value;
+        }
 
         public XmlSchema GetSchema() => null;
 
         public void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -54,12 +60,16 @@ namespace SimaticML.SW
                 }
                 if(sections.Count > 0) Sections = sections.ToArray();
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public void WriteXml(XmlWriter writer)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

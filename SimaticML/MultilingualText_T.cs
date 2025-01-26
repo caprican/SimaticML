@@ -43,12 +43,15 @@ namespace SimaticML
                             textItem.ReadXml(reader);
                             items.Add(textItem);
                             break;
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
 
-                Items = items.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
+                reader.ReadEndElement();
             }
-            reader.ReadEndElement();
 
             reader.ReadEndElement();
         }

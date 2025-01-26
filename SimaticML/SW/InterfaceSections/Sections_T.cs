@@ -30,8 +30,7 @@ namespace SimaticML.SW.InterfaceSections
 
         [XmlArray("Sections")]
         [XmlElement("Section")]
-        protected internal Section_T[] Items { get; set; }
-
+        private Section_T[] Items { get; set; }
         public Section_T this[int key]
         {
             get => Items[key];
@@ -53,6 +52,7 @@ namespace SimaticML.SW.InterfaceSections
                 }
             }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -75,10 +75,14 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (sections.Count > 0) Items = sections.ToArray();
-
-                reader.Skip();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
+
         public override void WriteXml(XmlWriter writer)
         {
             throw new NotImplementedException();
@@ -105,8 +109,7 @@ namespace SimaticML.SW.InterfaceSections
 
         [XmlArray("Sections")]
         [XmlElement("Section")]
-        protected internal new Section_T_v3[] Items { get; set; }
-
+        private Section_T_v3[] Items { get; set; }
         public new Section_T_v3 this[int key]
         {
             get => Items[key];
@@ -128,6 +131,7 @@ namespace SimaticML.SW.InterfaceSections
                 }
             }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -150,9 +154,12 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (sections.Count > 0) Items = sections.ToArray();
-
-                reader.Skip();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -181,8 +188,7 @@ namespace SimaticML.SW.InterfaceSections
 
         [XmlArray("Sections")]
         [XmlElement("Section")]
-        protected internal new Section_T_v4[] Items { get; set; }
-
+        private Section_T_v4[] Items { get; set; }
         public new Section_T_v4 this[int key]
         {
             get => Items[key];
@@ -204,6 +210,7 @@ namespace SimaticML.SW.InterfaceSections
                 }
             }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -226,9 +233,12 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (sections.Count > 0) Items = sections.ToArray();
-
-                reader.Skip();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -249,8 +259,7 @@ namespace SimaticML.SW.InterfaceSections
     {
         [XmlArray("Sections")]
         [XmlElement("Section")]
-        protected internal new Section_T_v5[] Items { get; set; }
-
+        private Section_T_v5[] Items { get; set; }
         public new Section_T_v5 this[int key]
         {
             get => Items[key];
@@ -296,7 +305,11 @@ namespace SimaticML.SW.InterfaceSections
                 }
                 if (sections.Count > 0) Items = sections.ToArray();
             }
-            reader.Skip();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

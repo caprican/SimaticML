@@ -33,11 +33,22 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Text):
+                        Text = reader.ReadContentAsString();
+                        break;
 
-            Text = reader.GetAttribute("Text");
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -46,9 +57,12 @@ namespace SimaticML.SW.Common
                 {
                     switch (reader.Name)
                     {
-                        case "IntegerAttribute":
+                        case nameof(IntegerAttribute):
                             IntegerAttribute = new Common.IntegerAttribute_T();
                             IntegerAttribute.ReadXml(reader);
+                            break;
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -82,11 +96,22 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Text):
+                        Text = reader.ReadContentAsString();
+                        break;
 
-            Text = reader.GetAttribute("Text");
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -95,15 +120,21 @@ namespace SimaticML.SW.Common
                 {
                     switch (reader.Name)
                     {
-                        case "IntegerAttribute":
+                        case nameof(IntegerAttribute):
                             IntegerAttribute = new Common.IntegerAttribute_T_v2();
                             IntegerAttribute.ReadXml(reader);
                             break;
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

@@ -41,13 +41,47 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("Inserted"), out var inserted);
-            Inserted = inserted;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Inserted):
+                        Inserted = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                }
+            }
 
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
+            reader.MoveToContent();
+            if (!reader.IsEmptyElement)
+            {
+                reader.Read();
 
-            reader.ReadEndElement();
+                var texts = new List<MultiLanguageText_T>();
+                while (reader.MoveToContent() == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "MultiLanguageText":
+                            MultiLanguageText_T text = new MultiLanguageText_T();
+                            text.ReadXml(reader);
+                            texts.Add(text);
+                            break;
+                        case "IntegerAttribute":
+                            IntegerAttribute = new IntegerAttribute_T();
+                            IntegerAttribute.ReadXml(reader);
+                            break;
+                    }
+                }
+                if (texts.Count > 0) MultiLanguageTexts = texts.ToArray();
+            }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -83,15 +117,24 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("Inserted"), out var inserted);
-            Inserted = inserted;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Inserted):
+                        Inserted = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -107,16 +150,18 @@ namespace SimaticML.SW.Common
                             multiLanguageTests.Add(num);
                             break;
                         case "IntegerAttribute" :
-                            var integerAttribute = new IntegerAttribute_T_v2();
-                            integerAttribute.ReadXml(reader);
-                            IntegerAttribute = integerAttribute;
+                            IntegerAttribute = new IntegerAttribute_T_v2();
+                            IntegerAttribute.ReadXml(reader);
                             break;
                     }
                 }
                 if(multiLanguageTests.Count > 0) MultiLanguageTexts = multiLanguageTests.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
