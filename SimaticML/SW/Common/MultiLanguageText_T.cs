@@ -12,11 +12,11 @@ namespace SimaticML.SW.Common
     /// </list>
     /// </remarks>
     [Serializable]
-    [DebuggerDisplay("{Lang} = {Value}")]
+    [DebuggerDisplay("{(Lang)}{Value}")]
     [XmlRoot("MultiLanguageText", IsNullable = false)]
     public class MultiLanguageText_T : Object_G
     {
-        [XmlAttribute]
+        [XmlAttribute("lng")]
         public string Lang { get; set; }
 
         [XmlText]
@@ -24,13 +24,17 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            Lang = reader.GetAttribute("Lang");
-
-            reader.Read();
-            Value = reader.Value;
-            reader.Read();
-
-            reader.ReadEndElement();
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Lang):
+                        Lang = reader.ReadContentAsString();
+                        break;
+                }
+            }
+            reader.MoveToContent();
+            Value = reader.ReadInnerXml();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -47,7 +51,7 @@ namespace SimaticML.SW.Common
     /// </list>
     /// </remarks>
     [Serializable]
-    [DebuggerDisplay("{Lang} = {Value}")]
+    [DebuggerDisplay("{(Lang)}{Value}")]
     [XmlRoot("MultiLanguageText", IsNullable = false)]
     public class MultiLanguageText_T_v2 : MultiLanguageText_T
     {
@@ -58,16 +62,21 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            Lang = reader.GetAttribute("Lang");
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if(UIdSpecified) UId = uId;
-
-            reader.Read();
-            Value = reader.Value;
-            reader.Read();
-
-            reader.ReadEndElement();
+            while (reader.MoveToNextAttribute())
+            {
+                switch(reader.LocalName)
+                {
+                    case nameof(Lang):
+                        Lang = reader.ReadContentAsString();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
+            reader.MoveToContent();
+            Value = reader.ReadInnerXml();
         }
 
         public override void WriteXml(XmlWriter writer)

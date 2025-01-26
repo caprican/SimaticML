@@ -15,6 +15,12 @@ namespace SimaticML.SW.InterfaceSections
     [XmlRoot("Sections", IsNullable = false)]
     public class Sections_T : Object_G
     {
+        [XmlAttribute]
+        public string Datatype { get; set; }
+
+        [XmlAttribute]
+        public string Version { get; set; }
+
         [XmlArray("AttributeList")]
         [XmlArrayItem("BooleanAttribute", typeof(Common.BooleanAttribute_T), IsNullable = false)]
         [XmlArrayItem("IntegerAttribute", typeof(Common.IntegerAttribute_T), IsNullable = false)]
@@ -22,19 +28,30 @@ namespace SimaticML.SW.InterfaceSections
         [XmlArrayItem("StringAttribute", typeof(Common.StringAttribute_T), IsNullable = false)]
         public Common.AttributeBase[] Attributes { get; set; }
 
+        [XmlArray("Sections")]
         [XmlElement("Section")]
-        public Section_T[] Sections { get; set; }
+        protected internal Section_T[] Items { get; set; }
 
-        [XmlAttribute]
-        public string Datatype { get; set; }
-
-        [XmlAttribute]
-        public string Version { get; set; }
+        public Section_T this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         public override void ReadXml(XmlReader reader)
         {
-            Datatype = reader.GetAttribute("Datatype");
-            Version = reader.GetAttribute("Version");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Datatype):
+                        Datatype = reader.ReadContentAsString();
+                        break;
+                    case nameof(Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
             if (!reader.IsEmptyElement)
             {
@@ -57,9 +74,9 @@ namespace SimaticML.SW.InterfaceSections
                             break;
                     }
                 }
-                if (sections.Count > 0) Sections = sections.ToArray();
+                if (sections.Count > 0) Items = sections.ToArray();
 
-                reader.ReadEndElement();
+                reader.Skip();
             }
         }
         public override void WriteXml(XmlWriter writer)
@@ -86,13 +103,30 @@ namespace SimaticML.SW.InterfaceSections
         [XmlArrayItem("StringAttribute", typeof(Common.StringAttribute_T_v2), IsNullable = false)]
         public new Common.AttributeBase[] Attributes { get; set; }
 
+        [XmlArray("Sections")]
         [XmlElement("Section")]
-        public new Section_T_v3[] Sections { get; set; }
+        protected internal new Section_T_v3[] Items { get; set; }
+
+        public new Section_T_v3 this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         public override void ReadXml(XmlReader reader)
         {
-            Datatype = reader.GetAttribute("Datatype");
-            Version = reader.GetAttribute("Version");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Datatype):
+                        Datatype = reader.ReadContentAsString();
+                        break;
+                    case nameof(Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
             if (!reader.IsEmptyElement)
             {
@@ -115,9 +149,9 @@ namespace SimaticML.SW.InterfaceSections
                             break;
                     }
                 }
-                if (sections.Count > 0) Sections = sections.ToArray();
+                if (sections.Count > 0) Items = sections.ToArray();
 
-                reader.ReadEndElement();
+                reader.Skip();
             }
         }
 
@@ -145,13 +179,30 @@ namespace SimaticML.SW.InterfaceSections
         [XmlArrayItem("StringAttribute", typeof(Common.StringAttribute_T_v2), IsNullable = false)]
         public new Common.AttributeBase[] Attributes { get; set; }
 
+        [XmlArray("Sections")]
         [XmlElement("Section")]
-        public new Section_T_v4[] Sections { get; set; }
+        protected internal new Section_T_v4[] Items { get; set; }
+
+        public new Section_T_v4 this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         public override void ReadXml(XmlReader reader)
         {
-            Datatype = reader.GetAttribute("Datatype");
-            Version = reader.GetAttribute("Version");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Datatype):
+                        Datatype = reader.ReadContentAsString();
+                        break;
+                    case nameof(Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
             if (!reader.IsEmptyElement)
             {
@@ -174,9 +225,9 @@ namespace SimaticML.SW.InterfaceSections
                             break;
                     }
                 }
-                if (sections.Count > 0) Sections = sections.ToArray();
+                if (sections.Count > 0) Items = sections.ToArray();
 
-                reader.ReadEndElement();
+                reader.Skip();
             }
         }
 
@@ -196,14 +247,32 @@ namespace SimaticML.SW.InterfaceSections
     [XmlRoot("Sections", IsNullable = false)]
     public class Sections_T_v5 : Sections_T_v4
     {
+        [XmlArray("Sections")]
         [XmlElement("Section")]
-        public new Section_T_v5[] Sections { get; set; }
+        protected internal new Section_T_v5[] Items { get; set; }
+
+        public new Section_T_v5 this[int key]
+        {
+            get => Items[key];
+            set => Items[key] = value;
+        }
 
         public override void ReadXml(XmlReader reader)
         {
-            Datatype = reader.GetAttribute("Datatype");
-            Version = reader.GetAttribute("Version");
+            while(reader.MoveToNextAttribute())
+            {
+                switch(reader.LocalName)
+                {
+                    case nameof(Datatype):
+                        Datatype = reader.ReadContentAsString();
+                        break;
+                    case nameof(Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -225,9 +294,9 @@ namespace SimaticML.SW.InterfaceSections
                             break;
                     }
                 }
-                if (sections.Count > 0) Sections = sections.ToArray();
+                if (sections.Count > 0) Items = sections.ToArray();
             }
-            //reader.ReadEndElement();
+            reader.Skip();
         }
 
         public override void WriteXml(XmlWriter writer)

@@ -34,15 +34,23 @@ namespace SimaticML.SW.InterfaceSections
 
         public override void ReadXml(XmlReader reader)
         {
-            ConstantName = reader.GetAttribute("ConstantName");
-            _ = bool.TryParse(reader.GetAttribute("IsBulkValue"), out var systemDefined);
-            IsBulkValue = systemDefined;
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
-            reader.Read();
-            Value = reader.Value;
-            reader.Read();
-            reader.ReadEndElement();
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(ConstantName):
+                        ConstantName = reader.ReadContentAsString();
+                        break;
+                    case nameof(IsBulkValue):
+                        IsBulkValue = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                }
+            }
+            reader.MoveToContent();
+            Value = reader.ReadInnerXml();
         }
         public override void WriteXml(XmlWriter writer)
         {

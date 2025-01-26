@@ -26,7 +26,6 @@ namespace SimaticML.SW
                 reader.Read();
 
                 var sections = new List<InterfaceSections.Sections_T>();
-
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.NamespaceURI)
@@ -55,7 +54,7 @@ namespace SimaticML.SW
                 }
                 if(sections.Count > 0) Sections = sections.ToArray();
             }
-                //reader.ReadEndElement();
+            reader.ReadEndElement();
         }
 
         public void WriteXml(XmlWriter writer)

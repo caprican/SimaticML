@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
@@ -13,6 +13,7 @@ namespace SimaticML.SW.Common
     /// </list>
     /// </remarks>
     [Serializable]
+    [DebuggerDisplay("{Name} = {Value}")]
     [XmlRoot("BooleanAttribute", IsNullable = false)]
     public class BooleanAttribute_T : AttributeBase
     {
@@ -38,20 +39,24 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(SystemDefined):
+                        SystemDefined = reader.ReadContentAsBoolean();
+                        break;
+                }
+            }
 
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
-
-            _ = bool.TryParse(reader.GetAttribute("SystemDefined"), out var systemDefined);
-            SystemDefined = systemDefined;
-
-            reader.Read();
-            _ = bool.TryParse(reader.Value, out var value);
-            Value = value;
-            reader.Read();
-
-            reader.ReadEndElement();
+            reader.MoveToContent();
+            Value = reader.ReadElementContentAsBoolean();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -68,6 +73,7 @@ namespace SimaticML.SW.Common
     /// </list>
     /// </remarks>
     [Serializable]
+    [DebuggerDisplay("{Name} = {Value}")]
     [XmlRoot("BooleanAttribute", IsNullable = false)]
     public class BooleanAttribute_T_v2 : BooleanAttribute_T
     {
@@ -78,23 +84,30 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(SystemDefined):
+                        SystemDefined = reader.ReadContentAsBoolean();
+                        break;
 
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
 
-            _ = bool.TryParse(reader.GetAttribute("SystemDefined"), out var systemDefined);
-            SystemDefined = systemDefined;
+            }
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if(UIdSpecified) UId = uId;
-
-            reader.Read();
-            _ = bool.TryParse(reader.Value, out var value);
-            Value = value;
-            reader.Read();
-
-            reader.ReadEndElement();
+            reader.MoveToContent();
+            Value = reader.ReadElementContentAsBoolean();
         }
 
         public override void WriteXml(XmlWriter writer)

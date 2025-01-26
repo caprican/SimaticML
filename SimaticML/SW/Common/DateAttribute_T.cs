@@ -15,12 +15,6 @@ namespace SimaticML.SW.Common
     [XmlRoot("DateAttribute", IsNullable = false)]
     public class DateAttribute_T : AttributeBase
     {
-        public DateAttribute_T()
-        {
-            Informative = false;
-            SystemDefined = true;
-        }
-
         [XmlAttribute]
         public string Name { get; set; }
 
@@ -29,34 +23,38 @@ namespace SimaticML.SW.Common
         /// </summary>
         [XmlAttribute]
         [DefaultValue(false)]
-        public bool Informative { get; set; }
+        public bool Informative { get; set; } = false;
 
         /// <summary>
         /// An attribute of attribute, denotes if it is defined by a user or the system itself. In V14, if exists it is always true.
         /// </summary>
         [XmlAttribute]
         [DefaultValue(true)]
-        public bool SystemDefined { get; set; }
+        public bool SystemDefined { get; set; } = false;
 
-        //[XmlText]
+        [XmlText]
         public System.DateTime Value { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(SystemDefined):
+                        SystemDefined = reader.ReadContentAsBoolean();
+                        break;
+                }
+            }
 
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
-
-            _ = bool.TryParse(reader.GetAttribute("SystemDefined"), out var systemDefined);
-            SystemDefined = systemDefined;
-
-            reader.Read();
-            _ = DateTime.TryParse(reader.Value, out var value);
-            Value = value;
-            reader.Read();
-
-            reader.ReadEndElement();
+            reader.MoveToContent();
+            Value = reader.ReadElementContentAsDateTime();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -83,23 +81,29 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(SystemDefined):
+                        SystemDefined = reader.ReadContentAsBoolean();
+                        break;
 
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            _ = bool.TryParse(reader.GetAttribute("SystemDefined"), out var systemDefined);
-            SystemDefined = systemDefined;
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
-            reader.Read();
-            _ = DateTime.TryParse(reader.Value, out var value);
-            Value = value;
-            reader.Read();
-
-            reader.ReadEndElement();
+            reader.MoveToContent();
+            Value = reader.ReadElementContentAsDateTime();
         }
 
         public override void WriteXml(XmlWriter writer)

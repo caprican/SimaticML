@@ -74,24 +74,19 @@ namespace SimaticML
                     switch (reader.Name)
                     {
                         case "SW.Blocks.GlobalDB":
-                            //var globalDbSerialize = new XmlSerializer(typeof(SW.Blocks.GlobalDB));
-                            //var globalDb = globalDbSerialize.Deserialize(reader) as SW.Blocks.GlobalDB;
                             var globalDb = new SW.Blocks.GlobalDB();
                             globalDb.ReadXml(reader);
                             items.Add(globalDb);
                             break;
 
                         case "SW.Blocks.FB":
-                            var FbSerialize = new XmlSerializer(typeof(SW.Blocks.FB), "");
-                            var fb = FbSerialize.Deserialize(reader) as SW.Blocks.FB;
-                            //var access = new SW.Blocks.GlobalDB();
-                            //access.ReadXml(reader);
+                            var fb = new SW.Blocks.FB();
+                            fb.ReadXml(reader);
                             items.Add(fb);
                             break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
             }
             reader.ReadEndElement();
         }

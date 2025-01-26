@@ -120,6 +120,7 @@ namespace SimaticML.SW.Blocks
             {
                 switch (reader.Name) 
                 {
+                    #region Common attributes for all blocks
                     case nameof(AutoNumber):
                         AutoNumber = reader.ReadElementContentAsBoolean();
                         AutoNumberSpecified = true;
@@ -210,7 +211,7 @@ namespace SimaticML.SW.Blocks
                         StructureModified = reader.ReadElementContentAsDateTime();
                         StructureModifiedSpecified = true;
                         break;
-
+                    #endregion
 
                     case nameof(IsOnlyStoredInLoadMemory):
                         IsOnlyStoredInLoadMemory = reader.ReadElementContentAsBoolean();

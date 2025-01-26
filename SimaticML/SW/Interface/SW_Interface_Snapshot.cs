@@ -38,6 +38,7 @@ namespace SimaticML.SW.Interface
 
         public override void WriteXml(XmlWriter writer)
         {
+            throw new NotImplementedException();
         }
     }
 
@@ -56,18 +57,25 @@ namespace SimaticML.SW.Interface
 
         public override void ReadXml(XmlReader reader)
         {
-            Path = reader.GetAttribute("Path");
-            Type = reader.GetAttribute("Type");
-
-            reader.Read();
-            Value = reader.Value;
-            reader.Read();
-
-            reader.ReadEndElement();
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Path):
+                        Path = reader.ReadContentAsString();
+                        break;
+                    case nameof(Type):
+                        Type = reader.ReadContentAsString();
+                        break;
+                }
+            }
+            reader.MoveToContent();
+            Value = reader.ReadInnerXml();
         }
 
         public override void WriteXml(XmlWriter writer)
         {
+            throw new NotImplementedException();
         }
     }
 }
