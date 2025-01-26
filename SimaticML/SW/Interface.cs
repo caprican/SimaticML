@@ -53,10 +53,9 @@ namespace SimaticML.SW
                             break;
                     }
                 }
-
-                if(sections.Count == 0) Sections = sections.ToArray();
-                reader.ReadEndElement();
+                if(sections.Count > 0) Sections = sections.ToArray();
             }
+                //reader.ReadEndElement();
         }
 
         public void WriteXml(XmlWriter writer)

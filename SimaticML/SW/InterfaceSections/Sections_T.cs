@@ -226,9 +226,8 @@ namespace SimaticML.SW.InterfaceSections
                     }
                 }
                 if (sections.Count > 0) Sections = sections.ToArray();
-
-                reader.ReadEndElement();
             }
+            //reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
