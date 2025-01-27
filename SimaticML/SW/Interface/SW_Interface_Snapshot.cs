@@ -14,6 +14,7 @@ namespace SimaticML.SW.Interface
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -31,9 +32,12 @@ namespace SimaticML.SW.Interface
                     }
                 }
                 if (values.Count > 0) Value = values.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -70,6 +74,7 @@ namespace SimaticML.SW.Interface
                 }
             }
             reader.MoveToContent();
+
             Value = reader.ReadInnerXml();
         }
 

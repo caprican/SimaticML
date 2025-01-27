@@ -24,14 +24,19 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
-            InformativeSpecified = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            if (InformativeSpecified) Informative = informative;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        InformativeSpecified = true;
+                        break;
+                }
+            }
 
-            reader.Read();
-            Value = reader.Value;
-            reader.Read();
-
-            reader.ReadEndElement();
+            reader.MoveToContent();
+            Value = reader.ReadInnerXml();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -55,23 +60,29 @@ namespace SimaticML.SW.PlcBlocks.Access
     public class ConstantValue_T_v2 : ConstantValue_T
     {
         [XmlAttribute]
-        public int UId { get; set; }
+        public int? UId { get; set; } = null;
         [XmlIgnore]
         public bool UIdSpecified { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            InformativeSpecified = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            if (InformativeSpecified) Informative = informative;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        InformativeSpecified = true;
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
-            reader.Read();
-            Value = reader.Value;
-            reader.Read();
-
-            reader.ReadEndElement();
+            reader.MoveToContent();
+            Value = reader.ReadInnerXml();
         }
 
         public override void WriteXml(XmlWriter writer)

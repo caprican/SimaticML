@@ -1,13 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 using System.Xml;
 
-Console.WriteLine("Hello, World!");
-
-//var fileName = @"C:\Users\capri\OneDrive\Documents\Automation\TIA069\UserFiles\Export\N100_Defauts.xml";
-//var fileName = @"C:\Users\capri\OneDrive\Documents\Automation\TIA069\UserFiles\Export\LSKF_Motor.xml";
-//var fileName = @"C:\Users\capri\OneDrive\Documents\Automation\TIA069\UserFiles\Export\TMA_R1_AlarmesAvertissements.xml";
-var fileName = @"C:\Users\capri\OneDrive\Documents\Automation\TIA069\UserFiles\Export\N100.xml";
+var fileName = @"C:\.xml";
 
 var settings = new XmlReaderSettings
 {
@@ -27,9 +21,21 @@ if (serializer.Deserialize(reader) is SimaticML.Document document)
 {
     switch (document[0])
     {
+        case SimaticML.SW.Blocks.OB ob:
+            break;
+        case SimaticML.SW.Blocks.FC fc:
+            break;
+        case SimaticML.SW.Blocks.FB fb:
+            break;
         case SimaticML.SW.Blocks.GlobalDB globalDB:
             //var item = globalDB.AttributeList.Interface.Sections[0];//.Member[0];
+            break;
+        case SimaticML.SW.Blocks.ArrayDB arrayDB:
+            break;
+        case SimaticML.SW.Blocks.InstanceDB instanceDB:
+            break;
 
+        case SimaticML.SW.Types.PlcStruct plcStruct:
             break;
     }
 }

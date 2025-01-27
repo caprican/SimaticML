@@ -49,6 +49,7 @@ namespace SimaticML.SW.InterfaceSections
                         break;
                 }
             }
+
             reader.MoveToContent();
             Value = reader.ReadInnerXml();
         }

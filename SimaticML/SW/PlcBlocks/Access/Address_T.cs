@@ -47,30 +47,40 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Area_TE>(reader.GetAttribute("Area"), out var area);
-            Area = area;
-
-            Type = reader.GetAttribute("Type");
-
-            BlockNumberSpecified = int.TryParse(reader.GetAttribute("BlockNumber"), out var blockNumber);
-            if (BlockNumberSpecified) BlockNumber = blockNumber;
-
-            BitOffsetSpecified = int.TryParse(reader.GetAttribute("BitOffset"), out var bitOffset);
-            if (BitOffsetSpecified) BitOffset = bitOffset;
-
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
-
-            if (!reader.IsEmptyElement)
+            while (reader.MoveToNextAttribute())
             {
-                reader.Read();
-
-                reader.ReadEndElement();
+                switch (reader.LocalName)
+                {
+                    case nameof(Area):
+                        Enum.TryParse<Area_TE>(reader.ReadContentAsString(), out var area);
+                        Area = area;
+                        break;
+                    case nameof(Type):
+                        Type = reader.ReadContentAsString();
+                        BlockNumberSpecified = true;
+                        break;
+                    case nameof(BlockNumber):
+                        BlockNumber = reader.ReadContentAsInt();
+                        break;
+                    case nameof(BitOffset):
+                        BitOffset = reader.ReadContentAsInt();
+                        BitOffsetSpecified = true;
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                }
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
         {
+            throw new NotImplementedException();
         }
     }
 
@@ -88,7 +98,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     public class Address_T_v2 : Address_T
     {
         [XmlElement("BooleanAttribute")]
-        public Common.BooleanAttribute_T_v2[] Items { get; set; }
+        public Common.BooleanAttribute_T_v2[] Attributes { get; set; }
 
         [XmlAttribute]
         public int? UId { get; set; } = null;
@@ -97,23 +107,36 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Area_TE>(reader.GetAttribute("Area"), out var area);
-            Area = area;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Area):
+                        Enum.TryParse<Area_TE>(reader.ReadContentAsString(), out var area);
+                        Area = area;
+                        break;
+                    case nameof(Type):
+                        Type = reader.ReadContentAsString();
+                        BlockNumberSpecified = true;
+                        break;
+                    case nameof(BlockNumber):
+                        BlockNumber = reader.ReadContentAsInt();
+                        break;
+                    case nameof(BitOffset):
+                        BitOffset = reader.ReadContentAsInt();
+                        BitOffsetSpecified = true;
+                        break;
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            Type = reader.GetAttribute("Type");
-
-            BlockNumberSpecified = int.TryParse(reader.GetAttribute("BlockNumber"), out var blockNumber);
-            if (BlockNumberSpecified) BlockNumber = blockNumber;
-
-            BitOffsetSpecified = int.TryParse(reader.GetAttribute("BitOffset"), out var bitOffset);
-            if (BitOffsetSpecified) BitOffset = bitOffset;
-
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -127,15 +150,24 @@ namespace SimaticML.SW.PlcBlocks.Access
                             booleanAttr.ReadXml(reader);
                             items.Add(booleanAttr);
                             break;
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
-                if (items.Count > 0) Items = items.ToArray();
+                if (items.Count > 0) Attributes = items.ToArray();
                 reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
         {
+            throw new NotImplementedException();
         }
     }
 }

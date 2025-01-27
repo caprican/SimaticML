@@ -15,7 +15,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </list> 
     /// </remarks>
     [Serializable]
-    [XmlRoot("AbsoluteOffset", Namespace = "", IsNullable = false)]
+    [XmlRoot("AbsoluteOffset", IsNullable = false)]
     public class AbsoluteOffset_T : Object_G
     {
         /// <summary>
@@ -29,17 +29,23 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = int.TryParse(reader.GetAttribute("BitOffset"), out var bitOffset);
-            BitOffset = bitOffset;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(BitOffset):
+                        BitOffset = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Type):
+                        Type = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            Type = reader.GetAttribute("Type");
-
-            //if (!reader.IsEmptyElement)
-            //{
-            //    reader.Read();
-
-            //}
-            reader.ReadEndElement();
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

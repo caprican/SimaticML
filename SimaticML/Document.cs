@@ -105,6 +105,7 @@ namespace SimaticML
                             break;
 
                         case "SW.Tags.PlcTagTable":
+            throw new NotImplementedException();
                             break;
 
                         case "SW.Types.PlcStruct":
@@ -114,6 +115,7 @@ namespace SimaticML
                             break;
 
                         case "SW.WatchAndForceTables.PlcWatchTable":
+            throw new NotImplementedException();
                             break;
                     }
                 }
