@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
@@ -16,13 +15,8 @@ namespace SimaticML.SW.PlcBlocks.Access
     [XmlRoot("Instance", IsNullable=false)]
     public class Instance_T : Object_G
     {
-        [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
-        [XmlElement("Component", typeof(Component_T))]
-        [XmlElement("Token", typeof(Common.Token_T))]                           // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        [XmlElement("Comment", typeof(Common.Comment_T))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T))]
-        [XmlElement("Address", typeof(Address_T))]                              // additional address for a symbol. it is informative
-        public Object_G[] Items { get; set; }
+        [XmlAttribute]
+        public Scope_TE Scope { get; set; }
 
         /// <summary>
         /// Not allowed in STL
@@ -32,17 +26,33 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlIgnore]
         public bool UIdSpecified { get; set; }
 
-        [XmlAttribute]
-        public Scope_TE Scope { get; set; }
+        [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
+        [XmlElement("Component", typeof(Component_T))]
+        [XmlElement("Token", typeof(Common.Token_T))]                           // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
+        [XmlElement("Comment", typeof(Common.Comment_T))]
+        [XmlElement("LineComment", typeof(Common.LineComment_T))]
+        [XmlElement("Address", typeof(Address_T))]                              // additional address for a symbol. it is informative
+        protected internal Object_G[] Items { get; set; }
+        public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Scope_TE>(reader.GetAttribute("Scope"), out var scope);
-            Scope = scope;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Scope):
+                        Enum.TryParse<Scope_TE>(reader.ReadContentAsString(), out var scope);
+                        Scope = scope;
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -85,9 +95,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -114,19 +127,30 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         public new Scope_TE_v2 Scope { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Scope_TE_v2>(reader.GetAttribute("Scope"), out var scope);
-            Scope = scope;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Scope):
+                        Enum.TryParse<Scope_TE_v2>(reader.ReadContentAsString(), out var scope);
+                        Scope = scope;
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -179,9 +203,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -208,19 +235,27 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new Object_G[] Items { get; set; }
-
-        [XmlAttribute]
-        public new Scope_TE_v2 Scope { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Scope_TE_v2>(reader.GetAttribute("Scope"), out var scope);
-            Scope = scope;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Scope):
+                        Enum.TryParse<Scope_TE_v2>(reader.ReadContentAsString(), out var scope);
+                        Scope = scope;
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -273,9 +308,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -302,16 +340,27 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Scope_TE_v2>(reader.GetAttribute("Scope"), out var scope);
-            Scope = scope;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Scope):
+                        Enum.TryParse<Scope_TE_v2>(reader.ReadContentAsString(), out var scope);
+                        Scope = scope;
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -364,9 +413,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -393,19 +445,30 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         public new Scope_TE_v5 Scope { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Scope_TE_v5>(reader.GetAttribute("Scope"), out var scope);
-            Scope = scope;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Scope):
+                        Enum.TryParse<Scope_TE_v5>(reader.ReadContentAsString(), out var scope);
+                        Scope = scope;
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -458,9 +521,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

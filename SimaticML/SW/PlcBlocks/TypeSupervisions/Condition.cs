@@ -20,6 +20,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -33,14 +34,17 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                             ConditionOperand.ReadXml(reader);
                             break;
                         case "TriggeringStatus":
+                            TriggeringStatus = reader.ReadElementContentAsBoolean();
                             break;
                     }
                 }
 
             }
-            throw new NotImplementedException();
 
-            reader.ReadEndElement();
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

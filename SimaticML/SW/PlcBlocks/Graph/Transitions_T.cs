@@ -16,10 +16,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class Transitions_T : Object_G
     {
         [XmlElement("Transition")]
-        public Transition_T[] Transition { get; set; }
+        private Transition_T[] Transition { get; set; }
+        public Transition_T this[int key] { get => Transition[key]; set => Transition[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -37,9 +39,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (items.Count > 0) Transition = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -59,10 +64,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class Transitions_T_v2 : Transitions_T
     {
         [XmlElement("Transition")]
-        public new Transition_T_v2[] Transition { get; set; }
+        private Transition_T_v2[] Transition { get; set; }
+        public new Transition_T_v2 this[int key] { get => Transition[key]; set => Transition[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -80,9 +87,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (items.Count > 0) Transition = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -102,10 +112,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class Transitions_T_v4 : Transitions_T_v2
     {
         [XmlElement("Transition")]
-        public new Transition_T_v4[] Transition { get; set; }
+        private Transition_T_v4[] Transition { get; set; }
+        public new Transition_T_v4 this[int key] { get => Transition[key]; set => Transition[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -123,9 +135,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (items.Count > 0) Transition = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -145,10 +160,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class Transitions_T_v5 : Transitions_T_v4
     {
         [XmlElement("Transition")]
-        public new Transition_T_v5[] Transition { get; set; }
+        private Transition_T_v5[] Transition { get; set; }
+        public new Transition_T_v5 this[int key] { get => Transition[key]; set => Transition[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -166,9 +183,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (items.Count > 0) Transition = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -188,10 +208,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class Transitions_T_v6 : Transitions_T_v5
     {
         [XmlElement("Transition")]
-        public new Transition_T_v6[] Transition { get; set; }
+        private Transition_T_v6[] Transition { get; set; }
+        public new Transition_T_v6 this[int key] { get => Transition[key]; set => Transition[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -209,9 +231,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (items.Count > 0) Transition = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

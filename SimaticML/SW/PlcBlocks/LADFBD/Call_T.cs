@@ -36,9 +36,17 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -85,9 +93,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 if (automticTypdes.Count > 0) AutomaticTyped = automticTypdes.ToArray();
                 if (invisibles.Count > 0) Invisible = invisibles.ToArray();
                 if (negateds.Count > 0) Negated = negateds.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -115,9 +126,17 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -164,9 +183,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 if (automticTypdes.Count > 0) AutomaticTyped = automticTypdes.ToArray();
                 if (invisibles.Count > 0) Invisible = invisibles.ToArray();
                 if (negateds.Count > 0) Negated = negateds.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -189,9 +211,17 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -238,9 +268,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 if (automticTypdes.Count > 0) AutomaticTyped = automticTypdes.ToArray();
                 if (invisibles.Count > 0) Invisible = invisibles.ToArray();
                 if (negateds.Count > 0) Negated = negateds.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -263,9 +296,17 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -312,9 +353,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 if (automticTypdes.Count > 0) AutomaticTyped = automticTypdes.ToArray();
                 if (invisibles.Count > 0) Invisible = invisibles.ToArray();
                 if (negateds.Count > 0) Negated = negateds.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -337,9 +381,17 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -386,9 +438,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 if (automticTypdes.Count > 0) AutomaticTyped = automticTypdes.ToArray();
                 if (invisibles.Count > 0) Invisible = invisibles.ToArray();
                 if (negateds.Count > 0) Negated = negateds.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

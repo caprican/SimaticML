@@ -24,6 +24,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -41,9 +42,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     }
                 }
                 if (items.Count > 0) Wire = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

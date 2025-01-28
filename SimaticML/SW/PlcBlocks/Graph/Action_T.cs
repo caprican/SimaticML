@@ -19,7 +19,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
         [XmlElement("Comment", typeof(Common.Comment_T))]
         [XmlElement("LineComment", typeof(Common.LineComment_T))]
         [XmlElement("Token", typeof(Common.Token_T))]
-        public Object_G[] Items { get; set; }
+        protected internal Object_G[] Items { get; set; }
+        public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         public Event_TE? Event { get; set; } = null;
@@ -38,15 +39,28 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            EventSpecified = Enum.TryParse<Event_TE>(reader.GetAttribute("Event"), out var eventT);
-            if(EventSpecified) Event = eventT;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Event):
+                        Enum.TryParse<Event_TE>(reader.ReadContentAsString(), out var eventT);
+                        Event = eventT;
+                        EventSpecified = true;
+                        break;
+                    case nameof(Interlock):
+                        Interlock = reader.ReadContentAsBoolean();
+                        InterlockSpecified = true;
+                        break;
+                    case nameof(Qualifier):
+                        Enum.TryParse<Qualifier_TE>(reader.ReadContentAsString(), out var qualifier);
+                        Qualifier = qualifier;
+                        QualifierSpecified = true;
+                        break;
+                }
+            }
 
-            InterlockSpecified = bool.TryParse(reader.GetAttribute("Interlock"), out var interlock);
-            if (InterlockSpecified) Interlock = interlock;
-
-            QualifierSpecified = Enum.TryParse<Qualifier_TE>(reader.GetAttribute("Qualifier"), out var qualifier);
-            if (QualifierSpecified) Qualifier = qualifier;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -79,9 +93,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -105,19 +122,33 @@ namespace SimaticML.SW.PlcBlocks.Graph
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            EventSpecified = Enum.TryParse<Event_TE>(reader.GetAttribute("Event"), out var eventT);
-            if (EventSpecified) Event = eventT;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Event):
+                        Enum.TryParse<Event_TE>(reader.ReadContentAsString(), out var eventT);
+                        Event = eventT;
+                        EventSpecified = true;
+                        break;
+                    case nameof(Interlock):
+                        Interlock = reader.ReadContentAsBoolean();
+                        InterlockSpecified = true;
+                        break;
+                    case nameof(Qualifier):
+                        Enum.TryParse<Qualifier_TE>(reader.ReadContentAsString(), out var qualifier);
+                        Qualifier = qualifier;
+                        QualifierSpecified = true;
+                        break;
+                }
+            }
 
-            InterlockSpecified = bool.TryParse(reader.GetAttribute("Interlock"), out var interlock);
-            if (InterlockSpecified) Interlock = interlock;
-
-            QualifierSpecified = Enum.TryParse<Qualifier_TE>(reader.GetAttribute("Qualifier"), out var qualifier);
-            if (QualifierSpecified) Qualifier = qualifier;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -160,9 +191,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -186,19 +220,33 @@ namespace SimaticML.SW.PlcBlocks.Graph
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            EventSpecified = Enum.TryParse<Event_TE>(reader.GetAttribute("Event"), out var eventT);
-            if (EventSpecified) Event = eventT;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Event):
+                        Enum.TryParse<Event_TE>(reader.ReadContentAsString(), out var eventT);
+                        Event = eventT;
+                        EventSpecified = true;
+                        break;
+                    case nameof(Interlock):
+                        Interlock = reader.ReadContentAsBoolean();
+                        InterlockSpecified = true;
+                        break;
+                    case nameof(Qualifier):
+                        Enum.TryParse<Qualifier_TE>(reader.ReadContentAsString(), out var qualifier);
+                        Qualifier = qualifier;
+                        QualifierSpecified = true;
+                        break;
+                }
+            }
 
-            InterlockSpecified = bool.TryParse(reader.GetAttribute("Interlock"), out var interlock);
-            if (InterlockSpecified) Interlock = interlock;
-
-            QualifierSpecified = Enum.TryParse<Qualifier_TE>(reader.GetAttribute("Qualifier"), out var qualifier);
-            if (QualifierSpecified) Qualifier = qualifier;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -241,9 +289,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -268,19 +319,33 @@ namespace SimaticML.SW.PlcBlocks.Graph
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            EventSpecified = Enum.TryParse<Event_TE>(reader.GetAttribute("Event"), out var eventT);
-            if (EventSpecified) Event = eventT;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Event):
+                        Enum.TryParse<Event_TE>(reader.ReadContentAsString(), out var eventT);
+                        Event = eventT;
+                        EventSpecified = true;
+                        break;
+                    case nameof(Interlock):
+                        Interlock = reader.ReadContentAsBoolean();
+                        InterlockSpecified = true;
+                        break;
+                    case nameof(Qualifier):
+                        Enum.TryParse<Qualifier_TE>(reader.ReadContentAsString(), out var qualifier);
+                        Qualifier = qualifier;
+                        QualifierSpecified = true;
+                        break;
+                }
+            }
 
-            InterlockSpecified = bool.TryParse(reader.GetAttribute("Interlock"), out var interlock);
-            if (InterlockSpecified) Interlock = interlock;
-
-            QualifierSpecified = Enum.TryParse<Qualifier_TE>(reader.GetAttribute("Qualifier"), out var qualifier);
-            if (QualifierSpecified) Qualifier = qualifier;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -323,9 +388,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -350,19 +418,33 @@ namespace SimaticML.SW.PlcBlocks.Graph
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            EventSpecified = Enum.TryParse<Event_TE>(reader.GetAttribute("Event"), out var eventT);
-            if (EventSpecified) Event = eventT;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Event):
+                        Enum.TryParse<Event_TE>(reader.ReadContentAsString(), out var eventT);
+                        Event = eventT;
+                        EventSpecified = true;
+                        break;
+                    case nameof(Interlock):
+                        Interlock = reader.ReadContentAsBoolean();
+                        InterlockSpecified = true;
+                        break;
+                    case nameof(Qualifier):
+                        Enum.TryParse<Qualifier_TE>(reader.ReadContentAsString(), out var qualifier);
+                        Qualifier = qualifier;
+                        QualifierSpecified = true;
+                        break;
+                }
+            }
 
-            InterlockSpecified = bool.TryParse(reader.GetAttribute("Interlock"), out var interlock);
-            if (InterlockSpecified) Interlock = interlock;
-
-            QualifierSpecified = Enum.TryParse<Qualifier_TE>(reader.GetAttribute("Qualifier"), out var qualifier);
-            if (QualifierSpecified) Qualifier = qualifier;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -405,9 +487,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

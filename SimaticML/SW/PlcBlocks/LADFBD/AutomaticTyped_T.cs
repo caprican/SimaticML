@@ -27,9 +27,20 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            reader.ReadEndElement();
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Security.Cryptography;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -17,13 +16,6 @@ namespace SimaticML.SW.PlcBlocks.Access
     [XmlRoot("Parameter", IsNullable = false)]
     public class Parameter_T : Object_G
     {
-        [XmlElement("IntegerAttribute" , typeof(Common.IntegerAttribute_T), Order = 0)]                // for NumBLs. NumBLs is informative
-        [XmlElement("StringAttribute", typeof(Common.StringAttribute_T), Order = 1)]                   // for InterfaceFlags. InterfaceFlags is informative. The type of the value should be InterfaceFlags_TP. The default value is "S7_Visible"
-        [XmlElement("Comment", typeof(Common.Comment_T), Order = 2 | 4)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T), Order = 2 | 4)]
-        [XmlElement("Access", typeof(Access_T), Order = 3)]
-        public Object_G[] Items { get; set; }
-
         [XmlAttribute]
         public string Name { get; set; }
 
@@ -38,15 +30,37 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlAttribute]
         public string TemplateReference { get; set; }
 
+        [XmlElement("IntegerAttribute" , typeof(Common.IntegerAttribute_T), Order = 0)]                // for NumBLs. NumBLs is informative
+        [XmlElement("StringAttribute", typeof(Common.StringAttribute_T), Order = 1)]                   // for InterfaceFlags. InterfaceFlags is informative. The type of the value should be InterfaceFlags_TP. The default value is "S7_Visible"
+        [XmlElement("Comment", typeof(Common.Comment_T), Order = 2 | 4)]
+        [XmlElement("LineComment", typeof(Common.LineComment_T), Order = 2 | 4)]
+        [XmlElement("Access", typeof(Access_T), Order = 3)]
+        protected internal Object_G[] Items { get; set; }
+        public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+
         public override void ReadXml(XmlReader reader)
         {
-            SectionSpecified = Enum.TryParse<Common.SectionName_TE>(reader.GetAttribute("Section"), out var section);
-            if(SectionSpecified) Section = section;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Section):
+                        Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var section);
+                        SectionSpecified = true;
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Type):
+                        Type = reader.ReadContentAsString();
+                        break;
+                    case nameof(TemplateReference):
+                        TemplateReference = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            Name = reader.GetAttribute("Name");
-            Type = reader.GetAttribute("Type");
-            TemplateReference = reader.GetAttribute("TemplateReference");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -84,9 +98,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -126,7 +143,8 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         [DefaultValue(false)]
@@ -139,19 +157,34 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Section):
+                        Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var section);
+                        SectionSpecified = true;
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Type):
+                        Type = reader.ReadContentAsString();
+                        break;
+                    case nameof(TemplateReference):
+                        TemplateReference = reader.ReadContentAsString();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            SectionSpecified = Enum.TryParse<Common.SectionName_TE>(reader.GetAttribute("Section"), out var section);
-            if (SectionSpecified) Section = section;
-
-            Name = reader.GetAttribute("Name");
-            Type = reader.GetAttribute("Type");
-            TemplateReference = reader.GetAttribute("TemplateReference");
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -207,9 +240,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -235,23 +271,39 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Section):
+                        Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var section);
+                        SectionSpecified = true;
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Type):
+                        Type = reader.ReadContentAsString();
+                        break;
+                    case nameof(TemplateReference):
+                        TemplateReference = reader.ReadContentAsString();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            SectionSpecified = Enum.TryParse<Common.SectionName_TE>(reader.GetAttribute("Section"), out var section);
-            if (SectionSpecified) Section = section;
-
-            Name = reader.GetAttribute("Name");
-            Type = reader.GetAttribute("Type");
-            TemplateReference = reader.GetAttribute("TemplateReference");
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -307,9 +359,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -335,23 +390,39 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Section):
+                        Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var section);
+                        SectionSpecified = true;
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Type):
+                        Type = reader.ReadContentAsString();
+                        break;
+                    case nameof(TemplateReference):
+                        TemplateReference = reader.ReadContentAsString();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            SectionSpecified = Enum.TryParse<Common.SectionName_TE>(reader.GetAttribute("Section"), out var section);
-            if (SectionSpecified) Section = section;
-
-            Name = reader.GetAttribute("Name");
-            Type = reader.GetAttribute("Type");
-            TemplateReference = reader.GetAttribute("TemplateReference");
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -407,9 +478,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -435,23 +509,39 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("Informative"), out var informative);
-            Informative = informative;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Informative):
+                        Informative = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Section):
+                        Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var section);
+                        SectionSpecified = true;
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Type):
+                        Type = reader.ReadContentAsString();
+                        break;
+                    case nameof(TemplateReference):
+                        TemplateReference = reader.ReadContentAsString();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
-            SectionSpecified = Enum.TryParse<Common.SectionName_TE>(reader.GetAttribute("Section"), out var section);
-            if (SectionSpecified) Section = section;
-
-            Name = reader.GetAttribute("Name");
-            Type = reader.GetAttribute("Type");
-            TemplateReference = reader.GetAttribute("TemplateReference");
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -507,9 +597,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

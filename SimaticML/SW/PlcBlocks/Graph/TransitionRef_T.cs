@@ -25,6 +25,21 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             _ = int.TryParse(reader.GetAttribute("Number"), out var number);
             Number = number;
+
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                }
+            }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

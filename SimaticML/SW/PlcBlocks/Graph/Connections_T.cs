@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -21,10 +20,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class Connections_T : Object_G
     {
         [XmlElement("Connection")]
-        public Connection_T[] Connections { get; set; }
+        protected internal Connection_T[] Connections { get; set; }
+        public Connection_T this[int key] { get => Connections[key]; set => Connections[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -42,9 +43,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (connections.Count > 0) Connections = connections.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

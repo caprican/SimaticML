@@ -16,10 +16,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class Steps_T : Object_G
     {
         [XmlElement("Step")]
-        public Step_T[] Step { get; set; }
+        private Step_T[] Step { get; set; }
+        public Step_T this[int key] { get => Step[key]; set => Step[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -37,9 +39,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (steps.Count > 0) Step = steps.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -59,10 +64,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class Steps_T_v2 : Steps_T
     {
         [XmlElement("Step")]
-        public new Step_T_v2[] Step { get; set; }
+        private Step_T_v2[] Step { get; set; }
+        public new Step_T_v2 this[int key] { get => Step[key]; set => Step[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -80,9 +87,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (steps.Count > 0) Step = steps.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -102,10 +112,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class Steps_T_v4 : Steps_T_v2
     {
         [XmlElement("Step")]
-        public new Step_T_v4[] Step { get; set; }
+        private Step_T_v4[] Step { get; set; }
+        public new Step_T_v4 this[int key] { get => Step[key]; set => Step[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -123,9 +135,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (steps.Count > 0) Step = steps.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -145,10 +160,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class Steps_T_v5 : Steps_T_v4
     {
         [XmlElement("Step")]
-        public new Step_T_v5[] Step { get; set; }
+        private Step_T_v5[] Step { get; set; }
+        public new Step_T_v5 this[int key] { get => Step[key]; set => Step[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -166,9 +183,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (steps.Count > 0) Step = steps.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -188,10 +208,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class Steps_T_v6 : Steps_T_v5
     {
         [XmlElement("Step")]
-        public new Step_T_v6[] Step { get; set; }
+        private Step_T_v6[] Step { get; set; }
+        public new Step_T_v6 this[int key] { get => Step[key]; set => Step[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -209,9 +231,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (steps.Count > 0) Step = steps.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

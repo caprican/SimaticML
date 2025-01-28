@@ -22,10 +22,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
         /// For translated step names
         /// </summary>
         [XmlElement("MultiLanguageText")]
-        public Common.MultiLanguageText_T_v2[] MultiLanguageText { get; set; }
+        protected internal Common.MultiLanguageText_T_v2[] MultiLanguageText { get; set; }
+        public Common.MultiLanguageText_T_v2 this[int key] { get => MultiLanguageText[key]; set => MultiLanguageText[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -35,7 +37,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Access":
+                        case "MultiLanguageText":
                             var text = new Common.MultiLanguageText_T_v2();
                             text.ReadXml(reader);
                             texts.Add(text);
@@ -43,9 +45,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (texts.Count > 0) MultiLanguageText = texts.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

@@ -21,6 +21,7 @@ namespace SimaticML.SW.PlcBlocks.STL
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -38,9 +39,12 @@ namespace SimaticML.SW.PlcBlocks.STL
                     }
                 }
                 if (items.Count > 0) StlStatement = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

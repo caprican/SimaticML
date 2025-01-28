@@ -23,7 +23,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
         [XmlElement("Parameter", typeof(Access.Parameter_T_v2))]
         [XmlElement("Text", typeof(Common.Text_T_v2))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        private Object_G[] Items { get; set; }
+        protected internal Object_G[] Items { get; set; }
         public Object_G this[int key]
         {
             get => Items[key];
@@ -133,7 +133,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
         [XmlElement("Parameter", typeof(Access.Parameter_T_v3))]
         [XmlElement("Text", typeof(Common.Text_T_v2))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        private Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
         public new Object_G this[int key]
         {
             get => Items[key];
@@ -238,7 +238,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
         [XmlElement("Parameter", typeof(Access.Parameter_T_v4))]
         [XmlElement("Text", typeof(Common.Text_T_v2))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        private Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
         public new Object_G this[int key]
         {
             get => Items[key];
@@ -343,7 +343,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
         [XmlElement("Parameter", typeof(Access.Parameter_T_v5))]
         [XmlElement("Text", typeof(Common.Text_T_v2))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        private Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
         public new Object_G this[int key]
         {
             get => Items[key];

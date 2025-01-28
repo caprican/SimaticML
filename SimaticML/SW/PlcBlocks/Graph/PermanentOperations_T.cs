@@ -20,10 +20,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
         public Common.Comment_T Comment { get; set; }
 
         [XmlElement("PermanentOperation")]
-        public PermanentOperation_T[] PermanentOperations { get; set; }
+        protected internal PermanentOperation_T[] PermanentOperations { get; set; }
+        public PermanentOperation_T this[int key] { get => PermanentOperations[key]; set => PermanentOperations[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -49,9 +51,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (operations.Count > 0) PermanentOperations = operations.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -75,10 +80,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
         public new Common.Comment_T_v2 Comment { get; set; }
 
         [XmlElement("PermanentOperation")]
-        public new PermanentOperation_T_v2[] PermanentOperations { get; set; }
+        protected internal new PermanentOperation_T_v2[] PermanentOperations { get; set; }
+        public new PermanentOperation_T_v2 this[int key] { get => PermanentOperations[key]; set => PermanentOperations[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -104,9 +111,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (operations.Count > 0) PermanentOperations = operations.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -126,10 +136,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class PermanentOperations_T_v4 : PermanentOperations_T_v2
     {
         [XmlElement("PermanentOperation")]
-        public new PermanentOperation_T_v4[] PermanentOperations { get; set; }
+        protected internal new PermanentOperation_T_v4[] PermanentOperations { get; set; }
+        public new PermanentOperation_T_v4 this[int key] { get => PermanentOperations[key]; set => PermanentOperations[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -155,9 +167,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (operations.Count > 0) PermanentOperations = operations.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -177,10 +192,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class PermanentOperations_T_v5 : PermanentOperations_T_v4
     {
         [XmlElement("PermanentOperation")]
-        public new PermanentOperation_T_v5[] PermanentOperations { get; set; }
+        protected internal new PermanentOperation_T_v5[] PermanentOperations { get; set; }
+        public new PermanentOperation_T_v5 this[int key] { get => PermanentOperations[key]; set => PermanentOperations[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -206,9 +223,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (operations.Count > 0) PermanentOperations = operations.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -228,10 +248,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     public class PermanentOperations_T_v6 : PermanentOperations_T_v5
     {
         [XmlElement("PermanentOperation")]
-        public new PermanentOperation_T_v6[] PermanentOperations { get; set; }
+        protected internal new PermanentOperation_T_v6[] PermanentOperations { get; set; }
+        public new PermanentOperation_T_v6 this[int key] { get => PermanentOperations[key]; set => PermanentOperations[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -257,9 +279,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (operations.Count > 0) PermanentOperations = operations.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

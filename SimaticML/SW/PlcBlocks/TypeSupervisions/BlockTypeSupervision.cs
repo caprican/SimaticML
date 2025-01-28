@@ -42,12 +42,21 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Type):
+                        Enum.TryParse<Type>(reader.ReadContentAsString(), out var type);
+                        Type = type;
+                        break;
+                }
+            }
 
-            _ = Enum.TryParse<Type>(reader.GetAttribute("Type"), out var type);
-            Type = type;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -84,7 +93,11 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                 }
                 if(conditions.Count > 0) Conditions = conditions.ToArray();
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -106,12 +119,21 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Type):
+                        Enum.TryParse<Type>(reader.ReadContentAsString(), out var type);
+                        Type = type;
+                        break;
+                }
+            }
 
-            _ = Enum.TryParse<Type>(reader.GetAttribute("Type"), out var type);
-            Type = type;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -148,7 +170,11 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                 }
                 if (conditions.Count > 0) Conditions = conditions.ToArray();
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

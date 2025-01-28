@@ -20,12 +20,15 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
-            reader.ReadEndElement();
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

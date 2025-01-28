@@ -22,10 +22,24 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
 
-            Name = reader.GetAttribute("Name");
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                }
+            }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

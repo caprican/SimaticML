@@ -20,6 +20,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -42,7 +43,11 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                 }
                 if (associatedValues.Count > 0) AssociatedValues = associatedValues.ToArray();
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -64,6 +69,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -86,7 +92,11 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                 }
                 if (associatedValues.Count > 0) AssociatedValues = associatedValues.ToArray();
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

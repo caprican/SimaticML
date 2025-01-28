@@ -25,6 +25,7 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -34,19 +35,23 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
                     switch (reader.Name)
                     {
                         case "Number":
+                            Number = reader.ReadElementContentAsInt();
                             break;
                         case "StateStruct":
                             StateStruct = new StateStruct();
                             StateStruct.ReadXml(reader);
                             break;
                         case "BlockTypeSupervisionNumber":
+                            BlockTypeSupervisionNumber = reader.ReadElementContentAsInt();
                             break;
                     }
                 }
-
             }
-            reader.ReadEndElement();
-            throw new NotImplementedException();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

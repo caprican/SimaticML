@@ -29,21 +29,27 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Branch_TE>(reader.GetAttribute("Type"), out var type);
-            Type = type;
-
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
-
-            _ = int.TryParse(reader.GetAttribute("Cardinality"), out var cardinality);
-            Cardinality = cardinality;
-
-            if (!reader.IsEmptyElement)
+            while (reader.MoveToNextAttribute())
             {
-                reader.Read();
-
-                reader.ReadEndElement();
+                switch (reader.LocalName)
+                {
+                    case nameof(Type):
+                        Enum.TryParse<Branch_TE>(reader.ReadContentAsString(), out var type);
+                        Type = type;
+                        break;
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Cardinality):
+                        Cardinality = reader.ReadContentAsInt();
+                        break;
+                }
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

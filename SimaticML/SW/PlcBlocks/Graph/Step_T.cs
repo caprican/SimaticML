@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Threading;
+using System.Security.Cryptography;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -47,19 +47,32 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
-            IsMissing = isMissing;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(IsMissing):
+                        IsMissing = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Init):
+                        Init = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(MaximumStepTime):
+                        MaximumStepTime = reader.ReadContentAsString();
+                        break;
+                    case nameof(WarningTime):
+                        WarningTime = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
-
-            _ = bool.TryParse(reader.GetAttribute("Init"), out var init);
-            Init = init;
-
-            Name = reader.GetAttribute("Name");
-            MaximumStepTime = reader.GetAttribute("MaximumStepTime");
-            WarningTime = reader.GetAttribute("WarningTime");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -88,7 +101,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 }
 
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -120,19 +137,32 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
-            IsMissing = isMissing;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(IsMissing):
+                        IsMissing = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Init):
+                        Init = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(MaximumStepTime):
+                        MaximumStepTime = reader.ReadContentAsString();
+                        break;
+                    case nameof(WarningTime):
+                        WarningTime = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
-
-            _ = bool.TryParse(reader.GetAttribute("Init"), out var init);
-            Init = init;
-
-            Name = reader.GetAttribute("Name");
-            MaximumStepTime = reader.GetAttribute("MaximumStepTime");
-            WarningTime = reader.GetAttribute("WarningTime");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -168,7 +198,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 if (texts.Count > 0) StepName = texts.ToArray();
 
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -195,19 +229,32 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
-            IsMissing = isMissing;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(IsMissing):
+                        IsMissing = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Init):
+                        Init = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(MaximumStepTime):
+                        MaximumStepTime = reader.ReadContentAsString();
+                        break;
+                    case nameof(WarningTime):
+                        WarningTime = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
-
-            _ = bool.TryParse(reader.GetAttribute("Init"), out var init);
-            Init = init;
-
-            Name = reader.GetAttribute("Name");
-            MaximumStepTime = reader.GetAttribute("MaximumStepTime");
-            WarningTime = reader.GetAttribute("WarningTime");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -243,7 +290,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 if (texts.Count > 0) StepName = texts.ToArray();
 
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -270,19 +321,32 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
-            IsMissing = isMissing;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(IsMissing):
+                        IsMissing = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Init):
+                        Init = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(MaximumStepTime):
+                        MaximumStepTime = reader.ReadContentAsString();
+                        break;
+                    case nameof(WarningTime):
+                        WarningTime = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
-
-            _ = bool.TryParse(reader.GetAttribute("Init"), out var init);
-            Init = init;
-
-            Name = reader.GetAttribute("Name");
-            MaximumStepTime = reader.GetAttribute("MaximumStepTime");
-            WarningTime = reader.GetAttribute("WarningTime");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -318,7 +382,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 if (texts.Count > 0) StepName = texts.ToArray();
 
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -346,19 +414,32 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
-            IsMissing = isMissing;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(IsMissing):
+                        IsMissing = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Init):
+                        Init = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(MaximumStepTime):
+                        MaximumStepTime = reader.ReadContentAsString();
+                        break;
+                    case nameof(WarningTime):
+                        WarningTime = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
-
-            _ = bool.TryParse(reader.GetAttribute("Init"), out var init);
-            Init = init;
-
-            Name = reader.GetAttribute("Name");
-            MaximumStepTime = reader.GetAttribute("MaximumStepTime");
-            WarningTime = reader.GetAttribute("WarningTime");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -394,7 +475,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 if (texts.Count > 0) StepName = texts.ToArray();
 
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

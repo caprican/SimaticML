@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -27,9 +25,18 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
-            ProgrammingLanguage = programmingLanguage;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(ProgrammingLanguage):
+                        Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
+                        ProgrammingLanguage = programmingLanguage;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -52,9 +59,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             break;
                     }
                 }
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -81,9 +91,18 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
-            ProgrammingLanguage = programmingLanguage;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(ProgrammingLanguage):
+                        Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
+                        ProgrammingLanguage = programmingLanguage;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -106,9 +125,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             break;
                     }
                 }
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -131,9 +153,18 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
-            ProgrammingLanguage = programmingLanguage;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(ProgrammingLanguage):
+                        Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
+                        ProgrammingLanguage = programmingLanguage;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -156,9 +187,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             break;
                     }
                 }
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -181,9 +215,18 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
-            ProgrammingLanguage = programmingLanguage;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(ProgrammingLanguage):
+                        Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
+                        ProgrammingLanguage = programmingLanguage;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -206,9 +249,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             break;
                     }
                 }
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -231,9 +277,18 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
-            ProgrammingLanguage = programmingLanguage;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(ProgrammingLanguage):
+                        Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
+                        ProgrammingLanguage = programmingLanguage;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -256,9 +311,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             break;
                     }
                 }
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

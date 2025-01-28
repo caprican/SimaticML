@@ -24,7 +24,20 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
         {
             Name = reader.GetAttribute("Name");
 
-            reader.ReadEndElement();
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                }
+            }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

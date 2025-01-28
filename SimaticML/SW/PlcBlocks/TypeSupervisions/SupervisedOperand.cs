@@ -19,7 +19,20 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                }
+            }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

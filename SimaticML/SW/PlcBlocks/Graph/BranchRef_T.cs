@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -34,14 +33,28 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(In):
+                        In = reader.ReadContentAsInt();
+                        InSpecified = true;
+                        break;
+                    case nameof(Out):
+                        Out = reader.ReadContentAsInt();
+                        OutSpecified = true;
+                        break;
+                }
+            }
 
-            InSpecified = int.TryParse(reader.GetAttribute("In"), out var _in);
-            if (InSpecified) In = _in;
-
-            OutSpecified = int.TryParse(reader.GetAttribute("Out"), out var _out);
-            if (OutSpecified) In = _out;
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

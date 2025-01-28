@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Security.Cryptography;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -35,17 +36,27 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
-            IsMissing = isMissing;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(IsMissing):
+                        IsMissing = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(ProgrammingLanguage):
+                        Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
+                        ProgrammingLanguage = programmingLanguage;
+                        break;
+                }
+            }
 
-            Name = reader.GetAttribute("name");
-
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
-
-            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
-            ProgrammingLanguage = programmingLanguage;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -64,9 +75,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             break;
                     }
                 }
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -94,17 +108,27 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
-            IsMissing = isMissing;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(IsMissing):
+                        IsMissing = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(ProgrammingLanguage):
+                        Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
+                        ProgrammingLanguage = programmingLanguage;
+                        break;
+                }
+            }
 
-            Name = reader.GetAttribute("name");
-
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
-
-            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
-            ProgrammingLanguage = programmingLanguage;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -130,8 +154,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (texts.Count > 0) TransitionName = texts.ToArray();
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -154,17 +182,27 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
-            IsMissing = isMissing;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(IsMissing):
+                        IsMissing = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(ProgrammingLanguage):
+                        Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
+                        ProgrammingLanguage = programmingLanguage;
+                        break;
+                }
+            }
 
-            Name = reader.GetAttribute("name");
-
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
-
-            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
-            ProgrammingLanguage = programmingLanguage;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -190,8 +228,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (texts.Count > 0) TransitionName = texts.ToArray();
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -214,17 +256,27 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
-            IsMissing = isMissing;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(IsMissing):
+                        IsMissing = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(ProgrammingLanguage):
+                        Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
+                        ProgrammingLanguage = programmingLanguage;
+                        break;
+                }
+            }
 
-            Name = reader.GetAttribute("name");
-
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
-
-            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
-            ProgrammingLanguage = programmingLanguage;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -250,8 +302,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (texts.Count > 0) TransitionName = texts.ToArray();
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -274,17 +330,27 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("IsMissing"), out var isMissing);
-            IsMissing = isMissing;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(IsMissing):
+                        IsMissing = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+                    case nameof(ProgrammingLanguage):
+                        Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
+                        ProgrammingLanguage = programmingLanguage;
+                        break;
+                }
+            }
 
-            Name = reader.GetAttribute("name");
-
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
-
-            _ = Enum.TryParse<ProgrammingLanguage_TE>(reader.GetAttribute("ProgrammingLanguage"), out var programmingLanguage);
-            ProgrammingLanguage = programmingLanguage;
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -310,8 +376,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     }
                 }
                 if (texts.Count > 0) TransitionName = texts.ToArray();
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

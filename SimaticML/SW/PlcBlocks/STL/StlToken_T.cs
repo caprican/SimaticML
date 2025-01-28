@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 
-using SimaticML.SW.PlcBlocks.Graph;
-
 namespace SimaticML.SW.PlcBlocks.STL
 {
     /// <remarks>
@@ -41,12 +39,23 @@ namespace SimaticML.SW.PlcBlocks.STL
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<STL_TE>(reader.GetAttribute("Text"), out var text);
-            Text = text;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Text):
+                        Enum.TryParse<STL_TE>(reader.ReadContentAsString(), out var text);
+                        Text = text;
+                        break;
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -77,9 +86,12 @@ namespace SimaticML.SW.PlcBlocks.STL
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -114,12 +126,23 @@ namespace SimaticML.SW.PlcBlocks.STL
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<STL_TE>(reader.GetAttribute("Text"), out var text);
-            Text = text;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Text):
+                        Enum.TryParse<STL_TE>(reader.ReadContentAsString(), out var text);
+                        Text = text;
+                        break;
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -161,9 +184,12 @@ namespace SimaticML.SW.PlcBlocks.STL
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -193,12 +219,23 @@ namespace SimaticML.SW.PlcBlocks.STL
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<STL_TE>(reader.GetAttribute("Text"), out var text);
-            Text = text;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Text):
+                        Enum.TryParse<STL_TE>(reader.ReadContentAsString(), out var text);
+                        Text = text;
+                        break;
 
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+                }
+            }
 
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -240,9 +277,12 @@ namespace SimaticML.SW.PlcBlocks.STL
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

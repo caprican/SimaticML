@@ -26,8 +26,21 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Statusword_TE>(reader.GetAttribute("Combination"), out var combination);
-            Combination = combination;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Combination):
+                        Enum.TryParse<Statusword_TE>(reader.ReadContentAsString(), out var combination);
+                        Combination = combination;
+                        break;
+                }
+            }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

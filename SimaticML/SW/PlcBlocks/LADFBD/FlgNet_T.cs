@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 
-using SimaticML.SW.Common;
-
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
     /// <remarks>
@@ -28,6 +26,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -63,9 +62,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     }
                 }
                 if (items.Count > 0) Parts = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -93,6 +95,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -128,9 +131,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     }
                 }
                 if (items.Count > 0) Parts = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -156,6 +162,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -191,9 +198,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     }
                 }
                 if (items.Count > 0) Parts = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -221,6 +231,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
+           reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -256,9 +267,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     }
                 }
                 if (items.Count > 0) Parts = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -284,6 +298,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -319,9 +334,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     }
                 }
                 if (items.Count > 0) Parts = items.ToArray();
-
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

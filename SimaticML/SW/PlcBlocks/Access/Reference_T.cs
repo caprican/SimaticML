@@ -22,10 +22,12 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
         [XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
         [XmlElement("Access", typeof(Access_T_v2), Order = 3)]
-        public Object_G[] Items { get; set; }
+        protected internal Object_G[] Items { get; set; }
+        public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -68,9 +70,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -96,10 +101,12 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
         [XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
         [XmlElement("Access", typeof(Access_T_v3), Order = 3)]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -142,9 +149,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -170,10 +180,12 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
         [XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
         [XmlElement("Access", typeof(Access_T_v4), Order = 3)]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -216,9 +228,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -244,10 +259,12 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
         [XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
         [XmlElement("Access", typeof(Access_T_v5), Order = 3)]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -290,9 +307,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

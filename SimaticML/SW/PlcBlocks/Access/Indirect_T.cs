@@ -15,18 +15,11 @@ namespace SimaticML.SW.PlcBlocks.Access
     [XmlRoot("Indirect", IsNullable = false)]
     public class Indirect_T : Object_G
     {
-        [XmlElement("Comment", typeof(Common.Comment_T))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T))]
-        [XmlElement("Token", typeof(Common.Token_T))]
-        public Object_G[] Items { get; set; }
-
-        public Access_T Access { get; set; }
-
         [XmlAttribute]
         public Width_TE Width { get; set; }
 
         [XmlAttribute]
-        public Area_TE Area { get; set; }
+        public Area_TE? Area { get; set; } = null;
         [XmlIgnore]
         public bool AreaSpecified { get; set; }
 
@@ -38,19 +31,41 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlAttribute]
         public string BitOffset { get; set; }
 
+        [XmlElement("Comment", typeof(Common.Comment_T))]
+        [XmlElement("LineComment", typeof(Common.LineComment_T))]
+        [XmlElement("Token", typeof(Common.Token_T))]
+        protected internal Object_G[] Items { get; set; }
+        public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+
+        public Access_T Access { get; set; }
+
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Width_TE>(reader.GetAttribute("Width"), out var width);
-            Width = width;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Area):
+                        Enum.TryParse<Area_TE>(reader.ReadContentAsString(), out var area);
+                        Area = area;
+                        AreaSpecified = true;
+                        break;
+                    case nameof(Width):
+                        Enum.TryParse<Width_TE>(reader.ReadContentAsString(), out var width);
+                        Width = width;
+                        break;
+                    case nameof(Register):
+                        Enum.TryParse<Register_TE>(reader.ReadContentAsString(), out var register);
+                        Register = register;
+                        RegisterSpecified = true;
+                        break;
+                    case nameof(BitOffset):
+                        BitOffset = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = Enum.TryParse<Area_TE>(reader.GetAttribute("Area"), out var area);
-            Area = area;
-
-            RegisterSpecified = Enum.TryParse<Register_TE>(reader.GetAttribute("Register"), out var register);
-            if(RegisterSpecified) Register = register;
-
-            BitOffset = reader.GetAttribute("BitOffset");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -82,9 +97,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -108,23 +126,38 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public new Access_T_v2 Access { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Width_TE>(reader.GetAttribute("Width"), out var width);
-            Width = width;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Area):
+                        Enum.TryParse<Area_TE>(reader.ReadContentAsString(), out var area);
+                        Area = area;
+                        AreaSpecified = true;
+                        break;
+                    case nameof(Width):
+                        Enum.TryParse<Width_TE>(reader.ReadContentAsString(), out var width);
+                        Width = width;
+                        break;
+                    case nameof(Register):
+                        Enum.TryParse<Register_TE>(reader.ReadContentAsString(), out var register);
+                        Register = register;
+                        RegisterSpecified = true;
+                        break;
+                    case nameof(BitOffset):
+                        BitOffset = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = Enum.TryParse<Area_TE>(reader.GetAttribute("Area"), out var area);
-            Area = area;
-
-            RegisterSpecified = Enum.TryParse<Register_TE>(reader.GetAttribute("Register"), out var register);
-            if (RegisterSpecified) Register = register;
-
-            BitOffset = reader.GetAttribute("BitOffset");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -166,9 +199,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -187,21 +223,37 @@ namespace SimaticML.SW.PlcBlocks.Access
     [XmlRoot("Indirect", IsNullable = false)]
     public class Indirect_T_v3 : Indirect_T_v2
     {
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+
         public new Access_T_v3 Access { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Width_TE>(reader.GetAttribute("Width"), out var width);
-            Width = width;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Area):
+                        Enum.TryParse<Area_TE>(reader.ReadContentAsString(), out var area);
+                        Area = area;
+                        AreaSpecified = true;
+                        break;
+                    case nameof(Width):
+                        Enum.TryParse<Width_TE>(reader.ReadContentAsString(), out var width);
+                        Width = width;
+                        break;
+                    case nameof(Register):
+                        Enum.TryParse<Register_TE>(reader.ReadContentAsString(), out var register);
+                        Register = register;
+                        RegisterSpecified = true;
+                        break;
+                    case nameof(BitOffset):
+                        BitOffset = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = Enum.TryParse<Area_TE>(reader.GetAttribute("Area"), out var area);
-            Area = area;
-
-            RegisterSpecified = Enum.TryParse<Register_TE>(reader.GetAttribute("Register"), out var register);
-            if (RegisterSpecified) Register = register;
-
-            BitOffset = reader.GetAttribute("BitOffset");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -243,9 +295,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -269,23 +324,38 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public new Access_T_v4 Access { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Width_TE>(reader.GetAttribute("Width"), out var width);
-            Width = width;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Area):
+                        Enum.TryParse<Area_TE>(reader.ReadContentAsString(), out var area);
+                        Area = area;
+                        AreaSpecified = true;
+                        break;
+                    case nameof(Width):
+                        Enum.TryParse<Width_TE>(reader.ReadContentAsString(), out var width);
+                        Width = width;
+                        break;
+                    case nameof(Register):
+                        Enum.TryParse<Register_TE>(reader.ReadContentAsString(), out var register);
+                        Register = register;
+                        RegisterSpecified = true;
+                        break;
+                    case nameof(BitOffset):
+                        BitOffset = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = Enum.TryParse<Area_TE>(reader.GetAttribute("Area"), out var area);
-            Area = area;
-
-            RegisterSpecified = Enum.TryParse<Register_TE>(reader.GetAttribute("Register"), out var register);
-            if (RegisterSpecified) Register = register;
-
-            BitOffset = reader.GetAttribute("BitOffset");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -327,9 +397,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -348,20 +421,37 @@ namespace SimaticML.SW.PlcBlocks.Access
     [XmlRoot("Indirect", IsNullable = false)]
     public class Indirect_T_v5 : Indirect_T_v4
     {
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+
         public new Access_T_v5 Access { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<Width_TE>(reader.GetAttribute("Width"), out var width);
-            Width = width;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Area):
+                        Enum.TryParse<Area_TE>(reader.ReadContentAsString(), out var area);
+                        Area = area;
+                        AreaSpecified = true;
+                        break;
+                    case nameof(Width):
+                        Enum.TryParse<Width_TE>(reader.ReadContentAsString(), out var width);
+                        Width = width;
+                        break;
+                    case nameof(Register):
+                        Enum.TryParse<Register_TE>(reader.ReadContentAsString(), out var register);
+                        Register = register;
+                        RegisterSpecified = true;
+                        break;
+                    case nameof(BitOffset):
+                        BitOffset = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = Enum.TryParse<Area_TE>(reader.GetAttribute("Area"), out var area);
-            Area = area;
-
-            RegisterSpecified = Enum.TryParse<Register_TE>(reader.GetAttribute("Register"), out var register);
-            if (RegisterSpecified) Register = register;
-
-            BitOffset = reader.GetAttribute("BitOffset");
+            reader.MoveToContent();
 
             if (!reader.IsEmptyElement)
             {
@@ -404,9 +494,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

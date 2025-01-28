@@ -24,6 +24,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -42,7 +43,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 }
                 if(branchs.Count == 0) Branchs = branchs.ToArray();
             }
-            reader.ReadEndElement();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

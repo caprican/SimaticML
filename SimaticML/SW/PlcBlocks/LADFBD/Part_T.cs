@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
-
-using SimaticML.SW.PlcBlocks.Graph;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
@@ -52,15 +49,26 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("DisabledENO"), out var disable);
-            DisabledENO = disable;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(DisabledENO):
+                        DisabledENO = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof (Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            UId = uId;
-
-            Name = reader.GetAttribute("Name");
-            Version = reader.GetAttribute("Version");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -113,9 +121,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 if (typeds.Count > 0) AutomaticTyped = typeds.ToArray();
                 if (invisibles.Count > 0) Invisible = invisibles.ToArray();
                 if (negateds.Count > 0) Negated = negateds.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -145,15 +156,26 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("DisabledENO"), out var disable);
-            DisabledENO = disable;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(DisabledENO):
+                        DisabledENO = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            UId = uId;
-
-            Name = reader.GetAttribute("Name");
-            Version = reader.GetAttribute("Version");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -206,9 +228,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 if (typeds.Count > 0) AutomaticTyped = typeds.ToArray();
                 if (invisibles.Count > 0) Invisible = invisibles.ToArray();
                 if (negateds.Count > 0) Negated = negateds.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -233,15 +258,26 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("DisabledENO"), out var disable);
-            DisabledENO = disable;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(DisabledENO):
+                        DisabledENO = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            UId = uId;
-
-            Name = reader.GetAttribute("Name");
-            Version = reader.GetAttribute("Version");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -294,9 +330,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 if (typeds.Count > 0) AutomaticTyped = typeds.ToArray();
                 if (invisibles.Count > 0) Invisible = invisibles.ToArray();
                 if (negateds.Count > 0) Negated = negateds.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -321,15 +360,26 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("DisabledENO"), out var disable);
-            DisabledENO = disable;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(DisabledENO):
+                        DisabledENO = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            UId = uId;
-
-            Name = reader.GetAttribute("Name");
-            Version = reader.GetAttribute("Version");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -382,9 +432,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 if (typeds.Count > 0) AutomaticTyped = typeds.ToArray();
                 if (invisibles.Count > 0) Invisible = invisibles.ToArray();
                 if (negateds.Count > 0) Negated = negateds.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -409,15 +462,26 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = bool.TryParse(reader.GetAttribute("DisabledENO"), out var disable);
-            DisabledENO = disable;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(DisabledENO):
+                        DisabledENO = reader.ReadContentAsBoolean();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(Version):
+                        Version = reader.ReadContentAsString();
+                        break;
+                }
+            }
 
-            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            UId = uId;
-
-            Name = reader.GetAttribute("Name");
-            Version = reader.GetAttribute("Version");
-
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -470,9 +534,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 if (typeds.Count > 0) AutomaticTyped = typeds.ToArray();
                 if (invisibles.Count > 0) Invisible = invisibles.ToArray();
                 if (negateds.Count > 0) Negated = negateds.ToArray();
-
-                reader.ReadEndElement();
             }
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

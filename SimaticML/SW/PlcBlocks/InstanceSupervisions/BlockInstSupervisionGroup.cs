@@ -20,11 +20,14 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     {
         public Multiinstance Multiinstance { get; set; }
 
+        [XmlArray("BlockInstSupervision")]
         [XmlElement("BlockInstSupervision")]
-        public BlockInstSupervision[] BlockInstSupervision { get; set; }
+        protected internal BlockInstSupervision[] BlockInstSupervisions { get; set; }
+        public BlockInstSupervision this[int key] { get => BlockInstSupervisions[key]; set => BlockInstSupervisions[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
+            reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
@@ -44,10 +47,13 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
                             break;
                     }
                 }
-                if(blocks.Count > 0) BlockInstSupervision = blocks.ToArray();
+                if(blocks.Count > 0) BlockInstSupervisions = blocks.ToArray();
             }
-            reader.ReadEndElement();
-            throw new NotImplementedException();
+
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)

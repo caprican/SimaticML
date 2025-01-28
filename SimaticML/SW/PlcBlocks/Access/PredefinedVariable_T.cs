@@ -25,11 +25,24 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<PredefinedVariable_TE>(reader.GetAttribute("Name"), out var name);
-            Name = name;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Name):
+                        Enum.TryParse<PredefinedVariable_TE>(reader.ReadContentAsString(), out var name);
+                        Name = name;
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        break;
+                }
+            }
 
-            _ = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            UId = uId;
+            if (reader.IsStartElement())
+                reader.Read();
+            else
+                reader.ReadEndElement();
         }
 
         public override void WriteXml(XmlWriter writer)
