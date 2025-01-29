@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -13,7 +14,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T : Object_G
+    public class Actions_T : Object_G, IEnumerable<Action_T>
     {
         public Common.Comment_T Title { get; set; }
 
@@ -57,6 +58,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Action_T> GetEnumerator()
+        {
+            foreach (var item in Actions)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -67,7 +78,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v2 : Actions_T
+    public class Actions_T_v2 : Actions_T, IEnumerable<Action_T_v2>
     {
         public new Common.Comment_T_v2 Title { get; set; }
 
@@ -111,6 +122,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Action_T_v2> GetEnumerator()
+        {
+            foreach (var item in Actions)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -121,7 +142,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v4 : Actions_T_v2
+    public class Actions_T_v4 : Actions_T_v2, IEnumerable<Action_T_v4>
     {
         [XmlElement("Action")]
         protected internal new Action_T_v4[] Actions { get; set; }
@@ -163,6 +184,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Action_T_v4> GetEnumerator()
+        {
+            foreach (var item in Actions)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -173,7 +204,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v5 : Actions_T_v4
+    public class Actions_T_v5 : Actions_T_v4, IEnumerable<Action_T_v5>
     {
         [XmlElement("Action")]
         protected internal new Action_T_v5[] Actions { get; set; }
@@ -215,6 +246,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Action_T_v5> GetEnumerator()
+        {
+            foreach (var item in Actions)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -225,7 +266,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v6 : Actions_T_v5
+    public class Actions_T_v6 : Actions_T_v5, IEnumerable<Action_T_v6>
     {
         [XmlElement("Action")]
         protected internal new Action_T_v6[] Actions { get; set; }
@@ -267,5 +308,15 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Action_T_v6> GetEnumerator()
+        {
+            foreach (var item in Actions)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

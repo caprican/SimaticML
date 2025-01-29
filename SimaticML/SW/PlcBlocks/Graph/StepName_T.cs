@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -16,14 +17,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("StepName", IsNullable = false)]
-    public class StepName_T : Object_G
+    public class StepName_T : Object_G, IEnumerable<Common.MultiLanguageText_T_v2>
     {
         /// <summary>
         /// For translated step names
         /// </summary>
         [XmlElement("MultiLanguageText")]
-        protected internal Common.MultiLanguageText_T_v2[] MultiLanguageText { get; set; }
-        public Common.MultiLanguageText_T_v2 this[int key] { get => MultiLanguageText[key]; set => MultiLanguageText[key] = value; }
+        protected internal Common.MultiLanguageText_T_v2[] Texts { get; set; }
+        public Common.MultiLanguageText_T_v2 this[int key] { get => Texts[key]; set => Texts[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -44,7 +45,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             break;
                     }
                 }
-                if (texts.Count > 0) MultiLanguageText = texts.ToArray();
+                if (texts.Count > 0) Texts = texts.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -57,5 +58,15 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Common.MultiLanguageText_T_v2> GetEnumerator()
+        {
+            foreach (var item in Texts)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

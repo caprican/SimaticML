@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -17,14 +18,15 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Wire", IsNullable = false)]
-    public class Wire_T : Object_G
+    public class Wire_T : Object_G, IEnumerable<Object_G>
     {
         [XmlElement("IdentCon", typeof(IdentCon_T))]
         [XmlElement("NameCon", typeof(NameCon_T))]
         [XmlElement("OpenCon", typeof(OpenCon_T))]
         [XmlElement("Openbranch", typeof(Openbranch_T))]
         [XmlElement("Powerrail", typeof(Powerrail_T))]
-        public Object_G[] Items { get; set; }
+        protected internal Object_G[] Items { get; set; }
+        public Object_G this[int index] { get => Items[index]; set => Items[index] = value; }
 
         [XmlAttribute]
         public int UId { get; set; }
@@ -91,5 +93,15 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

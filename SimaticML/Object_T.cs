@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace SimaticML
 {
     [Serializable]
-    public class Object_T
+    public class Object_T : IEnumerable<Object_T>
     {
         [XmlAttribute]
         public string ID { get; set; }
@@ -19,11 +21,16 @@ namespace SimaticML
         [XmlArrayItem("SW.Blocks.CompileUnit", typeof(SW.Blocks.CompileUnit))]
         [XmlArrayItem("MultilingualTextItem", typeof(MultilingualTextItem_T))]
         protected internal Object_T[] Items { get; set; }
-        public Object_T this[int key] 
-        { 
-            get => Items[key]; 
-            set => Items[key] = value; 
+        public Object_T this[int key]  {  get => Items[key];  set => Items[key] = value;  }
+
+        public IEnumerator<Object_T> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
         }
 
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

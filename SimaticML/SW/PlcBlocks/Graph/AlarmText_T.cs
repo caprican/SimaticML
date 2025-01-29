@@ -19,7 +19,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
         /// Temporary change for enable of empty alarm text because of the graph alarm handling reconstruction.
         /// </summary>
         [XmlElement("MultiLanguageText")]
-        public Common.MultiLanguageText_T[] MultiLanguageTexts { get; set; }
+        public Common.MultiLanguageText_T[] Texts { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -39,7 +39,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             break;
                     }
                 }
-                if(texts.Count > 0) MultiLanguageTexts = texts.ToArray();
+                if(texts.Count > 0) Texts = texts.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -71,7 +71,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
         /// Temporary change for enable of empty alarm text because of the graph alarm handling reconstruction.
         /// </summary>
         [XmlElement("MultiLanguageText")]
-        public new Common.MultiLanguageText_T_v2[] MultiLanguageTexts { get; set; }
+        public new Common.MultiLanguageText_T_v2[] Texts { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -91,7 +91,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             break;
                     }
                 }
-                if (texts.Count > 0) MultiLanguageTexts = texts.ToArray();
+                if (texts.Count > 0) Texts = texts.ToArray();
             }
 
             if (reader.IsStartElement())

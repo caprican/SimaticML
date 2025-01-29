@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -10,7 +11,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T : Object_G
+    public class StlStatement_T : Object_G, IEnumerable<Object_G>
     {
         [XmlElement("Comment", typeof(Common.Comment_T), Order = 0 | 3)]
         [XmlElement("LineComment", typeof(Common.LineComment_T), Order = 0 | 3)]
@@ -91,6 +92,16 @@ namespace SimaticML.SW.PlcBlocks.STL
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach(var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -98,7 +109,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T_v2 : StlStatement_T
+    public class StlStatement_T_v2 : StlStatement_T, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
         [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
@@ -183,6 +194,16 @@ namespace SimaticML.SW.PlcBlocks.STL
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -190,7 +211,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T_v3 : StlStatement_T_v2
+    public class StlStatement_T_v3 : StlStatement_T_v2, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
         [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
@@ -275,6 +296,16 @@ namespace SimaticML.SW.PlcBlocks.STL
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -282,7 +313,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T_v4 : StlStatement_T_v2
+    public class StlStatement_T_v4 : StlStatement_T_v2, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
         [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
@@ -367,6 +398,16 @@ namespace SimaticML.SW.PlcBlocks.STL
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -374,7 +415,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T_v5 : StlStatement_T_v4
+    public class StlStatement_T_v5 : StlStatement_T_v4, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
         [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
@@ -459,5 +500,15 @@ namespace SimaticML.SW.PlcBlocks.STL
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

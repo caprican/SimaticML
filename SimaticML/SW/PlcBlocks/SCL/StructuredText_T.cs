@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -13,7 +14,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
     /// </remarks>
     [Serializable]
     [XmlRoot("StructuredText", IsNullable = false)]
-    public class StructuredText_T : Object_G
+    public class StructuredText_T : Object_G, IEnumerable<Object_G>
     {
         [XmlElement("Access", typeof(Access.Access_T_v2))]
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -24,11 +25,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
         [XmlElement("Text", typeof(Common.Text_T_v2))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
         protected internal Object_G[] Items { get; set; }
-        public Object_G this[int key]
-        {
-            get => Items[key];
-            set => Items[key] = value;
-        }
+        public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         public int? UId { get; set; } = null;
@@ -113,6 +110,16 @@ namespace SimaticML.SW.PlcBlocks.SCL
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -123,7 +130,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
     /// </remarks>
     [Serializable]
     [XmlRoot("StructuredText", IsNullable = false)]
-    public class StructuredText_T_v2 : StructuredText_T
+    public class StructuredText_T_v2 : StructuredText_T, IEnumerable<Object_G>
     {
         [XmlElement("Access", typeof(Access.Access_T_v3))]
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -134,11 +141,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
         [XmlElement("Text", typeof(Common.Text_T_v2))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
         protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key]
-        {
-            get => Items[key];
-            set => Items[key] = value;
-        }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -218,6 +221,16 @@ namespace SimaticML.SW.PlcBlocks.SCL
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -228,7 +241,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
     /// </remarks>
     [Serializable]
     [XmlRoot("StructuredText", IsNullable = false)]
-    public class StructuredText_T_v3 : StructuredText_T_v2
+    public class StructuredText_T_v3 : StructuredText_T_v2, IEnumerable<Object_G>
     {
         [XmlElement("Access", typeof(Access.Access_T_v4))]
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -239,11 +252,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
         [XmlElement("Text", typeof(Common.Text_T_v2))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
         protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key]
-        {
-            get => Items[key];
-            set => Items[key] = value;
-        }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -323,6 +332,16 @@ namespace SimaticML.SW.PlcBlocks.SCL
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -333,7 +352,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
     /// </remarks>
     [Serializable]
     [XmlRoot("StructuredText", IsNullable = false)]
-    public class StructuredText_T_v4 : StructuredText_T_v3
+    public class StructuredText_T_v4 : StructuredText_T_v3, IEnumerable<Object_G>
     {
         [XmlElement("Access", typeof(Access.Access_T_v5))]
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -344,11 +363,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
         [XmlElement("Text", typeof(Common.Text_T_v2))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]
         protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key]
-        {
-            get => Items[key];
-            set => Items[key] = value;
-        }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -428,5 +443,15 @@ namespace SimaticML.SW.PlcBlocks.SCL
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

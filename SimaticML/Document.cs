@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Schema;
@@ -9,7 +10,7 @@ namespace SimaticML
     [Serializable]
     //[XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class Document : IXmlSerializable
+    public class Document : IXmlSerializable, IEnumerable<Object_T>
     {
         public Engineering Engineering { get; set; }
 
@@ -30,11 +31,7 @@ namespace SimaticML
         [XmlElement("SW.WatchAndForceTables.PlcWatchTable", typeof(SW.WatchAndForceTables.PlcWatchTable))]
         private Object_T[] Items { get; set; }
 
-        public Object_T this[int key] 
-        { 
-            get => Items[key]; 
-            set => Items[key] = value; 
-        }
+        public Object_T this[int key]  {  get => Items[key];  set => Items[key] = value;  }
 
         public XmlSchema GetSchema() => null;
 
@@ -128,5 +125,16 @@ namespace SimaticML
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_T> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
+
     }
 }

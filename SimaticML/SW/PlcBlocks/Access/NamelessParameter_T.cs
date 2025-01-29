@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -13,7 +14,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("NamelessParameter", IsNullable = false)]
-    public class NamelessParameter_T : Object_G
+    public class NamelessParameter_T : Object_G, IEnumerable<Object_G>
     {
         [XmlAttribute]
         public int? UId { get; set; } = null;
@@ -113,6 +114,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -123,7 +134,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("NamelessParameter", IsNullable = false)]
-    public class NamelessParameter_T_v3 : NamelessParameter_T
+    public class NamelessParameter_T_v3 : NamelessParameter_T, IEnumerable<Object_G>
     {
         [XmlElement("Access", typeof(Access_T_v3))]
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -210,6 +221,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -220,7 +241,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("NamelessParameter", IsNullable = false)]
-    public class NamelessParameter_T_v4 : NamelessParameter_T_v3
+    public class NamelessParameter_T_v4 : NamelessParameter_T_v3, IEnumerable<Object_G>
     {
         [XmlElement("Access", typeof(Access_T_v4))]
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -307,6 +328,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -317,7 +348,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("NamelessParameter", IsNullable = false)]
-    public class NamelessParameter_T_v5 : NamelessParameter_T_v4
+    public class NamelessParameter_T_v5 : NamelessParameter_T_v4, IEnumerable<Object_G>
     {
         [XmlElement("Access", typeof(Access_T_v5))]
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -404,5 +435,15 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

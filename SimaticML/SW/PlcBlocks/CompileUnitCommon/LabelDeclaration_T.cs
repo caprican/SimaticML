@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -13,7 +14,7 @@ namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
     /// </remarks>
     [Serializable]
     [XmlRoot("LabelDeclaration", IsNullable = false)]
-    public class LabelDeclaration_T : Object_G
+    public class LabelDeclaration_T : Object_G, IEnumerable<Object_G>
     {
         [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T), Order = 0)]             // for NumBLs. NumBLs is informative
         [XmlElement("Label", typeof(Access.Label_T), Order = 1)]
@@ -94,6 +95,16 @@ namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -105,7 +116,7 @@ namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
     /// </remarks>
     [Serializable]
     [XmlRoot("LabelDeclaration", IsNullable = false)]
-    public class LabelDeclaration_T_v2 : LabelDeclaration_T
+    public class LabelDeclaration_T_v2 : LabelDeclaration_T, IEnumerable<Object_G>
     {
         [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), Order = 0)]     // for NumBLs. NumBLs is informative
         [XmlElement("Label", typeof(Access.Label_T_v2), Order = 1)]
@@ -190,6 +201,16 @@ namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -201,7 +222,7 @@ namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
     /// </remarks>
     [Serializable]
     [XmlRoot("LabelDeclaration", IsNullable = false)]
-    public class LabelDeclaration_T_v4 : LabelDeclaration_T_v2
+    public class LabelDeclaration_T_v4 : LabelDeclaration_T_v2, IEnumerable<Object_G>
     {
         [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), Order = 0)]     // for NumBLs. NumBLs is informative
         [XmlElement("Label", typeof(Access.Label_T_v4), Order = 1)]
@@ -286,5 +307,15 @@ namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

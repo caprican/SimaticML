@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -16,7 +17,7 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class BlockInstSupervisionGroup : Object_G
+    public class BlockInstSupervisionGroup : Object_G, IEnumerable<BlockInstSupervision>
     {
         public Multiinstance Multiinstance { get; set; }
 
@@ -60,5 +61,15 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<BlockInstSupervision> GetEnumerator()
+        {
+            foreach (var item in BlockInstSupervisions)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

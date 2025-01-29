@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml;
@@ -14,7 +15,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("LineComment", IsNullable = false)]
-    public class LineComment_T : Comment_G
+    public class LineComment_T : Comment_G, IEnumerable<Object_G>
     {
         /// <summary>
         /// For NumBLs in STL. NumBLs is the count of the blank spaces before the actual text in the LineComment.
@@ -33,7 +34,7 @@ namespace SimaticML.SW.Common
         /// the value of the comment
         /// </summary>
         [XmlElement("Text", typeof(Text_T))]
-        private Object_G[] Items { get; set; }
+        protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
@@ -82,6 +83,16 @@ namespace SimaticML.SW.Common
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -92,7 +103,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("LineComment", IsNullable = false)]
-    public class LineComment_T_v2 : LineComment_T
+    public class LineComment_T_v2 : LineComment_T, IEnumerable<Object_G>
     {
         /// <summary>
         /// For NumBLs in STL. NumBLs is the count of the blank spaces before the actual text in the LineComment.
@@ -104,7 +115,7 @@ namespace SimaticML.SW.Common
         /// the value of the comment
         /// </summary>
         [XmlElement("Text", typeof(Text_T_v2))]
-        private Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
         public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
@@ -169,6 +180,16 @@ namespace SimaticML.SW.Common
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -178,14 +199,14 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("LineComment", IsNullable = false)]
-    public class LineComment_T_v3 : LineComment_T_v2
+    public class LineComment_T_v3 : LineComment_T_v2, IEnumerable<Object_G>
     {
         /// <summary>
         /// the value of the comment
         /// </summary>
         [XmlElement("Comment", typeof(Comment_T_v2))]
         [XmlElement("Text", typeof(Text_T_v2))]
-        private Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
         public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
@@ -246,5 +267,15 @@ namespace SimaticML.SW.Common
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

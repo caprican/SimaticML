@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -13,7 +14,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Indirect", IsNullable = false)]
-    public class Indirect_T : Object_G
+    public class Indirect_T : Object_G, IEnumerable<Object_G>
     {
         [XmlAttribute]
         public Width_TE Width { get; set; }
@@ -109,6 +110,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -119,7 +130,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Indirect", IsNullable = false)]
-    public class Indirect_T_v2 : Indirect_T
+    public class Indirect_T_v2 : Indirect_T, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T))]
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
@@ -211,6 +222,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -221,7 +242,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Indirect", IsNullable = false)]
-    public class Indirect_T_v3 : Indirect_T_v2
+    public class Indirect_T_v3 : Indirect_T_v2, IEnumerable<Object_G>
     {
         public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -307,6 +328,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -317,7 +348,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Indirect", IsNullable = false)]
-    public class Indirect_T_v4 : Indirect_T_v3
+    public class Indirect_T_v4 : Indirect_T_v3, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T))]
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
@@ -409,6 +440,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -419,7 +460,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Indirect", IsNullable = false)]
-    public class Indirect_T_v5 : Indirect_T_v4
+    public class Indirect_T_v5 : Indirect_T_v4, IEnumerable<Object_G>
     {
         public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -506,5 +547,15 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

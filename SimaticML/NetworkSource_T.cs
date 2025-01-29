@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Schema;
@@ -7,18 +8,14 @@ using System.Xml.Serialization;
 namespace SimaticML
 {
     [Serializable]
-    public class NetworkSource_T : IXmlSerializable
+    public class NetworkSource_T : IXmlSerializable, IEnumerable<SW.PlcBlocks.SCL.StructuredText_T>
     {
         [XmlArray("StructuredText")]
         [XmlElement(Type = typeof(SW.PlcBlocks.SCL.StructuredText_T_v2), ElementName = "StructuredText", Namespace = "http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v2")]
         [XmlElement(Type = typeof(SW.PlcBlocks.SCL.StructuredText_T_v3), ElementName = "StructuredText", Namespace = "http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3")]
         [XmlElement(Type = typeof(SW.PlcBlocks.SCL.StructuredText_T_v4), ElementName = "StructuredText", Namespace = "http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v4")]
         private SW.PlcBlocks.SCL.StructuredText_T[] StructuredTexts { get; set; }
-        public SW.PlcBlocks.SCL.StructuredText_T this[int key]
-        {
-            get => StructuredTexts[key];
-            set => StructuredTexts[key] = value;
-        }
+        public SW.PlcBlocks.SCL.StructuredText_T this[int key] { get => StructuredTexts[key]; set => StructuredTexts[key] = value; }
 
         public XmlSchema GetSchema() => null;
 
@@ -67,5 +64,15 @@ namespace SimaticML
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<SW.PlcBlocks.SCL.StructuredText_T> GetEnumerator()
+        {
+            foreach (var item in StructuredTexts)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

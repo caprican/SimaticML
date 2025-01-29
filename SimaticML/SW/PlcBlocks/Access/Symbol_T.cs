@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -13,7 +14,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Symbol", IsNullable = false)]
-    public class Symbol_T : Object_G
+    public class Symbol_T : Object_G, IEnumerable<Object_G>
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         [XmlElement("Component", typeof(Component_T))]
@@ -21,12 +22,8 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T))]
         [XmlElement("LineComment", typeof(Common.LineComment_T))]
         [XmlElement("Address", typeof(Address_T))]                              // additional address for a symbol. it is informative
-        private Object_G[] Items { get; set; }
-        public Object_G this[int key]
-        {
-            get => Items[key];
-            set => Items[key] = value;
-        }
+        protected internal Object_G[] Items { get; set; }
+        public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         /// <summary>
         /// Not allowed in STL
@@ -114,6 +111,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -124,7 +131,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Symbol", IsNullable = false)]
-    public class Symbol_T_v2 : Symbol_T
+    public class Symbol_T_v2 : Symbol_T, IEnumerable<Object_G>
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         [XmlElement("Access", typeof(Access_T_v2))]
@@ -135,12 +142,8 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]                        // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        private Object_G[] Items { get; set; }
-        public new Object_G this[int key]
-        {
-            get => Items[key];
-            set => Items[key] = value;
-        }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         public new Scope_TE_v2 Scope { get; set; }
@@ -233,6 +236,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -243,7 +256,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Symbol", IsNullable = false)]
-    public class Symbol_T_v3 : Symbol_T_v2
+    public class Symbol_T_v3 : Symbol_T_v2, IEnumerable<Object_G>
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         [XmlElement("Access", typeof(Access_T_v3))]
@@ -254,12 +267,8 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]                        // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        private Object_G[] Items { get; set; }
-        public new Object_G this[int key]
-        {
-            get => Items[key];
-            set => Items[key] = value;
-        }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         public new Scope_TE_v2 Scope { get; set; }
@@ -362,7 +371,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Symbol", IsNullable = false)]
-    public class Symbol_T_v4 : Symbol_T_v3
+    public class Symbol_T_v4 : Symbol_T_v3, IEnumerable<Object_G>
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         [XmlElement("Access", typeof(Access_T_v4))]
@@ -373,12 +382,8 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]                        // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        private Object_G[] Items { get; set; }
-        public new Object_G this[int key]
-        {
-            get => Items[key];
-            set => Items[key] = value;
-        }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -468,6 +473,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -478,7 +493,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Symbol", IsNullable = false)]
-    public class Symbol_T_v5 : Symbol_T_v4
+    public class Symbol_T_v5 : Symbol_T_v4, IEnumerable<Object_G>
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         [XmlElement("Access", typeof(Access_T_v5))]
@@ -489,12 +504,8 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
         [XmlElement("Token", typeof(Common.Token_T_v2))]                        // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        private Object_G[] Items { get; set; }
-        public new Object_G this[int key]
-        {
-            get => Items[key];
-            set => Items[key] = value;
-        }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         public new Scope_TE_v5 Scope { get; set; }
@@ -587,5 +598,15 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

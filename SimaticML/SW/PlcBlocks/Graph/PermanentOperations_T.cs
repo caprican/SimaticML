@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -13,7 +14,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PostOperations", IsNullable = false)]
-    public class PermanentOperations_T : Object_G
+    public class PermanentOperations_T : Object_G, IEnumerable<PermanentOperation_T>
     {
         public Common.Comment_T Title { get; set; }
 
@@ -63,6 +64,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<PermanentOperation_T> GetEnumerator()
+        {
+            foreach (var item in PermanentOperations)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -73,7 +84,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PostOperations", IsNullable = false)]
-    public class PermanentOperations_T_v2 : PermanentOperations_T
+    public class PermanentOperations_T_v2 : PermanentOperations_T, IEnumerable<PermanentOperation_T_v2>
     {
         public new Common.Comment_T_v2 Title { get; set; }
 
@@ -123,6 +134,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<PermanentOperation_T_v2> GetEnumerator()
+        {
+            foreach (var item in PermanentOperations)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -133,7 +154,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PostOperations", IsNullable = false)]
-    public class PermanentOperations_T_v4 : PermanentOperations_T_v2
+    public class PermanentOperations_T_v4 : PermanentOperations_T_v2, IEnumerable<PermanentOperation_T_v4>
     {
         [XmlElement("PermanentOperation")]
         protected internal new PermanentOperation_T_v4[] PermanentOperations { get; set; }
@@ -179,6 +200,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<PermanentOperation_T_v4> GetEnumerator()
+        {
+            foreach (var item in PermanentOperations)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -189,7 +220,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PostOperations", IsNullable = false)]
-    public class PermanentOperations_T_v5 : PermanentOperations_T_v4
+    public class PermanentOperations_T_v5 : PermanentOperations_T_v4, IEnumerable<PermanentOperation_T_v5>
     {
         [XmlElement("PermanentOperation")]
         protected internal new PermanentOperation_T_v5[] PermanentOperations { get; set; }
@@ -235,6 +266,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<PermanentOperation_T_v5> GetEnumerator()
+        {
+            foreach (var item in PermanentOperations)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -245,7 +286,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PostOperations", IsNullable = false)]
-    public class PermanentOperations_T_v6 : PermanentOperations_T_v5
+    public class PermanentOperations_T_v6 : PermanentOperations_T_v5, IEnumerable<PermanentOperation_T_v6>
     {
         [XmlElement("PermanentOperation")]
         protected internal new PermanentOperation_T_v6[] PermanentOperations { get; set; }
@@ -291,5 +332,15 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<PermanentOperation_T_v6> GetEnumerator()
+        {
+            foreach (var item in PermanentOperations)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

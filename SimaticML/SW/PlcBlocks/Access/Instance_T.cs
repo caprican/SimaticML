@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -13,7 +14,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instance", IsNullable=false)]
-    public class Instance_T : Object_G
+    public class Instance_T : Object_G, IEnumerable<Object_G>
     {
         [XmlAttribute]
         public Scope_TE Scope { get; set; }
@@ -107,6 +108,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -117,7 +128,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instance", IsNullable = false)]
-    public class Instance_T_v2 : Instance_T
+    public class Instance_T_v2 : Instance_T, IEnumerable<Object_G>
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         [XmlElement("Address", typeof(Address_T_v2))]                           // additional address for a symbol. it is informative
@@ -215,6 +226,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -225,7 +246,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instance", IsNullable = false)]
-    public class Instance_T_v3 : Instance_T_v2
+    public class Instance_T_v3 : Instance_T_v2, IEnumerable<Object_G>
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         [XmlElement("Address", typeof(Address_T_v2))]                           // additional address for a symbol. it is informative
@@ -320,6 +341,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -330,7 +361,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instance", IsNullable = false)]
-    public class Instance_T_v4 : Instance_T_v3
+    public class Instance_T_v4 : Instance_T_v3, IEnumerable<Object_G>
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         [XmlElement("Address", typeof(Address_T_v2))]                           // additional address for a symbol. it is informative
@@ -425,6 +456,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -435,7 +476,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instance", IsNullable = false)]
-    public class Instance_T_v5 : Instance_T_v4
+    public class Instance_T_v5 : Instance_T_v4, IEnumerable<Object_G>
     {
         [XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         [XmlElement("Address", typeof(Address_T_v2))]                           // additional address for a symbol. it is informative
@@ -533,5 +574,15 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

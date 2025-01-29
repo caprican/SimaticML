@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -10,7 +11,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlToken", IsNullable = false)]
-    public class StlToken_T : Object_G
+    public class StlToken_T : Object_G, IEnumerable<Object_G>
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative
@@ -19,7 +20,8 @@ namespace SimaticML.SW.PlcBlocks.STL
 
         [XmlElement("Comment", typeof(Common.Comment_T))]
         [XmlElement("LineComment", typeof(Common.LineComment_T))]
-        public Object_G[] Items { get; set; }
+        protected internal Object_G[] Items { get; set; }
+        public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         /// <summary>
         /// e.g 0 1 for NOP 0, NOP 1; STW for L STW or DILG for L DILG; only if separated by comment
@@ -98,6 +100,16 @@ namespace SimaticML.SW.PlcBlocks.STL
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -106,7 +118,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlToken", IsNullable = false)]
-    public class StlToken_T_v2 : StlToken_T
+    public class StlToken_T_v2 : StlToken_T, IEnumerable<Object_G>
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative
@@ -117,7 +129,8 @@ namespace SimaticML.SW.PlcBlocks.STL
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         /// <summary>
         /// e.g 0 1 for NOP 0, NOP 1; STW for L STW or DILG for L DILG; only if separated by comment
@@ -196,6 +209,16 @@ namespace SimaticML.SW.PlcBlocks.STL
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -204,7 +227,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlToken", IsNullable = false)]
-    public class StlToken_T_v4 : StlToken_T_v2
+    public class StlToken_T_v4 : StlToken_T_v2, IEnumerable<Object_G>
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative
@@ -215,7 +238,8 @@ namespace SimaticML.SW.PlcBlocks.STL
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new Object_G[] Items { get; set; }
+        protected internal new Object_G[] Items { get; set; }
+        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -289,5 +313,15 @@ namespace SimaticML.SW.PlcBlocks.STL
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

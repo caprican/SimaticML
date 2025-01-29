@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -21,7 +22,7 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
+            Name = reader.ReadContentAsString();
         }
 
         public override void WriteXml(XmlWriter writer)
@@ -40,7 +41,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Label", IsNullable = false)]
-    public class Label_T_v2 : Label_T
+    public class Label_T_v2 : Label_T, IEnumerable<Object_G>
     {
         public Common.BooleanAttribute_T_v2 BooleanAttribute { get; set; }
 
@@ -124,6 +125,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <summary>SCL only</summary>
@@ -136,7 +147,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Label", IsNullable = false)]
-    public class Label_T_v4 : Label_T_v2
+    public class Label_T_v4 : Label_T_v2, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T))]
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
@@ -211,5 +222,15 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml;
@@ -14,7 +15,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("Comment", IsNullable = false)]
-    public class Comment_T : Comment_G
+    public class Comment_T : Comment_G, IEnumerable<MultiLanguageText_T>
     {
         /// <summary>
         /// Denotes if the comment is at the end of the line (using //) or inside the line (using /* */)
@@ -37,7 +38,8 @@ namespace SimaticML.SW.Common
         public IntegerAttribute_T IntegerAttribute { get; set; }
 
         [XmlElement("MultiLanguageText")]
-        public MultiLanguageText_T[] MultiLanguageTexts { get; set; }
+        protected internal MultiLanguageText_T[] MultiLanguageTexts { get; set; }
+        public MultiLanguageText_T this[int key] { get => MultiLanguageTexts[key]; set => MultiLanguageTexts[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -88,6 +90,16 @@ namespace SimaticML.SW.Common
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<MultiLanguageText_T> GetEnumerator()
+        {
+            foreach (var text in MultiLanguageTexts)
+            {
+                yield return text;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -99,7 +111,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("Comment", IsNullable = false)]
-    public class Comment_T_v2 : Comment_T
+    public class Comment_T_v2 : Comment_T, IEnumerable<MultiLanguageText_T_v2>
     {
         /// <summary>
         /// For NumBLs. NumBLs is the count of the blank spaces before the actual text in the Comment.
@@ -108,7 +120,8 @@ namespace SimaticML.SW.Common
         public new IntegerAttribute_T_v2 IntegerAttribute { get; set; }
 
         [XmlElement("MultiLanguageText")]
-        public new MultiLanguageText_T_v2[] MultiLanguageTexts { get; set; }
+        protected internal new MultiLanguageText_T_v2[] MultiLanguageTexts { get; set; }
+        public new MultiLanguageText_T_v2 this[int key] { get => MultiLanguageTexts[key]; set => MultiLanguageTexts[key] = value; }
 
         [XmlAttribute]
         public int? UId { get; set; } = null;
@@ -168,5 +181,15 @@ namespace SimaticML.SW.Common
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<MultiLanguageText_T_v2> GetEnumerator()
+        {
+            foreach (var text in MultiLanguageTexts)
+            {
+                yield return text;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

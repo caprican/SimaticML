@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -13,7 +14,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Action", IsNullable = false)]
-    public class Action_T : Object_G
+    public class Action_T : Object_G, IEnumerable<Object_G>
     {
         [XmlElement("Access", typeof(Access.Access_T))]
         [XmlElement("Comment", typeof(Common.Comment_T))]
@@ -105,6 +106,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -114,7 +125,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Action", IsNullable = false)]
-    public class Action_T_v2 : Action_T
+    public class Action_T_v2 : Action_T, IEnumerable<Object_G>
     {
         [XmlElement("Access", typeof(Access.Access_T_v2))]
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -203,6 +214,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -212,7 +233,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Action", IsNullable = false)]
-    public class Action_T_v4 : Action_T_v2
+    public class Action_T_v4 : Action_T_v2, IEnumerable<Object_G>
     {
         [XmlElement("Access", typeof(Access.Access_T_v3))]
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -301,6 +322,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -311,7 +342,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Action", IsNullable = false)]
-    public class Action_T_v5 : Action_T_v4
+    public class Action_T_v5 : Action_T_v4, IEnumerable<Object_G>
     {
         [XmlElement("Access", typeof(Access.Access_T_v4))]
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -400,6 +431,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -410,7 +451,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Action", IsNullable = false)]
-    public class Action_T_v6 : Action_T_v5
+    public class Action_T_v6 : Action_T_v5, IEnumerable<Object_G>
     {
         [XmlElement("Access", typeof(Access.Access_T_v5))]
         [XmlElement("Blank", typeof(Common.Blank_T))]
@@ -499,5 +540,15 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

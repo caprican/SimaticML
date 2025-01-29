@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Security.Cryptography;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -96,6 +95,5 @@ namespace SimaticML
         {
             throw new NotImplementedException();
         }
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml;
@@ -120,7 +121,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T_v2 : Parameter_T
+    public class Parameter_T_v2 : Parameter_T, IEnumerable<Object_G>
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative
@@ -252,6 +253,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -262,7 +273,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T_v3 : Parameter_T_v2
+    public class Parameter_T_v3 : Parameter_T_v2, IEnumerable<Object_G>
     {
         [XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
         [XmlElement("Access", typeof(Access_T_v3))]
@@ -371,6 +382,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -381,7 +402,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T_v4 : Parameter_T_v3
+    public class Parameter_T_v4 : Parameter_T_v3, IEnumerable<Object_G>
     {
         [XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
         [XmlElement("Access", typeof(Access_T_v4))]
@@ -490,6 +511,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -500,7 +531,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T_v5 : Parameter_T_v4
+    public class Parameter_T_v5 : Parameter_T_v4, IEnumerable<Object_G>
     {
         [XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
         [XmlElement("Access", typeof(Access_T_v5))]
@@ -609,5 +640,15 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

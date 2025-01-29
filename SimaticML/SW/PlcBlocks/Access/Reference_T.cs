@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
@@ -14,7 +15,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Reference", IsNullable = false)]
-    public class Reference_T : Object_G
+    public class Reference_T : Object_G, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 2 | 4)]
         [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 2 | 4)]
@@ -82,6 +83,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <summary>SCL</summary>
@@ -93,7 +104,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Reference", IsNullable = false)]
-    public class Reference_T_v3 : Reference_T
+    public class Reference_T_v3 : Reference_T, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 2 | 4)]
         [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 2 | 4)]
@@ -161,6 +172,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <summary>SCL</summary>
@@ -172,7 +193,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Reference", IsNullable = false)]
-    public class Reference_T_v4 : Reference_T_v3
+    public class Reference_T_v4 : Reference_T_v3, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 2 | 4)]
         [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 2 | 4)]
@@ -240,6 +261,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <summary>SCL</summary>
@@ -251,7 +282,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Reference", IsNullable = false)]
-    public class Reference_T_v5 : Reference_T_v4
+    public class Reference_T_v5 : Reference_T_v4, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 2 | 4)]
         [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 2 | 4)]
@@ -319,5 +350,15 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

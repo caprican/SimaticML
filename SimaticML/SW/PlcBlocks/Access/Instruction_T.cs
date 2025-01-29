@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml;
@@ -14,7 +15,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instruction", Namespace = "", IsNullable = false)]
-    public class Instruction_T : Object_G
+    public class Instruction_T : Object_G, IEnumerable<Object_G>
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -101,6 +102,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -111,7 +122,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instruction", Namespace = "", IsNullable = false)]
-    public class Instruction_T_v2 : Instruction_T
+    public class Instruction_T_v2 : Instruction_T, IEnumerable<Object_G>
     {
         [XmlAttribute]
         [DefaultValue(false)]
@@ -226,6 +237,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -236,7 +257,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instruction", Namespace = "", IsNullable = false)]
-    public class Instruction_T_v3 : Instruction_T_v2
+    public class Instruction_T_v3 : Instruction_T_v2, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T))]
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
@@ -342,6 +363,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -352,7 +383,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instruction", Namespace = "", IsNullable = false)]
-    public class Instruction_T_v4 : Instruction_T_v3
+    public class Instruction_T_v4 : Instruction_T_v3, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T))]
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
@@ -458,6 +489,16 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -468,7 +509,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instruction", Namespace = "", IsNullable = false)]
-    public class Instruction_T_v5 : Instruction_T_v4
+    public class Instruction_T_v5 : Instruction_T_v4, IEnumerable<Object_G>
     {
         [XmlElement("Blank", typeof(Common.Blank_T))]
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
@@ -574,5 +615,15 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public new IEnumerator<Object_G> GetEnumerator()
+        {
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

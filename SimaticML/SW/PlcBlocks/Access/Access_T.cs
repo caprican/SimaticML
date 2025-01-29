@@ -33,7 +33,7 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         [XmlElement("Comment", typeof(Common.Comment_T))]
         [XmlElement("LineComment", typeof(Common.LineComment_T))]
-        public Common.Comment_G[] Items { get; set; }
+        public Common.Comment_G[] Comments { get; set; }
 
         [XmlAttribute]
         public Scope_TE Scope { get; set; }
@@ -137,7 +137,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             break;
                     }
                 }
-                if (items.Count > 0) Items = items.ToArray();
+                if (items.Count > 0) Comments = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -185,7 +185,7 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new Common.Comment_G[] Items { get; set; }
+        public new Common.Comment_G[] Comments { get; set; }
 
         [XmlAttribute]
         public new Scope_TE_v2 Scope { get; set; }
@@ -306,7 +306,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             break;
                     }
                 }
-                if (items.Count > 0) Items = items.ToArray();
+                if (items.Count > 0) Comments = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -466,7 +466,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             break;
                     }
                 }
-                if (items.Count > 0) Items = items.ToArray();
+                if (items.Count > 0) Comments = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -509,7 +509,7 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement("Comment", typeof(Common.Comment_T_v2))]
         [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new Common.Comment_G[] Items { get; set; }
+        public new Common.Comment_G[] Comments { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -630,7 +630,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             break;
                     }
                 }
-                if (items.Count > 0) Items = items.ToArray();
+                if (items.Count > 0) Comments = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -791,7 +791,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             break;
                     }
                 }
-                if (items.Count > 0) Items = items.ToArray();
+                if (items.Count > 0) Comments = items.ToArray();
             }
 
             if (reader.IsStartElement())
