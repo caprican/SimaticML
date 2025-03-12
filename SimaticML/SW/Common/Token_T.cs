@@ -4,6 +4,12 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    public interface IToken_T
+    {
+        IIntegerAttribute_T IntegerAttribute { get; set; }
+        int? UId { get; set; }
+        string Text { get; set; }
+    }
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -12,13 +18,13 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("Token", IsNullable = false)]
-    public class Token_T : Object_G
+    public class Token_T : Object_G, IToken_T
     {
         /// <summary>
         /// For NumBLs. NumBLs is the count of the blank spaces at the start.
         /// This is informative.
         /// </summary>
-        public IntegerAttribute_T IntegerAttribute { get; set; }
+        public IIntegerAttribute_T IntegerAttribute { get; set; }
 
         /// <summary>
         /// Not allowed in STL
@@ -58,8 +64,9 @@ namespace SimaticML.SW.Common
                     switch (reader.Name)
                     {
                         case nameof(IntegerAttribute):
-                            IntegerAttribute = new Common.IntegerAttribute_T();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new Common.IntegerAttribute_T();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
                         default:
                             reader.Skip();
@@ -86,13 +93,13 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("Token", IsNullable = false)]
-    public class Token_T_v2 : Token_T
+    public class Token_T_v2 : Token_T, IToken_T
     {
-        /// <summary>
-        /// For NumBLs. NumBLs is the count of the blank spaces at the start.
-        /// This is informative.
-        /// </summary>
-        public new IntegerAttribute_T_v2 IntegerAttribute { get; set; }
+        ///// <summary>
+        ///// For NumBLs. NumBLs is the count of the blank spaces at the start.
+        ///// This is informative.
+        ///// </summary>
+        //public new IntegerAttribute_T_v2 IntegerAttribute { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -121,8 +128,9 @@ namespace SimaticML.SW.Common
                     switch (reader.Name)
                     {
                         case nameof(IntegerAttribute):
-                            IntegerAttribute = new Common.IntegerAttribute_T_v2();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new Common.IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
                         default:
                             reader.Skip();

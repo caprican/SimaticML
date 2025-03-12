@@ -6,6 +6,17 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface ICallInfo_T : IEnumerable<Object_G>
+    {
+        string Name { get; set; }
+        BlockType_TE BlockType { get; set; }
+    }
+
+    public interface ICallInfo_T_v2 : ICallInfo_T
+    {
+        int? UId { get; set; }
+    }
+
     /// <summary>
     /// Not for LAD/FBD.
     /// </summary>
@@ -18,7 +29,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("CallInfo", IsNullable = false)]
-    public class CallInfo_T : Object_G, IEnumerable<Object_G>
+    public class CallInfo_T : Object_G, ICallInfo_T
     {
         //[XmlElement(Order = 0)]
         //public IntegerAttribute_T IntegerAttribute { get; set; }
@@ -26,13 +37,13 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement(Order = 1)]
         //public DateAttribute_T DateAttribute { get; set; }
 
-        [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T), Order = 0)]
-        [XmlElement("Comment", typeof(Common.Comment_T), Order = 2 | 4)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T), Order = 2 | 4)]
-        [XmlElement("DateAttribute", typeof(Common.DateAttribute_T), Order = 1)]
-        [XmlElement("Token", typeof(Common.Token_T), Order = 3)]
-        [XmlElement("Instance", typeof(Instance_T), Order = 5)]
-        [XmlElement("Parameter", typeof(Parameter_T), Order = 6)]
+        //[XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T), Order = 0)]
+        //[XmlElement("Comment", typeof(Common.Comment_T), Order = 2 | 4)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T), Order = 2 | 4)]
+        //[XmlElement("DateAttribute", typeof(Common.DateAttribute_T), Order = 1)]
+        //[XmlElement("Token", typeof(Common.Token_T), Order = 3)]
+        //[XmlElement("Instance", typeof(Instance_T), Order = 5)]
+        //[XmlElement("Parameter", typeof(Parameter_T), Order = 6)]
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -158,20 +169,20 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("CallInfo", IsNullable = false)]
-    public class CallInfo_T_v2 : CallInfo_T, IEnumerable<Object_G>
+    public class CallInfo_T_v2 : CallInfo_T, ICallInfo_T_v2
     {
-        [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3 | 6 | 9)]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3 | 6 | 9)]
-        [XmlElement("DateAttribute", typeof(Common.DateAttribute_T_v2), Order = 0)]                // for ParameterModifiedTS. ParameterModifiedTS is informative
-        [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), Order = 0)]          // for BlockNumber. BlockNumber is informative.
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 0 | 3 | 6 | 9)]
-        [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 3 | 6 | 9)]
-        [XmlElement("Token", typeof(Common.Token_T_v2), Order = 0 | 2 | 5 | 8)]
-        [XmlElement("Instance", typeof(Instance_T_v2), Order = 1)]
-        [XmlElement("NamelessParameter", typeof(NamelessParameter_T), Order = 4)]
-        [XmlElement("Parameter", typeof(Parameter_T_v2), Order = 7)]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3 | 6 | 9)]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3 | 6 | 9)]
+        //[XmlElement("DateAttribute", typeof(Common.DateAttribute_T_v2), Order = 0)]                // for ParameterModifiedTS. ParameterModifiedTS is informative
+        //[XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), Order = 0)]          // for BlockNumber. BlockNumber is informative.
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 0 | 3 | 6 | 9)]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 3 | 6 | 9)]
+        //[XmlElement("Token", typeof(Common.Token_T_v2), Order = 0 | 2 | 5 | 8)]
+        //[XmlElement("Instance", typeof(Instance_T_v2), Order = 1)]
+        //[XmlElement("NamelessParameter", typeof(NamelessParameter_T), Order = 4)]
+        //[XmlElement("Parameter", typeof(Parameter_T_v2), Order = 7)]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         //[XmlElement(Order = 1)]
         //public Instance_T Instance { get; set; }
@@ -335,20 +346,20 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("CallInfo", IsNullable = false)]
-    public class CallInfo_T_v3 : CallInfo_T_v2, IEnumerable<Object_G>
+    public class CallInfo_T_v3 : CallInfo_T_v2, ICallInfo_T_v2
     {
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("DateAttribute", typeof(Common.DateAttribute_T_v2))]                // for ParameterModifiedTS. ParameterModifiedTS is informative
-        [XmlElement("Instance", typeof(Instance_T_v3))]
-        [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2))]          // for BlockNumber. BlockNumber is informative.
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
-        [XmlElement("NamelessParameter", typeof(NamelessParameter_T_v3))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Parameter", typeof(Parameter_T_v3))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("DateAttribute", typeof(Common.DateAttribute_T_v2))]                // for ParameterModifiedTS. ParameterModifiedTS is informative
+        //[XmlElement("Instance", typeof(Instance_T_v3))]
+        //[XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2))]          // for BlockNumber. BlockNumber is informative.
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
+        //[XmlElement("NamelessParameter", typeof(NamelessParameter_T_v3))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Parameter", typeof(Parameter_T_v3))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -471,20 +482,20 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("CallInfo", IsNullable = false)]
-    public class CallInfo_T_v4 : CallInfo_T_v3, IEnumerable<Object_G>
+    public class CallInfo_T_v4 : CallInfo_T_v3, ICallInfo_T_v2
     {
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("DateAttribute", typeof(Common.DateAttribute_T_v2))]                // for ParameterModifiedTS. ParameterModifiedTS is informative
-        [XmlElement("Instance", typeof(Instance_T_v4))]
-        [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2))]          // for BlockNumber. BlockNumber is informative.
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
-        [XmlElement("NamelessParameter", typeof(NamelessParameter_T_v4))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Parameter", typeof(Parameter_T_v4))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("DateAttribute", typeof(Common.DateAttribute_T_v2))]                // for ParameterModifiedTS. ParameterModifiedTS is informative
+        //[XmlElement("Instance", typeof(Instance_T_v4))]
+        //[XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2))]          // for BlockNumber. BlockNumber is informative.
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
+        //[XmlElement("NamelessParameter", typeof(NamelessParameter_T_v4))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Parameter", typeof(Parameter_T_v4))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -596,20 +607,20 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("CallInfo", IsNullable = false)]
-    public class CallInfo_T_v5 : CallInfo_T_v4, IEnumerable<Object_G>
+    public class CallInfo_T_v5 : CallInfo_T_v4, ICallInfo_T_v2
     {
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("DateAttribute", typeof(Common.DateAttribute_T_v2))]                // for ParameterModifiedTS. ParameterModifiedTS is informative
-        [XmlElement("Instance", typeof(Instance_T_v5))]
-        [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2))]          // for BlockNumber. BlockNumber is informative.
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
-        [XmlElement("NamelessParameter", typeof(NamelessParameter_T_v5))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Parameter", typeof(Parameter_T_v5))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("DateAttribute", typeof(Common.DateAttribute_T_v2))]                // for ParameterModifiedTS. ParameterModifiedTS is informative
+        //[XmlElement("Instance", typeof(Instance_T_v5))]
+        //[XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2))]          // for BlockNumber. BlockNumber is informative.
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
+        //[XmlElement("NamelessParameter", typeof(NamelessParameter_T_v5))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Parameter", typeof(Parameter_T_v5))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {

@@ -4,6 +4,13 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IPermanentOperation_T
+    {
+        Common.IComment_T Title { get; set; }
+        LADFBD.IFlgNet_T FlgNet { get; set; }
+        ProgrammingLanguage_TE ProgrammingLanguage { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -12,11 +19,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PermanentOperation", IsNullable = false)]
-    public class PermanentOperation_T : Object_G
+    public class PermanentOperation_T : Object_G, IPermanentOperation_T
     {
-        public Common.Comment_T Title { get; set; }
+        public Common.IComment_T Title { get; set; }
 
-        public LADFBD.FlgNet_T FlgNet { get; set; }
+        public LADFBD.IFlgNet_T FlgNet { get; set; }
 
         [XmlAttribute]
         public ProgrammingLanguage_TE ProgrammingLanguage { get; set; }
@@ -44,12 +51,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                     }
                 }
@@ -75,11 +84,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PermanentOperation", IsNullable = false)]
-    public class PermanentOperation_T_v2 : PermanentOperation_T
+    public class PermanentOperation_T_v2 : PermanentOperation_T, IPermanentOperation_T
     {
-        public new Common.Comment_T_v2 Title { get; set; }
+        //public new Common.Comment_T_v2 Title { get; set; }
 
-        public new LADFBD.FlgNet_T_v2 FlgNet { get; set; }
+        //public new LADFBD.FlgNet_T_v2 FlgNet { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -104,12 +113,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T_v2();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T_v2();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                     }
                 }
@@ -135,9 +146,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PermanentOperation", IsNullable = false)]
-    public class PermanentOperation_T_v4 : PermanentOperation_T_v2
+    public class PermanentOperation_T_v4 : PermanentOperation_T_v2, IPermanentOperation_T
     {
-        public new LADFBD.FlgNet_T_v3 FlgNet { get; set; }
+        //public new LADFBD.FlgNet_T_v3 FlgNet { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -162,12 +173,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T_v3();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T_v3();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                     }
                 }
@@ -193,9 +206,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PermanentOperation", IsNullable = false)]
-    public class PermanentOperation_T_v5 : PermanentOperation_T_v4
+    public class PermanentOperation_T_v5 : PermanentOperation_T_v4, IPermanentOperation_T
     {
-        public new LADFBD.FlgNet_T_v4 FlgNet { get; set; }
+        //public new LADFBD.FlgNet_T_v4 FlgNet { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -220,12 +233,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T_v4();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T_v4();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                     }
                 }
@@ -251,9 +266,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PermanentOperation", IsNullable = false)]
-    public class PermanentOperation_T_v6 : PermanentOperation_T_v5
+    public class PermanentOperation_T_v6 : PermanentOperation_T_v5, IPermanentOperation_T
     {
-        public new LADFBD.FlgNet_T_v5 FlgNet { get; set; }
+        //public new LADFBD.FlgNet_T_v5 FlgNet { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -278,12 +293,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T_v5();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T_v5();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                     }
                 }

@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
-    public interface IAccess
+    public interface IAccess_T
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative. Not for LAD/FBD.
@@ -28,7 +28,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Access", IsNullable = false)]
-    public class Access_T : Object_G, IAccess
+    public class Access_T : Object_G, IAccess_T
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative. Not for LAD/FBD.
@@ -176,7 +176,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Access", IsNullable = false)]
-    public class Access_T_v2 : Access_T
+    public class Access_T_v2 : Access_T, IAccess_T
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative. Not for LAD/FBD.
@@ -345,7 +345,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Access", IsNullable = false)]
-    public class Access_T_v3 : Access_T_v2
+    public class Access_T_v3 : Access_T_v2, IAccess_T
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative. Not for LAD/FBD.
@@ -505,7 +505,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Access", IsNullable = false)]
-    public class Access_T_v4 : Access_T_v3
+    public class Access_T_v4 : Access_T_v3, IAccess_T
     {
         [XmlElement("Address", typeof(Address_T_v2))]              // for absolute addresses
         [XmlElement("CallInfo", typeof(CallInfo_T_v4))]              // call of a user block. Not in Graph ActionList.
@@ -669,7 +669,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Access", IsNullable = false)]
-    public class Access_T_v5 : Access_T_v4
+    public class Access_T_v5 : Access_T_v4, IAccess_T
     {
         [XmlElement("Address", typeof(Address_T_v2))]              // for absolute addresses
         [XmlElement("CallInfo", typeof(CallInfo_T_v5))]              // call of a user block. Not in Graph ActionList.

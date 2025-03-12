@@ -4,6 +4,13 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
 {
+    public interface IBlockInstSupervision
+    {
+        int Number { get; set; }
+        IStateStruct StateStruct { get; set; }
+        int BlockTypeSupervisionNumber { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -15,11 +22,11 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class BlockInstSupervision : Object_G
+    public class BlockInstSupervision : Object_G, IBlockInstSupervision
     {
         public int Number { get; set; }
 
-        public StateStruct StateStruct { get; set; }
+        public IStateStruct StateStruct { get; set; }
 
         public int BlockTypeSupervisionNumber { get; set; }
 
@@ -38,8 +45,9 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
                             Number = reader.ReadElementContentAsInt();
                             break;
                         case "StateStruct":
-                            StateStruct = new StateStruct();
-                            StateStruct.ReadXml(reader);
+                            var stateStruct = new StateStruct();
+                            stateStruct.ReadXml(reader);
+                            StateStruct = stateStruct;
                             break;
                         case "BlockTypeSupervisionNumber":
                             BlockTypeSupervisionNumber = reader.ReadElementContentAsInt();

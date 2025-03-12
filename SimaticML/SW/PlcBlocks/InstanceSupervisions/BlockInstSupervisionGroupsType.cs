@@ -6,6 +6,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
 {
+    public interface IBlockInstSupervisionGroupsType : IEnumerable<IBlockInstSupervisionGroup>
+    {
+        
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,11 +21,11 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     /// </remarks>
     [Serializable]
     [XmlRoot("BlockInstSupervisionGroups", IsNullable = false)]
-    public class BlockInstSupervisionGroupsType : Object_G, IEnumerable<BlockInstSupervisionGroup>
+    public class BlockInstSupervisionGroupsType : Object_G, IBlockInstSupervisionGroupsType
     {
         [XmlElement("BlockInstSupervisionGroup")]
-        protected internal BlockInstSupervisionGroup[] BlockInstSupervisionGroup { get; set; }
-        public BlockInstSupervisionGroup this[int key] { get => BlockInstSupervisionGroup[key]; set => BlockInstSupervisionGroup[key] = value; }
+        protected internal IBlockInstSupervisionGroup[] BlockInstSupervisionGroup { get; set; }
+        public IBlockInstSupervisionGroup this[int key] { get => BlockInstSupervisionGroup[key]; set => BlockInstSupervisionGroup[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -29,7 +34,7 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
             {
                 reader.Read();
 
-                var blocks = new List<BlockInstSupervisionGroup>();
+                var blocks = new List<IBlockInstSupervisionGroup>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -55,7 +60,7 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
             throw new NotImplementedException();
         }
 
-        public IEnumerator<BlockInstSupervisionGroup> GetEnumerator()
+        public IEnumerator<IBlockInstSupervisionGroup> GetEnumerator()
         {
             if (BlockInstSupervisionGroup is null) yield break;
             foreach (var blockGroup in BlockInstSupervisionGroup)

@@ -6,6 +6,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IStepName_T : IEnumerable<Common.IMultiLanguageText_T>
+    {
+        
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -17,7 +22,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("StepName", IsNullable = false)]
-    public class StepName_T : Object_G, IEnumerable<Common.MultiLanguageText_T_v2>
+    public class StepName_T : Object_G, IStepName_T
     {
         /// <summary>
         /// For translated step names
@@ -59,7 +64,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        public IEnumerator<Common.MultiLanguageText_T_v2> GetEnumerator()
+        public IEnumerator<Common.IMultiLanguageText_T> GetEnumerator()
         {
             if (Texts is null) yield break;
             foreach (var text in Texts)

@@ -6,18 +6,22 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.STL
 {
+    public interface IStlStatement_T : IEnumerable<Object_G>
+    {
+        int? UId { get; set; }
+    }
     /// <remarks>
     /// Schema : SW.PlcBlocks.STL (SW.PlcBlocks.CompileUnitCommon + SW.PlcBlocks.Access + SW.Common)
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T : Object_G, IEnumerable<Object_G>
+    public class StlStatement_T : Object_G, IStlStatement_T
     {
-        [XmlElement("Comment", typeof(Common.Comment_T), Order = 0 | 3)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T), Order = 0 | 3)]
-        [XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T), Order = 1)]
-        [XmlElement("StlToken", typeof(StlToken_T), Order = 2)]                 // missing for empty lines
-        [XmlElement("Access", typeof(Access.Access_T), Order = 4)]
+        //[XmlElement("Comment", typeof(Common.Comment_T), Order = 0 | 3)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T), Order = 0 | 3)]
+        //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T), Order = 1)]
+        //[XmlElement("StlToken", typeof(StlToken_T), Order = 2)]                 // missing for empty lines
+        //[XmlElement("Access", typeof(Access.Access_T), Order = 4)]
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -110,17 +114,17 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T_v2 : StlStatement_T, IEnumerable<Object_G>
+    public class StlStatement_T_v2 : StlStatement_T, IStlStatement_T
     {
-        [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 0 | 3)]
-        [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 3)]
-        [XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v2), Order = 1)]
-        [XmlElement("StlToken", typeof(StlToken_T_v2), Order = 2)]                 // missing for empty lines
-        [XmlElement("Access", typeof(Access.Access_T_v2), Order = 4)]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 0 | 3)]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 3)]
+        //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v2), Order = 1)]
+        //[XmlElement("StlToken", typeof(StlToken_T_v2), Order = 2)]                 // missing for empty lines
+        //[XmlElement("Access", typeof(Access.Access_T_v2), Order = 4)]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -212,17 +216,17 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T_v3 : StlStatement_T_v2, IEnumerable<Object_G>
+    public class StlStatement_T_v3 : StlStatement_T_v2, IStlStatement_T
     {
-        [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 0 | 3)]
-        [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 3)]
-        [XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v2), Order = 1)]
-        [XmlElement("StlToken", typeof(StlToken_T_v2), Order = 2)]                 // missing for empty lines
-        [XmlElement("Access", typeof(Access.Access_T_v3), Order = 4)]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 0 | 3)]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 3)]
+        //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v2), Order = 1)]
+        //[XmlElement("StlToken", typeof(StlToken_T_v2), Order = 2)]                 // missing for empty lines
+        //[XmlElement("Access", typeof(Access.Access_T_v3), Order = 4)]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -314,17 +318,17 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T_v4 : StlStatement_T_v2, IEnumerable<Object_G>
+    public class StlStatement_T_v4 : StlStatement_T_v2, IStlStatement_T
     {
-        [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3), Order = 0 | 3)]
-        [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 3)]
-        [XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v4), Order = 1)]
-        [XmlElement("StlToken", typeof(StlToken_T_v4), Order = 2)]                 // missing for empty lines
-        [XmlElement("Access", typeof(Access.Access_T_v4), Order = 4)]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3), Order = 0 | 3)]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 3)]
+        //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v4), Order = 1)]
+        //[XmlElement("StlToken", typeof(StlToken_T_v4), Order = 2)]                 // missing for empty lines
+        //[XmlElement("Access", typeof(Access.Access_T_v4), Order = 4)]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -416,17 +420,17 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T_v5 : StlStatement_T_v4, IEnumerable<Object_G>
+    public class StlStatement_T_v5 : StlStatement_T_v4, IStlStatement_T
     {
-        [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3), Order = 0 | 3)]
-        [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 3)]
-        [XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v4), Order = 1)]
-        [XmlElement("StlToken", typeof(StlToken_T_v4), Order = 2)]                 // missing for empty lines
-        [XmlElement("Access", typeof(Access.Access_T_v5), Order = 4)]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3), Order = 0 | 3)]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 3)]
+        //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v4), Order = 1)]
+        //[XmlElement("StlToken", typeof(StlToken_T_v4), Order = 2)]                 // missing for empty lines
+        //[XmlElement("Access", typeof(Access.Access_T_v5), Order = 4)]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {

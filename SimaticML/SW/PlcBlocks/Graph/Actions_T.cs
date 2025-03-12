@@ -6,6 +6,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IActions_T : IEnumerable<Object_G>
+    {
+        Common.IComment_T Title { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,9 +19,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T : Object_G, IEnumerable<Object_G>
+    public class Actions_T : Object_G, IActions_T
     {
-        public Common.Comment_T Title { get; set; }
+        public Common.IComment_T Title { get; set; }
 
         [XmlElement("Action")]
         protected internal Action_T[] Actions { get; set; }
@@ -35,8 +40,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Action":
                             var action = new Action_T();
@@ -79,13 +85,13 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v2 : Actions_T, IEnumerable<Object_G>
+    public class Actions_T_v2 : Actions_T, IActions_T
     {
-        public new Common.Comment_T_v2 Title { get; set; }
+        //public new Common.Comment_T_v2 Title { get; set; }
 
-        [XmlElement("Action")]
-        protected internal new Action_T_v2[] Actions { get; set; }
-        public new Action_T_v2 this[int key] { get => Actions[key]; set => Actions[key] = value; }
+        //[XmlElement("Action")]
+        //protected internal new Action_T_v2[] Actions { get; set; }
+        //public new Action_T_v2 this[int key] { get => Actions[key]; set => Actions[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -100,8 +106,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Action":
                             var action = new Action_T_v2();
@@ -143,11 +150,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v4 : Actions_T_v2, IEnumerable<Object_G>
+    public class Actions_T_v4 : Actions_T_v2, IActions_T
     {
-        [XmlElement("Action")]
-        protected internal new Action_T_v4[] Actions { get; set; }
-        public new Action_T_v4 this[int key] { get => Actions[key]; set => Actions[key] = value; }
+        //[XmlElement("Action")]
+        //protected internal new Action_T_v4[] Actions { get; set; }
+        //public new Action_T_v4 this[int key] { get => Actions[key]; set => Actions[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -162,8 +169,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Action":
                             var action = new Action_T_v4();
@@ -205,11 +213,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v5 : Actions_T_v4, IEnumerable<Object_G>
+    public class Actions_T_v5 : Actions_T_v4, IActions_T
     {
-        [XmlElement("Action")]
-        protected internal new Action_T_v5[] Actions { get; set; }
-        public new Action_T_v5 this[int key] { get => Actions[key]; set => Actions[key] = value; }
+        //[XmlElement("Action")]
+        //protected internal new Action_T_v5[] Actions { get; set; }
+        //public new Action_T_v5 this[int key] { get => Actions[key]; set => Actions[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -224,8 +232,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Action":
                             var action = new Action_T_v5();
@@ -248,13 +257,13 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Action_T_v5> GetEnumerator()
-        {
-            foreach (var item in Actions)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Action_T_v5> GetEnumerator()
+        //{
+        //    foreach (var item in Actions)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -267,11 +276,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v6 : Actions_T_v5, IEnumerable<Object_G>
+    public class Actions_T_v6 : Actions_T_v5, IActions_T
     {
-        [XmlElement("Action")]
-        protected internal new Action_T_v6[] Actions { get; set; }
-        public new Action_T_v6 this[int key] { get => Actions[key]; set => Actions[key] = value; }
+        //[XmlElement("Action")]
+        //protected internal new Action_T_v6[] Actions { get; set; }
+        //public new Action_T_v6 this[int key] { get => Actions[key]; set => Actions[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -286,8 +295,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Action":
                             var action = new Action_T_v6();

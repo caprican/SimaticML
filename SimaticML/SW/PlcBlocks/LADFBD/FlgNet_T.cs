@@ -5,6 +5,13 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface IFlgNet_T
+    {
+        CompileUnitCommon.ILabelDeclaration_T[] Labels { get; set; }
+        Object_G[] Parts { get; set; }
+        IWire_T[] Wires { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -13,20 +20,20 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("FlgNet", IsNullable = false)]
-    public class FlgNet_T : Object_G
+    public class FlgNet_T : Object_G, IFlgNet_T
     {
-        [XmlArray("Labels")]
-        [XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T))]
-        public CompileUnitCommon.LabelDeclaration_T[] Labels { get; set; }
+        //[XmlArray("Labels")]
+        //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T))]
+        public CompileUnitCommon.ILabelDeclaration_T[] Labels { get; set; }
 
-        [XmlArrayItem("Access", typeof(Access.Access_T), IsNullable = false)]
-        [XmlArrayItem("Call", typeof(Call_T), IsNullable = false)]
-        [XmlArrayItem("Part", typeof(Part_T), IsNullable = false)]
+        //[XmlArrayItem("Access", typeof(Access.Access_T), IsNullable = false)]
+        //[XmlArrayItem("Call", typeof(Call_T), IsNullable = false)]
+        //[XmlArrayItem("Part", typeof(Part_T), IsNullable = false)]
         public Object_G[] Parts { get; set; }
 
         [XmlArray("Wires")]
-        [XmlArrayItem("Wire", typeof(Wire_T))]
-        public Wire_T[] Wires { get; set; }
+        //[XmlArrayItem("Wire", typeof(Wire_T))]
+        public IWire_T[] Wires { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -110,15 +117,15 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("FlgNet", IsNullable = false)]
-    public class FlgNet_T_v2 : FlgNet_T
+    public class FlgNet_T_v2 : FlgNet_T, IFlgNet_T
     {
-        [XmlArray("Labels")]
-        [XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v2))]
-        public new CompileUnitCommon.LabelDeclaration_T_v2[] Labels { get; set; }
+        //[XmlArray("Labels")]
+        //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v2))]
+        //public new CompileUnitCommon.ILabelDeclaration_T[] Labels { get; set; }
 
-        [XmlArrayItem("Access", typeof(Access.Access_T_v2), IsNullable = false)]
-        [XmlArrayItem("Call", typeof(Call_T_v2), IsNullable = false)]
-        [XmlArrayItem("Part", typeof(Part_T_v2), IsNullable = false)]
+        //[XmlArrayItem("Access", typeof(Access.Access_T_v2), IsNullable = false)]
+        //[XmlArrayItem("Call", typeof(Call_T_v2), IsNullable = false)]
+        //[XmlArrayItem("Part", typeof(Part_T_v2), IsNullable = false)]
         public new Object_G[] Parts { get; set; }
 
         public override void ReadXml(XmlReader reader)
@@ -203,11 +210,11 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("FlgNet", IsNullable = false)]
-    public class FlgNet_T_v3 : FlgNet_T_v2
+    public class FlgNet_T_v3 : FlgNet_T_v2, IFlgNet_T
     {
-        [XmlArrayItem("Access", typeof(Access.Access_T_v3), IsNullable = false)]
-        [XmlArrayItem("Call", typeof(Call_T_v3), IsNullable = false)]
-        [XmlArrayItem("Part", typeof(Part_T_v3), IsNullable = false)]
+        //[XmlArrayItem("Access", typeof(Access.Access_T_v3), IsNullable = false)]
+        //[XmlArrayItem("Call", typeof(Call_T_v3), IsNullable = false)]
+        //[XmlArrayItem("Part", typeof(Part_T_v3), IsNullable = false)]
         public new Object_G[] Parts { get; set; }
 
         public override void ReadXml(XmlReader reader)
@@ -292,16 +299,16 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("FlgNet", IsNullable = false)]
-    public class FlgNet_T_v4 : FlgNet_T_v3
+    public class FlgNet_T_v4 : FlgNet_T_v3, IFlgNet_T
     {
-        [XmlArray("Labels")]
-        [XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v4))]
-        public new CompileUnitCommon.LabelDeclaration_T_v4[] Labels { get; set; }
+        //[XmlArray("Labels")]
+        //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v4))]
+        //public new CompileUnitCommon.LabelDeclaration_T_v4[] Labels { get; set; }
 
-        [XmlArrayItem("Access", typeof(Access.Access_T_v4), IsNullable = false)]
-        [XmlArrayItem("Call", typeof(Call_T_v4), IsNullable = false)]
-        [XmlArrayItem("Part", typeof(Part_T_v4), IsNullable = false)]
-        public new Object_G[] Parts { get; set; }
+        //[XmlArrayItem("Access", typeof(Access.Access_T_v4), IsNullable = false)]
+        //[XmlArrayItem("Call", typeof(Call_T_v4), IsNullable = false)]
+        //[XmlArrayItem("Part", typeof(Part_T_v4), IsNullable = false)]
+        //public new Object_G[] Parts { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -385,12 +392,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("FlgNet", IsNullable = false)]
-    public class FlgNet_T_v5 : FlgNet_T_v4
+    public class FlgNet_T_v5 : FlgNet_T_v4, IFlgNet_T
     {
-        [XmlArrayItem("Access", typeof(Access.Access_T_v5), IsNullable = false)]
-        [XmlArrayItem("Call", typeof(Call_T_v5), IsNullable = false)]
-        [XmlArrayItem("Part", typeof(Part_T_v5), IsNullable = false)]
-        public new Object_G[] Parts { get; set; }
+        //[XmlArrayItem("Access", typeof(Access.Access_T_v5), IsNullable = false)]
+        //[XmlArrayItem("Call", typeof(Call_T_v5), IsNullable = false)]
+        //[XmlArrayItem("Part", typeof(Part_T_v5), IsNullable = false)]
+        //public new Object_G[] Parts { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {

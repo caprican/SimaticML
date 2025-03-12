@@ -307,7 +307,7 @@ namespace SimaticML.SW.InterfaceSections
     [Serializable]
     [XmlRoot("Member", Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v4", IsNullable = false)]
     [DebuggerDisplay("{Name}")]
-    public class Member_T_v4 : Member_T_v3, IMember_T// IEnumerable<Object_G>
+    public class Member_T_v4 : Member_T_v3, IMember_T
     {
         //[XmlElement("Member", typeof(Member_T_v4))]
         //[XmlElement("Sections", typeof(Sections_T_v4))]
@@ -422,7 +422,7 @@ namespace SimaticML.SW.InterfaceSections
     [Serializable]
     [XmlRoot("Member", Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v5", IsNullable = false)]
     [DebuggerDisplay("{Name}")]
-    public class Member_T_v5 : Member_T_v4, IMember_T// IEnumerable<Object_G>
+    public class Member_T_v5 : Member_T_v4, IMember_T
     {
         //[XmlElement("AssignedProDiagFB", typeof(string))]
         //[XmlElement("Member", typeof(Member_T_v5))]

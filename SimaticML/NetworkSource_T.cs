@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace SimaticML
 {
     [Serializable]
-    public class NetworkSource_T : IXmlSerializable, IEnumerable<SW.PlcBlocks.SCL.StructuredText_T>
+    public class NetworkSource_T : IXmlSerializable, IEnumerable<SW.PlcBlocks.SCL.IStructuredText_T>
     {
         [XmlArray("StructuredText")]
         [XmlElement(Type = typeof(SW.PlcBlocks.SCL.StructuredText_T_v2), ElementName = "StructuredText", Namespace = "http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v2")]
@@ -65,7 +65,7 @@ namespace SimaticML
             throw new NotImplementedException();
         }
 
-        public IEnumerator<SW.PlcBlocks.SCL.StructuredText_T> GetEnumerator()
+        public IEnumerator<SW.PlcBlocks.SCL.IStructuredText_T> GetEnumerator()
         {
             if (StructuredTexts is null) yield break;
             foreach (var structuredText in StructuredTexts)

@@ -7,6 +7,22 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IParameter_T : IEnumerable<Object_G>
+    {
+        string Name { get; set; }
+        Common.SectionName_TE? Section { get; set; }
+        string Type { get; set; }
+        string TemplateReference { get; set; }
+    }
+
+    public interface IParameter_T_v2 : IParameter_T
+    {
+        Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
+        Common.StringAttribute_T_v2 StringAttribute { get; set; }
+        bool Informative { get; set; }
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -15,7 +31,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T : Object_G
+    public class Parameter_T : Object_G, IParameter_T
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -31,11 +47,11 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlAttribute]
         public string TemplateReference { get; set; }
 
-        [XmlElement("IntegerAttribute" , typeof(Common.IntegerAttribute_T), Order = 0)]                // for NumBLs. NumBLs is informative
-        [XmlElement("StringAttribute", typeof(Common.StringAttribute_T), Order = 1)]                   // for InterfaceFlags. InterfaceFlags is informative. The type of the value should be InterfaceFlags_TP. The default value is "S7_Visible"
-        [XmlElement("Comment", typeof(Common.Comment_T), Order = 2 | 4)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T), Order = 2 | 4)]
-        [XmlElement("Access", typeof(Access_T), Order = 3)]
+        //[XmlElement("IntegerAttribute" , typeof(Common.IntegerAttribute_T), Order = 0)]                // for NumBLs. NumBLs is informative
+        //[XmlElement("StringAttribute", typeof(Common.StringAttribute_T), Order = 1)]                   // for InterfaceFlags. InterfaceFlags is informative. The type of the value should be InterfaceFlags_TP. The default value is "S7_Visible"
+        //[XmlElement("Comment", typeof(Common.Comment_T), Order = 2 | 4)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T), Order = 2 | 4)]
+        //[XmlElement("Access", typeof(Access_T), Order = 3)]
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -111,6 +127,17 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            if (Items is null) yield break;
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -121,7 +148,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T_v2 : Parameter_T, IEnumerable<Object_G>
+    public class Parameter_T_v2 : Parameter_T, IParameter_T_v2
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative
@@ -137,15 +164,15 @@ namespace SimaticML.SW.PlcBlocks.Access
         [XmlElement]
         public Common.StringAttribute_T_v2 StringAttribute { get; set; }
 
-        [XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
-        [XmlElement("Access", typeof(Access_T_v2))]
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
+        //[XmlElement("Access", typeof(Access_T_v2))]
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         [DefaultValue(false)]
@@ -254,14 +281,14 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        public IEnumerator<Object_G> GetEnumerator()
-        {
-            if (Items is null) yield break; 
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    if (Items is null) yield break; 
+        //    foreach (var item in Items)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -274,17 +301,17 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T_v3 : Parameter_T_v2, IEnumerable<Object_G>
+    public class Parameter_T_v3 : Parameter_T_v2, IParameter_T_v2
     {
-        [XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
-        [XmlElement("Access", typeof(Access_T_v3))]
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
+        //[XmlElement("Access", typeof(Access_T_v3))]
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -403,17 +430,17 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T_v4 : Parameter_T_v3, IEnumerable<Object_G>
+    public class Parameter_T_v4 : Parameter_T_v3, IParameter_T_v2
     {
-        [XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
-        [XmlElement("Access", typeof(Access_T_v4))]
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
+        //[XmlElement("Access", typeof(Access_T_v4))]
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -532,17 +559,17 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T_v5 : Parameter_T_v4, IEnumerable<Object_G>
+    public class Parameter_T_v5 : Parameter_T_v4, IParameter_T_v2
     {
-        [XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
-        [XmlElement("Access", typeof(Access_T_v5))]
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
+        //[XmlElement("Access", typeof(Access_T_v5))]
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {

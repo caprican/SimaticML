@@ -6,6 +6,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IExpression_T : IEnumerable<Object_G>
+    {
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,12 +19,12 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Expression", IsNullable = false)]
-    public class Expression_T : Object_G, IEnumerable<Object_G>
+    public class Expression_T : Object_G, IExpression_T
     {
-        [XmlElement("Access", typeof(Access_T))]
-        [XmlElement("Token", typeof(Common.Token_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T))]
+        //[XmlElement("Access", typeof(Access_T))]
+        //[XmlElement("Token", typeof(Common.Token_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T))]
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -107,16 +112,16 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Expression", IsNullable = false)]
-    public class Expression_T_v2 : Expression_T, IEnumerable<Object_G>
+    public class Expression_T_v2 : Expression_T, IExpression_T
     {
-        [XmlElement("Access", typeof(Access_T_v2))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access_T_v2))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -206,16 +211,16 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Expression", IsNullable = false)]
-    public class Expression_T_v3 : Expression_T_v2, IEnumerable<Object_G>
+    public class Expression_T_v3 : Expression_T_v2, IExpression_T
     {
-        [XmlElement("Access", typeof(Access_T_v3))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access_T_v3))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -305,16 +310,16 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Expression", IsNullable = false)]
-    public class Expression_T_v4 : Expression_T_v2, IEnumerable<Object_G>
+    public class Expression_T_v4 : Expression_T_v3, IExpression_T
     {
-        [XmlElement("Access", typeof(Access_T_v4))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access_T_v4))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -404,16 +409,16 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Expression", IsNullable = false)]
-    public class Expression_T_v5 : Expression_T_v4, IEnumerable<Object_G>
+    public class Expression_T_v5 : Expression_T_v4, IExpression_T
     {
-        [XmlElement("Access", typeof(Access_T_v5))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access_T_v5))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {

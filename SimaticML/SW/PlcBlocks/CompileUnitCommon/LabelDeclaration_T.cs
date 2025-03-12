@@ -6,6 +6,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
 {
+    public interface ILabelDeclaration_T : IEnumerable<Object_G>
+    {
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,13 +19,13 @@ namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
     /// </remarks>
     [Serializable]
     [XmlRoot("LabelDeclaration", IsNullable = false)]
-    public class LabelDeclaration_T : Object_G, IEnumerable<Object_G>
+    public class LabelDeclaration_T : Object_G, ILabelDeclaration_T
     {
-        [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T), Order = 0)]             // for NumBLs. NumBLs is informative
-        [XmlElement("Label", typeof(Access.Label_T), Order = 1)]
-        [XmlElement("Comment", typeof(Common.Comment_T), Order = 2 | 4)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T), Order = 2 | 4)]
-        [XmlElement("Token", typeof(Common.Token_T), Order = 3)]     // the COLON; only if separated
+        //[XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T), Order = 0)]             // for NumBLs. NumBLs is informative
+        //[XmlElement("Label", typeof(Access.Label_T), Order = 1)]
+        //[XmlElement("Comment", typeof(Common.Comment_T), Order = 2 | 4)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T), Order = 2 | 4)]
+        //[XmlElement("Token", typeof(Common.Token_T), Order = 3)]     // the COLON; only if separated
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -117,17 +122,17 @@ namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
     /// </remarks>
     [Serializable]
     [XmlRoot("LabelDeclaration", IsNullable = false)]
-    public class LabelDeclaration_T_v2 : LabelDeclaration_T, IEnumerable<Object_G>
+    public class LabelDeclaration_T_v2 : LabelDeclaration_T, ILabelDeclaration_T
     {
-        [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), Order = 0)]     // for NumBLs. NumBLs is informative
-        [XmlElement("Label", typeof(Access.Label_T_v2), Order = 1)]
-        [XmlElement("Blank", typeof(Common.Blank_T), Order = 2 | 4)]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 2 | 4)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 2 | 4)]
-        [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 2 | 4)]
-        [XmlElement("Token", typeof(Common.Token_T_v2), Order = 3)]           // the COLON; only if separated
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), Order = 0)]     // for NumBLs. NumBLs is informative
+        //[XmlElement("Label", typeof(Access.Label_T_v2), Order = 1)]
+        //[XmlElement("Blank", typeof(Common.Blank_T), Order = 2 | 4)]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 2 | 4)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 2 | 4)]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 2 | 4)]
+        //[XmlElement("Token", typeof(Common.Token_T_v2), Order = 3)]           // the COLON; only if separated
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -223,17 +228,17 @@ namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
     /// </remarks>
     [Serializable]
     [XmlRoot("LabelDeclaration", IsNullable = false)]
-    public class LabelDeclaration_T_v4 : LabelDeclaration_T_v2, IEnumerable<Object_G>
+    public class LabelDeclaration_T_v4 : LabelDeclaration_T_v2, ILabelDeclaration_T
     {
-        [XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), Order = 0)]     // for NumBLs. NumBLs is informative
-        [XmlElement("Label", typeof(Access.Label_T_v4), Order = 1)]
-        [XmlElement("Blank", typeof(Common.Blank_T), Order = 2 | 4)]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 2 | 4)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3), Order = 2 | 4)]
-        [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 2 | 4)]
-        [XmlElement("Token", typeof(Common.Token_T_v2), Order = 3)]           // the COLON; only if separated
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), Order = 0)]     // for NumBLs. NumBLs is informative
+        //[XmlElement("Label", typeof(Access.Label_T_v4), Order = 1)]
+        //[XmlElement("Blank", typeof(Common.Blank_T), Order = 2 | 4)]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 2 | 4)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3), Order = 2 | 4)]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 2 | 4)]
+        //[XmlElement("Token", typeof(Common.Token_T_v2), Order = 3)]           // the COLON; only if separated
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {

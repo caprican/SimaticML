@@ -6,6 +6,10 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IReference_T : IEnumerable<Object_G>
+    {
+    }
+
     /// <summary>SCL</summary>
     /// <remarks>
     /// Schema : 
@@ -15,14 +19,14 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Reference", IsNullable = false)]
-    public class Reference_T : Object_G, IEnumerable<Object_G>
+    public class Reference_T : Object_G, IReference_T
     {
-        [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 2 | 4)]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 2 | 4)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 0 | 2 | 4)]
-        [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
-        [XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
-        [XmlElement("Access", typeof(Access_T_v2), Order = 3)]
+        //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 2 | 4)]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 2 | 4)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 0 | 2 | 4)]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
+        //[XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
+        //[XmlElement("Access", typeof(Access_T_v2), Order = 3)]
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -105,16 +109,16 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Reference", IsNullable = false)]
-    public class Reference_T_v3 : Reference_T, IEnumerable<Object_G>
+    public class Reference_T_v3 : Reference_T, IReference_T
     {
-        [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 2 | 4)]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 2 | 4)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 0 | 2 | 4)]
-        [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
-        [XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
-        [XmlElement("Access", typeof(Access_T_v3), Order = 3)]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 2 | 4)]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 2 | 4)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2), Order = 0 | 2 | 4)]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
+        //[XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
+        //[XmlElement("Access", typeof(Access_T_v3), Order = 3)]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -194,16 +198,16 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Reference", IsNullable = false)]
-    public class Reference_T_v4 : Reference_T_v3, IEnumerable<Object_G>
+    public class Reference_T_v4 : Reference_T_v3, IReference_T
     {
-        [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 2 | 4)]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 2 | 4)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3), Order = 0 | 2 | 4)]
-        [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
-        [XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
-        [XmlElement("Access", typeof(Access_T_v4), Order = 3)]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 2 | 4)]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 2 | 4)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3), Order = 0 | 2 | 4)]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
+        //[XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
+        //[XmlElement("Access", typeof(Access_T_v4), Order = 3)]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -283,16 +287,16 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Reference", IsNullable = false)]
-    public class Reference_T_v5 : Reference_T_v4, IEnumerable<Object_G>
+    public class Reference_T_v5 : Reference_T_v4, IReference_T
     {
-        [XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 2 | 4)]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 2 | 4)]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3), Order = 0 | 2 | 4)]
-        [XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
-        [XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
-        [XmlElement("Access", typeof(Access_T_v5), Order = 3)]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 2 | 4)]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 2 | 4)]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3), Order = 0 | 2 | 4)]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
+        //[XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
+        //[XmlElement("Access", typeof(Access_T_v5), Order = 3)]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {

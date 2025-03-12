@@ -2,12 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IComponent_T : IEnumerable<Object_G>
+    {
+        string Name { get; set; }
+        string SliceAccessModifier { get; set; }
+        string SimpleAccessModifier { get; set; }
+    }
+
+    public interface IComponent_T_v2 : IComponent_T
+    {
+        AccessModifier_TE AccessModifier { get; set; }
+        int UId { get; set; }
+    }
+
     /// <summary>
     /// For the indices of an array
     /// </summary>
@@ -20,9 +32,9 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Component", IsNullable = false)]
-    public class Component_T : Object_G, IEnumerable<Object_G>
+    public class Component_T : Object_G, IComponent_T
     {
-        [XmlElement("Access", typeof(Access_T))]                                 // For the indices of an array
+        //[XmlElement("Access", typeof(Access_T))]                                 // For the indices of an array
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -109,17 +121,17 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Component", IsNullable = false)]
-    public class Component_T_v2 : Component_T, IEnumerable<Object_G>
+    public class Component_T_v2 : Component_T, IComponent_T_v2
     {
-        [XmlElement("Access", typeof(Access_T_v2))]                                 // For the indices of an array
-        [XmlElement("Blank", typeof(Common.Blank_T))]                               // SCL
-        [XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]                        // SCL
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]                // SCL
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]                           // SCL
-        [XmlElement("Token", typeof(Common.Token_T_v2))]                            // SCL
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access_T_v2))]                                 // For the indices of an array
+        //[XmlElement("Blank", typeof(Common.Blank_T))]                               // SCL
+        //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]                        // SCL
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]                // SCL
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]                           // SCL
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]                            // SCL
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         /// <summary>
         /// If component has child AccessModifier is Array else AccessModifier is None
@@ -242,17 +254,17 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Component", IsNullable = false)]
-    public class Component_T_v3 : Component_T_v2, IEnumerable<Object_G>
+    public class Component_T_v3 : Component_T_v2, IComponent_T_v2
     {
-        [XmlElement("Access", typeof(Access_T_v3))]                                 // For the indices of an array
-        [XmlElement("Blank", typeof(Common.Blank_T))]                               // SCL
-        [XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]                        // SCL
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]                // SCL
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]                           // SCL
-        [XmlElement("Token", typeof(Common.Token_T_v2))]                            // SCL
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access_T_v3))]                                 // For the indices of an array
+        //[XmlElement("Blank", typeof(Common.Blank_T))]                               // SCL
+        //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]                        // SCL
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]                // SCL
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]                           // SCL
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]                            // SCL
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -363,17 +375,17 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Component", IsNullable = false)]
-    public class Component_T_v4 : Component_T_v3, IEnumerable<Object_G>
+    public class Component_T_v4 : Component_T_v3, IComponent_T_v2
     {
-        [XmlElement("Access", typeof(Access_T_v4))]                                 // For the indices of an array
-        [XmlElement("Blank", typeof(Common.Blank_T))]                               // SCL
-        [XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]                        // SCL
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]                // SCL
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]                           // SCL
-        [XmlElement("Token", typeof(Common.Token_T_v2))]                            // SCL
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access_T_v4))]                                 // For the indices of an array
+        //[XmlElement("Blank", typeof(Common.Blank_T))]                               // SCL
+        //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]                        // SCL
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]                // SCL
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]                           // SCL
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]                            // SCL
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -484,17 +496,17 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Component", IsNullable = false)]
-    public class Component_T_v5 : Component_T_v4, IEnumerable<Object_G>
+    public class Component_T_v5 : Component_T_v4, IComponent_T_v2
     {
-        [XmlElement("Access", typeof(Access_T_v5))]                                 // For the indices of an array
-        [XmlElement("Blank", typeof(Common.Blank_T))]                               // SCL
-        [XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]                        // SCL
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]                // SCL
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]                           // SCL
-        [XmlElement("Token", typeof(Common.Token_T_v2))]                            // SCL
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access_T_v5))]                                 // For the indices of an array
+        //[XmlElement("Blank", typeof(Common.Blank_T))]                               // SCL
+        //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]                        // SCL
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]                // SCL
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]                           // SCL
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]                            // SCL
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {

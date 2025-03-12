@@ -6,6 +6,12 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface INamelessParameter_T : IEnumerable<Object_G>
+    {
+        int? UId { get; set; }
+        Common.IStringAttribute_T[] StringAttribute { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,7 +20,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("NamelessParameter", IsNullable = false)]
-    public class NamelessParameter_T : Object_G, IEnumerable<Object_G>
+    public class NamelessParameter_T : Object_G, INamelessParameter_T
     {
         [XmlAttribute]
         public int? UId { get; set; } = null;
@@ -27,14 +33,14 @@ namespace SimaticML.SW.PlcBlocks.Access
         /// The default value is "S7_Visible"
         /// </summary>
         [XmlElement("StringAttribute")]
-        public Common.StringAttribute_T_v2[] StringAttribute { get; set; }
+        public Common.IStringAttribute_T[] StringAttribute { get; set; }
 
-        [XmlElement("Access", typeof(Access_T_v2))]
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
+        //[XmlElement("Access", typeof(Access_T_v2))]
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -135,16 +141,16 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("NamelessParameter", IsNullable = false)]
-    public class NamelessParameter_T_v3 : NamelessParameter_T, IEnumerable<Object_G>
+    public class NamelessParameter_T_v3 : NamelessParameter_T, INamelessParameter_T
     {
-        [XmlElement("Access", typeof(Access_T_v3))]
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access_T_v3))]
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -242,16 +248,16 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("NamelessParameter", IsNullable = false)]
-    public class NamelessParameter_T_v4 : NamelessParameter_T_v3, IEnumerable<Object_G>
+    public class NamelessParameter_T_v4 : NamelessParameter_T_v3, INamelessParameter_T
     {
-        [XmlElement("Access", typeof(Access_T_v4))]
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access_T_v4))]
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -349,16 +355,16 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("NamelessParameter", IsNullable = false)]
-    public class NamelessParameter_T_v5 : NamelessParameter_T_v4, IEnumerable<Object_G>
+    public class NamelessParameter_T_v5 : NamelessParameter_T_v4, INamelessParameter_T
     {
-        [XmlElement("Access", typeof(Access_T_v5))]
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access_T_v5))]
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {

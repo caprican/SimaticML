@@ -6,6 +6,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.SCL
 {
+    public interface IStructuredText_T : IEnumerable<Object_G>
+    {
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,7 +19,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
     /// </remarks>
     [Serializable]
     [XmlRoot("StructuredText", IsNullable = false)]
-    public class StructuredText_T : Object_G, IEnumerable<Object_G>
+    public class StructuredText_T : Object_G, IStructuredText_T
     {
         //[XmlElement("Access", typeof(Access.Access_T_v2))]
         //[XmlElement("Blank", typeof(Common.Blank_T))]
@@ -131,7 +136,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
     /// </remarks>
     [Serializable]
     [XmlRoot("StructuredText", IsNullable = false)]
-    public class StructuredText_T_v2 : StructuredText_T, IEnumerable<Object_G>
+    public class StructuredText_T_v2 : StructuredText_T, IStructuredText_T
     {
         //[XmlElement("Access", typeof(Access.Access_T_v3))]
         //[XmlElement("Blank", typeof(Common.Blank_T))]
@@ -242,7 +247,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
     /// </remarks>
     [Serializable]
     [XmlRoot("StructuredText", IsNullable = false)]
-    public class StructuredText_T_v3 : StructuredText_T_v2, IEnumerable<Object_G>
+    public class StructuredText_T_v3 : StructuredText_T_v2, IStructuredText_T
     {
         //[XmlElement("Access", typeof(Access.Access_T_v4))]
         //[XmlElement("Blank", typeof(Common.Blank_T))]
@@ -356,7 +361,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
     /// </remarks>
     [Serializable]
     [XmlRoot("StructuredText", IsNullable = false)]
-    public class StructuredText_T_v4 : StructuredText_T_v3, IEnumerable<Object_G>
+    public class StructuredText_T_v4 : StructuredText_T_v3, IStructuredText_T
     {
         //[XmlElement("Access", typeof(Access.Access_T_v5))]
         //[XmlElement("Blank", typeof(Common.Blank_T))]

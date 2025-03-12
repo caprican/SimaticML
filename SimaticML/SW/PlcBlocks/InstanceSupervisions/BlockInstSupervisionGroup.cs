@@ -6,6 +6,10 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
 {
+    public interface IBlockInstSupervisionGroup : IEnumerable<IBlockInstSupervision>
+    {
+        IMultiinstance Multiinstance { get; set; }
+    }
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -17,14 +21,14 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class BlockInstSupervisionGroup : Object_G, IEnumerable<BlockInstSupervision>
+    public class BlockInstSupervisionGroup : Object_G, IBlockInstSupervisionGroup
     {
-        public Multiinstance Multiinstance { get; set; }
+        public IMultiinstance Multiinstance { get; set; }
 
-        [XmlArray("BlockInstSupervision")]
-        [XmlElement("BlockInstSupervision")]
-        protected internal BlockInstSupervision[] BlockInstSupervisions { get; set; }
-        public BlockInstSupervision this[int key] { get => BlockInstSupervisions[key]; set => BlockInstSupervisions[key] = value; }
+        //[XmlArray("BlockInstSupervision")]
+        //[XmlElement("BlockInstSupervision")]
+        protected internal IBlockInstSupervision[] BlockInstSupervisions { get; set; }
+        public IBlockInstSupervision this[int key] { get => BlockInstSupervisions[key]; set => BlockInstSupervisions[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -38,8 +42,9 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
                     switch (reader.Name)
                     {
                         case "Multiinstance":
-                            Multiinstance = new Multiinstance();
-                            Multiinstance.ReadXml(reader);
+                            var multiinstance = new Multiinstance();
+                            multiinstance.ReadXml(reader);
+                            Multiinstance = multiinstance;
                             break;
                         case "BlockInstSupervision":
                             var blockInstSupervision = new BlockInstSupervision();
@@ -62,7 +67,7 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
             throw new NotImplementedException();
         }
 
-        public IEnumerator<BlockInstSupervision> GetEnumerator()
+        public IEnumerator<IBlockInstSupervision> GetEnumerator()
         {
             if (BlockInstSupervisions is null) yield break;
             foreach (var block in BlockInstSupervisions)

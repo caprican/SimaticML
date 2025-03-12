@@ -6,6 +6,10 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface IWire_T : IEnumerable<Object_G>
+    {
+        int UId { get; set; }
+    }
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -18,13 +22,13 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Wire", IsNullable = false)]
-    public class Wire_T : Object_G, IEnumerable<Object_G>
+    public class Wire_T : Object_G, IWire_T
     {
-        [XmlElement("IdentCon", typeof(IdentCon_T))]
-        [XmlElement("NameCon", typeof(NameCon_T))]
-        [XmlElement("OpenCon", typeof(OpenCon_T))]
-        [XmlElement("Openbranch", typeof(Openbranch_T))]
-        [XmlElement("Powerrail", typeof(Powerrail_T))]
+        //[XmlElement("IdentCon", typeof(IdentCon_T))]
+        //[XmlElement("NameCon", typeof(NameCon_T))]
+        //[XmlElement("OpenCon", typeof(OpenCon_T))]
+        //[XmlElement("Openbranch", typeof(Openbranch_T))]
+        //[XmlElement("Powerrail", typeof(Powerrail_T))]
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int index] { get => Items[index]; set => Items[index] = value; }
 

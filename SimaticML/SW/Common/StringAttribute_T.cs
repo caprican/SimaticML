@@ -6,6 +6,19 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    public interface IStringAttribute_T
+    {
+        string Name { get; set; }
+        bool Informative { get; set; }
+        bool SystemDefined { get; set; }
+        string Value { get; set; }
+    }
+
+    public interface IStringAttribute_T_v2 : IStringAttribute_T
+    {
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -15,7 +28,7 @@ namespace SimaticML.SW.Common
     [Serializable]
     [DebuggerDisplay("{Name} = {Value}")]
     [XmlRoot("StringAttribute", IsNullable = false)]
-    public class StringAttribute_T : AttributeBase
+    public class StringAttribute_T : AttributeBase, IStringAttribute_T
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -75,7 +88,7 @@ namespace SimaticML.SW.Common
     [Serializable]
     [XmlRoot("StringAttribute", IsNullable = false)]
     [DebuggerDisplay("{Name} = {Value}")]
-    public class StringAttribute_T_v2 : StringAttribute_T
+    public class StringAttribute_T_v2 : StringAttribute_T, IStringAttribute_T_v2
     {
         [XmlAttribute]
         public int? UId { get; set; } = null;

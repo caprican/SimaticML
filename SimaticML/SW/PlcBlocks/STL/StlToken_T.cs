@@ -6,27 +6,34 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.STL
 {
+    public interface IStlToken_T : IEnumerable<Object_G>
+    {
+        Common.IIntegerAttribute_T IntegerAttribute { get; set; }
+        Common.IToken_T Token { get; set; }
+        int? UId { get; set; }
+        STL_TE Text { get; set; }
+    }
     /// <remarks>
     /// Schema : SW.PlcBlocks.STL (SW.PlcBlocks.CompileUnitCommon + SW.PlcBlocks.Access + SW.Common)
     /// </remarks>
     [Serializable]
     [XmlRoot("StlToken", IsNullable = false)]
-    public class StlToken_T : Object_G, IEnumerable<Object_G>
+    public class StlToken_T : Object_G, IStlToken_T
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative
         /// </summary>
-        public Common.IntegerAttribute_T IntegerAttribute { get; set; }
+        public Common.IIntegerAttribute_T IntegerAttribute { get; set; }
 
-        [XmlElement("Comment", typeof(Common.Comment_T))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T))]
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         /// <summary>
         /// e.g 0 1 for NOP 0, NOP 1; STW for L STW or DILG for L DILG; only if separated by comment
         /// </summary>
-        public Common.Token_T Token { get; set; }
+        public Common.IToken_T Token { get; set; }
 
         /// <summary>
         /// Not allowed in STL
@@ -68,8 +75,9 @@ namespace SimaticML.SW.PlcBlocks.STL
                     switch (reader.Name)
                     {
                         case "IntegerAttribute":
-                            IntegerAttribute = new Common.IntegerAttribute_T();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new Common.IntegerAttribute_T();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
                         case "Comment":
                             var comment = new Common.Comment_T();
@@ -82,8 +90,9 @@ namespace SimaticML.SW.PlcBlocks.STL
                             items.Add(lineComment);
                             break;
                         case "Token":
-                            Token = new Common.Token_T_v2();
-                            Token.ReadXml(reader);
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            Token = token;
                             break;
                     }
                 }
@@ -119,24 +128,24 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlToken", IsNullable = false)]
-    public class StlToken_T_v2 : StlToken_T, IEnumerable<Object_G>
+    public class StlToken_T_v2 : StlToken_T, IStlToken_T
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative
         /// </summary>
-        public new Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
+        //public new Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
 
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         /// <summary>
         /// e.g 0 1 for NOP 0, NOP 1; STW for L STW or DILG for L DILG; only if separated by comment
         /// </summary>
-        public new Common.Token_T_v2 Token { get; set; }
+        //public new Common.Token_T_v2 Token { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -167,8 +176,9 @@ namespace SimaticML.SW.PlcBlocks.STL
                     switch (reader.Name)
                     {
                         case "IntegerAttribute":
-                            IntegerAttribute = new Common.IntegerAttribute_T_v2();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new Common.IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
                         case "Blank":
                             var blank = new Common.Blank_T();
@@ -192,8 +202,9 @@ namespace SimaticML.SW.PlcBlocks.STL
                             break;
 
                         case "Token":
-                            Token = new Common.Token_T_v2();
-                            Token.ReadXml(reader);
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            Token = token;
                             break;
                     }
                 }
@@ -228,19 +239,19 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlToken", IsNullable = false)]
-    public class StlToken_T_v4 : StlToken_T_v2, IEnumerable<Object_G>
+    public class StlToken_T_v4 : StlToken_T_v2, IStlToken_T
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative
         /// </summary>
-        public new Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
+        //public new Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
 
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -271,8 +282,9 @@ namespace SimaticML.SW.PlcBlocks.STL
                     switch (reader.Name)
                     {
                         case "IntegerAttribute":
-                            IntegerAttribute = new Common.IntegerAttribute_T_v2();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new Common.IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
                         case "Blank":
                             var blank = new Common.Blank_T();
@@ -296,8 +308,9 @@ namespace SimaticML.SW.PlcBlocks.STL
                             break;
 
                         case "Token":
-                            Token = new Common.Token_T_v2();
-                            Token.ReadXml(reader);
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            Token = token;
                             break;
                     }
                 }

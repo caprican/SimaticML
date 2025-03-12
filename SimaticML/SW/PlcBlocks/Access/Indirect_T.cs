@@ -6,6 +6,15 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IIndirect_T : IEnumerable<Object_G>
+    {
+        Width_TE Width { get; set; }
+        Area_TE? Area { get; set; }
+        Register_TE? Register { get; set; }
+        string BitOffset { get; set; }
+        IAccess_T Access { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,7 +23,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Indirect", IsNullable = false)]
-    public class Indirect_T : Object_G, IEnumerable<Object_G>
+    public class Indirect_T : Object_G, IIndirect_T
     {
         [XmlAttribute]
         public Width_TE Width { get; set; }
@@ -38,7 +47,7 @@ namespace SimaticML.SW.PlcBlocks.Access
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
-        public Access_T Access { get; set; }
+        public IAccess_T Access { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -77,8 +86,9 @@ namespace SimaticML.SW.PlcBlocks.Access
                     switch (reader.Name)
                     {
                         case "Access":
-                            Access = new Access_T();
-                            Access.ReadXml(reader);
+                            var access = new Access_T();
+                            access.ReadXml(reader);
+                            Access = access;
                             break;
                         case "Comment":
                             var comment = new Common.Comment_T_v2();
@@ -131,17 +141,17 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Indirect", IsNullable = false)]
-    public class Indirect_T_v2 : Indirect_T, IEnumerable<Object_G>
+    public class Indirect_T_v2 : Indirect_T, IIndirect_T
     {
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
-        public new Access_T_v2 Access { get; set; }
+        //public new Access_T_v2 Access { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -180,8 +190,9 @@ namespace SimaticML.SW.PlcBlocks.Access
                     switch (reader.Name)
                     {
                         case "Access":
-                            Access = new Access_T_v2();
-                            Access.ReadXml(reader);
+                            var access = new Access_T_v2();
+                            access.ReadXml(reader);
+                            Access = access;
                             break;
                         case "Blank":
                             var blank = new Common.Blank_T();
@@ -243,11 +254,11 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Indirect", IsNullable = false)]
-    public class Indirect_T_v3 : Indirect_T_v2, IEnumerable<Object_G>
+    public class Indirect_T_v3 : Indirect_T_v2, IIndirect_T
     {
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
-        public new Access_T_v3 Access { get; set; }
+        //public new Access_T_v3 Access { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -286,8 +297,9 @@ namespace SimaticML.SW.PlcBlocks.Access
                     switch (reader.Name)
                     {
                         case "Access":
-                            Access = new Access_T_v3();
-                            Access.ReadXml(reader);
+                            var access = new Access_T_v3();
+                            access.ReadXml(reader);
+                            Access = access;
                             break;
                         case "Blank":
                             var blank = new Common.Blank_T();
@@ -349,17 +361,17 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Indirect", IsNullable = false)]
-    public class Indirect_T_v4 : Indirect_T_v3, IEnumerable<Object_G>
+    public class Indirect_T_v4 : Indirect_T_v3, IIndirect_T
     {
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        [XmlElement("Token", typeof(Common.Token_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //[XmlElement("Token", typeof(Common.Token_T_v2))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
-        public new Access_T_v4 Access { get; set; }
+        //public new Access_T_v4 Access { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -398,8 +410,9 @@ namespace SimaticML.SW.PlcBlocks.Access
                     switch (reader.Name)
                     {
                         case "Access":
-                            Access = new Access_T_v4();
-                            Access.ReadXml(reader);
+                            var access = new Access_T_v4();
+                            access.ReadXml(reader);
+                            Access = access;
                             break;
                         case "Blank":
                             var blank = new Common.Blank_T();
@@ -461,11 +474,11 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Indirect", IsNullable = false)]
-    public class Indirect_T_v5 : Indirect_T_v4, IEnumerable<Object_G>
+    public class Indirect_T_v5 : Indirect_T_v4, IIndirect_T
     {
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
-        public new Access_T_v5 Access { get; set; }
+        //public new Access_T_v5 Access { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -505,8 +518,9 @@ namespace SimaticML.SW.PlcBlocks.Access
                     switch (reader.Name)
                     {
                         case "Access":
-                            Access = new Access_T_v5();
-                            Access.ReadXml(reader);
+                            var access = new Access_T_v5();
+                            access.ReadXml(reader);
+                            Access = access;
                             break;
                         case "Blank":
                             var blank = new Common.Blank_T();
