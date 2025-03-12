@@ -5,6 +5,21 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IAccess
+    {
+        /// <summary>
+        /// for NumBLs. NumBLs is informative. Not for LAD/FBD.
+        /// </summary>
+        Common.IIntegerAttribute_T IntegerAttribute { get; set; }
+        Object_G Item { get; set; }
+        Common.Comment_G[] Comments { get; set; }
+        Scope_TE Scope { get; set; }
+        /// <summary>
+        /// Not allowed in STL
+        /// </summary>
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -13,12 +28,12 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Access", IsNullable = false)]
-    public class Access_T : Object_G
+    public class Access_T : Object_G, IAccess
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative. Not for LAD/FBD.
         /// </summary>
-        public Common.IntegerAttribute_T IntegerAttribute { get; set; }
+        public Common.IIntegerAttribute_T IntegerAttribute { get; set; }
 
         [XmlElement("Address", typeof(Address_T))]              // for absolute addresses
         [XmlElement("CallInfo", typeof(CallInfo_T))]              // call of a user block. Not in Graph ActionList.
@@ -75,8 +90,9 @@ namespace SimaticML.SW.PlcBlocks.Access
                     switch (reader.Name)
                     {
                         case "IntegerAttribute":
-                            IntegerAttribute = new Common.IntegerAttribute_T();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new Common.IntegerAttribute_T();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
 
                         case "Comment":

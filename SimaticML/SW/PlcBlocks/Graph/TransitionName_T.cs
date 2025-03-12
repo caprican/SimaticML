@@ -62,9 +62,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public IEnumerator<Common.MultiLanguageText_T_v2> GetEnumerator()
         {
-            foreach (var item in Texts)
+            if (Texts is null) yield break;
+            foreach (var text in Texts)
             {
-                yield return item;
+                yield return text;
             }
         }
 

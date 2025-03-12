@@ -67,9 +67,10 @@ namespace SimaticML
 
         public IEnumerator<SW.PlcBlocks.SCL.StructuredText_T> GetEnumerator()
         {
-            foreach (var item in StructuredTexts)
+            if (StructuredTexts is null) yield break;
+            foreach (var structuredText in StructuredTexts)
             {
-                yield return item;
+                yield return structuredText;
             }
         }
 

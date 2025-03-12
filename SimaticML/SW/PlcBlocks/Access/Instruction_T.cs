@@ -105,6 +105,7 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public IEnumerator<Object_G> GetEnumerator()
         {
+            if (Items is null) yield break; 
             foreach (var item in Items)
             {
                 yield return item;
@@ -238,13 +239,13 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Object_G> GetEnumerator()
-        {
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    foreach (var item in Items)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -364,13 +365,13 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Object_G> GetEnumerator()
-        {
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    foreach (var item in Items)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -490,13 +491,13 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Object_G> GetEnumerator()
-        {
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    foreach (var item in Items)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -616,13 +617,13 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Object_G> GetEnumerator()
-        {
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    foreach (var item in Items)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

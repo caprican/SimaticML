@@ -6,6 +6,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    public interface  AttrbutList_T : IEnumerable<Object_G>
+    {
+        
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -13,7 +18,7 @@ namespace SimaticML.SW.Common
     /// </list>
     /// </remarks>
     [Serializable]
-    public class AttributList_T : Object_G, IEnumerable<Object_G>
+    public class AttributList_T : Object_G, AttrbutList_T
     {
         [XmlElement("BooleanAttribute", typeof(BooleanAttribute_T))]        // A member attribute with a type restriction of boolean
         [XmlElement("IntegerAttribute", typeof(IntegerAttribute_T))]        // A member attribute with a type restriction of integer.
@@ -71,6 +76,7 @@ namespace SimaticML.SW.Common
 
         public IEnumerator<Object_G> GetEnumerator()
         {
+            if (Items is null) yield break;
             foreach (var item in Items)
             {
                 yield return item;
@@ -88,7 +94,7 @@ namespace SimaticML.SW.Common
     /// </list>
     /// </remarks>
     [Serializable]
-    public class AttributList_T_v2 : AttributList_T, IEnumerable<Object_G>
+    public class AttributList_T_v2 : AttributList_T, AttrbutList_T
     {
         [XmlElement("BooleanAttribute", typeof(BooleanAttribute_T_v2))]         // A member attribute with a type restriction of boolean
         [XmlElement("DateAttribute", typeof(DateAttribute_T_v2))]               // A member attribute with a type restriction of date.
@@ -150,13 +156,13 @@ namespace SimaticML.SW.Common
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Object_G> GetEnumerator()
-        {
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    foreach (var item in Items)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

@@ -5,6 +5,18 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    public interface IMultiLanguageText_T
+    {
+        string Lang { get; set; }
+
+        string Value { get; set; }
+    }
+
+    public interface IMultiLanguageText_T_v2 : IMultiLanguageText_T
+    {
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,9 +26,9 @@ namespace SimaticML.SW.Common
     [Serializable]
     [DebuggerDisplay("{(Lang)}{Value}")]
     [XmlRoot("MultiLanguageText", IsNullable = false)]
-    public class MultiLanguageText_T : Object_G
+    public class MultiLanguageText_T : Object_G, IMultiLanguageText_T
     {
-        [XmlAttribute("lng")]
+        [XmlAttribute("Lang")]
         public string Lang { get; set; }
 
         [XmlText]
@@ -53,7 +65,7 @@ namespace SimaticML.SW.Common
     [Serializable]
     [DebuggerDisplay("{(Lang)}{Value}")]
     [XmlRoot("MultiLanguageText", IsNullable = false)]
-    public class MultiLanguageText_T_v2 : MultiLanguageText_T
+    public class MultiLanguageText_T_v2 : MultiLanguageText_T, IMultiLanguageText_T_v2
     {
         [XmlAttribute]
         public int? UId { get; set; } = null;

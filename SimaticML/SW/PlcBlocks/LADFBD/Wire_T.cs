@@ -96,6 +96,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public IEnumerator<Object_G> GetEnumerator()
         {
+            if (Items is null) yield break;
             foreach (var item in Items)
             {
                 yield return item;

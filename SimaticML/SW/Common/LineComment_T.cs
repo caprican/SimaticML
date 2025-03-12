@@ -7,6 +7,27 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    public interface ILineComment_T : IEnumerable<Object_G>
+    {
+        /// <summary>
+        /// For NumBLs in STL. NumBLs is the count of the blank spaces before the actual text in the LineComment.
+        /// This is informative.
+        /// </summary>
+        IIntegerAttribute_T IntegerAttribute { get; set; }
+        bool Inserted { get; set; }
+    }
+
+    public interface ILineComment_T_v2 : ILineComment_T
+    {
+        bool NoClosingBracket { get; set; }
+        int? UId { get; set; }
+    }
+
+    public interface ILineComment_T_v3 : ILineComment_T_v2
+    {
+
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -15,13 +36,13 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("LineComment", IsNullable = false)]
-    public class LineComment_T : Comment_G, IEnumerable<Object_G>
+    public class LineComment_T : Comment_G, ILineComment_T
     {
         /// <summary>
         /// For NumBLs in STL. NumBLs is the count of the blank spaces before the actual text in the LineComment.
         /// This is informative.
         /// </summary>
-        public IntegerAttribute_T IntegerAttribute { get; set; }
+        public IIntegerAttribute_T IntegerAttribute { get; set; }
 
         /// <summary>
         /// Denotes if the comment is at the end of the line (using //) or inside the line (using /* */)
@@ -60,8 +81,9 @@ namespace SimaticML.SW.Common
                     switch (reader.Name)
                     {
                         case "IntegerAttribute":
-                            IntegerAttribute = new IntegerAttribute_T();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new IntegerAttribute_T();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
                         case "Text":
                             var text = new Text_T();
@@ -86,6 +108,7 @@ namespace SimaticML.SW.Common
 
         public IEnumerator<Object_G> GetEnumerator()
         {
+            if (Items is null) yield break;
             foreach (var item in Items)
             {
                 yield return item;
@@ -103,13 +126,13 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("LineComment", IsNullable = false)]
-    public class LineComment_T_v2 : LineComment_T, IEnumerable<Object_G>
+    public class LineComment_T_v2 : LineComment_T, ILineComment_T_v2
     {
-        /// <summary>
-        /// For NumBLs in STL. NumBLs is the count of the blank spaces before the actual text in the LineComment.
-        /// This is informative.
-        /// </summary>
-        public new IntegerAttribute_T_v2 IntegerAttribute { get; set; }
+        ///// <summary>
+        ///// For NumBLs in STL. NumBLs is the count of the blank spaces before the actual text in the LineComment.
+        ///// This is informative.
+        ///// </summary>
+        //public new IntegerAttribute_T_v2 IntegerAttribute { get; set; }
 
         /// <summary>
         /// the value of the comment
@@ -157,8 +180,9 @@ namespace SimaticML.SW.Common
                     switch (reader.Name)
                     {
                         case "IntegerAttribute":
-                            IntegerAttribute = new IntegerAttribute_T_v2();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
                         case "Text":
                             var text = new Text_T_v2();
@@ -181,13 +205,13 @@ namespace SimaticML.SW.Common
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Object_G> GetEnumerator()
-        {
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    foreach (var item in Items)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -199,7 +223,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("LineComment", IsNullable = false)]
-    public class LineComment_T_v3 : LineComment_T_v2, IEnumerable<Object_G>
+    public class LineComment_T_v3 : LineComment_T_v2, ILineComment_T_v3
     {
         /// <summary>
         /// the value of the comment
@@ -239,8 +263,9 @@ namespace SimaticML.SW.Common
                     switch (reader.Name)
                     {
                         case "IntegerAttribute":
-                            IntegerAttribute = new IntegerAttribute_T_v2();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
                         case "Text":
                             var text = new Text_T_v2();
@@ -268,13 +293,13 @@ namespace SimaticML.SW.Common
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Object_G> GetEnumerator()
-        {
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    foreach (var item in Items)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

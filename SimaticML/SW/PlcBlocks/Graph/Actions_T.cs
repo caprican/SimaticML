@@ -14,7 +14,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T : Object_G, IEnumerable<Action_T>
+    public class Actions_T : Object_G, IEnumerable<Object_G>
     {
         public Common.Comment_T Title { get; set; }
 
@@ -59,11 +59,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        public IEnumerator<Action_T> GetEnumerator()
+        public IEnumerator<Object_G> GetEnumerator()
         {
-            foreach (var item in Actions)
+            if (Actions is null) yield break; 
+            foreach (var action in Actions)
             {
-                yield return item;
+                yield return action;
             }
         }
 
@@ -78,7 +79,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v2 : Actions_T, IEnumerable<Action_T_v2>
+    public class Actions_T_v2 : Actions_T, IEnumerable<Object_G>
     {
         public new Common.Comment_T_v2 Title { get; set; }
 
@@ -123,13 +124,13 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Action_T_v2> GetEnumerator()
-        {
-            foreach (var item in Actions)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Action_T_v2> GetEnumerator()
+        //{
+        //    foreach (var item in Actions)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -142,7 +143,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v4 : Actions_T_v2, IEnumerable<Action_T_v4>
+    public class Actions_T_v4 : Actions_T_v2, IEnumerable<Object_G>
     {
         [XmlElement("Action")]
         protected internal new Action_T_v4[] Actions { get; set; }
@@ -185,13 +186,13 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Action_T_v4> GetEnumerator()
-        {
-            foreach (var item in Actions)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Action_T_v4> GetEnumerator()
+        //{
+        //    foreach (var item in Actions)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -204,7 +205,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v5 : Actions_T_v4, IEnumerable<Action_T_v5>
+    public class Actions_T_v5 : Actions_T_v4, IEnumerable<Object_G>
     {
         [XmlElement("Action")]
         protected internal new Action_T_v5[] Actions { get; set; }
@@ -266,7 +267,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v6 : Actions_T_v5, IEnumerable<Action_T_v6>
+    public class Actions_T_v6 : Actions_T_v5, IEnumerable<Object_G>
     {
         [XmlElement("Action")]
         protected internal new Action_T_v6[] Actions { get; set; }
@@ -309,13 +310,13 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Action_T_v6> GetEnumerator()
-        {
-            foreach (var item in Actions)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Action_T_v6> GetEnumerator()
+        //{
+        //    foreach (var item in Actions)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

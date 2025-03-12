@@ -64,9 +64,10 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
 
         public IEnumerator<BlockInstSupervision> GetEnumerator()
         {
-            foreach (var item in BlockInstSupervisions)
+            if (BlockInstSupervisions is null) yield break;
+            foreach (var block in BlockInstSupervisions)
             {
-                yield return item;
+                yield return block;
             }
         }
 

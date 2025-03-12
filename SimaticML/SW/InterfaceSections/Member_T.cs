@@ -8,6 +8,19 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.InterfaceSections
 {
+    public interface IMember_T : IEnumerable<Object_G>
+    {
+        string Name { get; set; }
+        string Datatype { get; set; }
+        string Version { get; set; }
+        Remanence_TE Remanence { get; set; }
+        Accessibility_TE Accessibility { get; set; }
+        bool Informative { get; set; }
+        Common.AttributeBase[] Attributes {  get; set; }
+
+        Common.IComment_T Comment {  get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -17,7 +30,7 @@ namespace SimaticML.SW.InterfaceSections
     [Serializable]
     [XmlRoot("Member", Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v2", IsNullable = false)]
     [DebuggerDisplay("{Name}")]
-    public class Member_T : Object_G, IEnumerable<Object_G>
+    public class Member_T : Object_G, IMember_T
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -51,7 +64,7 @@ namespace SimaticML.SW.InterfaceSections
         [XmlArrayItem("StringAttribute", typeof(Common.StringAttribute_T), IsNullable = false)]
         public Common.AttributeBase[] Attributes { get; set; }
 
-        public Common.Comment_T Comment { get; set; }
+        public Common.IComment_T Comment { get; set; }
 
         [XmlElement("Member", typeof(Member_T))]
         [XmlElement("Sections", typeof(Sections_T))]
@@ -106,8 +119,9 @@ namespace SimaticML.SW.InterfaceSections
                             break;
 
                         case "Comment":
-                            Comment = new Common.Comment_T();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
 
                         case "Member":
@@ -148,6 +162,7 @@ namespace SimaticML.SW.InterfaceSections
 
         public IEnumerator<Object_G> GetEnumerator()
         {
+            if (Items is null) yield break;
             foreach (var item in Items)
             {
                 yield return item;
@@ -166,24 +181,24 @@ namespace SimaticML.SW.InterfaceSections
     [Serializable]
     [XmlRoot("Member", Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v3", IsNullable = false)]
     [DebuggerDisplay("{Name}")]
-    public class Member_T_v3 : Member_T, IEnumerable<Object_G>
+    public class Member_T_v3 : Member_T, IMember_T
     {
-        [XmlArray("AttributeList")]
-        [XmlArrayItem("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2), IsNullable = false)]
-        [XmlArrayItem("DateAttribute", typeof(Common.DateAttribute_T_v2), IsNullable = false)]
-        [XmlArrayItem("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), IsNullable = false)]
-        [XmlArrayItem("RealAttribute", typeof(Common.RealAttribute_T_v2), IsNullable = false)]
-        [XmlArrayItem("StringAttribute", typeof(Common.StringAttribute_T_v2), IsNullable = false)]
-        public new Common.AttributeBase[] Attributes { get; set; }
+        //[XmlArray("AttributeList")]
+        //[XmlArrayItem("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2), IsNullable = false)]
+        //[XmlArrayItem("DateAttribute", typeof(Common.DateAttribute_T_v2), IsNullable = false)]
+        //[XmlArrayItem("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), IsNullable = false)]
+        //[XmlArrayItem("RealAttribute", typeof(Common.RealAttribute_T_v2), IsNullable = false)]
+        //[XmlArrayItem("StringAttribute", typeof(Common.StringAttribute_T_v2), IsNullable = false)]
+        //public new Common.AttributeBase[] Attributes { get; set; }
 
-        public new Common.Comment_T_v2 Comment { get; set; }
+        //public new Common.Comment_T_v2 Comment { get; set; }
 
-        [XmlElement("Member", typeof(Member_T_v3))]
-        [XmlElement("Sections", typeof(Sections_T_v3))]
-        [XmlElement("StartValue", typeof(StartValue_T))]
-        [XmlElement("Subelement", typeof(Subelement_T_v3))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Member", typeof(Member_T_v3))]
+        //[XmlElement("Sections", typeof(Sections_T_v3))]
+        //[XmlElement("StartValue", typeof(StartValue_T))]
+        //[XmlElement("Subelement", typeof(Subelement_T_v3))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -272,13 +287,13 @@ namespace SimaticML.SW.InterfaceSections
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Object_G> GetEnumerator()
-        {
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    foreach (var item in Items)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -292,14 +307,14 @@ namespace SimaticML.SW.InterfaceSections
     [Serializable]
     [XmlRoot("Member", Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v4", IsNullable = false)]
     [DebuggerDisplay("{Name}")]
-    public class Member_T_v4 : Member_T_v3, IEnumerable<Object_G>
+    public class Member_T_v4 : Member_T_v3, IMember_T// IEnumerable<Object_G>
     {
-        [XmlElement("Member", typeof(Member_T_v4))]
-        [XmlElement("Sections", typeof(Sections_T_v4))]
-        [XmlElement("StartValue", typeof(StartValue_T))]
-        [XmlElement("Subelement", typeof(Subelement_T_v3))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Member", typeof(Member_T_v4))]
+        //[XmlElement("Sections", typeof(Sections_T_v4))]
+        //[XmlElement("StartValue", typeof(StartValue_T))]
+        //[XmlElement("Subelement", typeof(Subelement_T_v3))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -387,13 +402,13 @@ namespace SimaticML.SW.InterfaceSections
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Object_G> GetEnumerator()
-        {
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    foreach (var item in Items)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -407,15 +422,15 @@ namespace SimaticML.SW.InterfaceSections
     [Serializable]
     [XmlRoot("Member", Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v5", IsNullable = false)]
     [DebuggerDisplay("{Name}")]
-    public class Member_T_v5 : Member_T_v4, IEnumerable<Object_G>
+    public class Member_T_v5 : Member_T_v4, IMember_T// IEnumerable<Object_G>
     {
-        [XmlElement("AssignedProDiagFB", typeof(string))]
-        [XmlElement("Member", typeof(Member_T_v5))]
-        [XmlElement("Sections", typeof(Sections_T_v5))]
-        [XmlElement("StartValue", typeof(StartValue_T))]
-        [XmlElement("Subelement", typeof(Subelement_T_v5))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("AssignedProDiagFB", typeof(string))]
+        //[XmlElement("Member", typeof(Member_T_v5))]
+        //[XmlElement("Sections", typeof(Sections_T_v5))]
+        //[XmlElement("StartValue", typeof(StartValue_T))]
+        //[XmlElement("Subelement", typeof(Subelement_T_v5))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -508,13 +523,17 @@ namespace SimaticML.SW.InterfaceSections
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Object_G> GetEnumerator()
-        {
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    if (Items != null)
+        //    {
+        //        foreach (var item in Items)
+        //        {
+        //            yield return item;
+        //        }
+        //    }
+
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

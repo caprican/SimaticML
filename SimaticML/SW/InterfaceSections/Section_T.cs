@@ -6,6 +6,14 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.InterfaceSections
 {
+    public interface ISection_T
+    {
+        Common.SectionName_TE Name { get; set; }
+
+        ISections_T Sections { get; set; }
+        IMember_T[] Members { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -15,7 +23,7 @@ namespace SimaticML.SW.InterfaceSections
     [Serializable]
     [DebuggerDisplay("{Name}")]
     [XmlRoot("Section", Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v2", IsNullable = false)]
-    public class Section_T : Object_G
+    public class Section_T : Object_G, ISection_T
     {
         [XmlAttribute]
         public Common.SectionName_TE Name { get; set; }
@@ -23,10 +31,10 @@ namespace SimaticML.SW.InterfaceSections
         /// <summary>
         /// Base Class
         /// </summary>
-        public Sections_T Sections { get; set; }
+        public ISections_T Sections { get; set; }
 
         [XmlElement("Member")]
-        public Member_T[] Members { get; set; }
+        public IMember_T[] Members { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -87,15 +95,15 @@ namespace SimaticML.SW.InterfaceSections
     [Serializable]
     [DebuggerDisplay("{Name}")]
     [XmlRoot("Section", Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v3", IsNullable = false)]
-    public class Section_T_v3 : Section_T
+    public class Section_T_v3 : Section_T, ISection_T
     {
-        /// <summary>
-        /// Base Class
-        /// </summary>
-        public new Sections_T_v3 Sections { get; set; }
+        ///// <summary>
+        ///// Base Class
+        ///// </summary>
+        //public new Sections_T_v3 Sections { get; set; }
 
-        [XmlElement("Member")]
-        public new Member_T_v3[] Members { get; set; }
+        //[XmlElement("Member")]
+        //public new Member_T_v3[] Members { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -156,15 +164,15 @@ namespace SimaticML.SW.InterfaceSections
     [Serializable]
     [DebuggerDisplay("{Name}")]
     [XmlRoot("Section", Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v4", IsNullable = false)]
-    public class Section_T_v4 : Section_T_v3
+    public class Section_T_v4 : Section_T_v3, ISection_T
     {
-        /// <summary>
-        /// Base Class
-        /// </summary>
-        public new Sections_T_v4 Sections { get; set; }
+        ///// <summary>
+        ///// Base Class
+        ///// </summary>
+        //public new Sections_T_v4 Sections { get; set; }
 
-        [XmlElement("Member")]
-        public new Member_T_v4[] Members { get; set; }
+        //[XmlElement("Member")]
+        //public new Member_T_v4[] Members { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -225,15 +233,15 @@ namespace SimaticML.SW.InterfaceSections
     [Serializable]
     [DebuggerDisplay("{Name}")]
     [XmlRoot("Section", Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v5", IsNullable = false)]
-    public class Section_T_v5 : Section_T_v4
+    public class Section_T_v5 : Section_T_v4, ISection_T
     {
-        /// <summary>
-        /// Base Class
-        /// </summary>
-        public new Sections_T_v5 Sections { get; set; }
+        ///// <summary>
+        ///// Base Class
+        ///// </summary>
+        //public new Sections_T_v5 Sections { get; set; }
 
-        [XmlElement("Member")]
-        public new Member_T_v5[] Members { get; set; }
+        //[XmlElement("Member")]
+        //public new Member_T_v5[] Members { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {

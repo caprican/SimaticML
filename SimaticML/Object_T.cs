@@ -25,6 +25,7 @@ namespace SimaticML
 
         public IEnumerator<Object_T> GetEnumerator()
         {
+            if (Items is null) yield break;
             foreach (var item in Items)
             {
                 yield return item;

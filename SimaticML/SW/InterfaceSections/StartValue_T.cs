@@ -5,6 +5,14 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.InterfaceSections
 {
+    public interface IStartValue_T
+    {
+        string ConstantName { get; set; }
+        bool IsBulkValue { get; set; }
+        bool Informative { get; set; }
+        string Value { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +24,7 @@ namespace SimaticML.SW.InterfaceSections
     /// </remarks>
     [Serializable]
     [XmlRoot("StartValue", IsNullable = false)]
-    public class StartValue_T : Object_G
+    public class StartValue_T : Object_G, IStartValue_T
     {
         [XmlAttribute]
         public string ConstantName { get; set; }

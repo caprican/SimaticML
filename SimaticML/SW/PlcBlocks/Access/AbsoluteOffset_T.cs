@@ -4,6 +4,12 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IAbsoluteOffset_T
+    {
+        int BitOffset { get; set; }
+        string Type { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +22,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("AbsoluteOffset", IsNullable = false)]
-    public class AbsoluteOffset_T : Object_G
+    public class AbsoluteOffset_T : Object_G, IAbsoluteOffset_T
     {
         /// <summary>
         /// Byte * 8 + Bit

@@ -6,6 +6,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.InterfaceSections
 {
+    public interface ISubelement_T : IEnumerable<Object_G>
+    {
+        string Path { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,7 +19,7 @@ namespace SimaticML.SW.InterfaceSections
     /// </remarks>
     [Serializable]
     [XmlRoot("Subelement", IsNullable = false)]
-    public class Subelement_T : Object_G, IEnumerable<Object_G>
+    public class Subelement_T : Object_G, ISubelement_T
     {
         [XmlElement("Comment", typeof(Common.Comment_T))]
         [XmlElement("StartValue", typeof(StartValue_T))]
@@ -73,6 +78,7 @@ namespace SimaticML.SW.InterfaceSections
 
         public IEnumerator<Object_G> GetEnumerator()
         {
+            if (Items is null) yield break; 
             foreach (var item in Items)
             {
                 yield return item;
@@ -90,13 +96,13 @@ namespace SimaticML.SW.InterfaceSections
     /// </list>
     /// </remarks>
     [Serializable]
-    [XmlRoot("Subelement", Namespace = "", IsNullable = false)]
-    public class Subelement_T_v3 : Subelement_T, IEnumerable<Object_G>
+    [XmlRoot("Subelement", IsNullable = false)]
+    public class Subelement_T_v3 : Subelement_T, ISubelement_T
     {
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("StartValue", typeof(StartValue_T))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("StartValue", typeof(StartValue_T))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -146,13 +152,13 @@ namespace SimaticML.SW.InterfaceSections
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Object_G> GetEnumerator()
-        {
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    foreach (var item in Items)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -167,11 +173,11 @@ namespace SimaticML.SW.InterfaceSections
     [XmlRoot("Subelement", Namespace = "", IsNullable = false)]
     public class Subelement_T_v5 : Subelement_T_v3, IEnumerable<Object_G>
     {
-        [XmlElement("AssignedProDiagFB", typeof(string))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("StartValue", typeof(StartValue_T))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("AssignedProDiagFB", typeof(string))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("StartValue", typeof(StartValue_T))]
+        //protected internal new Object_G[] Items { get; set; }
+        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -225,13 +231,13 @@ namespace SimaticML.SW.InterfaceSections
             throw new NotImplementedException();
         }
 
-        public new IEnumerator<Object_G> GetEnumerator()
-        {
-            foreach (var item in Items)
-            {
-                yield return item;
-            }
-        }
+        //public new IEnumerator<Object_G> GetEnumerator()
+        //{
+        //    foreach (var item in Items)
+        //    {
+        //        yield return item;
+        //    }
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
