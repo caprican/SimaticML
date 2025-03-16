@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IAlarmSubcategory
+    {
+        ushort Id { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,7 +19,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("AlarmSubcategory1Interlock", IsNullable = false)]
-    public class AlarmSubcategory_T : Object_G
+    public class AlarmSubcategory_T : Object_G, IAlarmSubcategory
     {
         [XmlAttribute]
         public ushort Id { get; set; }

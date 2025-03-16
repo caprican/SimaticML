@@ -117,8 +117,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
         //[XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
         //[XmlElement("Access", typeof(Access_T_v3), Order = 3)]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -178,14 +176,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -206,8 +196,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
         //[XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
         //[XmlElement("Access", typeof(Access_T_v4), Order = 3)]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -267,14 +255,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -295,8 +275,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("NewLine", typeof(Common.NewLine_T), Order = 0 | 2 | 4)]
         //[XmlElement("Token", typeof(Common.Token_T_v2), Order = 1 | 5)]
         //[XmlElement("Access", typeof(Access_T_v5), Order = 3)]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -355,14 +333,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

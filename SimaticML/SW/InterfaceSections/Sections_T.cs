@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace SimaticML.SW.InterfaceSections
 {
 
-    public interface ISections_T : IEnumerable<ISection_T>
+    public interface ISections : IEnumerable<ISection>
     {
         string Datatype { get; set; }
         string Version { get; set; }
@@ -23,7 +23,7 @@ namespace SimaticML.SW.InterfaceSections
     /// </remarks>
     [Serializable]
     [XmlRoot("Sections", IsNullable = false)]
-    public class Sections_T : Object_G, ISections_T
+    public class Sections_T : Object_G, ISections
     {
         [XmlAttribute]
         public string Datatype { get; set; }
@@ -40,8 +40,8 @@ namespace SimaticML.SW.InterfaceSections
 
         [XmlArray("Sections")]
         [XmlElement("Section")]
-        protected internal ISection_T[] Items { get; set; }
-        public ISection_T this[int key] { get => Items[key]; set => Items[key] = value; }
+        protected internal ISection[] Items { get; set; }
+        public ISection this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -94,7 +94,7 @@ namespace SimaticML.SW.InterfaceSections
             throw new NotImplementedException();
         }
 
-        public IEnumerator<ISection_T> GetEnumerator()
+        public IEnumerator<ISection> GetEnumerator()
         {
             if (Items is null) yield break;
             foreach (var item in Items)
@@ -114,7 +114,7 @@ namespace SimaticML.SW.InterfaceSections
     /// </remarks>
     [Serializable]
     [XmlRoot("Sections", IsNullable = false)]
-    public class Sections_T_v3 : Sections_T, ISections_T
+    public class Sections_T_v3 : Sections_T, ISections
     {
         //[XmlArray("AttributeList")]
         //[XmlArrayItem("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2), IsNullable = false)]
@@ -122,13 +122,9 @@ namespace SimaticML.SW.InterfaceSections
         //[XmlArrayItem("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), IsNullable = false)]
         //[XmlArrayItem("RealAttribute", typeof(Common.RealAttribute_T_v2), IsNullable = false)]
         //[XmlArrayItem("StringAttribute", typeof(Common.StringAttribute_T_v2), IsNullable = false)]
-        //public new Common.AttributeBase[] Attributes { get; set; }
 
         //[XmlArray("Sections")]
         //[XmlElement("Section")]
-        //protected internal new ISection_T[] Items { get; set; }
-        //public new ISection_T this[int key] { get => Items[key]; set => Items[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -180,13 +176,6 @@ namespace SimaticML.SW.InterfaceSections
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<ISection_T> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -198,7 +187,7 @@ namespace SimaticML.SW.InterfaceSections
     /// </remarks>
     [Serializable]
     [XmlRoot("Sections", IsNullable = false)]
-    public class Sections_T_v4 : Sections_T_v3, ISections_T
+    public class Sections_T_v4 : Sections_T_v3, ISections
     {
         //[XmlArray("AttributeList")]
         //[XmlArrayItem("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2), IsNullable = false)]
@@ -206,12 +195,6 @@ namespace SimaticML.SW.InterfaceSections
         //[XmlArrayItem("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), IsNullable = false)]
         //[XmlArrayItem("RealAttribute", typeof(Common.RealAttribute_T_v2), IsNullable = false)]
         //[XmlArrayItem("StringAttribute", typeof(Common.StringAttribute_T_v2), IsNullable = false)]
-        //public new Common.AttributeBase[] Attributes { get; set; }
-
-        //[XmlArray("Sections")]
-        //[XmlElement("Section")]
-        //protected internal new ISection_T[] Items { get; set; }
-        //public new ISection_T this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -264,13 +247,6 @@ namespace SimaticML.SW.InterfaceSections
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<ISection_T> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -282,13 +258,8 @@ namespace SimaticML.SW.InterfaceSections
     /// </remarks>
     [Serializable]
     [XmlRoot("Sections", IsNullable = false)]
-    public class Sections_T_v5 : Sections_T_v4, ISections_T
+    public class Sections_T_v5 : Sections_T_v4, ISections
     {
-        //[XmlArray("Sections")]
-        //[XmlElement("Section")]
-        //protected internal new Section_T_v5[] Items { get; set; }
-        //public new Section_T_v5 this[int key] { get => Items[key]; set => Items[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
             while(reader.MoveToNextAttribute())
@@ -340,13 +311,6 @@ namespace SimaticML.SW.InterfaceSections
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<ISection_T> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

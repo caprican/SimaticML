@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
-    public interface ITransitionName_T : IEnumerable<Common.IMultiLanguageText_T>
+    public interface ITransitionName_T : IEnumerable<Common.IMultiLanguageText_v2>
     {
     }
 
@@ -28,8 +28,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
         /// </summary>
 
         [XmlElement("MultiLanguageText")]
-        protected internal Common.MultiLanguageText_T_v2[] Texts { get; set; }
-        public Common.MultiLanguageText_T_v2 this[int key] { get => Texts[key]; set => Texts[key] = value; }
+        protected internal Common.IMultiLanguageText_v2[] Texts { get; set; }
+        public Common.IMultiLanguageText_v2 this[int key] { get => Texts[key]; set => Texts[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -38,7 +38,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var texts = new List<Common.MultiLanguageText_T_v2>();
+                var texts = new List<Common.IMultiLanguageText_v2>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -64,7 +64,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        public IEnumerator<Common.IMultiLanguageText_T> GetEnumerator()
+        public IEnumerator<Common.IMultiLanguageText_v2> GetEnumerator()
         {
             if (Texts is null) yield break;
             foreach (var text in Texts)

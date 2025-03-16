@@ -6,13 +6,13 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
-    public interface ICallInfo_T : IEnumerable<Object_G>
+    public interface ICallInfo : IEnumerable<Object_G>
     {
         string Name { get; set; }
         BlockType_TE BlockType { get; set; }
     }
 
-    public interface ICallInfo_T_v2 : ICallInfo_T
+    public interface ICallInfo_v2 : ICallInfo
     {
         int? UId { get; set; }
     }
@@ -29,7 +29,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("CallInfo", IsNullable = false)]
-    public class CallInfo_T : Object_G, ICallInfo_T
+    public class CallInfo_T : Object_G, ICallInfo
     {
         //[XmlElement(Order = 0)]
         //public IntegerAttribute_T IntegerAttribute { get; set; }
@@ -169,7 +169,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("CallInfo", IsNullable = false)]
-    public class CallInfo_T_v2 : CallInfo_T, ICallInfo_T_v2
+    public class CallInfo_T_v2 : CallInfo_T, ICallInfo_v2
     {
         //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3 | 6 | 9)]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3 | 6 | 9)]
@@ -346,7 +346,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("CallInfo", IsNullable = false)]
-    public class CallInfo_T_v3 : CallInfo_T_v2, ICallInfo_T_v2
+    public class CallInfo_T_v3 : CallInfo_T_v2, ICallInfo_v2
     {
         //[XmlElement("Blank", typeof(Common.Blank_T))]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
@@ -482,7 +482,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("CallInfo", IsNullable = false)]
-    public class CallInfo_T_v4 : CallInfo_T_v3, ICallInfo_T_v2
+    public class CallInfo_T_v4 : CallInfo_T_v3, ICallInfo_v2
     {
         //[XmlElement("Blank", typeof(Common.Blank_T))]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
@@ -607,7 +607,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("CallInfo", IsNullable = false)]
-    public class CallInfo_T_v5 : CallInfo_T_v4, ICallInfo_T_v2
+    public class CallInfo_T_v5 : CallInfo_T_v4, ICallInfo_v2
     {
         //[XmlElement("Blank", typeof(Common.Blank_T))]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]

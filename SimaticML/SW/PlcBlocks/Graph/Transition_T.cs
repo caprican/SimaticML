@@ -6,6 +6,21 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface ITransition
+    {
+        Common.IComment_T Comment { get; set; }
+        LADFBD.IFlgNet_T FlgNet { get; set; }
+        bool IsMissing { get; set; }
+        string Name { get; set; }
+        int Number { get; set; }
+        ProgrammingLanguage_TE ProgrammingLanguage { get; set; }
+    }
+
+    public interface ITransition_v2 : ITransition
+    {
+        Common.IMultiLanguageText_v2[] TransitionName { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,11 +29,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Transition", IsNullable = false)]
-    public class Transition_T : Object_G
+    public class Transition_T : Object_G, ITransition
     {
-        public Common.Comment_T Comment { get; set; }
+        public Common.IComment_T Comment { get; set; }
 
-        public LADFBD.FlgNet_T FlgNet { get; set; }
+        public LADFBD.IFlgNet_T FlgNet { get; set; }
 
         [XmlAttribute]
         [DefaultValue(false)]
@@ -65,12 +80,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Comment":
-                            Comment = new Common.Comment_T();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                     }
                 }
@@ -96,14 +113,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Transition", IsNullable = false)]
-    public class Transition_T_v2 : Transition_T
+    public class Transition_T_v2 : Transition_T, ITransition_v2
     {
-        public new Common.Comment_T_v2 Comment { get; set; }
-
-        public new LADFBD.FlgNet_T_v2 FlgNet { get; set; }
-
         [XmlArrayItem("MultiLanguageText", IsNullable = false)]
-        public Common.MultiLanguageText_T_v2[] TransitionName { get; set; }
+        public Common.IMultiLanguageText_v2[] TransitionName { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -138,12 +151,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T_v2();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T_v2();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                         case "TransitionName":
                             var text = new Common.MultiLanguageText_T_v2();
@@ -175,10 +190,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Transition", IsNullable = false)]
-    public class Transition_T_v4 : Transition_T_v2
+    public class Transition_T_v4 : Transition_T_v2, ITransition_v2
     {
-        public new LADFBD.FlgNet_T_v3 FlgNet { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -212,12 +225,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T_v3();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T_v3();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                         case "TransitionName":
                             var text = new Common.MultiLanguageText_T_v2();
@@ -249,10 +264,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Transition", IsNullable = false)]
-    public class Transition_T_v5 : Transition_T_v4
+    public class Transition_T_v5 : Transition_T_v4, ITransition_v2
     {
-        public new LADFBD.FlgNet_T_v4 FlgNet { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -286,12 +299,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T_v4();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T_v4();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                         case "TransitionName":
                             var text = new Common.MultiLanguageText_T_v2();
@@ -323,10 +338,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Transition", IsNullable = false)]
-    public class Transition_T_v6 : Transition_T_v5
+    public class Transition_T_v6 : Transition_T_v5, ITransition_v2
     {
-        public new LADFBD.FlgNet_T_v5 FlgNet { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -360,12 +373,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T_v5();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T_v5();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                         case "TransitionName":
                             var text = new Common.MultiLanguageText_T_v2();

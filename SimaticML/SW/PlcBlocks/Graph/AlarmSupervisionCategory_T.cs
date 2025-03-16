@@ -4,6 +4,15 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IAlarmSupervisionCategory
+    {
+        Common.IToken Token { get; set; }
+
+        ushort Id { get; set; }
+
+        ushort DisplayClass { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -12,12 +21,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("AlarmSupervisionCategory", IsNullable = false)]
-    public class AlarmSupervisionCategory_T : Object_G
+    public class AlarmSupervisionCategory_T : Object_G, IAlarmSupervisionCategory
     {
         /// <summary>
         /// Enabler token
         /// </summary>
-        public Common.Token_T Token { get; set; }
+        public Common.IToken Token { get; set; }
 
         [XmlAttribute]
         public ushort Id { get; set; }
@@ -51,8 +60,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Token":
-                            Token = new Common.Token_T();
-                            Token.ReadXml(reader);
+                            var token = new Common.Token_T();
+                            token.ReadXml(reader);
+                            Token = token;
                             break;
                     }
                 }
@@ -81,13 +91,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("AlarmSupervisionCategory", IsNullable = false)]
-    public class AlarmSupervisionCategory_T_v2 : AlarmSupervisionCategory_T
+    public class AlarmSupervisionCategory_T_v2 : AlarmSupervisionCategory_T, IAlarmSupervisionCategory
     {
-        /// <summary>
-        /// Enabler token
-        /// </summary>
-        public new Common.Token_T_v2 Token { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -114,8 +119,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Token":
-                            Token = new Common.Token_T_v2();
-                            Token.ReadXml(reader);
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            Token = token;
                             break;
                     }
                 }

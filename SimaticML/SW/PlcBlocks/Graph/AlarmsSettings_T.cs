@@ -4,6 +4,24 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IAlarmsSettings
+    {
+        IAlarmSupervisionCategories AlarmSupervisionCategories { get; set; }
+        IAlarmCategory AlarmInterlockCategory { get; set; }
+        IAlarmCategory AlarmWarningCategory { get; set; }
+    }
+
+    public interface IAlarmsSettings_v4 : IAlarmsSettings
+    {
+        IAlarmSubcategory AlarmSubcategory1Interlock { get; set; }
+        IAlarmSubcategory AlarmSubcategory1Supervision { get; set; }
+        IAlarmSubcategory AlarmSubcategory1Warning { get; set; }
+
+        IAlarmSubcategory AlarmSubcategory2Interlock { get; set; }
+        IAlarmSubcategory AlarmSubcategory2Supervision { get; set; }
+        IAlarmSubcategory AlarmSubcategory2Warning { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -12,13 +30,13 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("AlarmsSettings", IsNullable = false)]
-    public class AlarmsSettings_T : Object_G
+    public class AlarmsSettings_T : Object_G, IAlarmsSettings
     {
-        public AlarmSupervisionCategories_T AlarmSupervisionCategories { get; set; }
+        public IAlarmSupervisionCategories AlarmSupervisionCategories { get; set; }
 
-        public AlarmCategory_T AlarmInterlockCategory { get; set; }
+        public IAlarmCategory AlarmInterlockCategory { get; set; }
 
-        public AlarmCategory_T AlarmWarningCategory { get; set; }
+        public IAlarmCategory AlarmWarningCategory { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -32,16 +50,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "AlarmSupervisionCategories":
-                            AlarmSupervisionCategories = new AlarmSupervisionCategories_T();
-                            AlarmSupervisionCategories.ReadXml(reader);
+                            var alarmSupervisionCategories = new AlarmSupervisionCategories_T();
+                            alarmSupervisionCategories.ReadXml(reader);
+                            AlarmSupervisionCategories = alarmSupervisionCategories;
                             break;
                         case "AlarmInterlockCategory":
-                            AlarmInterlockCategory = new AlarmCategory_T();
-                            AlarmInterlockCategory.ReadXml(reader);
+                            var alarmInterlockCategory = new AlarmCategory_T();
+                            alarmInterlockCategory.ReadXml(reader);
+                            AlarmInterlockCategory = alarmInterlockCategory;
                             break;
                         case "AlarmWarningCategory":
-                            AlarmWarningCategory = new AlarmCategory_T();
-                            AlarmWarningCategory.ReadXml(reader);
+                            var alarmWarningCategory = new AlarmCategory_T();
+                            alarmWarningCategory.ReadXml(reader);
+                            AlarmWarningCategory = alarmWarningCategory;
                             break;
                     }
                 }
@@ -67,10 +88,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("AlarmsSettings", IsNullable = false)]
-    public class AlarmsSettings_T_v2 : AlarmsSettings_T
+    public class AlarmsSettings_T_v2 : AlarmsSettings_T, IAlarmsSettings
     {
-        public new AlarmSupervisionCategories_T_v2 AlarmSupervisionCategories { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -83,16 +102,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "AlarmSupervisionCategories":
-                            AlarmSupervisionCategories = new AlarmSupervisionCategories_T_v2();
-                            AlarmSupervisionCategories.ReadXml(reader);
+                            var alarmSupervisionCategories = new AlarmSupervisionCategories_T_v2();
+                            alarmSupervisionCategories.ReadXml(reader);
+                            AlarmSupervisionCategories = alarmSupervisionCategories;
                             break;
                         case "AlarmInterlockCategory":
-                            AlarmInterlockCategory = new AlarmCategory_T();
-                            AlarmInterlockCategory.ReadXml(reader);
+                            var alarmInterlockCategory = new AlarmCategory_T();
+                            alarmInterlockCategory.ReadXml(reader);
+                            AlarmInterlockCategory = alarmInterlockCategory;
                             break;
                         case "AlarmWarningCategory":
-                            AlarmWarningCategory = new AlarmCategory_T();
-                            AlarmWarningCategory.ReadXml(reader);
+                            var alarmWarningCategory = new AlarmCategory_T();
+                            alarmWarningCategory.ReadXml(reader);
+                            AlarmWarningCategory = alarmWarningCategory;
                             break;
                     }
                 }
@@ -120,19 +142,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("AlarmsSettings", IsNullable = false)]
-    public class AlarmsSettings_T_v4 : AlarmsSettings_T_v2
+    public class AlarmsSettings_T_v4 : AlarmsSettings_T_v2, IAlarmsSettings_v4
     {
-        public AlarmSubcategory_T AlarmSubcategory1Interlock { get; set; }
+        public IAlarmSubcategory AlarmSubcategory1Interlock { get; set; }
 
-        public AlarmSubcategory_T AlarmSubcategory2Interlock { get; set; }
+        public IAlarmSubcategory AlarmSubcategory2Interlock { get; set; }
 
-        public AlarmSubcategory_T AlarmSubcategory1Supervision { get; set; }
+        public IAlarmSubcategory AlarmSubcategory1Supervision { get; set; }
 
-        public AlarmSubcategory_T AlarmSubcategory2Supervision { get; set; }
+        public IAlarmSubcategory AlarmSubcategory2Supervision { get; set; }
 
-        public AlarmSubcategory_T AlarmSubcategory1Warning { get; set; }
+        public IAlarmSubcategory AlarmSubcategory1Warning { get; set; }
 
-        public AlarmSubcategory_T AlarmSubcategory2Warning { get; set; }
+        public IAlarmSubcategory AlarmSubcategory2Warning { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -146,40 +168,49 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "AlarmSupervisionCategories":
-                            AlarmSupervisionCategories = new AlarmSupervisionCategories_T_v2();
-                            AlarmSupervisionCategories.ReadXml(reader);
+                            var alarmSupervisionCategories = new AlarmSupervisionCategories_T_v2();
+                            alarmSupervisionCategories.ReadXml(reader);
+                            AlarmSupervisionCategories = alarmSupervisionCategories;
                             break;
                         case "AlarmInterlockCategory":
-                            AlarmInterlockCategory = new AlarmCategory_T();
-                            AlarmInterlockCategory.ReadXml(reader);
+                            var alarmInterlockCategory = new AlarmCategory_T();
+                            alarmInterlockCategory.ReadXml(reader);
+                            AlarmInterlockCategory = alarmInterlockCategory;
                             break;
                         case "AlarmWarningCategory":
-                            AlarmWarningCategory = new AlarmCategory_T();
-                            AlarmWarningCategory.ReadXml(reader);
+                            var alarmWarningCategory = new AlarmCategory_T();
+                            alarmWarningCategory.ReadXml(reader);
+                            AlarmWarningCategory = alarmWarningCategory;
                             break;
                         case "AlarmSubcategory1Interlock":
-                            AlarmSubcategory1Interlock = new AlarmSubcategory_T();
-                            AlarmSubcategory1Interlock.ReadXml(reader);
+                            var alarmSubcategory1Interlock = new AlarmSubcategory_T();
+                            alarmSubcategory1Interlock.ReadXml(reader);
+                            AlarmSubcategory1Interlock = alarmSubcategory1Interlock;
                             break;
                         case "AlarmSubcategory2Interlock":
-                            AlarmSubcategory2Interlock = new AlarmSubcategory_T();
-                            AlarmSubcategory2Interlock.ReadXml(reader);
+                            var alarmSubcategory2Interlock = new AlarmSubcategory_T();
+                            alarmSubcategory2Interlock.ReadXml(reader);
+                            AlarmSubcategory2Interlock = alarmSubcategory2Interlock;
                             break;
                         case "AlarmSubcategory1Supervision":
-                            AlarmSubcategory1Supervision = new AlarmSubcategory_T();
-                            AlarmSubcategory1Supervision.ReadXml(reader);
+                            var alarmSubcategory1Supervision = new AlarmSubcategory_T();
+                            alarmSubcategory1Supervision.ReadXml(reader);
+                            AlarmSubcategory1Supervision = alarmSubcategory1Supervision;
                             break;
                         case "AlarmSubcategory2Supervision":
-                            AlarmSubcategory2Supervision = new AlarmSubcategory_T();
-                            AlarmSubcategory2Supervision.ReadXml(reader);
+                            var alarmSubcategory2Supervision = new AlarmSubcategory_T();
+                            alarmSubcategory2Supervision.ReadXml(reader);
+                            AlarmSubcategory2Supervision = alarmSubcategory2Supervision;
                             break;
                         case "AlarmSubcategory1Warning":
-                            AlarmSubcategory1Warning = new AlarmSubcategory_T();
-                            AlarmSubcategory1Warning.ReadXml(reader);
+                            var alarmSubcategory1Warning = new AlarmSubcategory_T();
+                            alarmSubcategory1Warning.ReadXml(reader);
+                            AlarmSubcategory1Warning = alarmSubcategory1Warning;
                             break;
                         case "AlarmSubcategory2Warning":
-                            AlarmSubcategory2Warning = new AlarmSubcategory_T();
-                            AlarmSubcategory2Warning.ReadXml(reader);
+                            var alarmSubcategory2Warning = new AlarmSubcategory_T();
+                            alarmSubcategory2Warning.ReadXml(reader);
+                            AlarmSubcategory2Warning = alarmSubcategory2Warning;
                             break;
                     }
                 }

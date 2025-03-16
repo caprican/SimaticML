@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface IParts_T : IEnumerable<Object_G>
+    {
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -13,11 +18,11 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Parts", IsNullable = false)]
-    public class Parts_T : Object_G
+    public class Parts_T : Object_G, IParts_T
     {
-        [XmlElement("Access", typeof(Access.Access_T))]
-        [XmlElement("Call", typeof(Call_T))]
-        [XmlElement("Part", typeof(Part_T))]
+        //[XmlElement("Access", typeof(Access.Access_T))]
+        //[XmlElement("Call", typeof(Call_T))]
+        //[XmlElement("Part", typeof(Part_T))]
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -63,6 +68,17 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            if (Items is null) yield break;
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -73,13 +89,11 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Parts", IsNullable = false)]
-    public class Parts_T_v2 : Parts_T
+    public class Parts_T_v2 : Parts_T, IParts_T
     {
-        [XmlElement("Access", typeof(Access.Access_T_v2))]
-        [XmlElement("Call", typeof(Call_T_v2))]
-        [XmlElement("Part", typeof(Part_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access.Access_T_v2))]
+        //[XmlElement("Call", typeof(Call_T_v2))]
+        //[XmlElement("Part", typeof(Part_T_v2))]
 
         public override void ReadXml(XmlReader reader)
         {
@@ -123,6 +137,8 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -133,13 +149,11 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Parts", IsNullable = false)]
-    public class Parts_T_v3 : Parts_T_v2
+    public class Parts_T_v3 : Parts_T_v2, IParts_T
     {
-        [XmlElement("Access", typeof(Access.Access_T_v3))]
-        [XmlElement("Call", typeof(Call_T_v3))]
-        [XmlElement("Part", typeof(Part_T_v3))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access.Access_T_v3))]
+        //[XmlElement("Call", typeof(Call_T_v3))]
+        //[XmlElement("Part", typeof(Part_T_v3))]
 
         public override void ReadXml(XmlReader reader)
         {
@@ -183,6 +197,8 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -193,13 +209,11 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Parts", IsNullable = false)]
-    public class Parts_T_v4 : Parts_T_v2
+    public class Parts_T_v4 : Parts_T_v2, IParts_T
     {
-        [XmlElement("Access", typeof(Access.Access_T_v4))]
-        [XmlElement("Call", typeof(Call_T_v4))]
-        [XmlElement("Part", typeof(Part_T_v4))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access.Access_T_v4))]
+        //[XmlElement("Call", typeof(Call_T_v4))]
+        //[XmlElement("Part", typeof(Part_T_v4))]
 
         public override void ReadXml(XmlReader reader)
         {
@@ -243,6 +257,8 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -253,13 +269,11 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Parts", IsNullable = false)]
-    public class Parts_T_v5 : Parts_T_v4
+    public class Parts_T_v5 : Parts_T_v4, IParts_T
     {
-        [XmlElement("Access", typeof(Access.Access_T_v5))]
-        [XmlElement("Call", typeof(Call_T_v5))]
-        [XmlElement("Part", typeof(Part_T_v5))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
+        //[XmlElement("Access", typeof(Access.Access_T_v5))]
+        //[XmlElement("Call", typeof(Call_T_v5))]
+        //[XmlElement("Part", typeof(Part_T_v5))]
 
         public override void ReadXml(XmlReader reader)
         {
@@ -303,5 +317,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

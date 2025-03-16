@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface INeg
+    {
+        string Name { get; set; }
+    }
+
     /// <summary>
     /// The negated pins of this part.
     /// </summary>
@@ -19,7 +24,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Negated", IsNullable = false)]
-    public class Neg_T : Object_G
+    public class Neg_T : Object_G, INeg
     {
         /// <summary>
         /// The name of the negated pin.

@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface IIdentCon
+    {
+        int UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +21,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("IdentCon", IsNullable = false)]
-    public class IdentCon_T : Object_G
+    public class IdentCon_T : Object_G, IIdentCon
     {
         [XmlAttribute]
         public int UId { get; set; }

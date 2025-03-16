@@ -6,4 +6,9 @@
     public abstract class Comment_G : Object_G
     {
     }
+
+    public interface IComment
+    {
+
+    }
 }

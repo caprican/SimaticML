@@ -5,6 +5,15 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    public interface IText
+    {
+        string Value { get; set; }
+    }
+
+    public interface IText_v2 : IText
+    {
+        int? UId { get; set; }
+    }
     /// <remarks>
     /// Schema :
     /// <list type="bullet">
@@ -14,7 +23,7 @@ namespace SimaticML.SW.Common
     [Serializable]
     [DebuggerDisplay("{Value}")]
     [XmlRoot("Text", IsNullable = false)]
-    public class Text_T : Object_G
+    public class Text_T : Object_G, IText
     {
         [XmlText]
         public string Value { get; set; }
@@ -41,7 +50,7 @@ namespace SimaticML.SW.Common
     [Serializable]
     [DebuggerDisplay("{Value}")]
     [XmlRoot("Text", IsNullable = false)]
-    public class Text_T_v2 : Text_T
+    public class Text_T_v2 : Text_T, IText_v2
     {
         [XmlAttribute]
         public int? UId { get; set; } = null;

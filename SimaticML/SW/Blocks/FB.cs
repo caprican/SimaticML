@@ -95,7 +95,7 @@ namespace SimaticML.SW.Blocks
         [XmlIgnore]
         public bool ISMultiInstanceCapableSpecified { get; set; }
 
-        [XmlElement("BlockTypeSupervisions", typeof(PlcBlocks.TypeSupervisions.BlockTypeSupervisions))]
+        //[XmlElement("BlockTypeSupervisions", typeof(PlcBlocks.TypeSupervisions.BlockTypeSupervisions))]
         [DefaultValue("​no supervisions")]
         public PlcBlocks.TypeSupervisions.BlockTypeSupervisions Supervisions { get; set; } = null;
         [XmlIgnore]
@@ -332,10 +332,12 @@ namespace SimaticML.SW.Blocks
                         ISMultiInstanceCapableSpecified = true;
                         break;
                     case nameof(Supervisions):
-                        ///==============================================================
-        //[XmlElement("BlockTypeSupervisions", typeof(PlcBlocks.TypeSupervisions.BlockTypeSupervisions))]
-        //[DefaultValue("​no supervisions")]
-        //public PlcBlocks.TypeSupervisions.BlockTypeSupervisions Supervisions { get; set; } = null;
+
+                        //[DefaultValue("​no supervisions")]
+                        var supervisions = new PlcBlocks.TypeSupervisions.BlockTypeSupervisions();
+                        supervisions.ReadXml(reader);
+
+                        Supervisions = supervisions;
                         SupervisionsSpecified = true;
                         break;
                     case nameof(IsIECCheckEnabled):

@@ -10,7 +10,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     /// </remarks>
     [Serializable]
     [XmlType(AnonymousType = true)]
-    public enum Type
+    public enum Type_TE
     {
         Action,
         Interlock,

@@ -5,6 +5,12 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    public interface IBlank_T : IComment
+    {
+        uint Num { get; set; }
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,7 +20,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("Blank", IsNullable = false)]
-    public class Blank_T : Comment_G
+    public class Blank_T : Comment_G, IBlank_T
     {
         [XmlAttribute(DataType = "positiveInteger")]
         [DefaultValue("1")]

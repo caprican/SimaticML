@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
-    public interface IAbsoluteOffset_T
+    public interface IAbsoluteOffset
     {
         int BitOffset { get; set; }
         string Type { get; set; }
@@ -22,7 +22,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("AbsoluteOffset", IsNullable = false)]
-    public class AbsoluteOffset_T : Object_G, IAbsoluteOffset_T
+    public class AbsoluteOffset_T : Object_G, IAbsoluteOffset
     {
         /// <summary>
         /// Byte * 8 + Bit

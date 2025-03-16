@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
-    public interface IPermanentOperations_T : IEnumerable<IPermanentOperation_T>
+    public interface IPermanentOperations : IEnumerable<IPermanentOperation>
     {
         Common.IComment_T Title { get; set; }
         Common.IComment_T Comment { get; set; }
@@ -20,15 +20,15 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PostOperations", IsNullable = false)]
-    public class PermanentOperations_T : Object_G, IPermanentOperations_T
+    public class PermanentOperations_T : Object_G, IPermanentOperations
     {
         public Common.IComment_T Title { get; set; }
 
         public Common.IComment_T Comment { get; set; }
 
         [XmlElement("PermanentOperation")]
-        protected internal IPermanentOperation_T[] PermanentOperations { get; set; }
-        public IPermanentOperation_T this[int key] { get => PermanentOperations[key]; set => PermanentOperations[key] = value; }
+        protected internal IPermanentOperation[] PermanentOperations { get; set; }
+        public IPermanentOperation this[int key] { get => PermanentOperations[key]; set => PermanentOperations[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -37,7 +37,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var operations = new List<PermanentOperation_T>();
+                var operations = new List<IPermanentOperation>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -73,7 +73,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        public IEnumerator<IPermanentOperation_T> GetEnumerator()
+        public IEnumerator<IPermanentOperation> GetEnumerator()
         {
             if (PermanentOperations is null) yield break;
             foreach (var operation in PermanentOperations)
@@ -93,16 +93,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PostOperations", IsNullable = false)]
-    public class PermanentOperations_T_v2 : PermanentOperations_T, IPermanentOperations_T
+    public class PermanentOperations_T_v2 : PermanentOperations_T, IPermanentOperations
     {
-        public new Common.Comment_T_v2 Title { get; set; }
-
-        public new Common.Comment_T_v2 Comment { get; set; }
-
-        //[XmlElement("PermanentOperation")]
-        //protected internal new PermanentOperation_T_v2[] PermanentOperations { get; set; }
-        //public new PermanentOperation_T_v2 this[int key] { get => PermanentOperations[key]; set => PermanentOperations[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -110,18 +102,20 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var operations = new List<PermanentOperation_T_v2>();
+                var operations = new List<IPermanentOperation>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "PermanentOperation":
                             var operation = new PermanentOperation_T_v2();
@@ -144,14 +138,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<PermanentOperation_T_v2> GetEnumerator()
-        //{
-        //    foreach (var item in PermanentOperations)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -163,12 +149,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PostOperations", IsNullable = false)]
-    public class PermanentOperations_T_v4 : PermanentOperations_T_v2, IPermanentOperations_T
+    public class PermanentOperations_T_v4 : PermanentOperations_T_v2, IPermanentOperations
     {
-        //[XmlElement("PermanentOperation")]
-        //protected internal new PermanentOperation_T_v4[] PermanentOperations { get; set; }
-        //public new PermanentOperation_T_v4 this[int key] { get => PermanentOperations[key]; set => PermanentOperations[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -176,18 +158,20 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var operations = new List<PermanentOperation_T_v4>();
+                var operations = new List<IPermanentOperation>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "PermanentOperation":
                             var operation = new PermanentOperation_T_v4();
@@ -210,14 +194,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<PermanentOperation_T_v4> GetEnumerator()
-        //{
-        //    foreach (var item in PermanentOperations)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -229,12 +205,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PostOperations", IsNullable = false)]
-    public class PermanentOperations_T_v5 : PermanentOperations_T_v4, IPermanentOperations_T
+    public class PermanentOperations_T_v5 : PermanentOperations_T_v4, IPermanentOperations
     {
-        //[XmlElement("PermanentOperation")]
-        //protected internal new PermanentOperation_T_v5[] PermanentOperations { get; set; }
-        //public new PermanentOperation_T_v5 this[int key] { get => PermanentOperations[key]; set => PermanentOperations[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -242,18 +214,20 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var operations = new List<PermanentOperation_T_v5>();
+                var operations = new List<IPermanentOperation>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "PermanentOperation":
                             var operation = new PermanentOperation_T_v5();
@@ -276,14 +250,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<PermanentOperation_T_v5> GetEnumerator()
-        //{
-        //    foreach (var item in PermanentOperations)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -295,12 +261,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PostOperations", IsNullable = false)]
-    public class PermanentOperations_T_v6 : PermanentOperations_T_v5, IPermanentOperations_T
+    public class PermanentOperations_T_v6 : PermanentOperations_T_v5, IPermanentOperations
     {
-        //[XmlElement("PermanentOperation")]
-        //protected internal new PermanentOperation_T_v6[] PermanentOperations { get; set; }
-        //public new PermanentOperation_T_v6 this[int key] { get => PermanentOperations[key]; set => PermanentOperations[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -308,18 +270,20 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var operations = new List<PermanentOperation_T_v6>();
+                var operations = new List<IPermanentOperation>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "PermanentOperation":
                             var operation = new PermanentOperation_T_v6();
@@ -341,14 +305,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<PermanentOperation_T_v6> GetEnumerator()
-        //{
-        //    foreach (var item in PermanentOperations)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
-    public interface IExpression_T : IEnumerable<Object_G>
+    public interface IExpression : IEnumerable<Object_G>
     {
         int? UId { get; set; }
     }
@@ -19,7 +19,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Expression", IsNullable = false)]
-    public class Expression_T : Object_G, IExpression_T
+    public class Expression_T : Object_G, IExpression
     {
         //[XmlElement("Access", typeof(Access_T))]
         //[XmlElement("Token", typeof(Common.Token_T))]
@@ -112,7 +112,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Expression", IsNullable = false)]
-    public class Expression_T_v2 : Expression_T, IExpression_T
+    public class Expression_T_v2 : Expression_T, IExpression
     {
         //[XmlElement("Access", typeof(Access_T_v2))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
@@ -120,8 +120,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -192,14 +190,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -211,7 +201,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Expression", IsNullable = false)]
-    public class Expression_T_v3 : Expression_T_v2, IExpression_T
+    public class Expression_T_v3 : Expression_T_v2, IExpression
     {
         //[XmlElement("Access", typeof(Access_T_v3))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
@@ -219,8 +209,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -291,14 +279,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -310,7 +290,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Expression", IsNullable = false)]
-    public class Expression_T_v4 : Expression_T_v3, IExpression_T
+    public class Expression_T_v4 : Expression_T_v3, IExpression
     {
         //[XmlElement("Access", typeof(Access_T_v4))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
@@ -318,8 +298,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -390,14 +368,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -409,7 +379,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Expression", IsNullable = false)]
-    public class Expression_T_v5 : Expression_T_v4, IExpression_T
+    public class Expression_T_v5 : Expression_T_v4, IExpression
     {
         //[XmlElement("Access", typeof(Access_T_v5))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
@@ -417,8 +387,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -479,14 +447,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

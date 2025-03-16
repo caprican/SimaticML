@@ -5,16 +5,21 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
+    public interface ISpecificFieldText
+    {
+        Common.IMultiLanguageText[] MultiLanguageText { get; set; }
+    }
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.TypeSupervisions (SW.Common)
     /// </remarks>
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class SpecificFieldText : Object_G
+    public class SpecificFieldText : Object_G, ISpecificFieldText
     {
         [XmlElement("MultiLanguageText")]
-        public Common.MultiLanguageText_T[] MultiLanguageText { get; set; }
+        public Common.IMultiLanguageText[] MultiLanguageText { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -23,7 +28,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
             {
                 reader.Read();
 
-                var texts = new List<Common.MultiLanguageText_T>();
+                var texts = new List<Common.IMultiLanguageText>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -57,11 +62,8 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class SpecificFieldText_v2 : SpecificFieldText
+    public class SpecificFieldText_v2 : SpecificFieldText, ISpecificFieldText
     {
-        [XmlElement("MultiLanguageText")]
-        public new Common.MultiLanguageText_T_v2[] MultiLanguageText { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -69,7 +71,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
             {
                 reader.Read();
 
-                var texts = new List<Common.MultiLanguageText_T_v2>();
+                var texts = new List<Common.IMultiLanguageText_v2>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)

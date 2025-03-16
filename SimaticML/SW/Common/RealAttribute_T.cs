@@ -5,6 +5,19 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    public interface IRealAttribute
+    {
+        string Name { get; set; }
+        bool Informative { get; set; }
+        bool SystemDefined { get; set; }
+        decimal Value { get; set; }
+    }
+
+    public interface IRealAttribute_v2 : IRealAttribute
+    {
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -13,7 +26,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("RealAttribute", IsNullable = false)]
-    public class RealAttribute_T : AttributeBase
+    public class RealAttribute_T : AttributeBase, IRealAttribute
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -72,7 +85,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("RealAttribute", IsNullable = false)]
-    public class RealAttribute_T_v2 : RealAttribute_T
+    public class RealAttribute_T_v2 : RealAttribute_T, IRealAttribute_v2
     {
         [XmlAttribute]
         public int? UId { get; set; } = null;

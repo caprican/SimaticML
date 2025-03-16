@@ -4,6 +4,10 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface IOpenbranch
+    {
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +20,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Openbranch", IsNullable = false)]
-    public class Openbranch_T : Object_G
+    public class Openbranch_T : Object_G, IOpenbranch
     {
         public override void ReadXml(XmlReader reader)
         {

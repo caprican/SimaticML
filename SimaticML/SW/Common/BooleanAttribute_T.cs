@@ -6,6 +6,19 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    public interface IBooleanAttribute
+    {
+        string Name { get; set; }
+        bool Value { get; set; }
+        bool Informative { get; set; }
+        bool SystemDefined { get; set; }
+    }
+
+    public interface IBooleanAttribute_v2 : IBooleanAttribute
+    {
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -15,7 +28,7 @@ namespace SimaticML.SW.Common
     [Serializable]
     [DebuggerDisplay("{Name} = {Value}")]
     [XmlRoot("BooleanAttribute", IsNullable = false)]
-    public class BooleanAttribute_T : AttributeBase
+    public class BooleanAttribute_T : AttributeBase, IBooleanAttribute
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -75,7 +88,7 @@ namespace SimaticML.SW.Common
     [Serializable]
     [DebuggerDisplay("{Name} = {Value}")]
     [XmlRoot("BooleanAttribute", IsNullable = false)]
-    public class BooleanAttribute_T_v2 : BooleanAttribute_T
+    public class BooleanAttribute_T_v2 : BooleanAttribute_T, IBooleanAttribute_v2
     {
         [XmlAttribute]
         public int? UId { get; set; } = null;

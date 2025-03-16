@@ -4,6 +4,12 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
+    public interface ICondition
+    {
+        IConditionOperand ConditionOperand { get; set; }
+        bool TriggeringStatus { get; set; }
+    }
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.TypeSupervisions (SW.Common)
     ///          SW.PlcBlocks.TypeSupervisions_v2 (SW.Common_v2)
@@ -12,9 +18,9 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class Condition : Object_G
+    public class Condition : Object_G, ICondition
     {
-        public ConditionOperand ConditionOperand { get; set; }
+        public IConditionOperand ConditionOperand { get; set; }
 
         public bool TriggeringStatus { get; set; }
 
@@ -30,8 +36,9 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                     switch (reader.Name)
                     {
                         case "ConditionOperand":
-                            ConditionOperand = new ConditionOperand();
-                            ConditionOperand.ReadXml(reader);
+                            var conditionOperand = new ConditionOperand();
+                            conditionOperand.ReadXml(reader);
+                            ConditionOperand = conditionOperand;
                             break;
                         case "TriggeringStatus":
                             TriggeringStatus = reader.ReadElementContentAsBoolean();

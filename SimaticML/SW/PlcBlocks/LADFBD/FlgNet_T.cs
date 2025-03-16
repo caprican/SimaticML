@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
-    public interface IFlgNet_T
+    public interface IFlgNet_T : IEnumerable<Object_G>
     {
-        CompileUnitCommon.ILabelDeclaration_T[] Labels { get; set; }
-        Object_G[] Parts { get; set; }
-        IWire_T[] Wires { get; set; }
+
     }
 
     /// <remarks>
@@ -20,20 +19,15 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("FlgNet", IsNullable = false)]
-    public class FlgNet_T : Object_G, IFlgNet_T
+    internal class FlgNet_T : Object_G, IFlgNet_T
     {
-        //[XmlArray("Labels")]
         //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T))]
-        public CompileUnitCommon.ILabelDeclaration_T[] Labels { get; set; }
-
-        //[XmlArrayItem("Access", typeof(Access.Access_T), IsNullable = false)]
-        //[XmlArrayItem("Call", typeof(Call_T), IsNullable = false)]
-        //[XmlArrayItem("Part", typeof(Part_T), IsNullable = false)]
-        public Object_G[] Parts { get; set; }
-
-        [XmlArray("Wires")]
-        //[XmlArrayItem("Wire", typeof(Wire_T))]
-        public IWire_T[] Wires { get; set; }
+        //[XmlElement("Access", typeof(Access.Access_T), IsNullable = false)]
+        //[XmlElement("Call", typeof(Call_T), IsNullable = false)]
+        //[XmlElement("Part", typeof(Part_T), IsNullable = false)]
+        //[XmlElement("Wire", typeof(Wire_T))]
+        protected internal Object_G[] Items { get; set; }
+        public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -48,19 +42,30 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     switch (reader.Name)
                     {
                         case "Labels":
-                            var labels = new List<CompileUnitCommon.LabelDeclaration_T>();
-                            while (reader.MoveToContent() == XmlNodeType.Element)
+                            reader.MoveToContent();
+                            if(!reader.IsEmptyElement)
                             {
-                                switch (reader.Name)
+                                reader.Read();
+                                
+                                var labels = new List<CompileUnitCommon.LabelDeclaration_T>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
                                 {
-                                    case "LabelDeclaration":
-                                        var label = new CompileUnitCommon.LabelDeclaration_T();
-                                        label.ReadXml(reader);
-                                        labels.Add(label);
-                                        break;
+                                    switch (reader.Name)
+                                    {
+                                        case "LabelDeclaration":
+                                            var label = new CompileUnitCommon.LabelDeclaration_T();
+                                            label.ReadXml(reader);
+                                            labels.Add(label);
+                                            break;
+                                    }
                                 }
+                                if (labels.Count > 0) items.AddRange(labels);
                             }
-                            if (labels.Count > 0) Labels = labels.ToArray();
+
+                            if (reader.IsStartElement())
+                                reader.Read();
+                            else
+                                reader.ReadEndElement();
                             break;
                         case "Access":
                             var access = new Access.Access_T();
@@ -77,24 +82,40 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             part.ReadXml(reader);
                             items.Add(part);
                             break;
+                        case "Parts":
+                            var parts = new Parts_T();
+                            parts.ReadXml(reader);
+                            items.Add(parts);
+                            break;
                         case "Wires":
-                            var wires = new List<Wire_T>();
-                            while (reader.MoveToContent() == XmlNodeType.Element)
+                            reader.MoveToContent();
+                            if(!reader.IsEmptyElement)
                             {
-                                switch (reader.Name)
+                                reader.Read();
+
+                                var wires = new List<Wire_T>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
                                 {
-                                    case "Wire":
-                                        var wire = new Wire_T();
-                                        wire.ReadXml(reader);
-                                        wires.Add(wire);
-                                        break;
+                                    switch (reader.Name)
+                                    {
+                                        case "Wire":
+                                            var wire = new Wire_T();
+                                            wire.ReadXml(reader);
+                                            wires.Add(wire);
+                                            break;
+                                    }
                                 }
+                                if (wires.Count > 0) items.AddRange(wires);
                             }
-                            if (wires.Count > 0) Wires = wires.ToArray();
+
+                            if (reader.IsStartElement())
+                                reader.Read();
+                            else
+                                reader.ReadEndElement();
                             break;
                     }
                 }
-                if (items.Count > 0) Parts = items.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -107,6 +128,17 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            if (Items is null) yield break;
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -117,16 +149,13 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("FlgNet", IsNullable = false)]
-    public class FlgNet_T_v2 : FlgNet_T, IFlgNet_T
+    internal class FlgNet_T_v2 : FlgNet_T, IFlgNet_T
     {
-        //[XmlArray("Labels")]
         //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v2))]
-        //public new CompileUnitCommon.ILabelDeclaration_T[] Labels { get; set; }
 
-        //[XmlArrayItem("Access", typeof(Access.Access_T_v2), IsNullable = false)]
-        //[XmlArrayItem("Call", typeof(Call_T_v2), IsNullable = false)]
-        //[XmlArrayItem("Part", typeof(Part_T_v2), IsNullable = false)]
-        public new Object_G[] Parts { get; set; }
+        //[XmlElement("Access", typeof(Access.Access_T_v2), IsNullable = false)]
+        //[XmlElement("Call", typeof(Call_T_v2), IsNullable = false)]
+        //[XmlElement("Part", typeof(Part_T_v2), IsNullable = false)]
 
         public override void ReadXml(XmlReader reader)
         {
@@ -141,19 +170,30 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     switch (reader.Name)
                     {
                         case "Labels":
-                            var labels = new List<CompileUnitCommon.LabelDeclaration_T_v2>();
-                            while (reader.MoveToContent() == XmlNodeType.Element)
+                            reader.MoveToContent();
+                            if(!reader.IsEmptyElement)
                             {
-                                switch (reader.Name)
+                                reader.Read();
+                                
+                                var labels = new List<CompileUnitCommon.LabelDeclaration_T_v2>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
                                 {
-                                    case "LabelDeclaration":
-                                        var label = new CompileUnitCommon.LabelDeclaration_T_v2();
-                                        label.ReadXml(reader);
-                                        labels.Add(label);
-                                        break;
+                                    switch (reader.Name)
+                                    {
+                                        case "LabelDeclaration":
+                                            var label = new CompileUnitCommon.LabelDeclaration_T_v2();
+                                            label.ReadXml(reader);
+                                            labels.Add(label);
+                                            break;
+                                    }
                                 }
+                                if (labels.Count > 0) items.AddRange(labels);
                             }
-                            if (labels.Count > 0) Labels = labels.ToArray();
+
+                            if (reader.IsStartElement())
+                                reader.Read();
+                            else
+                                reader.ReadEndElement();
                             break;
                         case "Access":
                             var access = new Access.Access_T_v2();
@@ -170,24 +210,40 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             part.ReadXml(reader);
                             items.Add(part);
                             break;
+                        case "Parts":
+                            var parts = new Parts_T_v2();
+                            parts.ReadXml(reader);
+                            items.Add(parts);
+                            break;
                         case "Wires":
-                            var wires = new List<Wire_T>();
-                            while (reader.MoveToContent() == XmlNodeType.Element)
+                            reader.MoveToContent();
+                            if(!reader.IsEmptyElement)
                             {
-                                switch (reader.Name)
+                                reader.Read();
+                                
+                                var wires = new List<Wire_T>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
                                 {
-                                    case "Wire":
-                                        var wire = new Wire_T();
-                                        wire.ReadXml(reader);
-                                        wires.Add(wire);
-                                        break;
+                                    switch (reader.Name)
+                                    {
+                                        case "Wire":
+                                            var wire = new Wire_T();
+                                            wire.ReadXml(reader);
+                                            wires.Add(wire);
+                                            break;
+                                    }
                                 }
+                                if (wires.Count > 0) items.AddRange(wires);
                             }
-                            if (wires.Count > 0) Wires = wires.ToArray();
+
+                            if (reader.IsStartElement())
+                                reader.Read();
+                            else
+                                reader.ReadEndElement();
                             break;
                     }
                 }
-                if (items.Count > 0) Parts = items.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -200,6 +256,8 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -210,12 +268,11 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("FlgNet", IsNullable = false)]
-    public class FlgNet_T_v3 : FlgNet_T_v2, IFlgNet_T
+    internal class FlgNet_T_v3 : FlgNet_T_v2, IFlgNet_T
     {
         //[XmlArrayItem("Access", typeof(Access.Access_T_v3), IsNullable = false)]
         //[XmlArrayItem("Call", typeof(Call_T_v3), IsNullable = false)]
         //[XmlArrayItem("Part", typeof(Part_T_v3), IsNullable = false)]
-        public new Object_G[] Parts { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -230,19 +287,30 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     switch (reader.Name)
                     {
                         case "Labels":
-                            var labels = new List<CompileUnitCommon.LabelDeclaration_T_v2>();
-                            while (reader.MoveToContent() == XmlNodeType.Element)
+                            reader.MoveToContent();
+                            if(!reader.IsEmptyElement)
                             {
-                                switch (reader.Name)
+                                reader.Read();
+
+                                var labels = new List<CompileUnitCommon.LabelDeclaration_T_v2>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
                                 {
-                                    case "LabelDeclaration":
-                                        var label = new CompileUnitCommon.LabelDeclaration_T_v2();
-                                        label.ReadXml(reader);
-                                        labels.Add(label);
-                                        break;
+                                    switch (reader.Name)
+                                    {
+                                        case "LabelDeclaration":
+                                            var label = new CompileUnitCommon.LabelDeclaration_T_v2();
+                                            label.ReadXml(reader);
+                                            labels.Add(label);
+                                            break;
+                                    }
                                 }
+                                if (labels.Count > 0) items.AddRange(labels);
                             }
-                            if (labels.Count > 0) Labels = labels.ToArray();
+
+                            if (reader.IsStartElement())
+                                reader.Read();
+                            else
+                                reader.ReadEndElement();
                             break;
                         case "Access":
                             var access = new Access.Access_T_v3();
@@ -259,24 +327,40 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             part.ReadXml(reader);
                             items.Add(part);
                             break;
+                        case "Parts":
+                            var parts = new Parts_T_v3();
+                            parts.ReadXml(reader);
+                            items.Add(parts);
+                            break;
                         case "Wires":
-                            var wires = new List<Wire_T>();
-                            while (reader.MoveToContent() == XmlNodeType.Element)
+                            reader.MoveToContent();
+                            if (!reader.IsEmptyElement)
                             {
-                                switch (reader.Name)
+                                reader.Read();
+                                
+                                var wires = new List<Wire_T>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
                                 {
-                                    case "Wire":
-                                        var wire = new Wire_T();
-                                        wire.ReadXml(reader);
-                                        wires.Add(wire);
-                                        break;
+                                    switch (reader.Name)
+                                    {
+                                        case "Wire":
+                                            var wire = new Wire_T();
+                                            wire.ReadXml(reader);
+                                            wires.Add(wire);
+                                            break;
+                                    }
                                 }
+                                if (wires.Count > 0) items.AddRange(wires);
                             }
-                            if (wires.Count > 0) Wires = wires.ToArray();
+
+                            if (reader.IsStartElement())
+                                reader.Read();
+                            else
+                                reader.ReadEndElement();
                             break;
                     }
                 }
-                if (items.Count > 0) Parts = items.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -289,6 +373,8 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -299,16 +385,12 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("FlgNet", IsNullable = false)]
-    public class FlgNet_T_v4 : FlgNet_T_v3, IFlgNet_T
+    internal class FlgNet_T_v4 : FlgNet_T_v3, IFlgNet_T
     {
-        //[XmlArray("Labels")]
         //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v4))]
-        //public new CompileUnitCommon.LabelDeclaration_T_v4[] Labels { get; set; }
-
         //[XmlArrayItem("Access", typeof(Access.Access_T_v4), IsNullable = false)]
         //[XmlArrayItem("Call", typeof(Call_T_v4), IsNullable = false)]
         //[XmlArrayItem("Part", typeof(Part_T_v4), IsNullable = false)]
-        //public new Object_G[] Parts { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -323,19 +405,30 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     switch (reader.Name)
                     {
                         case "Labels":
-                            var labels = new List<CompileUnitCommon.LabelDeclaration_T_v4>();
-                            while (reader.MoveToContent() == XmlNodeType.Element)
+                            reader.MoveToContent();
+                            if(!reader.IsEmptyElement)
                             {
-                                switch (reader.Name)
+                                reader.Read();
+
+                                var labels = new List<Object_G>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
                                 {
-                                    case "LabelDeclaration":
-                                        var label = new CompileUnitCommon.LabelDeclaration_T_v4();
-                                        label.ReadXml(reader);
-                                        labels.Add(label);
-                                        break;
+                                    switch (reader.Name)
+                                    {
+                                        case "LabelDeclaration":
+                                            var label = new CompileUnitCommon.LabelDeclaration_T_v4();
+                                            label.ReadXml(reader);
+                                            labels.Add(label);
+                                            break;
+                                    }
                                 }
+                                if (labels.Count > 0) items.AddRange(labels);
                             }
-                            if (labels.Count > 0) Labels = labels.ToArray();
+
+                            if (reader.IsStartElement())
+                                reader.Read();
+                            else
+                                reader.ReadEndElement();
                             break;
                         case "Access":
                             var access = new Access.Access_T_v4();
@@ -352,24 +445,40 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             part.ReadXml(reader);
                             items.Add(part);
                             break;
+                        case "Parts":
+                            var parts = new Parts_T_v4();
+                            parts.ReadXml(reader);
+                            items.Add(parts);
+                            break;
                         case "Wires":
-                            var wires = new List<Wire_T>();
-                            while (reader.MoveToContent() == XmlNodeType.Element)
-                            {
-                                switch (reader.Name)
+                            reader.MoveToContent();
+                            if(!reader.IsEmptyElement)
+                            { 
+                                reader.Read();
+
+                                var wires = new List<Wire_T>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
                                 {
-                                    case "Wire":
-                                        var wire = new Wire_T();
-                                        wire.ReadXml(reader);
-                                        wires.Add(wire);
-                                        break;
+                                    switch (reader.Name)
+                                    {
+                                        case "Wire":
+                                            var wire = new Wire_T();
+                                            wire.ReadXml(reader);
+                                            wires.Add(wire);
+                                            break;
+                                    }
                                 }
+                                if (wires.Count > 0) items.AddRange(wires);
                             }
-                            if (wires.Count > 0) Wires = wires.ToArray();
+
+                            if (reader.IsStartElement())
+                                reader.Read();
+                            else
+                                reader.ReadEndElement();
                             break;
                     }
                 }
-                if (items.Count > 0) Parts = items.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -382,6 +491,8 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -392,7 +503,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("FlgNet", IsNullable = false)]
-    public class FlgNet_T_v5 : FlgNet_T_v4, IFlgNet_T
+    internal class FlgNet_T_v5 : FlgNet_T_v4, IFlgNet_T
     {
         //[XmlArrayItem("Access", typeof(Access.Access_T_v5), IsNullable = false)]
         //[XmlArrayItem("Call", typeof(Call_T_v5), IsNullable = false)]
@@ -412,19 +523,30 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     switch (reader.Name)
                     {
                         case "Labels":
-                            var labels = new List<CompileUnitCommon.LabelDeclaration_T_v4>();
-                            while (reader.MoveToContent() == XmlNodeType.Element)
+                            reader.MoveToContent();
+                            if(!reader.IsEmptyElement)
                             {
-                                switch (reader.Name)
+                                reader.Read();
+
+                                var labels = new List<CompileUnitCommon.LabelDeclaration_T_v4>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
                                 {
-                                    case "LabelDeclaration":
-                                        var label = new CompileUnitCommon.LabelDeclaration_T_v4();
-                                        label.ReadXml(reader);
-                                        labels.Add(label);
-                                        break;
+                                    switch (reader.Name)
+                                    {
+                                        case "LabelDeclaration":
+                                            var label = new CompileUnitCommon.LabelDeclaration_T_v4();
+                                            label.ReadXml(reader);
+                                            labels.Add(label);
+                                            break;
+                                    }
                                 }
+                                if (labels.Count > 0) items.AddRange(labels);
                             }
-                            if (labels.Count > 0) Labels = labels.ToArray();
+
+                            if (reader.IsStartElement())
+                                reader.Read();
+                            else
+                                reader.ReadEndElement();
                             break;
                         case "Access":
                             var access = new Access.Access_T_v5();
@@ -441,24 +563,40 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             part.ReadXml(reader);
                             items.Add(part);
                             break;
+                        case "Parts":
+                            var parts = new Parts_T_v5();
+                            parts.ReadXml(reader);
+                            items.Add(parts);
+                            break;
                         case "Wires":
-                            var wires = new List<Wire_T>();
-                            while (reader.MoveToContent() == XmlNodeType.Element)
+                            reader.MoveToContent();
+                            if(!reader.IsEmptyElement)
                             {
-                                switch (reader.Name)
+                                reader.Read();
+
+                                var wires = new List<Wire_T>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
                                 {
-                                    case "Wire":
-                                        var wire = new Wire_T();
-                                        wire.ReadXml(reader);
-                                        wires.Add(wire);
-                                        break;
+                                    switch (reader.Name)
+                                    {
+                                        case "Wire":
+                                            var wire = new Wire_T();
+                                            wire.ReadXml(reader);
+                                            wires.Add(wire);
+                                            break;
+                                    }
                                 }
+                                if (wires.Count > 0) items.AddRange(wires);
                             }
-                            if (wires.Count > 0) Wires = wires.ToArray();
+
+                            if (reader.IsStartElement())
+                                reader.Read();
+                            else
+                                reader.ReadEndElement();
                             break;
                     }
                 }
-                if (items.Count > 0) Parts = items.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -471,5 +609,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

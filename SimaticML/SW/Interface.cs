@@ -8,15 +8,15 @@ using System.Xml.Serialization;
 namespace SimaticML.SW
 {
     [Serializable]
-    public class Interface_T : IXmlSerializable, IEnumerable<InterfaceSections.ISections_T>
+    public class Interface_T : IXmlSerializable, IEnumerable<InterfaceSections.ISections>
     {
         [XmlArray("Sections")]
         [XmlArrayItem("Section", Type = typeof(InterfaceSections.Sections_T), Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v2")]
         [XmlArrayItem("Section", Type = typeof(InterfaceSections.Sections_T_v3), Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v3")]
         [XmlArrayItem("Section", Type = typeof(InterfaceSections.Sections_T_v4), Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v4")]
         [XmlArrayItem("Section", Type = typeof(InterfaceSections.Sections_T_v5), Namespace = "http://www.siemens.com/automation/Openness/SW/Interface/v5")]
-        protected internal InterfaceSections.ISections_T[] Sections { get; set; }
-        public InterfaceSections.ISections_T this[int key] { get => Sections[key]; set => Sections[key] = value; }
+        protected internal InterfaceSections.ISections[] Sections { get; set; }
+        public InterfaceSections.ISections this[int key] { get => Sections[key]; set => Sections[key] = value; }
 
         public XmlSchema GetSchema() => null;
 
@@ -27,7 +27,7 @@ namespace SimaticML.SW
             {
                 reader.Read();
 
-                var sections = new List<InterfaceSections.ISections_T>();
+                var sections = new List<InterfaceSections.ISections>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.NamespaceURI)
@@ -68,7 +68,7 @@ namespace SimaticML.SW
             throw new NotImplementedException();
         }
 
-        public IEnumerator<InterfaceSections.ISections_T> GetEnumerator()
+        public IEnumerator<InterfaceSections.ISections> GetEnumerator()
         {
             if (Sections is null) yield break;
             foreach (var section in Sections)

@@ -4,6 +4,20 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    public interface IViewInfo
+    {
+        bool? Start { get; set; }
+        int? XPos { get; set; }
+        int? YPos { get; set; }
+        int? Width { get; set; }
+        int? Height { get; set; }
+    }
+
+    public interface IViewInfo_v2 : IViewInfo
+    {
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema :
     /// <list type="bullet">
@@ -12,7 +26,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("ViewInfo", IsNullable = false)]
-    public class ViewInfo_T : Object_G
+    public class ViewInfo_T : Object_G, IViewInfo
     {
         [XmlAttribute]
         public bool? Start { get; set; } = null;
@@ -86,7 +100,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("ViewInfo", IsNullable = false)]
-    public class ViewInfo_T_v2 : ViewInfo_T
+    public class ViewInfo_T_v2 : ViewInfo_T, IViewInfo_v2
     {
         [XmlAttribute]
         public int? UId { get; set; } = null;

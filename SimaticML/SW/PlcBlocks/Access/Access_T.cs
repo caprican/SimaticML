@@ -10,14 +10,24 @@ namespace SimaticML.SW.PlcBlocks.Access
         /// <summary>
         /// for NumBLs. NumBLs is informative. Not for LAD/FBD.
         /// </summary>
-        Common.IIntegerAttribute_T IntegerAttribute { get; set; }
+        Common.IIntegerAttribute IntegerAttribute { get; set; }
         Object_G Item { get; set; }
-        Common.Comment_G[] Comments { get; set; }
+        Common.IComment[] Comments { get; set; }
         Scope_TE Scope { get; set; }
         /// <summary>
         /// Not allowed in STL
         /// </summary>
         int? UId { get; set; }
+    }
+
+    public interface IAccess_T_v2 : IAccess_T
+    {
+        new Scope_TE_v2 Scope { get; set; }
+    }
+
+    public interface IAccess_T_v5 : IAccess_T_v2
+    {
+        new Scope_TE_v5 Scope { get; set; }
     }
 
     /// <remarks>
@@ -33,22 +43,22 @@ namespace SimaticML.SW.PlcBlocks.Access
         /// <summary>
         /// for NumBLs. NumBLs is informative. Not for LAD/FBD.
         /// </summary>
-        public Common.IIntegerAttribute_T IntegerAttribute { get; set; }
+        public Common.IIntegerAttribute IntegerAttribute { get; set; }
 
-        [XmlElement("Address", typeof(Address_T))]              // for absolute addresses
-        [XmlElement("CallInfo", typeof(CallInfo_T))]              // call of a user block. Not in Graph ActionList.
-        [XmlElement("Constant", typeof(Constant_T))]
-        [XmlElement("Expression", typeof(Expression_T))]        // SCL specific
-        [XmlElement("Indirect", typeof(Indirect_T))]            // STL specific
-        [XmlElement("Instruction", typeof(Instruction_T))]      // call of an instruction. Not for LAD/FBD, Graph ActionList.
-        [XmlElement("Label", typeof(Label_T))]
-        [XmlElement("Statusword", typeof(Statusword_T))]
-        [XmlElement("Symbol", typeof(Symbol_T))]
+        //[XmlElement("Address", typeof(Address_T))]              // for absolute addresses
+        //[XmlElement("CallInfo", typeof(CallInfo_T))]              // call of a user block. Not in Graph ActionList.
+        //[XmlElement("Constant", typeof(Constant_T))]
+        //[XmlElement("Expression", typeof(Expression_T))]        // SCL specific
+        //[XmlElement("Indirect", typeof(Indirect_T))]            // STL specific
+        //[XmlElement("Instruction", typeof(Instruction_T))]      // call of an instruction. Not for LAD/FBD, Graph ActionList.
+        //[XmlElement("Label", typeof(Label_T))]
+        //[XmlElement("Statusword", typeof(Statusword_T))]
+        //[XmlElement("Symbol", typeof(Symbol_T))]
         public Object_G Item { get; set; }
 
-        [XmlElement("Comment", typeof(Common.Comment_T))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T))]
-        public Common.Comment_G[] Comments { get; set; }
+        //[XmlElement("Comment", typeof(Common.Comment_T))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T))]
+        public Common.IComment[] Comments { get; set; }
 
         [XmlAttribute]
         public Scope_TE Scope { get; set; }
@@ -84,7 +94,7 @@ namespace SimaticML.SW.PlcBlocks.Access
             {
                 reader.Read();
 
-                var items = new List<Common.Comment_G>();
+                var items = new List<Common.IComment>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -176,32 +186,32 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Access", IsNullable = false)]
-    public class Access_T_v2 : Access_T, IAccess_T
+    public class Access_T_v2 : Access_T, IAccess_T_v2
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative. Not for LAD/FBD.
         /// </summary>
         public new Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
 
-        [XmlElement("Address", typeof(Address_T_v2))]              // for absolute addresses
-        [XmlElement("CallInfo", typeof(CallInfo_T_v2))]              // call of a user block. Not in Graph ActionList.
-        [XmlElement("Constant", typeof(Constant_T_v2))]
-        [XmlElement("Expression", typeof(Expression_T_v2))]        // SCL specific
-        [XmlElement("Indirect", typeof(Indirect_T_v2))]            // STL specific
-        [XmlElement("Instruction", typeof(Instruction_T_v2))]      // call of an instruction. Not for LAD/FBD, Graph ActionList.
-        [XmlElement("Label", typeof(Label_T_v2))]
-        [XmlElement("Statusword", typeof(Statusword_T))]
-        [XmlElement("Symbol", typeof(Symbol_T_v2))]
-        [XmlElement("DataType", typeof(DataType_T))]
-        [XmlElement("PredefinedVariable", typeof(PredefinedVariable_T))] // Only in SCL
-        [XmlElement("Reference", typeof(Reference_T))]
-        public new Object_G Item { get; set; }
+        //[XmlElement("Address", typeof(Address_T_v2))]              // for absolute addresses
+        //[XmlElement("CallInfo", typeof(CallInfo_T_v2))]              // call of a user block. Not in Graph ActionList.
+        //[XmlElement("Constant", typeof(Constant_T_v2))]
+        //[XmlElement("Expression", typeof(Expression_T_v2))]        // SCL specific
+        //[XmlElement("Indirect", typeof(Indirect_T_v2))]            // STL specific
+        //[XmlElement("Instruction", typeof(Instruction_T_v2))]      // call of an instruction. Not for LAD/FBD, Graph ActionList.
+        //[XmlElement("Label", typeof(Label_T_v2))]
+        //[XmlElement("Statusword", typeof(Statusword_T))]
+        //[XmlElement("Symbol", typeof(Symbol_T_v2))]
+        //[XmlElement("DataType", typeof(DataType_T))]
+        //[XmlElement("PredefinedVariable", typeof(PredefinedVariable_T))] // Only in SCL
+        //[XmlElement("Reference", typeof(Reference_T))]
+        //public new Object_G Item { get; set; }
 
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new Common.Comment_G[] Comments { get; set; }
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //public new Common.Comment_G[] Comments { get; set; }
 
         [XmlAttribute]
         public new Scope_TE_v2 Scope { get; set; }
@@ -229,7 +239,7 @@ namespace SimaticML.SW.PlcBlocks.Access
             {
                 reader.Read();
 
-                var items = new List<Common.Comment_G>();
+                var items = new List<Common.IComment>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -345,26 +355,26 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Access", IsNullable = false)]
-    public class Access_T_v3 : Access_T_v2, IAccess_T
+    public class Access_T_v3 : Access_T_v2, IAccess_T_v2
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative. Not for LAD/FBD.
         /// </summary>
-        public new Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
+        //public new Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
 
-        [XmlElement("Address", typeof(Address_T_v2))]              // for absolute addresses
-        [XmlElement("CallInfo", typeof(CallInfo_T_v3))]              // call of a user block. Not in Graph ActionList.
-        [XmlElement("Constant", typeof(Constant_T_v2))]
-        [XmlElement("Expression", typeof(Expression_T_v3))]        // SCL specific
-        [XmlElement("Indirect", typeof(Indirect_T_v3))]            // STL specific
-        [XmlElement("Instruction", typeof(Instruction_T_v3))]      // call of an instruction. Not for LAD/FBD, Graph ActionList.
-        [XmlElement("Label", typeof(Label_T_v2))]
-        [XmlElement("Statusword", typeof(Statusword_T))]
-        [XmlElement("Symbol", typeof(Symbol_T_v2))]
-        [XmlElement("DataType", typeof(DataType_T))]
-        [XmlElement("PredefinedVariable", typeof(PredefinedVariable_T))] // Only in SCL
-        [XmlElement("Reference", typeof(Reference_T_v3))]
-        public new Object_G Item { get; set; }
+        //[XmlElement("Address", typeof(Address_T_v2))]              // for absolute addresses
+        //[XmlElement("CallInfo", typeof(CallInfo_T_v3))]              // call of a user block. Not in Graph ActionList.
+        //[XmlElement("Constant", typeof(Constant_T_v2))]
+        //[XmlElement("Expression", typeof(Expression_T_v3))]        // SCL specific
+        //[XmlElement("Indirect", typeof(Indirect_T_v3))]            // STL specific
+        //[XmlElement("Instruction", typeof(Instruction_T_v3))]      // call of an instruction. Not for LAD/FBD, Graph ActionList.
+        //[XmlElement("Label", typeof(Label_T_v2))]
+        //[XmlElement("Statusword", typeof(Statusword_T))]
+        //[XmlElement("Symbol", typeof(Symbol_T_v2))]
+        //[XmlElement("DataType", typeof(DataType_T))]
+        //[XmlElement("PredefinedVariable", typeof(PredefinedVariable_T))] // Only in SCL
+        //[XmlElement("Reference", typeof(Reference_T_v3))]
+        //public new Object_G Item { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -389,7 +399,7 @@ namespace SimaticML.SW.PlcBlocks.Access
             {
                 reader.Read();
 
-                var items = new List<Common.Comment_G>();
+                var items = new List<Common.IComment>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -505,27 +515,27 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Access", IsNullable = false)]
-    public class Access_T_v4 : Access_T_v3, IAccess_T
+    public class Access_T_v4 : Access_T_v3, IAccess_T_v2
     {
-        [XmlElement("Address", typeof(Address_T_v2))]              // for absolute addresses
-        [XmlElement("CallInfo", typeof(CallInfo_T_v4))]              // call of a user block. Not in Graph ActionList.
-        [XmlElement("Constant", typeof(Constant_T_v2))]
-        [XmlElement("Expression", typeof(Expression_T_v4))]        // SCL specific
-        [XmlElement("Indirect", typeof(Indirect_T_v4))]            // STL specific
-        [XmlElement("Instruction", typeof(Instruction_T_v4))]      // call of an instruction. Not for LAD/FBD, Graph ActionList.
-        [XmlElement("Label", typeof(Label_T_v4))]
-        [XmlElement("Statusword", typeof(Statusword_T))]
-        [XmlElement("Symbol", typeof(Symbol_T_v4))]
-        [XmlElement("DataType", typeof(DataType_T))]
-        [XmlElement("PredefinedVariable", typeof(PredefinedVariable_T))] // Only in SCL
-        [XmlElement("Reference", typeof(Reference_T_v4))]
-        public new Object_G Item { get; set; }
+        //[XmlElement("Address", typeof(Address_T_v2))]              // for absolute addresses
+        //[XmlElement("CallInfo", typeof(CallInfo_T_v4))]              // call of a user block. Not in Graph ActionList.
+        //[XmlElement("Constant", typeof(Constant_T_v2))]
+        //[XmlElement("Expression", typeof(Expression_T_v4))]        // SCL specific
+        //[XmlElement("Indirect", typeof(Indirect_T_v4))]            // STL specific
+        //[XmlElement("Instruction", typeof(Instruction_T_v4))]      // call of an instruction. Not for LAD/FBD, Graph ActionList.
+        //[XmlElement("Label", typeof(Label_T_v4))]
+        //[XmlElement("Statusword", typeof(Statusword_T))]
+        //[XmlElement("Symbol", typeof(Symbol_T_v4))]
+        //[XmlElement("DataType", typeof(DataType_T))]
+        //[XmlElement("PredefinedVariable", typeof(PredefinedVariable_T))] // Only in SCL
+        //[XmlElement("Reference", typeof(Reference_T_v4))]
+        //public new Object_G Item { get; set; }
 
-        [XmlElement("Blank", typeof(Common.Blank_T))]
-        [XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        [XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
-        [XmlElement("NewLine", typeof(Common.NewLine_T))]
-        public new Common.Comment_G[] Comments { get; set; }
+        //[XmlElement("Blank", typeof(Common.Blank_T))]
+        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
+        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
+        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
+        //public new Common.Comment_G[] Comments { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -550,7 +560,7 @@ namespace SimaticML.SW.PlcBlocks.Access
             {
                 reader.Read();
 
-                var items = new List<Common.Comment_G>();
+                var items = new List<Common.IComment>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -669,21 +679,21 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Access", IsNullable = false)]
-    public class Access_T_v5 : Access_T_v4, IAccess_T
+    public class Access_T_v5 : Access_T_v4, IAccess_T_v5
     {
-        [XmlElement("Address", typeof(Address_T_v2))]              // for absolute addresses
-        [XmlElement("CallInfo", typeof(CallInfo_T_v5))]              // call of a user block. Not in Graph ActionList.
-        [XmlElement("Constant", typeof(Constant_T_v2))]
-        [XmlElement("Expression", typeof(Expression_T_v5))]        // SCL specific
-        [XmlElement("Indirect", typeof(Indirect_T_v5))]            // STL specific
-        [XmlElement("Instruction", typeof(Instruction_T_v5))]      // call of an instruction. Not for LAD/FBD, Graph ActionList.
-        [XmlElement("Label", typeof(Label_T_v4))]
-        [XmlElement("Statusword", typeof(Statusword_T))]
-        [XmlElement("Symbol", typeof(Symbol_T_v5))]
-        [XmlElement("DataType", typeof(DataType_T))]
-        [XmlElement("PredefinedVariable", typeof(PredefinedVariable_T))] // Only in SCL
-        [XmlElement("Reference", typeof(Reference_T_v5))]
-        public new Object_G Item { get; set; }
+        //[XmlElement("Address", typeof(Address_T_v2))]              // for absolute addresses
+        //[XmlElement("CallInfo", typeof(CallInfo_T_v5))]              // call of a user block. Not in Graph ActionList.
+        //[XmlElement("Constant", typeof(Constant_T_v2))]
+        //[XmlElement("Expression", typeof(Expression_T_v5))]        // SCL specific
+        //[XmlElement("Indirect", typeof(Indirect_T_v5))]            // STL specific
+        //[XmlElement("Instruction", typeof(Instruction_T_v5))]      // call of an instruction. Not for LAD/FBD, Graph ActionList.
+        //[XmlElement("Label", typeof(Label_T_v4))]
+        //[XmlElement("Statusword", typeof(Statusword_T))]
+        //[XmlElement("Symbol", typeof(Symbol_T_v5))]
+        //[XmlElement("DataType", typeof(DataType_T))]
+        //[XmlElement("PredefinedVariable", typeof(PredefinedVariable_T))] // Only in SCL
+        //[XmlElement("Reference", typeof(Reference_T_v5))]
+        //public new Object_G Item { get; set; }
 
         [XmlAttribute]
         public new Scope_TE_v5 Scope { get; set; }
@@ -711,7 +721,7 @@ namespace SimaticML.SW.PlcBlocks.Access
             {
                 reader.Read();
 
-                var items = new List<Common.Comment_G>();
+                var items = new List<Common.IComment>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)

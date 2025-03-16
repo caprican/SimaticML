@@ -4,6 +4,10 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IEndConnection
+    {
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +20,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("EndConnection", IsNullable = false)]
-    public class EndConnection_T : Object_G
+    public class EndConnection_T : Object_G, IEndConnection
     {
         public override void ReadXml(XmlReader reader)
         {

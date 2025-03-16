@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.InterfaceSections
 {
-    public interface IStartValue_T
+    public interface IStartValue
     {
         string ConstantName { get; set; }
         bool IsBulkValue { get; set; }
@@ -24,7 +24,7 @@ namespace SimaticML.SW.InterfaceSections
     /// </remarks>
     [Serializable]
     [XmlRoot("StartValue", IsNullable = false)]
-    public class StartValue_T : Object_G, IStartValue_T
+    public class StartValue_T : Object_G, IStartValue
     {
         [XmlAttribute]
         public string ConstantName { get; set; }

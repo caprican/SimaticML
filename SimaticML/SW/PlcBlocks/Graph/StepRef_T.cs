@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IStepRef
+    {
+        int Number { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +21,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("StepRef", IsNullable = false)]
-    public class StepRef_T : Object_G
+    public class StepRef_T : Object_G, IStepRef
     {
         [XmlAttribute]
         public int Number { get; set; }

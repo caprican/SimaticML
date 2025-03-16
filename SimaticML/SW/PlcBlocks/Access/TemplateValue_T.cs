@@ -4,6 +4,18 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface ITemplateValue
+    {
+        string Name { get; set; }
+        TemplateType_TE Type { get; set; }
+        string Value { get; set; }
+    }
+
+    public interface ITemplateValue_v2 : ITemplateValue
+    {
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema :
     /// <list type="bullet">
@@ -12,7 +24,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("TemplateValue", IsNullable = false)]
-    public class TemplateValue_T : Object_G
+    public class TemplateValue_T : Object_G, ITemplateValue
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -61,7 +73,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("TemplateValue", IsNullable = false)]
-    public class TemplateValue_T_v2 : TemplateValue_T
+    public class TemplateValue_T_v2 : TemplateValue_T, ITemplateValue_v2
     {
         [XmlAttribute]
         public int? UId { get; set; } = null;

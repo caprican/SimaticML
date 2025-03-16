@@ -5,12 +5,17 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
-    public interface IIntegerAttribute_T
+    public interface IIntegerAttribute
     {
         string Name { get; set; }
         bool Informative { get; set; }
         bool SystemDefined { get; set; }
         int Value { get; set; }
+    }
+
+    public interface IIntegerAttribute_v2 : IIntegerAttribute
+    {
+        int? UId { get; set; }
     }
 
     /// <summary>
@@ -24,7 +29,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("IntegerAttribute", IsNullable = false)]
-    public class IntegerAttribute_T : AttributeBase, IIntegerAttribute_T
+    public class IntegerAttribute_T : AttributeBase, IIntegerAttribute
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -86,7 +91,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("IntegerAttribute", IsNullable = false)]
-    public class IntegerAttribute_T_v2 : IntegerAttribute_T, IIntegerAttribute_T
+    public class IntegerAttribute_T_v2 : IntegerAttribute_T, IIntegerAttribute_v2
     {
         [XmlAttribute]
         public int? UId { get; set; } = null;

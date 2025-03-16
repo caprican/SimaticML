@@ -5,6 +5,10 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IAlarmSupervisionCategories
+    {
+        IAlarmSupervisionCategory[] AlarmSupervisionCategories { get; set; }
+    }
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -13,10 +17,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("AlarmSupervisionCategories", IsNullable = false)]
-    public class AlarmSupervisionCategories_T : Object_G
+    public class AlarmSupervisionCategories_T : Object_G, IAlarmSupervisionCategories
     {
         [XmlElement("AlarmSupervisionCategory")]
-        public AlarmSupervisionCategory_T[] AlarmSupervisionCategories { get; set; }
+        public IAlarmSupervisionCategory[] AlarmSupervisionCategories { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -25,7 +29,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var alarms = new List<AlarmSupervisionCategory_T>();
+                var alarms = new List<IAlarmSupervisionCategory>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -63,11 +67,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("AlarmSupervisionCategories", IsNullable = false)]
-    public class AlarmSupervisionCategories_T_v2 : AlarmSupervisionCategories_T
+    public class AlarmSupervisionCategories_T_v2 : AlarmSupervisionCategories_T, IAlarmSupervisionCategories
     {
-        [XmlElement("AlarmSupervisionCategory")]
-        public new AlarmSupervisionCategory_T_v2[] AlarmSupervisionCategories { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -75,7 +76,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var alarms = new List<AlarmSupervisionCategory_T_v2>();
+                var alarms = new List<IAlarmSupervisionCategory>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)

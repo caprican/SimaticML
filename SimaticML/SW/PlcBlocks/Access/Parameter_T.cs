@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
-    public interface IParameter_T : IEnumerable<Object_G>
+    public interface IParameter : IEnumerable<Object_G>
     {
         string Name { get; set; }
         Common.SectionName_TE? Section { get; set; }
@@ -15,10 +15,10 @@ namespace SimaticML.SW.PlcBlocks.Access
         string TemplateReference { get; set; }
     }
 
-    public interface IParameter_T_v2 : IParameter_T
+    public interface IParameter_v2 : IParameter
     {
-        Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
-        Common.StringAttribute_T_v2 StringAttribute { get; set; }
+        Common.IIntegerAttribute_v2 IntegerAttribute { get; set; }
+        Common.IStringAttribute_v2 StringAttribute { get; set; }
         bool Informative { get; set; }
         int? UId { get; set; }
     }
@@ -31,7 +31,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T : Object_G, IParameter_T
+    public class Parameter_T : Object_G, IParameter
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -148,13 +148,13 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T_v2 : Parameter_T, IParameter_T_v2
+    public class Parameter_T_v2 : Parameter_T, IParameter_v2
     {
         /// <summary>
         /// for NumBLs. NumBLs is informative
         /// </summary>
         [XmlElement]
-        public Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
+        public Common.IIntegerAttribute_v2 IntegerAttribute { get; set; }
 
         /// <summary>
         /// for InterfaceFlags. InterfaceFlags is informative
@@ -162,7 +162,7 @@ namespace SimaticML.SW.PlcBlocks.Access
         /// The default value is "S7_Visible"
         /// </summary>
         [XmlElement]
-        public Common.StringAttribute_T_v2 StringAttribute { get; set; }
+        public Common.IStringAttribute_v2 StringAttribute { get; set; }
 
         //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
         //[XmlElement("Access", typeof(Access_T_v2))]
@@ -171,8 +171,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         [DefaultValue(false)]
@@ -223,12 +221,14 @@ namespace SimaticML.SW.PlcBlocks.Access
                     switch (reader.Name)
                     {
                         case "IntegerAttribute":
-                            IntegerAttribute = new Common.IntegerAttribute_T_v2();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new Common.IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
                         case "StringAttribute":
-                            StringAttribute = new Common.StringAttribute_T_v2();
-                            StringAttribute.ReadXml(reader);
+                            var stringAttribute = new Common.StringAttribute_T_v2();
+                            stringAttribute.ReadXml(reader);
+                            StringAttribute = stringAttribute;
                             break;
                         case "BooleanAttribute":
                             var booleanAttribute = new Common.BooleanAttribute_T_v2();
@@ -281,15 +281,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    if (Items is null) yield break; 
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -301,7 +292,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T_v3 : Parameter_T_v2, IParameter_T_v2
+    public class Parameter_T_v3 : Parameter_T_v2, IParameter_v2
     {
         //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
         //[XmlElement("Access", typeof(Access_T_v3))]
@@ -310,8 +301,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -353,12 +342,14 @@ namespace SimaticML.SW.PlcBlocks.Access
                     switch (reader.Name)
                     {
                         case "IntegerAttribute":
-                            IntegerAttribute = new Common.IntegerAttribute_T_v2();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new Common.IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
                         case "StringAttribute":
-                            StringAttribute = new Common.StringAttribute_T_v2();
-                            StringAttribute.ReadXml(reader);
+                            var stringAttribute = new Common.StringAttribute_T_v2();
+                            stringAttribute.ReadXml(reader);
+                            StringAttribute = stringAttribute;
                             break;
                         case "BooleanAttribute":
                             var booleanAttribute = new Common.BooleanAttribute_T_v2();
@@ -411,14 +402,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -430,7 +413,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T_v4 : Parameter_T_v3, IParameter_T_v2
+    public class Parameter_T_v4 : Parameter_T_v3, IParameter_v2
     {
         //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
         //[XmlElement("Access", typeof(Access_T_v4))]
@@ -439,8 +422,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -482,12 +463,14 @@ namespace SimaticML.SW.PlcBlocks.Access
                     switch (reader.Name)
                     {
                         case "IntegerAttribute":
-                            IntegerAttribute = new Common.IntegerAttribute_T_v2();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new Common.IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
                         case "StringAttribute":
-                            StringAttribute = new Common.StringAttribute_T_v2();
-                            StringAttribute.ReadXml(reader);
+                            var stringAttribute = new Common.StringAttribute_T_v2();
+                            stringAttribute.ReadXml(reader);
+                            StringAttribute = stringAttribute;
                             break;
                         case "BooleanAttribute":
                             var booleanAttribute = new Common.BooleanAttribute_T_v2();
@@ -540,14 +523,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -559,7 +534,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Parameter", IsNullable = false)]
-    public class Parameter_T_v5 : Parameter_T_v4, IParameter_T_v2
+    public class Parameter_T_v5 : Parameter_T_v4, IParameter_v2
     {
         //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
         //[XmlElement("Access", typeof(Access_T_v5))]
@@ -568,8 +543,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -611,12 +584,14 @@ namespace SimaticML.SW.PlcBlocks.Access
                     switch (reader.Name)
                     {
                         case "IntegerAttribute":
-                            IntegerAttribute = new Common.IntegerAttribute_T_v2();
-                            IntegerAttribute.ReadXml(reader);
+                            var integerAttribute = new Common.IntegerAttribute_T_v2();
+                            integerAttribute.ReadXml(reader);
+                            IntegerAttribute = integerAttribute;
                             break;
                         case "StringAttribute":
-                            StringAttribute = new Common.StringAttribute_T_v2();
-                            StringAttribute.ReadXml(reader);
+                            var stringAttribute = new Common.StringAttribute_T_v2();
+                            stringAttribute.ReadXml(reader);
+                            StringAttribute = stringAttribute;
                             break;
                         case "BooleanAttribute":
                             var booleanAttribute = new Common.BooleanAttribute_T_v2();
@@ -668,14 +643,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

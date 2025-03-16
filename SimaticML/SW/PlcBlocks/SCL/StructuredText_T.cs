@@ -19,7 +19,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
     /// </remarks>
     [Serializable]
     [XmlRoot("StructuredText", IsNullable = false)]
-    public class StructuredText_T : Object_G, IStructuredText_T
+    internal class StructuredText_T : Object_G, IStructuredText_T
     {
         //[XmlElement("Access", typeof(Access.Access_T_v2))]
         //[XmlElement("Blank", typeof(Common.Blank_T))]
@@ -136,7 +136,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
     /// </remarks>
     [Serializable]
     [XmlRoot("StructuredText", IsNullable = false)]
-    public class StructuredText_T_v2 : StructuredText_T, IStructuredText_T
+    internal class StructuredText_T_v2 : StructuredText_T, IStructuredText_T
     {
         //[XmlElement("Access", typeof(Access.Access_T_v3))]
         //[XmlElement("Blank", typeof(Common.Blank_T))]
@@ -228,14 +228,6 @@ namespace SimaticML.SW.PlcBlocks.SCL
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -247,7 +239,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
     /// </remarks>
     [Serializable]
     [XmlRoot("StructuredText", IsNullable = false)]
-    public class StructuredText_T_v3 : StructuredText_T_v2, IStructuredText_T
+    internal class StructuredText_T_v3 : StructuredText_T_v2, IStructuredText_T
     {
         //[XmlElement("Access", typeof(Access.Access_T_v4))]
         //[XmlElement("Blank", typeof(Common.Blank_T))]
@@ -339,17 +331,6 @@ namespace SimaticML.SW.PlcBlocks.SCL
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    if (Items != null)
-        //    { 
-        //        foreach (var item in Items)
-        //        {
-        //            yield return item;
-        //        }
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -361,7 +342,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
     /// </remarks>
     [Serializable]
     [XmlRoot("StructuredText", IsNullable = false)]
-    public class StructuredText_T_v4 : StructuredText_T_v3, IStructuredText_T
+    internal class StructuredText_T_v4 : StructuredText_T_v3, IStructuredText_T
     {
         //[XmlElement("Access", typeof(Access.Access_T_v5))]
         //[XmlElement("Blank", typeof(Common.Blank_T))]
@@ -452,14 +433,6 @@ namespace SimaticML.SW.PlcBlocks.SCL
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface IAutomaticTyped
+    {
+        string Name { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +21,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("AutomaticTyped", IsNullable = false)]
-    public class AutomaticTyped_T : Object_G
+    public class AutomaticTyped_T : Object_G, IAutomaticTyped
     {
         /// <summary>
         /// The name of the automatic chosen template parameter.

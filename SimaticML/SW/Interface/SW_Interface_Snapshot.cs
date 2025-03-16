@@ -5,12 +5,17 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Interface
 {
+    public interface ISnapshotValues
+    {
+        IValue[] Value { get; set; }
+    }
+
     [Serializable]
     [XmlRoot("SnapshotValues", IsNullable = false)]
-    public class SnapshotValues_T : Object_G
+    public class SnapshotValues_T : Object_G, ISnapshotValues
     {
         [XmlElement("Value")]
-        public Value_T[] Value { get; set; }
+        public IValue[] Value { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -19,7 +24,7 @@ namespace SimaticML.SW.Interface
             {
                 reader.Read();
 
-                var values = new List<Value_T>();
+                var values = new List<IValue>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -46,9 +51,16 @@ namespace SimaticML.SW.Interface
         }
     }
 
+    public interface IValue
+    {
+        string Path { get; set; }
+        string Type { get; set; }
+        string Value { get; set; }
+    }
+
     [Serializable]
     [XmlRoot("Value", IsNullable = false)]
-    public class Value_T : Object_G
+    public class Value_T : Object_G, IValue
     {
         [XmlAttribute]
         public string Path { get; set; }

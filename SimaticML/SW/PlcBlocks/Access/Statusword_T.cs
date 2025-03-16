@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IStatusword
+    {
+        Statusword_TE Combination { get; set; }
+    }
+
     /// <summary>
     /// Only for S7-300/400/WinAC
     /// </summary>
@@ -19,7 +24,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Statusword", IsNullable = false)]
-    public class Statusword_T : Object_G
+    public class Statusword_T : Object_G, IStatusword
     {
         [XmlAttribute]
         public Statusword_TE Combination { get; set; }

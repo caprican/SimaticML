@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
-    public interface IActions_T : IEnumerable<Object_G>
+    public interface IActions : IEnumerable<IAction>
     {
         Common.IComment_T Title { get; set; }
     }
@@ -19,13 +19,13 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T : Object_G, IActions_T
+    public class Actions_T : Object_G, IActions
     {
         public Common.IComment_T Title { get; set; }
 
         [XmlElement("Action")]
-        protected internal Action_T[] Actions { get; set; }
-        public Action_T this[int key] { get => Actions[key]; set => Actions[key] = value; }
+        protected internal IAction[] Actions { get; set; }
+        public IAction this[int key] { get => Actions[key]; set => Actions[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -34,7 +34,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var actions = new List<Action_T>();
+                var actions = new List<IAction>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -65,7 +65,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        public IEnumerator<Object_G> GetEnumerator()
+        public IEnumerator<IAction> GetEnumerator()
         {
             if (Actions is null) yield break; 
             foreach (var action in Actions)
@@ -85,14 +85,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v2 : Actions_T, IActions_T
+    public class Actions_T_v2 : Actions_T, IActions
     {
-        //public new Common.Comment_T_v2 Title { get; set; }
-
-        //[XmlElement("Action")]
-        //protected internal new Action_T_v2[] Actions { get; set; }
-        //public new Action_T_v2 this[int key] { get => Actions[key]; set => Actions[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -100,7 +94,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var actions = new List<Action_T_v2>();
+                var actions = new List<IAction>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -131,14 +125,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Action_T_v2> GetEnumerator()
-        //{
-        //    foreach (var item in Actions)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -150,12 +136,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v4 : Actions_T_v2, IActions_T
+    public class Actions_T_v4 : Actions_T_v2, IActions
     {
-        //[XmlElement("Action")]
-        //protected internal new Action_T_v4[] Actions { get; set; }
-        //public new Action_T_v4 this[int key] { get => Actions[key]; set => Actions[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -163,7 +145,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var actions = new List<Action_T_v4>();
+                var actions = new List<IAction>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -194,14 +176,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Action_T_v4> GetEnumerator()
-        //{
-        //    foreach (var item in Actions)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -213,12 +187,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v5 : Actions_T_v4, IActions_T
+    public class Actions_T_v5 : Actions_T_v4, IActions
     {
-        //[XmlElement("Action")]
-        //protected internal new Action_T_v5[] Actions { get; set; }
-        //public new Action_T_v5 this[int key] { get => Actions[key]; set => Actions[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -226,7 +196,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var actions = new List<Action_T_v5>();
+                var actions = new List<IAction>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -257,14 +227,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Action_T_v5> GetEnumerator()
-        //{
-        //    foreach (var item in Actions)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -276,12 +238,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Actions", IsNullable = false)]
-    public class Actions_T_v6 : Actions_T_v5, IActions_T
+    public class Actions_T_v6 : Actions_T_v5, IActions
     {
-        //[XmlElement("Action")]
-        //protected internal new Action_T_v6[] Actions { get; set; }
-        //public new Action_T_v6 this[int key] { get => Actions[key]; set => Actions[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -289,7 +247,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var actions = new List<Action_T_v6>();
+                var actions = new List<IAction>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -319,14 +277,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Action_T_v6> GetEnumerator()
-        //{
-        //    foreach (var item in Actions)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

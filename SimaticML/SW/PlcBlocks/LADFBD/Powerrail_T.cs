@@ -4,6 +4,10 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface IPowerrail
+    {
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +20,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Powerrail", IsNullable = false)]
-    public class Powerrail_T : Object_G
+    public class Powerrail_T : Object_G, IPowerrail
     {
         public override void ReadXml(XmlReader reader)
         {

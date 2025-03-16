@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
-    public interface IPermanentOperation_T
+    public interface IPermanentOperation
     {
         Common.IComment_T Title { get; set; }
         LADFBD.IFlgNet_T FlgNet { get; set; }
@@ -19,7 +19,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PermanentOperation", IsNullable = false)]
-    public class PermanentOperation_T : Object_G, IPermanentOperation_T
+    public class PermanentOperation_T : Object_G, IPermanentOperation
     {
         public Common.IComment_T Title { get; set; }
 
@@ -84,12 +84,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PermanentOperation", IsNullable = false)]
-    public class PermanentOperation_T_v2 : PermanentOperation_T, IPermanentOperation_T
+    public class PermanentOperation_T_v2 : PermanentOperation_T, IPermanentOperation
     {
-        //public new Common.Comment_T_v2 Title { get; set; }
-
-        //public new LADFBD.FlgNet_T_v2 FlgNet { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -146,10 +142,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PermanentOperation", IsNullable = false)]
-    public class PermanentOperation_T_v4 : PermanentOperation_T_v2, IPermanentOperation_T
+    public class PermanentOperation_T_v4 : PermanentOperation_T_v2, IPermanentOperation
     {
-        //public new LADFBD.FlgNet_T_v3 FlgNet { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -206,10 +200,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PermanentOperation", IsNullable = false)]
-    public class PermanentOperation_T_v5 : PermanentOperation_T_v4, IPermanentOperation_T
+    public class PermanentOperation_T_v5 : PermanentOperation_T_v4, IPermanentOperation
     {
-        //public new LADFBD.FlgNet_T_v4 FlgNet { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -266,10 +258,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("PermanentOperation", IsNullable = false)]
-    public class PermanentOperation_T_v6 : PermanentOperation_T_v5, IPermanentOperation_T
+    public class PermanentOperation_T_v6 : PermanentOperation_T_v5, IPermanentOperation
     {
-        //public new LADFBD.FlgNet_T_v5 FlgNet { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())

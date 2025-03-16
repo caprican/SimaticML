@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface IInvisible
+    {
+        string Name { get; set; }
+    }
+
     /// <summary>
     /// The invisible pins of this part.
     /// </summary>
@@ -19,7 +24,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Invisible", IsNullable = false)]
-    public class Invisible_T : Object_G
+    public class Invisible_T : Object_G, IInvisible
     {
         /// <summary>
         /// The name of the invisible pin.

@@ -4,12 +4,13 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
-    public interface IToken_T
+    public interface IToken
     {
-        IIntegerAttribute_T IntegerAttribute { get; set; }
+        IIntegerAttribute IntegerAttribute { get; set; }
         int? UId { get; set; }
         string Text { get; set; }
     }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -18,13 +19,13 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("Token", IsNullable = false)]
-    public class Token_T : Object_G, IToken_T
+    public class Token_T : Object_G, IToken
     {
         /// <summary>
         /// For NumBLs. NumBLs is the count of the blank spaces at the start.
         /// This is informative.
         /// </summary>
-        public IIntegerAttribute_T IntegerAttribute { get; set; }
+        public IIntegerAttribute IntegerAttribute { get; set; }
 
         /// <summary>
         /// Not allowed in STL
@@ -93,13 +94,12 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("Token", IsNullable = false)]
-    public class Token_T_v2 : Token_T, IToken_T
+    public class Token_T_v2 : Token_T, IToken
     {
         ///// <summary>
         ///// For NumBLs. NumBLs is the count of the blank spaces at the start.
         ///// This is informative.
         ///// </summary>
-        //public new IntegerAttribute_T_v2 IntegerAttribute { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {

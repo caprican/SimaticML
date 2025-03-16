@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
-    public interface IInstance_T : IEnumerable<Object_G>
+    public interface IInstance : IEnumerable<Object_G>
     {
         Scope_TE Scope { get; set; }
         int? UId { get; set; }
@@ -20,7 +20,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instance", IsNullable=false)]
-    public class Instance_T : Object_G, IInstance_T
+    public class Instance_T : Object_G, IInstance
     {
         [XmlAttribute]
         public Scope_TE Scope { get; set; }
@@ -135,7 +135,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instance", IsNullable = false)]
-    public class Instance_T_v2 : Instance_T, IInstance_T
+    public class Instance_T_v2 : Instance_T, IInstance
     {
         //[XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         //[XmlElement("Address", typeof(Address_T_v2))]                           // additional address for a symbol. it is informative
@@ -145,8 +145,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         public new Scope_TE_v2 Scope { get; set; }
@@ -234,14 +232,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -253,7 +243,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instance", IsNullable = false)]
-    public class Instance_T_v3 : Instance_T_v2, IInstance_T
+    public class Instance_T_v3 : Instance_T_v2, IInstance
     {
         //[XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         //[XmlElement("Address", typeof(Address_T_v2))]                           // additional address for a symbol. it is informative
@@ -263,8 +253,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -349,14 +337,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -368,7 +348,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instance", IsNullable = false)]
-    public class Instance_T_v4 : Instance_T_v3, IInstance_T
+    public class Instance_T_v4 : Instance_T_v3, IInstance
     {
         //[XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         //[XmlElement("Address", typeof(Address_T_v2))]                           // additional address for a symbol. it is informative
@@ -378,8 +358,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -464,14 +442,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -483,7 +453,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Instance", IsNullable = false)]
-    public class Instance_T_v5 : Instance_T_v4, IInstance_T
+    public class Instance_T_v5 : Instance_T_v4, IInstance
     {
         //[XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         //[XmlElement("Address", typeof(Address_T_v2))]                           // additional address for a symbol. it is informative
@@ -493,8 +463,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         public new Scope_TE_v5 Scope { get; set; }
@@ -581,14 +549,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

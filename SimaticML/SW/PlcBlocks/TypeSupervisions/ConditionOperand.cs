@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
+    public interface IConditionOperand
+    {
+        int Number { get; set; }
+        string Name { get; set; }
+    }
     /// <remarks>
     /// Schema : SW.PlcBlocks.TypeSupervisions (SW.Common)
     ///          SW.PlcBlocks.TypeSupervisions_v2 (SW.Common_v2)
@@ -12,7 +17,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class ConditionOperand : Object_G
+    public class ConditionOperand : Object_G, IConditionOperand
     {
         [XmlAttribute]
         public int Number { get; set; }

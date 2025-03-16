@@ -5,6 +5,21 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IConstant
+    {
+        IConstantType ConstantType { get; set; }
+        IConstantValue ConstantValue { get; set; }
+
+        Common.AttributeBase[] Attributes { get; set; }
+
+        string Name { get; set; }
+    }
+
+    public interface IConstant_v2 : IConstant
+    {
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -13,11 +28,11 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Constant", IsNullable = false)]
-    public class Constant_T : Object_G
+    public class Constant_T : Object_G, IConstant
     {
-        public ConstantType_T ConstantType { get; set; }
+        public IConstantType ConstantType { get; set; }
 
-        public ConstantValue_T ConstantValue { get; set; }
+        public IConstantValue ConstantValue { get; set; }
 
         /// <summary>
         /// for Format and FormatFlags. They are informative..
@@ -51,13 +66,15 @@ namespace SimaticML.SW.PlcBlocks.Access
                     switch (reader.Name)
                     {
                         case "ConstantType":
-                            ConstantType = new ConstantType_T();
-                            ConstantType.ReadXml(reader);
+                            var constantType = new ConstantType_T();
+                            constantType.ReadXml(reader);
+                            ConstantType = constantType;
                             break;
 
                         case "ConstantValue":
-                            ConstantValue = new ConstantValue_T();
-                            ConstantValue.ReadXml(reader);
+                            var constantValue = new ConstantValue_T();
+                            constantValue.ReadXml(reader);
+                            ConstantValue = constantValue;
                             break;
                         case "StringAttribute":
                             var stringAttribute = new Common.StringAttribute_T();
@@ -92,18 +109,14 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Constant", IsNullable = false)]
-    public class Constant_T_v2 : Constant_T
+    public class Constant_T_v2 : Constant_T, IConstant_v2
     {
-        public new ConstantType_T_v2 ConstantType { get; set; }
-
-        public new ConstantValue_T_v2 ConstantValue { get; set; }
-
         /// <summary>
         /// for Format and FormatFlags. They are informative..
         /// </summary>
-        [XmlElement("StringAttribute", typeof(Common.StringAttribute_T_v2))]
-        [XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
-        public new Common.AttributeBase[] Attributes { get; set; }
+        //[XmlElement("StringAttribute", typeof(Common.StringAttribute_T_v2))]
+        //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
+        //public new Common.AttributeBase[] Attributes { get; set; }
 
         [XmlAttribute]
         public int? UId { get; set; } = null;
@@ -137,13 +150,15 @@ namespace SimaticML.SW.PlcBlocks.Access
                     switch (reader.Name)
                     {
                         case "ConstantType":
-                            ConstantType = new ConstantType_T_v2();
-                            ConstantType.ReadXml(reader);
+                            var constantType = new ConstantType_T_v2();
+                            constantType.ReadXml(reader);
+                            ConstantType = constantType;
                             break;
 
                         case "ConstantValue":
-                            ConstantValue = new ConstantValue_T_v2();
-                            ConstantValue.ReadXml(reader);
+                            var constantValue = new ConstantValue_T_v2();
+                            constantValue.ReadXml(reader);
+                            ConstantValue = constantValue;
                             break;
                         case "StringAttribute":
                             var stringAttribute = new Common.StringAttribute_T_v2();

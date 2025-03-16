@@ -5,6 +5,16 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface ISequence
+    {
+        Common.IComment_T Title { get; set; }
+        Common.IComment_T Comment { get; set; }
+        IStep[] Steps { get; set; }
+        ITransition[] Transitions { get; set; }
+        IBranch[] Branches { get; set; }
+        IConnection[] Connections { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -13,27 +23,27 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Sequence", IsNullable = false)]
-    public class Sequence_T : Object_G
+    public class Sequence_T : Object_G, ISequence
     {
-        public Common.Comment_T Title { get; set; }
+        public Common.IComment_T Title { get; set; }
 
-        public Common.Comment_T Comment { get; set; }
+        public Common.IComment_T Comment { get; set; }
 
         [XmlArray("Steps")]
         [XmlArrayItem("Step", typeof(Step_T))]
-        public Step_T[] Steps { get; set; }
+        public IStep[] Steps { get; set; }
 
         [XmlArray("Transitions")]
         [XmlArrayItem("Transition", typeof(Transition_T))]
-        public Transition_T[] Transitions { get; set; }
+        public ITransition[] Transitions { get; set; }
 
         [XmlArray("Branches")]
         [XmlArrayItem("Branch", typeof(Branch_T))]
-        public Branch_T[] Branches { get; set; }
+        public IBranch[] Branches { get; set; }
 
         [XmlArray("Connections")]
         [XmlArrayItem("Connection", typeof(Connection_T))]
-        public Connection_T[] Connections { get; set; }
+        public IConnection[] Connections { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -47,15 +57,17 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Steps":
-                            var steps = new List<Step_T>();
+                            var steps = new List<IStep>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -70,7 +82,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (steps.Count > 0) Steps = steps.ToArray();
                             break;
                         case "Transitions":
-                            var transitions = new List<Transition_T>();
+                            var transitions = new List<ITransition>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -85,7 +97,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (transitions.Count > 0) Transitions = transitions.ToArray();
                             break;
                         case "Branches":
-                            var branches = new List<Branch_T>();
+                            var branches = new List<IBranch>();
                             while (reader.NodeType == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -100,7 +112,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (branches.Count == 0) Branches = branches.ToArray();
                             break;
                         case "Connections":
-                            var connections = new List<Connection_T>();
+                            var connections = new List<IConnection>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -138,20 +150,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Sequence", IsNullable = false)]
-    public class Sequence_T_v2 : Sequence_T
+    public class Sequence_T_v2 : Sequence_T, ISequence
     {
-        public new Common.Comment_T_v2 Title { get; set; }
-
-        public new Common.Comment_T_v2 Comment { get; set; }
-
-        [XmlArray("Steps")]
-        [XmlArrayItem("Step", typeof(Step_T_v2))]
-        public new Step_T_v2[] Steps { get; set; }
-
-        [XmlArray("Transitions")]
-        [XmlArrayItem("Transition", typeof(Transition_T_v2))]
-        public new Transition_T_v2[] Transitions { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -164,15 +164,17 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Steps":
-                            var steps = new List<Step_T_v2>();
+                            var steps = new List<IStep_v2>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -187,7 +189,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (steps.Count > 0) Steps = steps.ToArray();
                             break;
                         case "Transitions":
-                            var transitions = new List<Transition_T_v2>();
+                            var transitions = new List<ITransition>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -202,7 +204,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (transitions.Count > 0) Transitions = transitions.ToArray();
                             break;
                         case "Branches":
-                            var branches = new List<Branch_T>();
+                            var branches = new List<IBranch>();
                             while (reader.NodeType == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -217,7 +219,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (branches.Count == 0) Branches = branches.ToArray();
                             break;
                         case "Connections":
-                            var connections = new List<Connection_T>();
+                            var connections = new List<IConnection>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -255,16 +257,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Sequence", IsNullable = false)]
-    public class Sequence_T_v4 : Sequence_T_v2
+    public class Sequence_T_v4 : Sequence_T_v2, ISequence
     {
-        [XmlArray("Steps")]
-        [XmlArrayItem("Step", typeof(Step_T_v4))]
-        public new Step_T_v4[] Steps { get; set; }
-
-        [XmlArray("Transitions")]
-        [XmlArrayItem("Transition", typeof(Transition_T_v4))]
-        public new Transition_T_v4[] Transitions { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -277,15 +271,17 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Steps":
-                            var steps = new List<Step_T_v4>();
+                            var steps = new List<IStep_v2>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -300,7 +296,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (steps.Count > 0) Steps = steps.ToArray();
                             break;
                         case "Transitions":
-                            var transitions = new List<Transition_T_v4>();
+                            var transitions = new List<ITransition>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -315,7 +311,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (transitions.Count > 0) Transitions = transitions.ToArray();
                             break;
                         case "Branches":
-                            var branches = new List<Branch_T>();
+                            var branches = new List<IBranch>();
                             while (reader.NodeType == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -330,7 +326,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (branches.Count == 0) Branches = branches.ToArray();
                             break;
                         case "Connections":
-                            var connections = new List<Connection_T>();
+                            var connections = new List<IConnection>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -368,16 +364,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Sequence", IsNullable = false)]
-    public class Sequence_T_v5 : Sequence_T_v4
+    public class Sequence_T_v5 : Sequence_T_v4, ISequence
     {
-        [XmlArray("Steps")]
-        [XmlArrayItem("Step", typeof(Step_T_v5))]
-        public new Step_T_v5[] Steps { get; set; }
-
-        [XmlArray("Transitions")]
-        [XmlArrayItem("Transition", typeof(Transition_T_v5))]
-        public new Transition_T_v5[] Transitions { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -390,15 +378,17 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Steps":
-                            var steps = new List<Step_T_v5>();
+                            var steps = new List<IStep_v2>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -413,7 +403,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (steps.Count > 0) Steps = steps.ToArray();
                             break;
                         case "Transitions":
-                            var transitions = new List<Transition_T_v5>();
+                            var transitions = new List<ITransition>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -428,7 +418,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (transitions.Count > 0) Transitions = transitions.ToArray();
                             break;
                         case "Branches":
-                            var branches = new List<Branch_T>();
+                            var branches = new List<IBranch>();
                             while (reader.NodeType == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -443,7 +433,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (branches.Count == 0) Branches = branches.ToArray();
                             break;
                         case "Connections":
-                            var connections = new List<Connection_T>();
+                            var connections = new List<IConnection>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -481,16 +471,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Sequence", IsNullable = false)]
-    public class Sequence_T_v6 : Sequence_T_v5
+    public class Sequence_T_v6 : Sequence_T_v5, ISequence
     {
-        [XmlArray("Steps")]
-        [XmlArrayItem("Step", typeof(Step_T_v5))]
-        public new Step_T_v6[] Steps { get; set; }
-
-        [XmlArray("Transitions")]
-        [XmlArrayItem("Transition", typeof(Transition_T_v6))]
-        public new Transition_T_v6[] Transitions { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -503,15 +485,17 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Steps":
-                            var steps = new List<Step_T_v6>();
+                            var steps = new List<IStep_v2>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -526,7 +510,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (steps.Count > 0) Steps = steps.ToArray();
                             break;
                         case "Transitions":
-                            var transitions = new List<Transition_T_v6>();
+                            var transitions = new List<ITransition>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -541,7 +525,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (transitions.Count > 0) Transitions = transitions.ToArray();
                             break;
                         case "Branches":
-                            var branches = new List<Branch_T>();
+                            var branches = new List<IBranch>();
                             while (reader.NodeType == XmlNodeType.Element)
                             {
                                 switch (reader.Name)
@@ -556,7 +540,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             if (branches.Count == 0) Branches = branches.ToArray();
                             break;
                         case "Connections":
-                            var connections = new List<Connection_T>();
+                            var connections = new List<IConnection>();
                             while (reader.MoveToContent() == XmlNodeType.Element)
                             {
                                 switch (reader.Name)

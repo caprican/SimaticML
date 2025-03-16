@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
 {
+    public interface ISupervisionFB
+    {
+        string Name { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -15,7 +20,7 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class SupervisionFB : Object_G
+    public class SupervisionFB : Object_G, ISupervisionFB
     {
         [XmlAttribute]
         public string Name { get; set; }

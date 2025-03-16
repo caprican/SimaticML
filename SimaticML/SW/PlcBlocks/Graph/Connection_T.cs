@@ -4,6 +4,13 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IConnection
+    {
+        INode NodeFrom { get; set; }
+        INode NodeTo { get; set; }
+        Link_TE LinkType { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,11 +23,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Connection", IsNullable = false)]
-    public class Connection_T : Object_G
+    public class Connection_T : Object_G, IConnection
     {
-        public Node_T NodeFrom { get; set; }
+        public INode NodeFrom { get; set; }
 
-        public Node_T NodeTo { get; set; }
+        public INode NodeTo { get; set; }
 
         public Link_TE LinkType { get; set; }
 
@@ -47,12 +54,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case nameof(NodeFrom):
-                            NodeFrom = new Node_T();
-                            NodeFrom.ReadXml(reader);
+                            var nodeFrom = new Node_T();
+                            nodeFrom.ReadXml(reader);
+                            NodeFrom = nodeFrom;
                             break;
                         case nameof(NodeTo):
-                            NodeTo = new Node_T();
-                            NodeTo.ReadXml(reader);
+                            var nodeTo = new Node_T();
+                            nodeTo.ReadXml(reader);
+                            NodeTo = nodeTo;
                             break;
                     }
                 }

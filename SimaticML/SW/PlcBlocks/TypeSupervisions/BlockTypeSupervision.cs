@@ -5,22 +5,43 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
+    public interface IBlockTypeSupervision
+    {
+        ISupervisedOperand SupervisedOperand { get; set; }
+
+        bool SupervisedStatus { get; set; }
+
+        IDelayOperand DelayOperand { get; set; }
+
+        ICondition[] Conditions { get; set; }
+
+        int CategoryNumber { get; set; }
+        long? SubCategory1Number { get; set; }
+        long? SubCategory2Number { get; set; }
+
+        ISpecificField SpecificField { get; set; }
+
+        int Number { get; set; }
+
+        Type_TE Type { get; set; }
+    }
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.TypeSupervisions (SW.Common)
     /// </remarks>
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class BlockTypeSupervision : Object_G
+    public class BlockTypeSupervision : Object_G, IBlockTypeSupervision
     {
-        public SupervisedOperand SupervisedOperand { get; set; }
+        public ISupervisedOperand SupervisedOperand { get; set; }
 
         public bool SupervisedStatus { get; set; }
 
-        public DelayOperand DelayOperand { get; set; }
+        public IDelayOperand DelayOperand { get; set; }
 
         [XmlArrayItem("Condition", IsNullable = false)]
-        public Condition[] Conditions { get; set; }
+        public ICondition[] Conditions { get; set; }
 
         public int CategoryNumber { get; set; }
 
@@ -32,13 +53,13 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
         [XmlIgnore]
         public bool SubCategory2NumberSpecified { get; set; }
 
-        public SpecificField SpecificField { get; set; }
+        public ISpecificField SpecificField { get; set; }
 
         [XmlAttribute]
         public int Number { get; set; }
 
         [XmlAttribute]
-        public Type Type { get; set; }
+        public Type_TE Type { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -50,7 +71,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                         Number = reader.ReadContentAsInt();
                         break;
                     case nameof(Type):
-                        Enum.TryParse<Type>(reader.ReadContentAsString(), out var type);
+                        Enum.TryParse<Type_TE>(reader.ReadContentAsString(), out var type);
                         Type = type;
                         break;
                 }
@@ -61,37 +82,67 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
             {
                 reader.Read();
 
-                var conditions = new List<Condition>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "SupervisedOperand":
-                            SupervisedOperand = new SupervisedOperand();
-                            SupervisedOperand.ReadXml(reader);
+                            var supervisedOperand = new SupervisedOperand();
+                            supervisedOperand.ReadXml(reader);
+                            SupervisedOperand = supervisedOperand;
                             break;
                         case "DelayOperand":
-                            DelayOperand = new DelayOperand();
-                            DelayOperand.ReadXml(reader);
+                            var delayOperand = new DelayOperand();
+                            delayOperand.ReadXml(reader);
+                            DelayOperand = delayOperand;
                             break;
                         case "SpecificField":
-                            SpecificField = new SpecificField();
-                            SpecificField.ReadXml(reader);
+                            var specificField = new SpecificField();
+                            specificField.ReadXml(reader);
+                            SpecificField = specificField;
                             break;
                         case "SupervisedStatus":
-
+                            SupervisedStatus = reader.ReadElementContentAsBoolean();
                             break;
                         case "Conditions":
-                            var condition = new Condition();
-                            condition.ReadXml(reader);
-                            conditions.Add(condition);
+                            reader.MoveToContent();
+                            if (!reader.IsEmptyElement)
+                            {
+                                reader.Read();
+
+                                var conditions = new List<ICondition>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
+                                {
+                                    switch (reader.Name)
+                                    {
+                                        case "Condition":
+                                            var condition = new Condition();
+                                            condition.ReadXml(reader);
+                                            conditions.Add(condition);
+                                            break;
+                                    }
+                                }
+                                if (conditions.Count > 0) Conditions = conditions.ToArray();
+                            }
+
+                            if (reader.IsStartElement())
+                                reader.Read();
+                            else
+                                reader.ReadEndElement();
                             break;
                         case "CategoryNumber":
-
+                            CategoryNumber = reader.ReadElementContentAsInt();
+                            break;
+                        case "SubCategory1Number":
+                            SubCategory1Number = reader.ReadElementContentAsLong();
+                            SubCategory1NumberSpecified = true;
+                            break;
+                        case "SubCategory2Number":
+                            SubCategory2Number = reader.ReadElementContentAsLong();
+                            SubCategory2NumberSpecified = true;
                             break;
                     }
                 }
-                if(conditions.Count > 0) Conditions = conditions.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -113,10 +164,8 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class BlockTypeSupervision_v2 : BlockTypeSupervision
+    public class BlockTypeSupervision_v2 : BlockTypeSupervision, IBlockTypeSupervision
     {
-        public new SpecificField_v2 SpecificField { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -127,7 +176,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                         Number = reader.ReadContentAsInt();
                         break;
                     case nameof(Type):
-                        Enum.TryParse<Type>(reader.ReadContentAsString(), out var type);
+                        Enum.TryParse<Type_TE>(reader.ReadContentAsString(), out var type);
                         Type = type;
                         break;
                 }
@@ -138,37 +187,68 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
             {
                 reader.Read();
 
-                var conditions = new List<Condition>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "SupervisedOperand":
-                            SupervisedOperand = new SupervisedOperand();
-                            SupervisedOperand.ReadXml(reader);
+                            var supervisedOperand = new SupervisedOperand();
+                            supervisedOperand.ReadXml(reader);
+                            SupervisedOperand = supervisedOperand;
                             break;
                         case "DelayOperand":
-                            DelayOperand = new DelayOperand();
-                            DelayOperand.ReadXml(reader);
+                            var delayOperand = new DelayOperand();
+                            delayOperand.ReadXml(reader);
+                            DelayOperand = delayOperand;
                             break;
                         case "SpecificField":
-                            SpecificField = new SpecificField_v2();
-                            SpecificField.ReadXml(reader);
+                            var specificField = new SpecificField_v2();
+                            specificField.ReadXml(reader);
+                            SpecificField = specificField;
                             break;
                         case "SupervisedStatus":
-
+                            SupervisedStatus = reader.ReadElementContentAsBoolean();
                             break;
                         case "Conditions":
-                            var condition = new Condition();
-                            condition.ReadXml(reader);
-                            conditions.Add(condition);
+                            reader.MoveToContent();
+                            if (!reader.IsEmptyElement)
+                            {
+                                reader.Read();
+
+                                var conditions = new List<ICondition>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
+                                {
+                                    switch (reader.Name)
+                                    {
+                                        case "Condition":
+                                            var condition = new Condition();
+                                            condition.ReadXml(reader);
+                                            conditions.Add(condition);
+                                            break;
+                                    }
+                                }
+                                if (conditions.Count > 0) Conditions = conditions.ToArray();
+                            }
+
+                            if (reader.IsStartElement())
+                                reader.Read();
+                            else
+                                reader.ReadEndElement();
+
                             break;
                         case "CategoryNumber":
-
+                            CategoryNumber = reader.ReadElementContentAsInt();
+                            break;
+                        case "SubCategory1Number":
+                            SubCategory1Number = reader.ReadElementContentAsLong();
+                            SubCategory1NumberSpecified = true;
+                            break;
+                        case "SubCategory2Number":
+                            SubCategory2Number = reader.ReadElementContentAsLong();
+                            SubCategory2NumberSpecified = true;
                             break;
                     }
                 }
-                if (conditions.Count > 0) Conditions = conditions.ToArray();
             }
 
             if (reader.IsStartElement())

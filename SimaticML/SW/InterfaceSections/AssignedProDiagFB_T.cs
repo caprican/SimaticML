@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.InterfaceSections
 {
+    public interface IAssignedProDiagFB
+    {
+        string Value { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -12,7 +17,7 @@ namespace SimaticML.SW.InterfaceSections
     /// </remarks>
     [Serializable]
     [XmlRoot("AssignedProDiagFB", IsNullable = false)]
-    public class AssignedProDiagFB_T : Object_G
+    public class AssignedProDiagFB_T : Object_G, IAssignedProDiagFB
     {
         [XmlText]
         public string Value { get; set; }

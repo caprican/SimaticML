@@ -5,6 +5,14 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IGraph
+    {
+        IPermanentOperations PreOperations { get; set; }
+        ISequence[] Sequences { get; set; }
+        IPermanentOperations PostOperations { get; set; }
+        IAlarmsSettings AlarmsSettings { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -13,16 +21,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Graph", IsNullable = false)]
-    public class Graph_T : Object_G
+    public class Graph_T : Object_G, IGraph
     {
-        public PermanentOperations_T PreOperations { get; set; }
+        public IPermanentOperations PreOperations { get; set; }
 
         [XmlElement("Sequence")]
-        public Sequence_T[] Sequences { get; set; }
+        public ISequence[] Sequences { get; set; }
 
-        public PermanentOperations_T PostOperations { get; set; }
+        public IPermanentOperations PostOperations { get; set; }
 
-        public AlarmsSettings_T AlarmsSettings { get; set; }
+        public IAlarmsSettings AlarmsSettings { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -31,7 +39,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var sequences = new List<Sequence_T>();
+                var sequences = new List<ISequence>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -42,16 +50,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             sequences.Add(sequence);
                             break;
                         case "PostOperations":
-                            PostOperations = new PermanentOperations_T();
-                            PostOperations.ReadXml(reader);
+                            var postOperations = new PermanentOperations_T();
+                            postOperations.ReadXml(reader);
+                            PostOperations = postOperations;
                             break;
                         case "PreOperations":
-                            PreOperations = new PermanentOperations_T();
-                            PreOperations.ReadXml(reader);
+                            var preOperations = new PermanentOperations_T();
+                            preOperations.ReadXml(reader);
+                            PreOperations = preOperations;
                             break;
                         case "AlarmsSettings":
-                            AlarmsSettings = new AlarmsSettings_T();
-                            AlarmsSettings.ReadXml(reader);
+                            var alarmsSettings = new AlarmsSettings_T();
+                            alarmsSettings.ReadXml(reader);
+                            AlarmsSettings = alarmsSettings;
                             break;
                     }
                 }
@@ -78,13 +89,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Graph", IsNullable = false)]
-    public class Graph_T_v2 : Graph_T
+    public class Graph_T_v2 : Graph_T, IGraph
     {
-        [XmlElement("Sequence")]
-        public new Sequence_T_v2[] Sequences { get; set; }
-
-        public new AlarmsSettings_T_v2 AlarmsSettings { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -92,7 +98,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var sequences = new List<Sequence_T_v2>();
+                var sequences = new List<ISequence>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -103,16 +109,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             sequences.Add(sequence);
                             break;
                         case "PostOperations":
-                            PostOperations = new PermanentOperations_T();
-                            PostOperations.ReadXml(reader);
+                            var postOperations = new PermanentOperations_T();
+                            postOperations.ReadXml(reader);
+                            PostOperations = postOperations;
                             break;
                         case "PreOperations":
-                            PreOperations = new PermanentOperations_T();
-                            PreOperations.ReadXml(reader);
+                            var preOperations = new PermanentOperations_T();
+                            preOperations.ReadXml(reader);
+                            PreOperations = preOperations;
                             break;
                         case "AlarmsSettings":
-                            AlarmsSettings = new AlarmsSettings_T_v2();
-                            AlarmsSettings.ReadXml(reader);
+                            var alarmsSettings = new AlarmsSettings_T_v2();
+                            alarmsSettings.ReadXml(reader);
+                            AlarmsSettings = alarmsSettings;
                             break;
                     }
                 }
@@ -141,11 +150,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
     [XmlRoot("Graph", IsNullable = false)]
     public class Graph_T_v4 : Graph_T_v2
     {
-        [XmlElement("Sequence")]
-        public new Sequence_T_v4[] Sequences { get; set; }
-
-        public new AlarmsSettings_T_v4 AlarmsSettings { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -153,7 +157,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var sequences = new List<Sequence_T_v4>();
+                var sequences = new List<ISequence>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -164,16 +168,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             sequences.Add(sequence);
                             break;
                         case "PostOperations":
-                            PostOperations = new PermanentOperations_T();
-                            PostOperations.ReadXml(reader);
+                            var postOperations = new PermanentOperations_T();
+                            postOperations.ReadXml(reader);
+                            PostOperations = postOperations;
                             break;
                         case "PreOperations":
-                            PreOperations = new PermanentOperations_T();
-                            PreOperations.ReadXml(reader);
+                            var preOperations = new PermanentOperations_T();
+                            preOperations.ReadXml(reader);
+                            PreOperations = preOperations;
                             break;
                         case "AlarmsSettings":
-                            AlarmsSettings = new AlarmsSettings_T_v4();
-                            AlarmsSettings.ReadXml(reader);
+                            var alarmsSettings = new AlarmsSettings_T_v4();
+                            alarmsSettings.ReadXml(reader);
+                            AlarmsSettings = alarmsSettings;
                             break;
                     }
                 }
@@ -202,9 +209,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
     [XmlRoot("Graph", IsNullable = false)]
     public class Graph_T_v5 : Graph_T_v4
     {
-        [XmlElement("Sequence")]
-        public new Sequence_T_v5[] Sequences { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -212,7 +216,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var sequences = new List<Sequence_T_v5>();
+                var sequences = new List<ISequence>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -223,16 +227,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             sequences.Add(sequence);
                             break;
                         case "PostOperations":
-                            PostOperations = new PermanentOperations_T();
-                            PostOperations.ReadXml(reader);
+                            var postOperations = new PermanentOperations_T();
+                            postOperations.ReadXml(reader);
+                            PostOperations = postOperations;
                             break;
                         case "PreOperations":
-                            PreOperations = new PermanentOperations_T();
-                            PreOperations.ReadXml(reader);
+                            var preOperations = new PermanentOperations_T();
+                            preOperations.ReadXml(reader);
+                            PreOperations = preOperations;
                             break;
                         case "AlarmsSettings":
-                            AlarmsSettings = new AlarmsSettings_T_v4();
-                            AlarmsSettings.ReadXml(reader);
+                            var alarmsSettings = new AlarmsSettings_T_v4();
+                            alarmsSettings.ReadXml(reader);
+                            AlarmsSettings = alarmsSettings;
                             break;
                     }
                 }
@@ -261,9 +268,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
     [XmlRoot("Graph", IsNullable = false)]
     public class Graph_T_v6 : Graph_T_v5
     {
-        [XmlElement("Sequence")]
-        public new Sequence_T_v6[] Sequences { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -271,7 +275,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var sequences = new List<Sequence_T_v6>();
+                var sequences = new List<ISequence>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -282,16 +286,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             sequences.Add(sequence);
                             break;
                         case "PostOperations":
-                            PostOperations = new PermanentOperations_T();
-                            PostOperations.ReadXml(reader);
+                            var postOperations = new PermanentOperations_T();
+                            postOperations.ReadXml(reader);
+                            PostOperations = postOperations;
                             break;
                         case "PreOperations":
-                            PreOperations = new PermanentOperations_T();
-                            PreOperations.ReadXml(reader);
+                            var preOperations = new PermanentOperations_T();
+                            preOperations.ReadXml(reader);
+                            PreOperations = preOperations;
                             break;
                         case "AlarmsSettings":
-                            AlarmsSettings = new AlarmsSettings_T_v4();
-                            AlarmsSettings.ReadXml(reader);
+                            var alarmsSettings = new AlarmsSettings_T_v4();
+                            alarmsSettings.ReadXml(reader);
+                            AlarmsSettings = alarmsSettings;
                             break;
                     }
                 }

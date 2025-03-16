@@ -4,6 +4,15 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IIdentRef
+    {
+        Common.IComment_T Comment { get; set; }
+
+        Common.IViewInfo ViewInfo { get; set; }
+
+        int UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -12,11 +21,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("IdentRef", IsNullable = false)]
-    public class IdentRef_T : Object_G
+    public class IdentRef_T : Object_G, IIdentRef
     {
-        public Common.Comment_T Comment { get; set; }
+        public Common.IComment_T Comment { get; set; }
 
-        public Common.ViewInfo_T ViewInfo { get; set; }
+        public Common.IViewInfo ViewInfo { get; set; }
 
         [XmlAttribute]
         public int UId { get; set; }
@@ -43,12 +52,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Comment":
-                            Comment = new Common.Comment_T();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "ViewInfo":
-                            ViewInfo = new Common.ViewInfo_T();
-                            ViewInfo.ReadXml(reader);
+                            var viewInfo = new Common.ViewInfo_T();
+                            viewInfo.ReadXml(reader);
+                            ViewInfo = viewInfo;
                             break;
                     }
                 }
@@ -77,12 +88,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("IdentRef", IsNullable = false)]
-    public class IdentRef_T_v2 : IdentRef_T
+    public class IdentRef_T_v2 : IdentRef_T, IIdentRef
     {
-        public new Common.Comment_T_v2 Comment { get; set; }
-
-        public new Common.ViewInfo_T_v2 ViewInfo { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -105,12 +112,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "ViewInfo":
-                            ViewInfo = new Common.ViewInfo_T_v2();
-                            ViewInfo.ReadXml(reader);
+                            var viewInfo = new Common.ViewInfo_T_v2();
+                            viewInfo.ReadXml(reader);
+                            ViewInfo = viewInfo;
                             break;
                     }
                 }

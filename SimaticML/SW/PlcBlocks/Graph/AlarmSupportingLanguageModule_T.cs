@@ -4,6 +4,17 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IAlarmSupportingLanguageModule
+    {
+        Common.IComment_T Title { get; set; }
+
+        IAlarmText AlarmText { get; set; }
+
+        LADFBD.IFlgNet_T FlgNet { get; set; }
+
+        ProgrammingLanguage_TE ProgrammingLanguage { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -12,13 +23,13 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Interlock", IsNullable = false)]
-    public class AlarmSupportingLanguageModule_T : Object_G
+    public class AlarmSupportingLanguageModule_T : Object_G, IAlarmSupportingLanguageModule
     {
-        public Common.Comment_T Title { get; set; }
+        public Common.IComment_T Title { get; set; }
 
-        public AlarmText_T AlarmText { get; set; }
+        public IAlarmText AlarmText { get; set; }
 
-        public LADFBD.FlgNet_T FlgNet { get; set; }
+        public LADFBD.IFlgNet_T FlgNet { get; set; }
 
         [XmlAttribute]
         public ProgrammingLanguage_TE ProgrammingLanguage { get; set; }
@@ -46,16 +57,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "AlarmText":
-                            AlarmText = new AlarmText_T();
-                            AlarmText.ReadXml(reader);
+                            var alarmText = new AlarmText_T();
+                            alarmText.ReadXml(reader);
+                            AlarmText = alarmText;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                     }
                 }
@@ -81,14 +95,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Interlock", IsNullable = false)]
-    public class AlarmSupportingLanguageModule_T_v2 : AlarmSupportingLanguageModule_T
+    public class AlarmSupportingLanguageModule_T_v2 : AlarmSupportingLanguageModule_T, IAlarmSupportingLanguageModule
     {
-        public new Common.Comment_T_v2 Title { get; set; }
-
-        public new AlarmText_T_v2 AlarmText { get; set; }
-
-        public new LADFBD.FlgNet_T_v2 FlgNet { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -112,16 +120,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "AlarmText":
-                            AlarmText = new AlarmText_T_v2();
-                            AlarmText.ReadXml(reader);
+                            var alarmText = new AlarmText_T_v2();
+                            alarmText.ReadXml(reader);
+                            AlarmText = alarmText;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T_v2();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T_v2();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                     }
                 }
@@ -147,10 +158,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Interlock", IsNullable = false)]
-    public class AlarmSupportingLanguageModule_T_v4 : AlarmSupportingLanguageModule_T_v2
+    public class AlarmSupportingLanguageModule_T_v4 : AlarmSupportingLanguageModule_T_v2, IAlarmSupportingLanguageModule
     {
-        public new LADFBD.FlgNet_T_v3 FlgNet { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -174,16 +183,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "AlarmText":
-                            AlarmText = new AlarmText_T_v2();
-                            AlarmText.ReadXml(reader);
+                            var alarmText = new AlarmText_T_v2();
+                            alarmText.ReadXml(reader);
+                            AlarmText = alarmText;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T_v3();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T_v3();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                     }
                 }
@@ -209,10 +221,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Interlock", IsNullable = false)]
-    public class AlarmSupportingLanguageModule_T_v5 : AlarmSupportingLanguageModule_T_v4
+    public class AlarmSupportingLanguageModule_T_v5 : AlarmSupportingLanguageModule_T_v4, IAlarmSupportingLanguageModule
     {
-        public new LADFBD.FlgNet_T_v4 FlgNet { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -236,16 +246,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "AlarmText":
-                            AlarmText = new AlarmText_T_v2();
-                            AlarmText.ReadXml(reader);
+                            var alarmText = new AlarmText_T_v2();
+                            alarmText.ReadXml(reader);
+                            AlarmText = alarmText;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T_v4();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T_v4();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                     }
                 }
@@ -271,10 +284,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Interlock", IsNullable = false)]
-    public class AlarmSupportingLanguageModule_T_v6 : AlarmSupportingLanguageModule_T_v5
+    public class AlarmSupportingLanguageModule_T_v6 : AlarmSupportingLanguageModule_T_v5, IAlarmSupportingLanguageModule
     {
-        public new LADFBD.FlgNet_T_v5 FlgNet { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -298,16 +309,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Title":
-                            Title = new Common.Comment_T_v2();
-                            Title.ReadXml(reader);
+                            var title = new Common.Comment_T_v2();
+                            title.ReadXml(reader);
+                            Title = title;
                             break;
                         case "AlarmText":
-                            AlarmText = new AlarmText_T_v2();
-                            AlarmText.ReadXml(reader);
+                            var alarmText = new AlarmText_T_v2();
+                            alarmText.ReadXml(reader);
+                            AlarmText = alarmText;
                             break;
                         case "FlgNet":
-                            FlgNet = new LADFBD.FlgNet_T_v5();
-                            FlgNet.ReadXml(reader);
+                            var flgNet = new LADFBD.FlgNet_T_v5();
+                            flgNet.ReadXml(reader);
+                            FlgNet = flgNet;
                             break;
                     }
                 }

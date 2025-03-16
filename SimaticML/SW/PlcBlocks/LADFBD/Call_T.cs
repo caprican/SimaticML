@@ -5,6 +5,17 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface ICall_T
+    {
+        Access.ICallInfo CallInfo { get; set; }
+        Access.ITemplateValue[] TemplateValue { get; set; }
+        IAutomaticTyped[] AutomaticTyped { get; set; }
+        IInvisible[] Invisible { get; set; }
+        INeg[] Negated { get; set; }
+        Common.IComment Comment { get; set; }
+        int UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -13,23 +24,23 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Call", IsNullable = false)]
-    public class Call_T : Object_G
+    public class Call_T : Object_G, ICall_T
     {
-        public Access.CallInfo_T CallInfo { get; set; }
+        public Access.ICallInfo CallInfo { get; set; }
 
         [XmlElement("TemplateValue")]
-        public Access.TemplateValue_T[] TemplateValue { get; set; }
+        public Access.ITemplateValue[] TemplateValue { get; set; }
 
         [XmlElement("AutomaticTyped")]
-        public AutomaticTyped_T[] AutomaticTyped { get; set; }
+        public IAutomaticTyped[] AutomaticTyped { get; set; }
 
         [XmlElement("Invisible")]
-        public Invisible_T[] Invisible { get; set; }
+        public IInvisible[] Invisible { get; set; }
 
         [XmlElement("Negated")]
-        public Neg_T[] Negated { get; set; }
+        public INeg[] Negated { get; set; }
 
-        public Common.Comment_T Comment { get; set; }
+        public Common.IComment Comment { get; set; }
 
         [XmlAttribute]
         public int UId { get; set; }
@@ -51,17 +62,18 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
             {
                 reader.Read();
 
-                var templates = new List<Access.TemplateValue_T>();
-                var automticTypdes = new List<AutomaticTyped_T>();
-                var invisibles = new List<Invisible_T>();
-                var negateds = new List<Neg_T>();
+                var templates = new List<Access.ITemplateValue>();
+                var automticTypdes = new List<IAutomaticTyped>();
+                var invisibles = new List<IInvisible>();
+                var negateds = new List<INeg>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "CallInfo":
-                            CallInfo = new Access.CallInfo_T();
-                            CallInfo.ReadXml(reader);
+                            var callInfo = new Access.CallInfo_T();
+                            callInfo.ReadXml(reader);
+                            CallInfo = callInfo;
                             break;
                         case "TemplateValue":
                             var template = new Access.TemplateValue_T();
@@ -74,8 +86,9 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             automticTypdes.Add(typed);
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Invisible":
                             var invisible = new Invisible_T();
@@ -115,14 +128,14 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Call", IsNullable = false)]
-    public class Call_T_v2 : Call_T
+    public class Call_T_v2 : Call_T, ICall_T
     {
-        public new Access.CallInfo_T_v2 CallInfo { get; set; }
+        //public new Access.CallInfo_T_v2 CallInfo { get; set; }
 
-        [XmlElement("TemplateValue")]
-        public new Access.TemplateValue_T_v2[] TemplateValue { get; set; }
+        //[XmlElement("TemplateValue")]
+        //public new Access.TemplateValue_T_v2[] TemplateValue { get; set; }
 
-        public new Common.Comment_T_v2 Comment { get; set; }
+        //public new Common.Comment_T_v2 Comment { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -141,17 +154,18 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
             {
                 reader.Read();
 
-                var templates = new List<Access.TemplateValue_T_v2>();
-                var automticTypdes = new List<AutomaticTyped_T>();
-                var invisibles = new List<Invisible_T>();
-                var negateds = new List<Neg_T>();
+                var templates = new List<Access.ITemplateValue_v2>();
+                var automticTypdes = new List<IAutomaticTyped>();
+                var invisibles = new List<IInvisible>();
+                var negateds = new List<INeg>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "CallInfo":
-                            CallInfo = new Access.CallInfo_T_v2();
-                            CallInfo.ReadXml(reader);
+                            var callInfo = new Access.CallInfo_T_v2();
+                            callInfo.ReadXml(reader);
+                            CallInfo = callInfo;
                             break;
                         case "TemplateValue":
                             var template = new Access.TemplateValue_T_v2();
@@ -164,8 +178,9 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             automticTypdes.Add(typed);
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Invisible":
                             var invisible = new Invisible_T();
@@ -205,9 +220,9 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Call", IsNullable = false)]
-    public class Call_T_v3 : Call_T_v2
+    public class Call_T_v3 : Call_T_v2, ICall_T
     {
-        public new Access.CallInfo_T_v3 CallInfo { get; set; }
+        //public new Access.CallInfo_T_v3 CallInfo { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -226,17 +241,18 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
             {
                 reader.Read();
 
-                var templates = new List<Access.TemplateValue_T_v2>();
-                var automticTypdes = new List<AutomaticTyped_T>();
-                var invisibles = new List<Invisible_T>();
-                var negateds = new List<Neg_T>();
+                var templates = new List<Access.ITemplateValue_v2>();
+                var automticTypdes = new List<IAutomaticTyped>();
+                var invisibles = new List<IInvisible>();
+                var negateds = new List<INeg>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "CallInfo":
-                            CallInfo = new Access.CallInfo_T_v3();
-                            CallInfo.ReadXml(reader);
+                            var callInfo = new Access.CallInfo_T_v3();
+                            callInfo.ReadXml(reader);
+                            CallInfo = callInfo;
                             break;
                         case "TemplateValue":
                             var template = new Access.TemplateValue_T_v2();
@@ -249,8 +265,9 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             automticTypdes.Add(typed);
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Invisible":
                             var invisible = new Invisible_T();
@@ -290,9 +307,9 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Call", IsNullable = false)]
-    public class Call_T_v4 : Call_T_v3
+    public class Call_T_v4 : Call_T_v3, ICall_T
     {
-        public new Access.CallInfo_T_v4 CallInfo { get; set; }
+        //public new Access.CallInfo_T_v4 CallInfo { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -311,17 +328,18 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
             {
                 reader.Read();
 
-                var templates = new List<Access.TemplateValue_T_v2>();
-                var automticTypdes = new List<AutomaticTyped_T>();
-                var invisibles = new List<Invisible_T>();
-                var negateds = new List<Neg_T>();
+                var templates = new List<Access.ITemplateValue_v2>();
+                var automticTypdes = new List<IAutomaticTyped>();
+                var invisibles = new List<IInvisible>();
+                var negateds = new List<INeg>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "CallInfo":
-                            CallInfo = new Access.CallInfo_T_v4();
-                            CallInfo.ReadXml(reader);
+                            var callInfo = new Access.CallInfo_T_v4();
+                            callInfo.ReadXml(reader);
+                            CallInfo = callInfo;
                             break;
                         case "TemplateValue":
                             var template = new Access.TemplateValue_T_v2();
@@ -334,8 +352,9 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             automticTypdes.Add(typed);
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Invisible":
                             var invisible = new Invisible_T();
@@ -375,9 +394,9 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Call", IsNullable = false)]
-    public class Call_T_v5 : Call_T_v4
+    public class Call_T_v5 : Call_T_v4, ICall_T
     {
-        public new Access.CallInfo_T_v5 CallInfo { get; set; }
+        //public new Access.CallInfo_T_v5 CallInfo { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -396,17 +415,18 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
             {
                 reader.Read();
 
-                var templates = new List<Access.TemplateValue_T_v2>();
-                var automticTypdes = new List<AutomaticTyped_T>();
-                var invisibles = new List<Invisible_T>();
-                var negateds = new List<Neg_T>();
+                var templates = new List<Access.ITemplateValue_v2>();
+                var automticTypdes = new List<IAutomaticTyped>();
+                var invisibles = new List<IInvisible>();
+                var negateds = new List<INeg>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "CallInfo":
-                            CallInfo = new Access.CallInfo_T_v5();
-                            CallInfo.ReadXml(reader);
+                            var callInfo = new Access.CallInfo_T_v5();
+                            callInfo.ReadXml(reader);
+                            CallInfo = callInfo;
                             break;
                         case "TemplateValue":
                             var template = new Access.TemplateValue_T_v2();
@@ -419,8 +439,9 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             automticTypdes.Add(typed);
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Invisible":
                             var invisible = new Invisible_T();

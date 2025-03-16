@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
+    public interface IDelayOperand
+    {
+        string Name { get; set; }
+    }
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.TypeSupervisions (SW.Common)
     ///          SW.PlcBlocks.TypeSupervisions_v2 (SW.Common_v2)
@@ -12,7 +17,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(Namespace = "", IsNullable = false)]
-    public class DelayOperand : Object_G
+    public class DelayOperand : Object_G, IDelayOperand
     {
         [XmlAttribute]
         public string Name { get; set; }

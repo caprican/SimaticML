@@ -8,11 +8,12 @@ namespace SimaticML.SW.PlcBlocks.STL
 {
     public interface IStlToken_T : IEnumerable<Object_G>
     {
-        Common.IIntegerAttribute_T IntegerAttribute { get; set; }
-        Common.IToken_T Token { get; set; }
+        Common.IIntegerAttribute IntegerAttribute { get; set; }
+        Common.IToken Token { get; set; }
         int? UId { get; set; }
         STL_TE Text { get; set; }
     }
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.STL (SW.PlcBlocks.CompileUnitCommon + SW.PlcBlocks.Access + SW.Common)
     /// </remarks>
@@ -23,7 +24,7 @@ namespace SimaticML.SW.PlcBlocks.STL
         /// <summary>
         /// for NumBLs. NumBLs is informative
         /// </summary>
-        public Common.IIntegerAttribute_T IntegerAttribute { get; set; }
+        public Common.IIntegerAttribute IntegerAttribute { get; set; }
 
         //[XmlElement("Comment", typeof(Common.Comment_T))]
         //[XmlElement("LineComment", typeof(Common.LineComment_T))]
@@ -33,7 +34,7 @@ namespace SimaticML.SW.PlcBlocks.STL
         /// <summary>
         /// e.g 0 1 for NOP 0, NOP 1; STW for L STW or DILG for L DILG; only if separated by comment
         /// </summary>
-        public Common.IToken_T Token { get; set; }
+        public Common.IToken Token { get; set; }
 
         /// <summary>
         /// Not allowed in STL
@@ -222,14 +223,6 @@ namespace SimaticML.SW.PlcBlocks.STL
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -327,14 +320,6 @@ namespace SimaticML.SW.PlcBlocks.STL
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

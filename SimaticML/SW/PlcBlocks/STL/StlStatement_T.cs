@@ -10,6 +10,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     {
         int? UId { get; set; }
     }
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.STL (SW.PlcBlocks.CompileUnitCommon + SW.PlcBlocks.Access + SW.Common)
     /// </remarks>
@@ -123,8 +124,6 @@ namespace SimaticML.SW.PlcBlocks.STL
         //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v2), Order = 1)]
         //[XmlElement("StlToken", typeof(StlToken_T_v2), Order = 2)]                 // missing for empty lines
         //[XmlElement("Access", typeof(Access.Access_T_v2), Order = 4)]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -200,14 +199,6 @@ namespace SimaticML.SW.PlcBlocks.STL
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -225,8 +216,6 @@ namespace SimaticML.SW.PlcBlocks.STL
         //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v2), Order = 1)]
         //[XmlElement("StlToken", typeof(StlToken_T_v2), Order = 2)]                 // missing for empty lines
         //[XmlElement("Access", typeof(Access.Access_T_v3), Order = 4)]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -302,14 +291,6 @@ namespace SimaticML.SW.PlcBlocks.STL
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -327,8 +308,6 @@ namespace SimaticML.SW.PlcBlocks.STL
         //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v4), Order = 1)]
         //[XmlElement("StlToken", typeof(StlToken_T_v4), Order = 2)]                 // missing for empty lines
         //[XmlElement("Access", typeof(Access.Access_T_v4), Order = 4)]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -404,14 +383,6 @@ namespace SimaticML.SW.PlcBlocks.STL
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -429,8 +400,6 @@ namespace SimaticML.SW.PlcBlocks.STL
         //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v4), Order = 1)]
         //[XmlElement("StlToken", typeof(StlToken_T_v4), Order = 2)]                 // missing for empty lines
         //[XmlElement("Access", typeof(Access.Access_T_v5), Order = 4)]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -505,14 +474,6 @@ namespace SimaticML.SW.PlcBlocks.STL
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

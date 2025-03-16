@@ -4,6 +4,13 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IBranch
+    {
+        int Number { get; set; }
+        Branch_TE Type { get; set; }
+        int Cardinality { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +23,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Branch", IsNullable = false)]
-    public class Branch_T : Object_G
+    public class Branch_T : Object_G, IBranch
     {
         [XmlAttribute]
         public int Number { get; set; }

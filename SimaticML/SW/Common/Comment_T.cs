@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
-    public interface IComment_T : IEnumerable<IMultiLanguageText_T>
+    public interface IComment_T : IEnumerable<IMultiLanguageText>, IComment
     {
         /// <summary>
         /// Denotes if the comment is at the end of the line (using //) or inside the line (using /* */)
@@ -23,7 +23,7 @@ namespace SimaticML.SW.Common
         /// For NumBLs. NumBLs is the count of the blank spaces before the actual text in the Comment.
         /// This is informative.
         /// </summary>
-        IIntegerAttribute_T IntegerAttribute { get; set; }
+        IIntegerAttribute IntegerAttribute { get; set; }
     }
 
     public interface IComment_T_v2 : IComment_T
@@ -59,11 +59,11 @@ namespace SimaticML.SW.Common
         /// For NumBLs. NumBLs is the count of the blank spaces before the actual text in the Comment.
         /// This is informative.
         /// </summary>
-        public IIntegerAttribute_T IntegerAttribute { get; set; }
+        public IIntegerAttribute IntegerAttribute { get; set; }
 
         [XmlElement("MultiLanguageText")]
-        protected internal IMultiLanguageText_T[] MultiLanguageTexts { get; set; }
-        public IMultiLanguageText_T this[int key] { get => MultiLanguageTexts[key]; set => MultiLanguageTexts[key] = value; }
+        protected internal IMultiLanguageText[] MultiLanguageTexts { get; set; }
+        public IMultiLanguageText this[int key] { get => MultiLanguageTexts[key]; set => MultiLanguageTexts[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -116,7 +116,7 @@ namespace SimaticML.SW.Common
             throw new NotImplementedException();
         }
 
-        public IEnumerator<IMultiLanguageText_T> GetEnumerator()
+        public IEnumerator<IMultiLanguageText> GetEnumerator()
         {
             if (MultiLanguageTexts is null) yield break;
             foreach (var text in MultiLanguageTexts)

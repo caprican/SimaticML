@@ -4,6 +4,12 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IPredefinedVariable
+    {
+        PredefinedVariable_TE Name { get; set; }
+        int UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -15,7 +21,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("PredefinedVariable", IsNullable = false)]
-    public class PredefinedVariable_T : Object_G
+    public class PredefinedVariable_T : Object_G, IPredefinedVariable
     {
         [XmlAttribute]
         public PredefinedVariable_TE Name { get; set; }

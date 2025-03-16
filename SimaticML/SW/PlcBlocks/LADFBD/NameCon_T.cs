@@ -4,6 +4,12 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface INameCon
+    {
+        int UId { get; set; }
+        string Name { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +22,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("NameCon", IsNullable = false)]
-    public class NameCon_T : Object_G
+    public class NameCon_T : Object_G, INameCon
     {
         [XmlAttribute]
         public int UId { get; set; }

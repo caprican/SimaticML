@@ -5,6 +5,10 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IAlarmText
+    {
+        Common.IMultiLanguageText[] Texts { get; set; }
+    }
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -13,13 +17,13 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("AlarmText", IsNullable = false)]
-    public class AlarmText_T : Object_G
+    public class AlarmText_T : Object_G, IAlarmText
     {
         /// <summary>
         /// Temporary change for enable of empty alarm text because of the graph alarm handling reconstruction.
         /// </summary>
         [XmlElement("MultiLanguageText")]
-        public Common.MultiLanguageText_T[] Texts { get; set; }
+        public Common.IMultiLanguageText[] Texts { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -65,21 +69,15 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("AlarmText", IsNullable = false)]
-    public class AlarmText_T_v2 : AlarmText_T
+    public class AlarmText_T_v2 : AlarmText_T, IAlarmText
     {
-        /// <summary>
-        /// Temporary change for enable of empty alarm text because of the graph alarm handling reconstruction.
-        /// </summary>
-        [XmlElement("MultiLanguageText")]
-        public new Common.MultiLanguageText_T_v2[] Texts { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
-                var texts = new List<Common.MultiLanguageText_T_v2>();
+                var texts = new List<Common.IMultiLanguageText>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)

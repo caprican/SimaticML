@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface IEquation
+    {
+        string Value { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +21,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Equation", IsNullable = false)]
-    public class Equation_T : Object_G
+    public class Equation_T : Object_G, IEquation
     {
         [XmlText]
         public string Value { get; set; }

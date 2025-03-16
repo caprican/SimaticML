@@ -7,13 +7,13 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
-    public interface ILineComment_T : IEnumerable<Object_G>
+    public interface ILineComment_T : IEnumerable<Object_G>, IComment
     {
         /// <summary>
         /// For NumBLs in STL. NumBLs is the count of the blank spaces before the actual text in the LineComment.
         /// This is informative.
         /// </summary>
-        IIntegerAttribute_T IntegerAttribute { get; set; }
+        IIntegerAttribute IntegerAttribute { get; set; }
         bool Inserted { get; set; }
     }
 
@@ -42,7 +42,7 @@ namespace SimaticML.SW.Common
         /// For NumBLs in STL. NumBLs is the count of the blank spaces before the actual text in the LineComment.
         /// This is informative.
         /// </summary>
-        public IIntegerAttribute_T IntegerAttribute { get; set; }
+        public IIntegerAttribute IntegerAttribute { get; set; }
 
         /// <summary>
         /// Denotes if the comment is at the end of the line (using //) or inside the line (using /* */)

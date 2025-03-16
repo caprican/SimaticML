@@ -6,15 +6,15 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
-    public interface ILabel_T
+    public interface ILabel
     {
         string Name { get; set; }
     }
 
-    public interface ILabel_T_v2 : ILabel_T, IEnumerable<Object_G>
+    public interface ILabel_v2 : ILabel, IEnumerable<Object_G>
     {
-        Common.BooleanAttribute_T_v2 BooleanAttribute { get; set; }
-        Common.Token_T_v2 Token { get; set; }
+        Common.IBooleanAttribute_v2 BooleanAttribute { get; set; }
+        Common.IToken Token { get; set; }
         int? UId { get; set; }
     }
 
@@ -27,7 +27,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Label", IsNullable = false)]
-    public class Label_T : Object_G, ILabel_T
+    public class Label_T : Object_G, ILabel
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -53,9 +53,9 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Label", IsNullable = false)]
-    public class Label_T_v2 : Label_T, ILabel_T_v2
+    public class Label_T_v2 : Label_T, ILabel_v2
     {
-        public Common.BooleanAttribute_T_v2 BooleanAttribute { get; set; }
+        public Common.IBooleanAttribute_v2 BooleanAttribute { get; set; }
 
         //[XmlElement("Blank", typeof(Common.Blank_T))]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
@@ -64,7 +64,7 @@ namespace SimaticML.SW.PlcBlocks.Access
         protected internal Common.Comment_G[] Items { get; set; }
         public Common.Comment_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
-        public Common.Token_T_v2 Token { get; set; }
+        public Common.IToken Token { get; set; }
 
         [XmlAttribute]
         public int? UId { get; set; } = null;
@@ -119,8 +119,9 @@ namespace SimaticML.SW.PlcBlocks.Access
                             break;
 
                         case "Token":
-                            Token = new Common.Token_T_v2();
-                            Token.ReadXml(reader);
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            Token = token;
                             break;
                     }
                 }
@@ -160,14 +161,12 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Label", IsNullable = false)]
-    public class Label_T_v4 : Label_T_v2, ILabel_T_v2
+    public class Label_T_v4 : Label_T_v2, ILabel_v2
     {
         //[XmlElement("Blank", typeof(Common.Blank_T))]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //protected internal new Common.Comment_G[] Items { get; set; }
-        //public new Common.Comment_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -217,8 +216,9 @@ namespace SimaticML.SW.PlcBlocks.Access
                             break;
 
                         case "Token":
-                            Token = new Common.Token_T_v2();
-                            Token.ReadXml(reader);
+                            var token = new Common.Token_T_v2();
+                            token.ReadXml(reader);
+                            Token = token;
                             break;
                     }
                 }
@@ -235,14 +235,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

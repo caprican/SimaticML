@@ -5,18 +5,25 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
+    public interface ISpecificField
+    {
+        IAssociatedValue[] AssociatedValues { get; set; }
+
+        ISpecificFieldText SpecificFieldText { get; set; }
+    }
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.TypeSupervisions (SW.Common)
     /// </remarks>
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class SpecificField : Object_G
+    public class SpecificField : Object_G, ISpecificField
     {
         [XmlArrayItem("AssociatedValue", IsNullable = false)]
-        public AssociatedValue[] AssociatedValues { get; set; }
+        public IAssociatedValue[] AssociatedValues { get; set; }
 
-        public SpecificFieldText SpecificFieldText { get; set; }
+        public ISpecificFieldText SpecificFieldText { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -25,7 +32,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
             {
                 reader.Read();
 
-                var associatedValues = new List<AssociatedValue>();
+                var associatedValues = new List<IAssociatedValue>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -36,8 +43,9 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                             associatedValues.Add(value);
                             break;
                         case "SpecificFieldText":
-                            SpecificFieldText = new SpecificFieldText();
-                            SpecificFieldText.ReadXml(reader);
+                            var specificFieldText = new SpecificFieldText();
+                            specificFieldText.ReadXml(reader);
+                            SpecificFieldText = specificFieldText;
                             break;
                     }
                 }
@@ -63,10 +71,8 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class SpecificField_v2 : SpecificField
+    public class SpecificField_v2 : SpecificField, ISpecificField
     {
-        public new SpecificFieldText_v2 SpecificFieldText { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
@@ -74,7 +80,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
             {
                 reader.Read();
 
-                var associatedValues = new List<AssociatedValue>();
+                var associatedValues = new List<IAssociatedValue>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -85,8 +91,9 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                             associatedValues.Add(value);
                             break;
                         case "SpecificFieldText":
-                            SpecificFieldText = new SpecificFieldText_v2();
-                            SpecificFieldText.ReadXml(reader);
+                            var specificFieldText = new SpecificFieldText_v2();
+                            specificFieldText.ReadXml(reader);
+                            SpecificFieldText = specificFieldText;
                             break;
                     }
                 }

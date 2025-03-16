@@ -4,6 +4,12 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
+    public interface IAssociatedValueOperand
+    {
+        int Number { get; set; }
+        string Name { get; set; }
+    }
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.TypeSupervisions (SW.Common)
     ///          SW.PlcBlocks.TypeSupervisions_v2 (SW.Common_v2)
@@ -12,7 +18,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class AssociatedValueOperand : Object_G
+    public class AssociatedValueOperand : Object_G, IAssociatedValueOperand
     {
         [XmlAttribute]
         public int Number { get; set; }

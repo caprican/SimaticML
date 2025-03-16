@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
-    public interface IWire_T : IEnumerable<Object_G>
+    public interface IWire : IEnumerable<Object_G>
     {
         int UId { get; set; }
     }
@@ -22,7 +22,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Wire", IsNullable = false)]
-    public class Wire_T : Object_G, IWire_T
+    public class Wire_T : Object_G, IWire
     {
         //[XmlElement("IdentCon", typeof(IdentCon_T))]
         //[XmlElement("NameCon", typeof(NameCon_T))]

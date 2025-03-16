@@ -6,6 +6,21 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IAdress
+    {
+        Area_TE Area { get; set; }
+        string Type { get; set; }
+        int? BlockNumber { get; set; }
+        int? BitOffset { get; set; }
+        bool Informative { get; set; }
+    }
+
+    public interface IAdress_v2 : IAdress
+    {
+        Common.IBooleanAttribute[] Attributes { get; set; }
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,7 +29,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Address", IsNullable=false)]
-    public class Address_T : Object_G
+    public class Address_T : Object_G, IAdress
     {
         [XmlAttribute]
         public Area_TE Area { get; set; }
@@ -95,10 +110,10 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Address", IsNullable = false)]
-    public class Address_T_v2 : Address_T
+    public class Address_T_v2 : Address_T, IAdress_v2
     {
         [XmlElement("BooleanAttribute")]
-        public Common.BooleanAttribute_T_v2[] Attributes { get; set; }
+        public Common.IBooleanAttribute[] Attributes { get; set; }
 
         [XmlAttribute]
         public int? UId { get; set; } = null;

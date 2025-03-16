@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface ITransitionRef
+    {
+        int Number { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +21,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("TransitionRef", IsNullable = false)]
-    public class TransitionRef_T : Object_G
+    public class TransitionRef_T : Object_G, ITransitionRef
     {
         [XmlAttribute]
         public int Number { get; set; }

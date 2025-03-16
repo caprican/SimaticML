@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml;
@@ -6,6 +7,14 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.LADFBD
 {
+    public interface IPart : IEnumerable<Object_G>
+    {
+        int UId { get; set; }
+        string Name { get; }
+        string Version { get; set; }
+        bool DisabledENO { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,25 +23,18 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Part", IsNullable = false)]
-    public class Part_T : Object_G
+    public class Part_T : Object_G, IPart
     {
-        [XmlElement("Equation", typeof(Equation_T))]                    // The equation of this part. This is only used for the Calculate box.
-        [XmlElement("Instance", typeof(Access.Instance_T))]
-        public Object_G Item { get; set; }
+        //[XmlElement("Equation", typeof(Equation_T))]                    // The equation of this part. This is only used for the Calculate box.
+        //[XmlElement("Instance", typeof(Access.Instance_T))]
+        //[XmlElement("TemplateValue", typeof(Access.TemplateValue_T))]
+        //[XmlElement("AutomaticTyped", typeof(AutomaticTyped_T))]
+        //[XmlElement("Invisible", typeof(Invisible_T))]
+        //[XmlElement("Negated", typeof(Neg_T))]
+        protected internal Object_G[] Items { get; set; }
+        public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
-        [XmlElement("TemplateValue")]
-        public Access.TemplateValue_T[] TemplateValue { get; set; }
-
-        [XmlElement("AutomaticTyped")]
-        public AutomaticTyped_T[] AutomaticTyped { get; set; }
-
-        [XmlElement("Invisible")]
-        public Invisible_T[] Invisible { get; set; }
-
-        [XmlElement("Negated")]
-        public Neg_T[] Negated { get; set; }
-
-        public Common.Comment_T Comment { get; set; }
+        public Common.IComment_T Comment { get; set; }
 
         [XmlAttribute]
         public int UId { get; set; }
@@ -73,10 +75,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
             {
                 reader.Read();
 
-                var templates = new List<Access.TemplateValue_T>();
-                var typeds = new List<AutomaticTyped_T>();
-                var invisibles = new List<Invisible_T>();
-                var negateds = new List<Neg_T>();
+                var items = new List<Object_G>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -84,43 +83,41 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         case "Equation":
                             var equation = new Equation_T();
                             equation.ReadXml(reader);
-                            Item = equation;
+                            items.Add(equation);
                             break;
                         case "Instance":
                             var instance = new Access.Instance_T();
                             instance.ReadXml(reader);
-                            Item = instance;
+                            items.Add(instance);
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "TemplateValue":
                             var template = new Access.TemplateValue_T();
                             template.ReadXml(reader);
-                            templates.Add(template);
+                            items.Add(template);
                             break;
                         case "AutomaticTyped":
                             var type = new AutomaticTyped_T();
                             type.ReadXml(reader);
-                            typeds.Add(type);
+                            items.Add(type);
                             break;
                         case "Invisible":
                             var invisible = new Invisible_T();
                             invisible.ReadXml(reader);
-                            invisibles.Add(invisible);
+                            items.Add(invisible);
                             break;
                         case "Negated":
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
-                            negateds.Add(neg);
+                            items.Add(neg);
                             break;
                     }
                 }
-                if (templates.Count > 0) TemplateValue = templates.ToArray();
-                if (typeds.Count > 0) AutomaticTyped = typeds.ToArray();
-                if (invisibles.Count > 0) Invisible = invisibles.ToArray();
-                if (negateds.Count > 0) Negated = negateds.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -133,6 +130,17 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerator<Object_G> GetEnumerator()
+        {
+            if (Items is null) yield break;
+            foreach (var item in Items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -143,16 +151,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Part", IsNullable = false)]
-    public class Part_T_v2 : Part_T
+    public class Part_T_v2 : Part_T, IPart
     {
-        [XmlElement("Equation", typeof(Equation_T))]                    // The equation of this part. This is only used for the Calculate box.
-        [XmlElement("Instance", typeof(Access.Instance_T_v2))]
-        public new Object_G Item { get; set; }
-
-        [XmlElement("TemplateValue")]
-        public new Access.TemplateValue_T_v2[] TemplateValue { get; set; }
-
-        public new Common.Comment_T_v2 Comment { get; set; }
+        //[XmlElement("Instance", typeof(Access.Instance_T_v2))]
+        //[XmlElement("TemplateValue", typeof(Access.TemplateValue_T_v2))]
 
         public override void ReadXml(XmlReader reader)
         {
@@ -180,10 +182,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
             {
                 reader.Read();
 
-                var templates = new List<Access.TemplateValue_T_v2>();
-                var typeds = new List<AutomaticTyped_T>();
-                var invisibles = new List<Invisible_T>();
-                var negateds = new List<Neg_T>();
+                var items = new List<Object_G>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -191,43 +190,41 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         case "Equation":
                             var equation = new Equation_T();
                             equation.ReadXml(reader);
-                            Item = equation;
+                            items.Add(equation);
                             break;
                         case "Instance":
                             var instance = new Access.Instance_T_v2();
                             instance.ReadXml(reader);
-                            Item = instance;
+                            items.Add(instance);
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "TemplateValue":
                             var template = new Access.TemplateValue_T_v2();
                             template.ReadXml(reader);
-                            templates.Add(template);
+                            items.Add(template);
                             break;
                         case "AutomaticTyped":
                             var type = new AutomaticTyped_T();
                             type.ReadXml(reader);
-                            typeds.Add(type);
+                            items.Add(type);
                             break;
                         case "Invisible":
                             var invisible = new Invisible_T();
                             invisible.ReadXml(reader);
-                            invisibles.Add(invisible);
+                            items.Add(invisible);
                             break;
                         case "Negated":
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
-                            negateds.Add(neg);
+                            items.Add(neg);
                             break;
                     }
                 }
-                if (templates.Count > 0) TemplateValue = templates.ToArray();
-                if (typeds.Count > 0) AutomaticTyped = typeds.ToArray();
-                if (invisibles.Count > 0) Invisible = invisibles.ToArray();
-                if (negateds.Count > 0) Negated = negateds.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -240,6 +237,8 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -250,11 +249,9 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Part", IsNullable = false)]
-    public class Part_T_v3 : Part_T_v2
+    public class Part_T_v3 : Part_T_v2, IPart
     {
-        [XmlElement("Equation", typeof(Equation_T))]                    // The equation of this part. This is only used for the Calculate box.
-        [XmlElement("Instance", typeof(Access.Instance_T_v3))]
-        public new Object_G Item { get; set; }
+        //[XmlElement("Instance", typeof(Access.Instance_T_v3))]
 
         public override void ReadXml(XmlReader reader)
         {
@@ -282,10 +279,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
             {
                 reader.Read();
 
-                var templates = new List<Access.TemplateValue_T_v2>();
-                var typeds = new List<AutomaticTyped_T>();
-                var invisibles = new List<Invisible_T>();
-                var negateds = new List<Neg_T>();
+                var items = new List<Object_G>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -293,43 +287,41 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         case "Equation":
                             var equation = new Equation_T();
                             equation.ReadXml(reader);
-                            Item = equation;
+                            items.Add(equation);
                             break;
                         case "Instance":
                             var instance = new Access.Instance_T_v3();
                             instance.ReadXml(reader);
-                            Item = instance;
+                            items.Add(instance);
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "TemplateValue":
                             var template = new Access.TemplateValue_T_v2();
                             template.ReadXml(reader);
-                            templates.Add(template);
+                            items.Add(template);
                             break;
                         case "AutomaticTyped":
                             var type = new AutomaticTyped_T();
                             type.ReadXml(reader);
-                            typeds.Add(type);
+                            items.Add(type);
                             break;
                         case "Invisible":
                             var invisible = new Invisible_T();
                             invisible.ReadXml(reader);
-                            invisibles.Add(invisible);
+                            items.Add(invisible);
                             break;
                         case "Negated":
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
-                            negateds.Add(neg);
+                            items.Add(neg);
                             break;
                     }
                 }
-                if (templates.Count > 0) TemplateValue = templates.ToArray();
-                if (typeds.Count > 0) AutomaticTyped = typeds.ToArray();
-                if (invisibles.Count > 0) Invisible = invisibles.ToArray();
-                if (negateds.Count > 0) Negated = negateds.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -342,6 +334,8 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -352,11 +346,9 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Part", IsNullable = false)]
-    public class Part_T_v4 : Part_T_v3
+    public class Part_T_v4 : Part_T_v3, IPart
     {
-        [XmlElement("Equation", typeof(Equation_T))]                    // The equation of this part. This is only used for the Calculate box.
-        [XmlElement("Instance", typeof(Access.Instance_T_v4))]
-        public new Object_G Item { get; set; }
+        //[XmlElement("Instance", typeof(Access.Instance_T_v4))]
 
         public override void ReadXml(XmlReader reader)
         {
@@ -384,10 +376,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
             {
                 reader.Read();
 
-                var templates = new List<Access.TemplateValue_T_v2>();
-                var typeds = new List<AutomaticTyped_T>();
-                var invisibles = new List<Invisible_T>();
-                var negateds = new List<Neg_T>();
+                var items = new List<Object_G>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -395,43 +384,41 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         case "Equation":
                             var equation = new Equation_T();
                             equation.ReadXml(reader);
-                            Item = equation;
+                            items.Add(equation);
                             break;
                         case "Instance":
                             var instance = new Access.Instance_T_v4();
                             instance.ReadXml(reader);
-                            Item = instance;
+                            items.Add(instance);
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "TemplateValue":
                             var template = new Access.TemplateValue_T_v2();
                             template.ReadXml(reader);
-                            templates.Add(template);
+                            items.Add(template);
                             break;
                         case "AutomaticTyped":
                             var type = new AutomaticTyped_T();
                             type.ReadXml(reader);
-                            typeds.Add(type);
+                            items.Add(type);
                             break;
                         case "Invisible":
                             var invisible = new Invisible_T();
                             invisible.ReadXml(reader);
-                            invisibles.Add(invisible);
+                            items.Add(invisible);
                             break;
                         case "Negated":
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
-                            negateds.Add(neg);
+                            items.Add(neg);
                             break;
                     }
                 }
-                if (templates.Count > 0) TemplateValue = templates.ToArray();
-                if (typeds.Count > 0) AutomaticTyped = typeds.ToArray();
-                if (invisibles.Count > 0) Invisible = invisibles.ToArray();
-                if (negateds.Count > 0) Negated = negateds.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -444,6 +431,8 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     /// <remarks>
@@ -454,11 +443,9 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     /// </remarks>
     [Serializable]
     [XmlRoot("Part", IsNullable = false)]
-    public class Part_T_v5 : Part_T_v4
+    public class Part_T_v5 : Part_T_v4, IPart
     {
-        [XmlElement("Equation", typeof(Equation_T))]                    // The equation of this part. This is only used for the Calculate box.
-        [XmlElement("Instance", typeof(Access.Instance_T_v5))]
-        public new Object_G Item { get; set; }
+        //[XmlElement("Instance", typeof(Access.Instance_T_v5))]
 
         public override void ReadXml(XmlReader reader)
         {
@@ -486,10 +473,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
             {
                 reader.Read();
 
-                var templates = new List<Access.TemplateValue_T_v2>();
-                var typeds = new List<AutomaticTyped_T>();
-                var invisibles = new List<Invisible_T>();
-                var negateds = new List<Neg_T>();
+                var items = new List<Object_G>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
@@ -497,43 +481,41 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         case "Equation":
                             var equation = new Equation_T();
                             equation.ReadXml(reader);
-                            Item = equation;
+                            items.Add(equation);
                             break;
                         case "Instance":
                             var instance = new Access.Instance_T_v5();
                             instance.ReadXml(reader);
-                            Item = instance;
+                            items.Add(instance);
                             break;
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "TemplateValue":
                             var template = new Access.TemplateValue_T_v2();
                             template.ReadXml(reader);
-                            templates.Add(template);
+                            items.Add(template);
                             break;
                         case "AutomaticTyped":
                             var type = new AutomaticTyped_T();
                             type.ReadXml(reader);
-                            typeds.Add(type);
+                            items.Add(type);
                             break;
                         case "Invisible":
                             var invisible = new Invisible_T();
                             invisible.ReadXml(reader);
-                            invisibles.Add(invisible);
+                            items.Add(invisible);
                             break;
                         case "Negated":
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
-                            negateds.Add(neg);
+                            items.Add(neg);
                             break;
                     }
                 }
-                if (templates.Count > 0) TemplateValue = templates.ToArray();
-                if (typeds.Count > 0) AutomaticTyped = typeds.ToArray();
-                if (invisibles.Count > 0) Invisible = invisibles.ToArray();
-                if (negateds.Count > 0) Negated = negateds.ToArray();
+                if (items.Count > 0) Items = items.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -546,5 +528,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
         {
             throw new NotImplementedException();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.InterfaceSections
 {
-    public interface ISubelement_T : IEnumerable<Object_G>
+    public interface ISubelement : IEnumerable<Object_G>
     {
         string Path { get; set; }
     }
@@ -19,7 +19,7 @@ namespace SimaticML.SW.InterfaceSections
     /// </remarks>
     [Serializable]
     [XmlRoot("Subelement", IsNullable = false)]
-    public class Subelement_T : Object_G, ISubelement_T
+    public class Subelement_T : Object_G, ISubelement
     {
         [XmlElement("Comment", typeof(Common.Comment_T))]
         [XmlElement("StartValue", typeof(StartValue_T))]
@@ -97,12 +97,10 @@ namespace SimaticML.SW.InterfaceSections
     /// </remarks>
     [Serializable]
     [XmlRoot("Subelement", IsNullable = false)]
-    public class Subelement_T_v3 : Subelement_T, ISubelement_T
+    public class Subelement_T_v3 : Subelement_T, ISubelement
     {
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("StartValue", typeof(StartValue_T))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -152,14 +150,6 @@ namespace SimaticML.SW.InterfaceSections
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -176,8 +166,6 @@ namespace SimaticML.SW.InterfaceSections
         //[XmlElement("AssignedProDiagFB", typeof(string))]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("StartValue", typeof(StartValue_T))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -230,14 +218,6 @@ namespace SimaticML.SW.InterfaceSections
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

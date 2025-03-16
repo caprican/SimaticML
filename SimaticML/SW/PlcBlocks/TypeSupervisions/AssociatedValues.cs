@@ -5,6 +5,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
+    public interface IAssociatedValues
+    {
+        IAssociatedValue[] AssociatedValue { get; set; }
+    }
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.TypeSupervisions (SW.Common)
     ///          SW.PlcBlocks.TypeSupervisions_v2 (SW.Common_v2)
@@ -13,10 +18,10 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class AssociatedValues : Object_G
+    public class AssociatedValues : Object_G, IAssociatedValues
     {
         [XmlElement("AssociatedValue")]
-        public AssociatedValue[] AssociatedValue { get; set; }
+        public IAssociatedValue[] AssociatedValue { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -25,7 +30,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
             {
                 reader.Read();
 
-                var associatedValues = new List<AssociatedValue>();
+                var associatedValues = new List<IAssociatedValue>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)

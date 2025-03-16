@@ -4,6 +4,13 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IDataType
+    {
+        bool? Informative { get; set; }
+        int? UId { get; set; }
+        string Value { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -15,7 +22,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("DataType", IsNullable = false)]
-    public class DataType_T : Object_G
+    public class DataType_T : Object_G, IDataType
     {
         [XmlAttribute]
         public bool? Informative { get; set; } = null;

@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
+    public interface IAssociatedValue
+    {
+        IAssociatedValueOperand AssociatedValueOperand { get; set; }
+    }
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.TypeSupervisions (SW.Common)
     ///          SW.PlcBlocks.TypeSupervisions_v2 (SW.Common_v2)
@@ -12,9 +17,9 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class AssociatedValue : Object_G
+    public class AssociatedValue : Object_G, IAssociatedValue
     {
-        public AssociatedValueOperand AssociatedValueOperand { get; set; }
+        public IAssociatedValueOperand AssociatedValueOperand { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -28,8 +33,9 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                     switch (reader.Name)
                     {
                         case "AssociatedValueOperand":
-                            AssociatedValueOperand  = new AssociatedValueOperand();
-                            AssociatedValueOperand.ReadXml(reader);
+                            var associatedValueOperand  = new AssociatedValueOperand();
+                            associatedValueOperand.ReadXml(reader);
+                            AssociatedValueOperand = associatedValueOperand;
                             break;
                     }
                 }

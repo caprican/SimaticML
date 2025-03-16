@@ -6,6 +6,34 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface IStep
+    {
+        Common.IComment_T Comment { get; set; }
+
+        IActions Actions { get; set; }
+
+        ISupervisions Supervisions { get; set; }
+
+        IInterlocks Interlocks { get; set; }
+
+        bool IsMissing { get; set; }
+
+        int Number { get; set; }
+
+        bool Init { get; set; }
+
+        string Name { get; set; }
+
+        string MaximumStepTime { get; set; }
+
+        string WarningTime { get; set; }
+    }
+
+    public interface IStep_v2 : IStep
+    {
+        Common.IMultiLanguageText[] StepName { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -14,15 +42,15 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Step", IsNullable = false)]
-    public class Step_T : Object_G
+    public class Step_T : Object_G, IStep
     {
-        public Common.Comment_T Comment { get; set; }
+        public Common.IComment_T Comment { get; set; }
 
-        public Actions_T Actions { get; set; }
+        public IActions Actions { get; set; }
 
-        public Supervisions_T Supervisions { get; set; }
+        public ISupervisions Supervisions { get; set; }
 
-        public Interlocks_T Interlocks { get; set; }
+        public IInterlocks Interlocks { get; set; }
 
         [XmlAttribute]
         [DefaultValue(false)]
@@ -81,20 +109,24 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     switch (reader.Name)
                     {
                         case "Comment":
-                            Comment = new Common.Comment_T();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Actions":
-                            Actions = new Actions_T();
-                            Actions.ReadXml(reader);
+                            var actions = new Actions_T();
+                            actions.ReadXml(reader);
+                            Actions = actions;
                             break;
                         case "Supervisions":
-                            Supervisions = new Supervisions_T();
-                            Supervisions.ReadXml(reader);
+                            var supervisions = new Supervisions_T();
+                            supervisions.ReadXml(reader);
+                            Supervisions = supervisions;
                             break;
                         case "Interlocks":
-                            Interlocks = new Interlocks_T();
-                            Interlocks.ReadXml(reader);
+                            var interlocks = new Interlocks_T();
+                            interlocks.ReadXml(reader);
+                            Interlocks = interlocks;
                             break;
                     }
                 }
@@ -121,18 +153,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Step", IsNullable = false)]
-    public class Step_T_v2 : Step_T
+    public class Step_T_v2 : Step_T, IStep_v2
     {
-        public new Common.Comment_T_v2 Comment { get; set; }
-
-        public new Supervisions_T_v2 Supervisions { get; set; }
-
         [XmlArrayItem("MultiLanguageText", IsNullable = false)]
-        public Common.MultiLanguageText_T_v2[] StepName { get; set; }
-
-        public new Actions_T_v2 Actions { get; set; }
-
-        public new Interlocks_T_v2 Interlocks { get; set; }
+        public Common.IMultiLanguageText[] StepName { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -166,26 +190,30 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var texts = new List<Common.MultiLanguageText_T_v2>();
+                var texts = new List<Common.IMultiLanguageText>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Actions":
-                            Actions = new Actions_T_v2();
-                            Actions.ReadXml(reader);
+                            var actions = new Actions_T_v2();
+                            actions.ReadXml(reader);
+                            Actions = actions;
                             break;
                         case "Supervisions":
-                            Supervisions = new Supervisions_T_v2();
-                            Supervisions.ReadXml(reader);
+                            var supervisions = new Supervisions_T_v2();
+                            supervisions.ReadXml(reader);
+                            Supervisions = supervisions;
                             break;
                         case "Interlocks":
-                            Interlocks = new Interlocks_T_v2();
-                            Interlocks.ReadXml(reader);
+                            var interlocks = new Interlocks_T_v2();
+                            interlocks.ReadXml(reader);
+                            Interlocks = interlocks;
                             break;
                         case "StepName":
                             var text = new Common.MultiLanguageText_T_v2();
@@ -218,14 +246,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Step", IsNullable = false)]
-    public class Step_T_v4 : Step_T_v2
+    public class Step_T_v4 : Step_T_v2, IStep_v2
     {
-        public new Actions_T_v4 Actions { get; set; }
-
-        public new Supervisions_T_v4 Supervisions { get; set; }
-
-        public new Interlocks_T_v4 Interlocks { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -258,26 +280,30 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var texts = new List<Common.MultiLanguageText_T_v2>();
+                var texts = new List<Common.IMultiLanguageText>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Actions":
-                            Actions = new Actions_T_v4();
-                            Actions.ReadXml(reader);
+                            var actions = new Actions_T_v4();
+                            actions.ReadXml(reader);
+                            Actions = actions;
                             break;
                         case "Supervisions":
-                            Supervisions = new Supervisions_T_v4();
-                            Supervisions.ReadXml(reader);
+                            var supervisions = new Supervisions_T_v4();
+                            supervisions.ReadXml(reader);
+                            Supervisions = supervisions;
                             break;
                         case "Interlocks":
-                            Interlocks = new Interlocks_T_v4();
-                            Interlocks.ReadXml(reader);
+                            var interlocks = new Interlocks_T_v4();
+                            interlocks.ReadXml(reader);
+                            Interlocks = interlocks;
                             break;
                         case "StepName":
                             var text = new Common.MultiLanguageText_T_v2();
@@ -310,14 +336,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Step", IsNullable = false)]
-    public class Step_T_v5 : Step_T_v4
+    public class Step_T_v5 : Step_T_v4, IStep_v2
     {
-        public new Supervisions_T_v5 Supervisions { get; set; }
-
-        public new Actions_T_v5 Actions { get; set; }
-
-        public new Interlocks_T_v5 Interlocks { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -350,26 +370,30 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var texts = new List<Common.MultiLanguageText_T_v2>();
+                var texts = new List<Common.IMultiLanguageText>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Actions":
-                            Actions = new Actions_T_v5();
-                            Actions.ReadXml(reader);
+                            var actions = new Actions_T_v5();
+                            actions.ReadXml(reader);
+                            Actions = actions;
                             break;
                         case "Supervisions":
-                            Supervisions = new Supervisions_T_v5();
-                            Supervisions.ReadXml(reader);
+                            var supervisions = new Supervisions_T_v5();
+                            supervisions.ReadXml(reader);
+                            Supervisions = supervisions;
                             break;
                         case "Interlocks":
-                            Interlocks = new Interlocks_T_v5();
-                            Interlocks.ReadXml(reader);
+                            var interlocks = new Interlocks_T_v5();
+                            interlocks.ReadXml(reader);
+                            Interlocks = interlocks;
                             break;
                         case "StepName":
                             var text = new Common.MultiLanguageText_T_v2();
@@ -403,13 +427,8 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("Step", IsNullable = false)]
-    public class Step_T_v6 : Step_T_v5
+    public class Step_T_v6 : Step_T_v5, IStep_v2
     {
-        public new Actions_T_v6 Actions { get; set; }
-
-        public new Supervisions_T_v6 Supervisions { get; set; }
-
-        public new Interlocks_T_v6 Interlocks { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -443,26 +462,30 @@ namespace SimaticML.SW.PlcBlocks.Graph
             {
                 reader.Read();
 
-                var texts = new List<Common.MultiLanguageText_T_v2>();
+                var texts = new List<Common.IMultiLanguageText>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
                         case "Comment":
-                            Comment = new Common.Comment_T_v2();
-                            Comment.ReadXml(reader);
+                            var comment = new Common.Comment_T_v2();
+                            comment.ReadXml(reader);
+                            Comment = comment;
                             break;
                         case "Actions":
-                            Actions = new Actions_T_v6();
-                            Actions.ReadXml(reader);
+                            var actions = new Actions_T_v6();
+                            actions.ReadXml(reader);
+                            Actions = actions;
                             break;
                         case "Supervisions":
-                            Supervisions = new Supervisions_T_v6();
-                            Supervisions.ReadXml(reader);
+                            var supervisions = new Supervisions_T_v6();
+                            supervisions.ReadXml(reader);
+                            Supervisions = supervisions;
                             break;
                         case "Interlocks":
-                            Interlocks = new Interlocks_T_v6();
-                            Interlocks.ReadXml(reader);
+                            var interlocks = new Interlocks_T_v6();
+                            interlocks.ReadXml(reader);
+                            Interlocks = interlocks;
                             break;
                         case "StepName":
                             var text = new Common.MultiLanguageText_T_v2();

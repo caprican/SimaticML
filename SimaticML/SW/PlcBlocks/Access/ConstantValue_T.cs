@@ -4,6 +4,17 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
+    public interface IConstantValue
+    {
+        bool? Informative { get; set; }
+        string Value { get; set; }
+    }
+
+    public interface IConstantValue_v2 : IConstantValue
+    {
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -12,7 +23,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("ConstantValue", IsNullable = false)]
-    public class ConstantValue_T : Object_G
+    public class ConstantValue_T : Object_G, IConstantValue
     {
         [XmlAttribute]
         public bool? Informative { get; set; } = null;
@@ -57,7 +68,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(Namespace = "ConstantValue", IsNullable = false)]
-    public class ConstantValue_T_v2 : ConstantValue_T
+    public class ConstantValue_T_v2 : ConstantValue_T, IConstantValue_v2
     {
         [XmlAttribute]
         public int? UId { get; set; } = null;

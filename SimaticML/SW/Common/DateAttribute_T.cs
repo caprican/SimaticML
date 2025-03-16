@@ -5,6 +5,19 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.Common
 {
+    public interface IDateAttribute
+    {
+        string Name { get; set; }
+        bool Informative { get; set; }
+        bool SystemDefined { get; set; }
+        DateTime Value { get; set; }
+    }
+
+    public interface IDateAttribute_v2 : IDateAttribute
+    {
+        int? UId { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -13,7 +26,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("DateAttribute", IsNullable = false)]
-    public class DateAttribute_T : AttributeBase
+    public class DateAttribute_T : AttributeBase, IDateAttribute
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -72,7 +85,7 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("DateAttribute", IsNullable = false)]
-    public class DateAttribute_T_v2 : DateAttribute_T
+    public class DateAttribute_T_v2 : DateAttribute_T, IDateAttribute_v2
     {
         [XmlAttribute]
         public int? UId { get; set; } = null;

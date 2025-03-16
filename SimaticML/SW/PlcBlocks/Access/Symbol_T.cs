@@ -6,12 +6,12 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
 {
-
-    public interface ISymbol_T : IEnumerable<Object_G>
+    public interface ISymbol : IEnumerable<Object_G>
     {
         int? UId { get; set; }
         Scope_TE? Scope { get; set; }
     }
+
     /// <remarks>
     /// Schema :
     /// <list type="bullet">
@@ -20,7 +20,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Symbol", IsNullable = false)]
-    public class Symbol_T : Object_G, ISymbol_T
+    public class Symbol_T : Object_G, ISymbol
     {
         //[XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         //[XmlElement("Component", typeof(Component_T))]
@@ -138,7 +138,7 @@ namespace SimaticML.SW.PlcBlocks.Access
     /// </remarks>
     [Serializable]
     [XmlRoot("Symbol", IsNullable = false)]
-    public class Symbol_T_v2 : Symbol_T, ISymbol_T
+    public class Symbol_T_v2 : Symbol_T, ISymbol
     {
         //[XmlElement("AbsoluteOffset", typeof(AbsoluteOffset_T))]
         //[XmlElement("Access", typeof(Access_T_v2))]
@@ -149,8 +149,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]                        // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         public new Scope_TE_v2 Scope { get; set; }
@@ -244,14 +242,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -274,8 +264,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]                        // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -386,8 +374,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]                        // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -478,14 +464,6 @@ namespace SimaticML.SW.PlcBlocks.Access
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -508,8 +486,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]                        // the DOT; only if separated. Not in Graph ActionList, not in LAD/FBD.
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         [XmlAttribute]
         public new Scope_TE_v5 Scope { get; set; }
@@ -602,14 +578,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

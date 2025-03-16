@@ -4,6 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Graph
 {
+    public interface INode
+    {
+        Object_G Item { get; set; }
+    }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -16,7 +21,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
     /// </remarks>
     [Serializable]
     [XmlRoot("NodeFrom", IsNullable = false)]
-    public class Node_T : Object_G
+    public class Node_T : Object_G, INode
     {
         [XmlElement("BranchRef", typeof(BranchRef_T))]
         [XmlElement("EndConnection", typeof(EndConnection_T))]
