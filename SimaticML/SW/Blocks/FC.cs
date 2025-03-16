@@ -31,6 +31,9 @@ namespace SimaticML.SW.Blocks
                         CompositionName = reader.ReadContentAsString();
                         CompositionNameSpecified = true;
                         break;
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -142,6 +145,16 @@ namespace SimaticML.SW.Blocks
 
         public void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.Read();
 
             while (reader.MoveToContent() == XmlNodeType.Element)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -23,6 +24,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -32,10 +43,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Interlock":
+                        case nameof(Interlock) :
                             var interlock = new AlarmSupportingLanguageModule_T();
                             interlock.ReadXml(reader);
                             Interlock = interlock;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -65,6 +80,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -74,10 +99,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Interlock":
+                        case nameof(Interlock) :
                             var interlock = new AlarmSupportingLanguageModule_T_v2();
                             interlock.ReadXml(reader);
                             Interlock = interlock;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -107,6 +136,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -116,10 +155,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Interlock":
+                        case nameof(Interlock) :
                             var interlock = new AlarmSupportingLanguageModule_T_v4();
                             interlock.ReadXml(reader);
                             Interlock = interlock;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -149,6 +192,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -158,10 +211,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Interlock":
+                        case nameof(Interlock) :
                             var interlock = new AlarmSupportingLanguageModule_T_v5();
                             interlock.ReadXml(reader);
                             Interlock = interlock;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -191,6 +248,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -200,10 +267,14 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Interlock":
+                        case nameof(Interlock) :
                             var interlock = new AlarmSupportingLanguageModule_T_v6();
                             interlock.ReadXml(reader);
                             Interlock = interlock;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

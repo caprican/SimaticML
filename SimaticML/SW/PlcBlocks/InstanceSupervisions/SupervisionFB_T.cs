@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
 {
-    public interface IMultiinstance
+    public interface ISupervisionFB
     {
         string Name { get; set; }
     }
@@ -20,7 +20,7 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class Multiinstance : Object_G, IMultiinstance
+    public class SupervisionFB_T : Object_G, ISupervisionFB
     {
         [XmlAttribute]
         public string Name { get; set; }
@@ -33,6 +33,10 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
                 {
                     case nameof(Name):
                         Name = reader.ReadContentAsString();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }

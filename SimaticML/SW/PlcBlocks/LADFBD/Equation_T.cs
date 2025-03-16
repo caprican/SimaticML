@@ -28,6 +28,16 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             Value = reader.ReadInnerXml();
         }

@@ -39,6 +39,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -51,15 +55,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T();
                             comment.ReadXml(reader);
                             Comment = comment;
                             break;
-                        case "ViewInfo":
+                        case nameof(ViewInfo) :
                             var viewInfo = new Common.ViewInfo_T();
                             viewInfo.ReadXml(reader);
                             ViewInfo = viewInfo;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -99,6 +107,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -111,15 +123,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
                             break;
-                        case "ViewInfo":
+                        case nameof(ViewInfo) :
                             var viewInfo = new Common.ViewInfo_T_v2();
                             viewInfo.ReadXml(reader);
                             ViewInfo = viewInfo;
+                            break;
+
+                        default:
+                            reader.Skip(); 
                             break;
                     }
                 }

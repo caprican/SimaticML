@@ -79,6 +79,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(Name):
                         Name = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -127,6 +131,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             parameter.ReadXml(reader);
                             items.Add(parameter);
                             break;
+
                         default:
                             reader.Skip();
                             break;
@@ -242,6 +247,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -305,6 +314,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             parameter.ReadXml(reader);
                             items.Add(parameter);
                             break;
+
                         default:
                             reader.Skip();
                             break;
@@ -323,14 +333,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -358,8 +360,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
         //[XmlElement("Parameter", typeof(Parameter_T_v3))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -377,6 +377,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -441,6 +445,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             parameter.ReadXml(reader);
                             items.Add(parameter);
                             break;
+
                         default:
                             reader.Skip();
                             break;
@@ -459,14 +464,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -494,18 +491,30 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
         //[XmlElement("Parameter", typeof(Parameter_T_v4))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<BlockType_TE>(reader.GetAttribute("BlockType"), out var blockType);
-            BlockType = blockType;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(BlockType):
+                        Enum.TryParse<BlockType_TE>(reader.ReadContentAsString(), out var blockType);
+                        BlockType = blockType;
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
 
-            Name = reader.GetAttribute("Name");
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
 
             if (!reader.IsEmptyElement)
             {
@@ -566,6 +575,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             parameter.ReadXml(reader);
                             items.Add(parameter);
                             break;
+
                         default:
                             reader.Skip();
                             break;
@@ -584,14 +594,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
@@ -619,18 +621,30 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
         //[XmlElement("Parameter", typeof(Parameter_T_v5))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = Enum.TryParse<BlockType_TE>(reader.GetAttribute("BlockType"), out var blockType);
-            BlockType = blockType;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(BlockType):
+                        Enum.TryParse<BlockType_TE>(reader.ReadContentAsString(), out var blockType);
+                        BlockType = blockType;
+                        break;
+                    case nameof(Name):
+                        Name = reader.ReadContentAsString();
+                        break;
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
 
-            Name = reader.GetAttribute("Name");
-
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
 
             if (!reader.IsEmptyElement)
             {
@@ -691,6 +705,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             parameter.ReadXml(reader);
                             items.Add(parameter);
                             break;
+
                         default:
                             reader.Skip();
                             break;
@@ -709,14 +724,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

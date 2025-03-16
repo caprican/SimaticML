@@ -23,6 +23,16 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -32,10 +42,14 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                 {
                     switch (reader.Name)
                     {
-                        case "AssociatedValueOperand":
+                        case nameof(AssociatedValueOperand) :
                             var associatedValueOperand  = new AssociatedValueOperand_T();
                             associatedValueOperand.ReadXml(reader);
                             AssociatedValueOperand = associatedValueOperand;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

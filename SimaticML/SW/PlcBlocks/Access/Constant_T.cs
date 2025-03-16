@@ -52,6 +52,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(Name):
                         Name = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -65,13 +69,13 @@ namespace SimaticML.SW.PlcBlocks.Access
                 {
                     switch (reader.Name)
                     {
-                        case "ConstantType":
+                        case nameof(ConstantType) :
                             var constantType = new ConstantType_T();
                             constantType.ReadXml(reader);
                             ConstantType = constantType;
                             break;
 
-                        case "ConstantValue":
+                        case nameof(ConstantValue) :
                             var constantValue = new ConstantValue_T();
                             constantValue.ReadXml(reader);
                             ConstantValue = constantValue;
@@ -80,6 +84,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var stringAttribute = new Common.StringAttribute_T();
                             stringAttribute.ReadXml(reader);
                             attributes.Add(stringAttribute);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -111,13 +119,6 @@ namespace SimaticML.SW.PlcBlocks.Access
     [XmlRoot("Constant", IsNullable = false)]
     public class Constant_T_v2 : Constant_T, IConstant_v2
     {
-        /// <summary>
-        /// for Format and FormatFlags. They are informative..
-        /// </summary>
-        //[XmlElement("StringAttribute", typeof(Common.StringAttribute_T_v2))]
-        //[XmlElement("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2))]
-        //public new Common.AttributeBase[] Attributes { get; set; }
-
         [XmlAttribute]
         public int? UId { get; set; } = null;
         [XmlIgnore]
@@ -136,6 +137,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -149,13 +154,13 @@ namespace SimaticML.SW.PlcBlocks.Access
                 {
                     switch (reader.Name)
                     {
-                        case "ConstantType":
+                        case nameof(ConstantType) :
                             var constantType = new ConstantType_T_v2();
                             constantType.ReadXml(reader);
                             ConstantType = constantType;
                             break;
 
-                        case "ConstantValue":
+                        case nameof(ConstantValue) :
                             var constantValue = new ConstantValue_T_v2();
                             constantValue.ReadXml(reader);
                             ConstantValue = constantValue;
@@ -169,6 +174,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var booleanAttribute = new Common.BooleanAttribute_T_v2();
                             booleanAttribute.ReadXml(reader);
                             attributes.Add(booleanAttribute);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

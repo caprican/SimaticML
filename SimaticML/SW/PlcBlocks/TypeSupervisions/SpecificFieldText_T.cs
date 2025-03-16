@@ -23,6 +23,16 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -37,6 +47,10 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                             var value = new Common.MultiLanguageText_T();
                             value.ReadXml(reader);
                             texts.Add(value);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -66,6 +80,16 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -80,6 +104,10 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                             var value = new Common.MultiLanguageText_T_v2();
                             value.ReadXml(reader);
                             texts.Add(value);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

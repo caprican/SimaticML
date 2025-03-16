@@ -14,6 +14,7 @@ namespace SimaticML.SW.PlcBlocks.STL
         STL_TE Text { get; set; }
     }
 
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.STL (SW.PlcBlocks.CompileUnitCommon + SW.PlcBlocks.Access + SW.Common)
     /// </remarks>
@@ -62,6 +63,10 @@ namespace SimaticML.SW.PlcBlocks.STL
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -94,6 +99,10 @@ namespace SimaticML.SW.PlcBlocks.STL
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             Token = token;
+                            break;
+
+                        default :
+                            reader.Skip();
                             break;
                     }
                 }
@@ -131,22 +140,10 @@ namespace SimaticML.SW.PlcBlocks.STL
     [XmlRoot("StlToken", IsNullable = false)]
     public class StlToken_T_v2 : StlToken_T, IStlToken_T
     {
-        /// <summary>
-        /// for NumBLs. NumBLs is informative
-        /// </summary>
-        //public new Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
-
         //[XmlElement("Blank", typeof(Common.Blank_T))]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
-
-        /// <summary>
-        /// e.g 0 1 for NOP 0, NOP 1; STW for L STW or DILG for L DILG; only if separated by comment
-        /// </summary>
-        //public new Common.Token_T_v2 Token { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -162,6 +159,10 @@ namespace SimaticML.SW.PlcBlocks.STL
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -207,6 +208,10 @@ namespace SimaticML.SW.PlcBlocks.STL
                             token.ReadXml(reader);
                             Token = token;
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
@@ -234,17 +239,10 @@ namespace SimaticML.SW.PlcBlocks.STL
     [XmlRoot("StlToken", IsNullable = false)]
     public class StlToken_T_v4 : StlToken_T_v2, IStlToken_T
     {
-        /// <summary>
-        /// for NumBLs. NumBLs is informative
-        /// </summary>
-        //public new Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
-
         //[XmlElement("Blank", typeof(Common.Blank_T))]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
         //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
         //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -260,6 +258,10 @@ namespace SimaticML.SW.PlcBlocks.STL
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -304,6 +306,10 @@ namespace SimaticML.SW.PlcBlocks.STL
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             Token = token;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

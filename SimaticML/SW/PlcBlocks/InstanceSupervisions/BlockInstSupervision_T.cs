@@ -22,7 +22,7 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class BlockInstSupervision : Object_G, IBlockInstSupervision
+    public class BlockInstSupervision_T : Object_G, IBlockInstSupervision
     {
         public int Number { get; set; }
 
@@ -32,6 +32,16 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -41,16 +51,20 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
                 {
                     switch (reader.Name)
                     {
-                        case "Number":
+                        case nameof(Number) :
                             Number = reader.ReadElementContentAsInt();
                             break;
-                        case "StateStruct":
-                            var stateStruct = new StateStruct();
+                        case nameof(StateStruct) :
+                            var stateStruct = new StateStruct_T();
                             stateStruct.ReadXml(reader);
                             StateStruct = stateStruct;
                             break;
-                        case "BlockTypeSupervisionNumber":
+                        case nameof(BlockTypeSupervisionNumber) :
                             BlockTypeSupervisionNumber = reader.ReadElementContentAsInt();
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

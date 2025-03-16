@@ -47,6 +47,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -56,17 +66,17 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title) :
                             var title = new Common.Comment_T();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T();
                             comment.ReadXml(reader);
                             Comment = comment;
                             break;
-                        case "Steps":
+                        case nameof(Steps) :
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -92,7 +102,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Transitions":
+                        case nameof(Transitions) :
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -118,7 +128,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Branches":
+                        case nameof(Branches) :
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -144,7 +154,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Connections":
+                        case nameof(Connections) :
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -169,6 +179,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
                                 reader.Read();
                             else
                                 reader.ReadEndElement();
+                            break;
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -198,6 +211,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -207,17 +230,17 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title) :
                             var title = new Common.Comment_T_v2();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
                             break;
-                        case "Steps":
+                        case nameof(Steps) :
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -243,7 +266,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Transitions":
+                        case nameof(Transitions) :
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -269,7 +292,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Branches":
+                        case nameof(Branches) :
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -295,7 +318,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Connections":
+                        case nameof(Connections):
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -320,6 +343,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
                                 reader.Read();
                             else
                                 reader.ReadEndElement();
+                            break;
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -349,6 +375,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -358,17 +394,17 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title) :
                             var title = new Common.Comment_T_v2();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
                             break;
-                        case "Steps":
+                        case nameof(Steps) :
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -394,7 +430,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Transitions":
+                        case nameof(Transitions) :
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -420,7 +456,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Branches":
+                        case nameof(Branches) :
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -446,7 +482,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Connections":
+                        case nameof(Connections) :
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -471,6 +507,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
                                 reader.Read();
                             else
                                 reader.ReadEndElement();
+                            break;
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -500,6 +539,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -509,17 +558,17 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title) :
                             var title = new Common.Comment_T_v2();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
                             break;
-                        case "Steps":
+                        case nameof(Steps) :
                             reader.MoveToContent();
 
                             if(!reader.IsEmptyElement)
@@ -546,7 +595,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Transitions":
+                        case nameof(Transitions) :
                             reader.MoveToContent();
 
                             if (!reader.IsEmptyElement)
@@ -573,7 +622,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Branches":
+                        case nameof(Branches) :
                             reader.MoveToContent();
 
                             if (!reader.IsEmptyElement)
@@ -600,7 +649,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Connections":
+                        case nameof(Connections) :
                             reader.MoveToContent();
 
                             if(!reader.IsEmptyElement)
@@ -626,6 +675,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
                                 reader.Read();
                             else
                                 reader.ReadEndElement();
+                            break;
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -655,6 +707,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -664,17 +726,17 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title) :
                             var title = new Common.Comment_T_v2();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
                             break;
-                        case "Steps":
+                        case nameof(Steps) :
                             reader.MoveToContent();
 
                             if (!reader.IsEmptyElement)
@@ -701,7 +763,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Transitions":
+                        case nameof(Transitions) :
                             reader.MoveToContent();
 
                             if (!reader.IsEmptyElement)
@@ -728,7 +790,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Branches":
+                        case nameof(Branches) :
                             reader.MoveToContent();
 
                             if (!reader.IsEmptyElement)
@@ -755,7 +817,7 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "Connections":
+                        case nameof(Connections) :
                             reader.MoveToContent();
 
                             if (!reader.IsEmptyElement)
@@ -781,6 +843,9 @@ namespace SimaticML.SW.PlcBlocks.Graph
                                 reader.Read();
                             else
                                 reader.ReadEndElement();
+                            break;
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

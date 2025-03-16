@@ -72,6 +72,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(BitOffset):
                         BitOffset = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -104,6 +108,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             items.Add(token);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -172,6 +180,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(BitOffset):
                         BitOffset = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -214,6 +226,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             items.Add(token);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -267,6 +283,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(BitOffset):
                         BitOffset = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -309,6 +329,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             items.Add(token);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -368,6 +392,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(BitOffset):
                         BitOffset = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -410,6 +438,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             items.Add(token);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -463,6 +495,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(BitOffset):
                         BitOffset = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -506,6 +542,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             items.Add(token);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -14,6 +15,7 @@ namespace SimaticML.SW.Common
     {
         int? UId { get; set; }
     }
+
     /// <remarks>
     /// Schema :
     /// <list type="bullet">
@@ -30,6 +32,16 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             Value = reader.ReadInnerXml();
         }
@@ -66,6 +78,10 @@ namespace SimaticML.SW.Common
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }

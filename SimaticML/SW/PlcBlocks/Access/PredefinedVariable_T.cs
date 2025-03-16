@@ -42,6 +42,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 

@@ -55,6 +55,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         Out = reader.ReadContentAsInt();
                         OutSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 

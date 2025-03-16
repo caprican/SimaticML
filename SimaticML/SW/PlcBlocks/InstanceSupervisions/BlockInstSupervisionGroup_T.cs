@@ -10,6 +10,7 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     {
         IMultiinstance Multiinstance { get; set; }
     }
+
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -21,7 +22,7 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class BlockInstSupervisionGroup : Object_G, IBlockInstSupervisionGroup
+    public class BlockInstSupervisionGroup_T : Object_G, IBlockInstSupervisionGroup
     {
         public IMultiinstance Multiinstance { get; set; }
 
@@ -32,24 +33,38 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
                 reader.Read();
-                var blocks = new List<BlockInstSupervision>();
+                var blocks = new List<BlockInstSupervision_T>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
                     switch (reader.Name)
                     {
-                        case "Multiinstance":
-                            var multiinstance = new Multiinstance();
+                        case nameof(Multiinstance) :
+                            var multiinstance = new Multiinstance_T();
                             multiinstance.ReadXml(reader);
                             Multiinstance = multiinstance;
                             break;
                         case "BlockInstSupervision":
-                            var blockInstSupervision = new BlockInstSupervision();
+                            var blockInstSupervision = new BlockInstSupervision_T();
                             blockInstSupervision.ReadXml(reader);
                             blocks.Add(blockInstSupervision);
+                            break;
+                        
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

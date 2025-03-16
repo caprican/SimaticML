@@ -21,7 +21,7 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     /// </remarks>
     [Serializable]
     [XmlRoot("BlockInstSupervisionGroups", IsNullable = false)]
-    public class BlockInstSupervisionGroupsType : Object_G, IBlockInstSupervisionGroupsType
+    public class BlockInstSupervisionGroupsType_T : Object_G, IBlockInstSupervisionGroupsType
     {
         [XmlElement("BlockInstSupervisionGroup")]
         protected internal IBlockInstSupervisionGroup[] BlockInstSupervisionGroup { get; set; }
@@ -29,6 +29,16 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -40,9 +50,13 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
                     switch (reader.Name)
                     {
                         case "BlockInstSupervisionGroup":
-                            var block = new BlockInstSupervisionGroup();
+                            var block = new BlockInstSupervisionGroup_T();
                             block.ReadXml(reader);
                             blocks.Add(block);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

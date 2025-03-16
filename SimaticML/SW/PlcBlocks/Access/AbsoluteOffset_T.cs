@@ -45,6 +45,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(Type):
                         Type = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 

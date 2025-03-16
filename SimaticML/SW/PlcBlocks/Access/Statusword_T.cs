@@ -39,6 +39,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         Enum.TryParse<Statusword_TE>(reader.ReadContentAsString(), out var combination);
                         Combination = combination;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 

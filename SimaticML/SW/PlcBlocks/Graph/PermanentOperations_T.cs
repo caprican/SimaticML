@@ -32,6 +32,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -42,12 +52,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title) :
                             var title = new Common.Comment_T();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -56,6 +66,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var operation = new PermanentOperation_T();
                             operation.ReadXml(reader);
                             operations.Add(operation);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -97,6 +111,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -107,12 +131,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title) :
                             var title = new Common.Comment_T_v2();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -121,6 +145,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var operation = new PermanentOperation_T_v2();
                             operation.ReadXml(reader);
                             operations.Add(operation);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -153,6 +181,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -163,12 +201,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title) :
                             var title = new Common.Comment_T_v2();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -177,6 +215,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var operation = new PermanentOperation_T_v4();
                             operation.ReadXml(reader);
                             operations.Add(operation);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -209,6 +251,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -219,12 +271,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title):
                             var title = new Common.Comment_T_v2();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -233,6 +285,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var operation = new PermanentOperation_T_v5();
                             operation.ReadXml(reader);
                             operations.Add(operation);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -265,6 +321,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -275,12 +341,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title) :
                             var title = new Common.Comment_T_v2();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -289,6 +355,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var operation = new PermanentOperation_T_v6();
                             operation.ReadXml(reader);
                             operations.Add(operation);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

@@ -49,6 +49,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(Name):
                         Name = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -96,6 +100,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }

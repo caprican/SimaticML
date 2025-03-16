@@ -50,6 +50,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     case nameof(Cardinality):
                         Cardinality = reader.ReadContentAsInt();
                         break;
+                    
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 

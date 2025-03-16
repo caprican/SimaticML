@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
     [Serializable]
-    public class BlockTypeSupervisions : IXmlSerializable, IEnumerable<IBlockTypeSupervision>
+    public class BlockTypeSupervisions_T : IXmlSerializable, IEnumerable<IBlockTypeSupervision>
     {
         protected internal IBlockTypeSupervision[] Items { get; set; }
         public IBlockTypeSupervision this[int key] { get => Items[key]; set => Items[key] = value; }
@@ -17,6 +17,16 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -44,6 +54,10 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                                             block.ReadXml(reader);
                                             blocks.Add(block);
                                             break;
+
+                                        default:
+                                            reader.Skip();
+                                            break;
                                     }
                                 }
                             }
@@ -52,6 +66,9 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                                 reader.Read();
                             else
                                 reader.ReadEndElement();
+                            break;
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

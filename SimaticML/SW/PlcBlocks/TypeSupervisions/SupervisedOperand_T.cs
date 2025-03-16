@@ -31,6 +31,10 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                     case nameof(Name):
                         Name = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 

@@ -56,8 +56,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("Symbol", typeof(Symbol_T))]
         public Object_G Item { get; set; }
 
-        //[XmlElement("Comment", typeof(Common.Comment_T))]
-        //[XmlElement("LineComment", typeof(Common.LineComment_T))]
         public Common.IComment[] Comments { get; set; }
 
         [XmlAttribute]
@@ -86,6 +84,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -99,7 +101,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                 {
                     switch (reader.Name)
                     {
-                        case "IntegerAttribute":
+                        case nameof(IntegerAttribute) :
                             var integerAttribute = new Common.IntegerAttribute_T();
                             integerAttribute.ReadXml(reader);
                             IntegerAttribute = integerAttribute;
@@ -161,6 +163,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             symbol.ReadXml(reader);
                             Item = symbol;
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Comments = items.ToArray();
@@ -205,13 +211,7 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("DataType", typeof(DataType_T))]
         //[XmlElement("PredefinedVariable", typeof(PredefinedVariable_T))] // Only in SCL
         //[XmlElement("Reference", typeof(Reference_T))]
-        //public new Object_G Item { get; set; }
 
-        //[XmlElement("Blank", typeof(Common.Blank_T))]
-        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        //[XmlElement("LineComment", typeof(Common.LineComment_T_v2))]
-        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //public new Common.Comment_G[] Comments { get; set; }
 
         [XmlAttribute]
         public new Scope_TE_v2 Scope { get; set; }
@@ -231,6 +231,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -244,7 +248,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                 {
                     switch (reader.Name)
                     {
-                        case "IntegerAttribute":
+                        case nameof(IntegerAttribute) :
                             IntegerAttribute = new Common.IntegerAttribute_T_v2();
                             IntegerAttribute.ReadXml(reader);
                             break;
@@ -330,6 +334,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             reference.ReadXml(reader);
                             Item = reference;
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Comments = items.ToArray();
@@ -357,11 +365,6 @@ namespace SimaticML.SW.PlcBlocks.Access
     [XmlRoot("Access", IsNullable = false)]
     public class Access_T_v3 : Access_T_v2, IAccess_T_v2
     {
-        /// <summary>
-        /// for NumBLs. NumBLs is informative. Not for LAD/FBD.
-        /// </summary>
-        //public new Common.IntegerAttribute_T_v2 IntegerAttribute { get; set; }
-
         //[XmlElement("Address", typeof(Address_T_v2))]              // for absolute addresses
         //[XmlElement("CallInfo", typeof(CallInfo_T_v3))]              // call of a user block. Not in Graph ActionList.
         //[XmlElement("Constant", typeof(Constant_T_v2))]
@@ -374,7 +377,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("DataType", typeof(DataType_T))]
         //[XmlElement("PredefinedVariable", typeof(PredefinedVariable_T))] // Only in SCL
         //[XmlElement("Reference", typeof(Reference_T_v3))]
-        //public new Object_G Item { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -391,6 +393,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -404,7 +410,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                 {
                     switch (reader.Name)
                     {
-                        case "IntegerAttribute":
+                        case nameof(IntegerAttribute) :
                             IntegerAttribute = new Common.IntegerAttribute_T_v2();
                             IntegerAttribute.ReadXml(reader);
                             break;
@@ -490,6 +496,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             reference.ReadXml(reader);
                             Item = reference;
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Comments = items.ToArray();
@@ -529,13 +539,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("DataType", typeof(DataType_T))]
         //[XmlElement("PredefinedVariable", typeof(PredefinedVariable_T))] // Only in SCL
         //[XmlElement("Reference", typeof(Reference_T_v4))]
-        //public new Object_G Item { get; set; }
-
-        //[XmlElement("Blank", typeof(Common.Blank_T))]
-        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        //[XmlElement("LineComment", typeof(Common.LineComment_T_v3))]
-        //[XmlElement("NewLine", typeof(Common.NewLine_T))]
-        //public new Common.Comment_G[] Comments { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -551,6 +554,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -651,6 +658,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             reference.ReadXml(reader);
                             Item = reference;
                             break;
+
                         default:
                             reader.Skip();
                             break;
@@ -693,7 +701,6 @@ namespace SimaticML.SW.PlcBlocks.Access
         //[XmlElement("DataType", typeof(DataType_T))]
         //[XmlElement("PredefinedVariable", typeof(PredefinedVariable_T))] // Only in SCL
         //[XmlElement("Reference", typeof(Reference_T_v5))]
-        //public new Object_G Item { get; set; }
 
         [XmlAttribute]
         public new Scope_TE_v5 Scope { get; set; }
@@ -713,6 +720,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -726,7 +737,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                 {
                     switch (reader.Name)
                     {
-                        case "IntegerAttribute":
+                        case nameof(IntegerAttribute) :
                             IntegerAttribute = new Common.IntegerAttribute_T_v2();
                             IntegerAttribute.ReadXml(reader);
                             break;
@@ -812,6 +823,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             reference.ReadXml(reader);
                             Item = reference;
                             break;
+
                         default:
                             reader.Skip();
                             break;

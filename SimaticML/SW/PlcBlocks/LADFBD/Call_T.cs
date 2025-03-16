@@ -54,6 +54,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -70,7 +74,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 {
                     switch (reader.Name)
                     {
-                        case "CallInfo":
+                        case nameof(CallInfo) :
                             var callInfo = new Access.CallInfo_T();
                             callInfo.ReadXml(reader);
                             CallInfo = callInfo;
@@ -85,7 +89,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             typed.ReadXml(reader);
                             automticTypdes.Add(typed);
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -99,6 +103,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
                             negateds.Add(neg);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -130,13 +138,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     [XmlRoot("Call", IsNullable = false)]
     public class Call_T_v2 : Call_T, ICall_T
     {
-        //public new Access.CallInfo_T_v2 CallInfo { get; set; }
-
-        //[XmlElement("TemplateValue")]
-        //public new Access.TemplateValue_T_v2[] TemplateValue { get; set; }
-
-        //public new Common.Comment_T_v2 Comment { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -145,6 +146,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 {
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -162,7 +167,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 {
                     switch (reader.Name)
                     {
-                        case "CallInfo":
+                        case nameof(CallInfo) :
                             var callInfo = new Access.CallInfo_T_v2();
                             callInfo.ReadXml(reader);
                             CallInfo = callInfo;
@@ -177,7 +182,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             typed.ReadXml(reader);
                             automticTypdes.Add(typed);
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -191,6 +196,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
                             negateds.Add(neg);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -222,8 +231,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     [XmlRoot("Call", IsNullable = false)]
     public class Call_T_v3 : Call_T_v2, ICall_T
     {
-        //public new Access.CallInfo_T_v3 CallInfo { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -232,6 +239,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 {
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -249,7 +260,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 {
                     switch (reader.Name)
                     {
-                        case "CallInfo":
+                        case nameof(CallInfo) :
                             var callInfo = new Access.CallInfo_T_v3();
                             callInfo.ReadXml(reader);
                             CallInfo = callInfo;
@@ -264,7 +275,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             typed.ReadXml(reader);
                             automticTypdes.Add(typed);
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -278,6 +289,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
                             negateds.Add(neg);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -309,8 +324,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     [XmlRoot("Call", IsNullable = false)]
     public class Call_T_v4 : Call_T_v3, ICall_T
     {
-        //public new Access.CallInfo_T_v4 CallInfo { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -319,6 +332,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 {
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -336,7 +353,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 {
                     switch (reader.Name)
                     {
-                        case "CallInfo":
+                        case nameof(CallInfo) :
                             var callInfo = new Access.CallInfo_T_v4();
                             callInfo.ReadXml(reader);
                             CallInfo = callInfo;
@@ -351,7 +368,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             typed.ReadXml(reader);
                             automticTypdes.Add(typed);
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -365,6 +382,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
                             negateds.Add(neg);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -396,8 +417,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     [XmlRoot("Call", IsNullable = false)]
     public class Call_T_v5 : Call_T_v4, ICall_T
     {
-        //public new Access.CallInfo_T_v5 CallInfo { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -406,6 +425,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 {
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -423,7 +446,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 {
                     switch (reader.Name)
                     {
-                        case "CallInfo":
+                        case nameof(CallInfo) :
                             var callInfo = new Access.CallInfo_T_v5();
                             callInfo.ReadXml(reader);
                             CallInfo = callInfo;
@@ -438,7 +461,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             typed.ReadXml(reader);
                             automticTypdes.Add(typed);
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -452,6 +475,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
                             negateds.Add(neg);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

@@ -35,6 +35,9 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         break;
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 

@@ -47,6 +47,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     case nameof(DisplayClass):
                         DisplayClass = (ushort)reader.ReadContentAsInt();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -63,6 +67,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var token = new Common.Token_T();
                             token.ReadXml(reader);
                             Token = token;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -106,6 +114,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     case nameof(DisplayClass):
                         DisplayClass = (ushort)reader.ReadContentAsInt();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -122,6 +134,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             Token = token;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

@@ -34,6 +34,17 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             Name = reader.ReadContentAsString();
         }
 
@@ -84,6 +95,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+                    
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -122,6 +137,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             Token = token;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -181,6 +200,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -219,6 +242,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             Token = token;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

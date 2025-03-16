@@ -39,6 +39,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     case nameof(Name):
                         Name = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 

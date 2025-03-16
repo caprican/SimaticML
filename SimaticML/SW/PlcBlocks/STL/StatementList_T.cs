@@ -8,8 +8,8 @@ namespace SimaticML.SW.PlcBlocks.STL
 {
     public interface IStatementList : IEnumerable<IStlStatement>
     {
-
     }
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.STL (SW.PlcBlocks.CompileUnitCommon + SW.PlcBlocks.Access + SW.Common)
     ///          SW.PlcBlocks.STL_v2 (SW.PlcBlocks.CompileUnitCommon_v2 + SW.PlcBlocks.Access_v2 + SW.Common_v2)
@@ -26,6 +26,16 @@ namespace SimaticML.SW.PlcBlocks.STL
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -60,6 +70,10 @@ namespace SimaticML.SW.PlcBlocks.STL
                             var stl_v5 = new StlStatement_T_v5();
                             stl_v5.ReadXml(reader);
                             items.Add(stl_v5);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

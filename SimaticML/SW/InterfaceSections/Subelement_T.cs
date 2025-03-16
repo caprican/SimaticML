@@ -38,6 +38,10 @@ namespace SimaticML.SW.InterfaceSections
                     case nameof(Path):
                         Path = reader.ReadContentAsString();
                         break;
+                    
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -59,6 +63,10 @@ namespace SimaticML.SW.InterfaceSections
                             var startValue = new StartValue_T();
                             startValue.ReadXml(reader);
                             items.Add(startValue);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -99,9 +107,6 @@ namespace SimaticML.SW.InterfaceSections
     [XmlRoot("Subelement", IsNullable = false)]
     public class Subelement_T_v3 : Subelement_T, ISubelement
     {
-        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        //[XmlElement("StartValue", typeof(StartValue_T))]
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -110,6 +115,10 @@ namespace SimaticML.SW.InterfaceSections
                 {
                     case nameof(Path):
                         Path = reader.ReadContentAsString();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -133,6 +142,10 @@ namespace SimaticML.SW.InterfaceSections
                             var startValue = new StartValue_T();
                             startValue.ReadXml(reader);
                             items.Add(startValue);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -163,10 +176,6 @@ namespace SimaticML.SW.InterfaceSections
     [XmlRoot("Subelement", Namespace = "", IsNullable = false)]
     public class Subelement_T_v5 : Subelement_T_v3, IEnumerable<Object_G>
     {
-        //[XmlElement("AssignedProDiagFB", typeof(string))]
-        //[XmlElement("Comment", typeof(Common.Comment_T_v2))]
-        //[XmlElement("StartValue", typeof(StartValue_T))]
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -175,6 +184,10 @@ namespace SimaticML.SW.InterfaceSections
                 {
                     case nameof(Path):
                         Path = reader.ReadContentAsString();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -202,6 +215,10 @@ namespace SimaticML.SW.InterfaceSections
                             var startValue = new StartValue_T();
                             startValue.ReadXml(reader);
                             items.Add(startValue);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

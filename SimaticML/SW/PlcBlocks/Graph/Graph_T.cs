@@ -34,6 +34,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -49,20 +59,24 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             sequence.ReadXml(reader);
                             sequences.Add(sequence);
                             break;
-                        case "PostOperations":
+                        case nameof(PostOperations) :
                             var postOperations = new PermanentOperations_T();
                             postOperations.ReadXml(reader);
                             PostOperations = postOperations;
                             break;
-                        case "PreOperations":
+                        case nameof(PreOperations) :
                             var preOperations = new PermanentOperations_T();
                             preOperations.ReadXml(reader);
                             PreOperations = preOperations;
                             break;
-                        case "AlarmsSettings":
+                        case nameof(AlarmsSettings) :
                             var alarmsSettings = new AlarmsSettings_T();
                             alarmsSettings.ReadXml(reader);
                             AlarmsSettings = alarmsSettings;
+                            break;
+                        
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -93,6 +107,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -108,20 +132,24 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             sequence.ReadXml(reader);
                             sequences.Add(sequence);
                             break;
-                        case "PostOperations":
+                        case nameof(PostOperations) :
                             var postOperations = new PermanentOperations_T();
                             postOperations.ReadXml(reader);
                             PostOperations = postOperations;
                             break;
-                        case "PreOperations":
+                        case nameof(PreOperations) :
                             var preOperations = new PermanentOperations_T();
                             preOperations.ReadXml(reader);
                             PreOperations = preOperations;
                             break;
-                        case "AlarmsSettings":
+                        case nameof(AlarmsSettings) :
                             var alarmsSettings = new AlarmsSettings_T_v2();
                             alarmsSettings.ReadXml(reader);
                             AlarmsSettings = alarmsSettings;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -152,6 +180,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -167,20 +205,24 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             sequence.ReadXml(reader);
                             sequences.Add(sequence);
                             break;
-                        case "PostOperations":
+                        case nameof(PostOperations) :
                             var postOperations = new PermanentOperations_T();
                             postOperations.ReadXml(reader);
                             PostOperations = postOperations;
                             break;
-                        case "PreOperations":
+                        case nameof(PreOperations) :
                             var preOperations = new PermanentOperations_T();
                             preOperations.ReadXml(reader);
                             PreOperations = preOperations;
                             break;
-                        case "AlarmsSettings":
+                        case nameof(AlarmsSettings) :
                             var alarmsSettings = new AlarmsSettings_T_v4();
                             alarmsSettings.ReadXml(reader);
                             AlarmsSettings = alarmsSettings;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -211,6 +253,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -226,20 +278,24 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             sequence.ReadXml(reader);
                             sequences.Add(sequence);
                             break;
-                        case "PostOperations":
+                        case nameof(PostOperations) :
                             var postOperations = new PermanentOperations_T();
                             postOperations.ReadXml(reader);
                             PostOperations = postOperations;
                             break;
-                        case "PreOperations":
+                        case nameof(PreOperations) :
                             var preOperations = new PermanentOperations_T();
                             preOperations.ReadXml(reader);
                             PreOperations = preOperations;
                             break;
-                        case "AlarmsSettings":
+                        case nameof(AlarmsSettings) :
                             var alarmsSettings = new AlarmsSettings_T_v4();
                             alarmsSettings.ReadXml(reader);
                             AlarmsSettings = alarmsSettings;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -270,6 +326,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -285,20 +351,24 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             sequence.ReadXml(reader);
                             sequences.Add(sequence);
                             break;
-                        case "PostOperations":
+                        case nameof(PostOperations) :
                             var postOperations = new PermanentOperations_T();
                             postOperations.ReadXml(reader);
                             PostOperations = postOperations;
                             break;
-                        case "PreOperations":
+                        case nameof(PreOperations) :
                             var preOperations = new PermanentOperations_T();
                             preOperations.ReadXml(reader);
                             PreOperations = preOperations;
                             break;
-                        case "AlarmsSettings":
+                        case nameof(AlarmsSettings) :
                             var alarmsSettings = new AlarmsSettings_T_v4();
                             alarmsSettings.ReadXml(reader);
                             AlarmsSettings = alarmsSettings;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

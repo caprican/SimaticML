@@ -45,6 +45,9 @@ namespace SimaticML.SW.Common
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 

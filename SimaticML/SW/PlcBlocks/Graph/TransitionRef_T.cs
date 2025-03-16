@@ -28,8 +28,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            _ = int.TryParse(reader.GetAttribute("Number"), out var number);
-            Number = number;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(Number):
+                        Number = reader.ReadContentAsInt();
+                        break;
+
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -37,6 +48,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     case nameof(Number):
                         Number = reader.ReadContentAsInt();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }

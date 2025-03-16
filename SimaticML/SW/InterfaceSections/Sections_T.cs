@@ -6,7 +6,6 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.InterfaceSections
 {
-
     public interface ISections : IEnumerable<ISection>
     {
         string Datatype { get; set; }
@@ -55,6 +54,10 @@ namespace SimaticML.SW.InterfaceSections
                     case nameof(Version):
                         Version = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -77,6 +80,10 @@ namespace SimaticML.SW.InterfaceSections
                             var section = new Section_T();
                             section.ReadXml(reader);
                             sections.Add(section);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -116,15 +123,6 @@ namespace SimaticML.SW.InterfaceSections
     [XmlRoot("Sections", IsNullable = false)]
     public class Sections_T_v3 : Sections_T, ISections
     {
-        //[XmlArray("AttributeList")]
-        //[XmlArrayItem("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2), IsNullable = false)]
-        //[XmlArrayItem("DateAttribute", typeof(Common.DateAttribute_T_v2), IsNullable = false)]
-        //[XmlArrayItem("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), IsNullable = false)]
-        //[XmlArrayItem("RealAttribute", typeof(Common.RealAttribute_T_v2), IsNullable = false)]
-        //[XmlArrayItem("StringAttribute", typeof(Common.StringAttribute_T_v2), IsNullable = false)]
-
-        //[XmlArray("Sections")]
-        //[XmlElement("Section")]
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -136,6 +134,10 @@ namespace SimaticML.SW.InterfaceSections
                         break;
                     case nameof(Version):
                         Version = reader.ReadContentAsString();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -159,6 +161,10 @@ namespace SimaticML.SW.InterfaceSections
                             var section = new Section_T_v3();
                             section.ReadXml(reader);
                             sections.Add(section);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -189,13 +195,6 @@ namespace SimaticML.SW.InterfaceSections
     [XmlRoot("Sections", IsNullable = false)]
     public class Sections_T_v4 : Sections_T_v3, ISections
     {
-        //[XmlArray("AttributeList")]
-        //[XmlArrayItem("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2), IsNullable = false)]
-        //[XmlArrayItem("DateAttribute", typeof(Common.DateAttribute_T_v2), IsNullable = false)]
-        //[XmlArrayItem("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), IsNullable = false)]
-        //[XmlArrayItem("RealAttribute", typeof(Common.RealAttribute_T_v2), IsNullable = false)]
-        //[XmlArrayItem("StringAttribute", typeof(Common.StringAttribute_T_v2), IsNullable = false)]
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -207,6 +206,10 @@ namespace SimaticML.SW.InterfaceSections
                         break;
                     case nameof(Version):
                         Version = reader.ReadContentAsString();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -230,6 +233,10 @@ namespace SimaticML.SW.InterfaceSections
                             var section = new Section_T_v4();
                             section.ReadXml(reader);
                             sections.Add(section);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -272,6 +279,10 @@ namespace SimaticML.SW.InterfaceSections
                     case nameof(Version):
                         Version = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -294,6 +305,10 @@ namespace SimaticML.SW.InterfaceSections
                             var section = new Section_T_v5();
                             section.ReadXml(reader);
                             sections.Add(section);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

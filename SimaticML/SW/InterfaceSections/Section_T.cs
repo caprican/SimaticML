@@ -46,6 +46,10 @@ namespace SimaticML.SW.InterfaceSections
                         Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var name);
                         Name = name;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -64,10 +68,14 @@ namespace SimaticML.SW.InterfaceSections
                             member.ReadXml(reader);
                             members.Add(member);
                             break;
-                        case "Sections":
+                        case nameof(Sections) :
                             var sections = new Sections_T();
                             sections.ReadXml(reader);
                             Sections = sections;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -107,6 +115,10 @@ namespace SimaticML.SW.InterfaceSections
                         Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var name);
                         Name = name;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -125,10 +137,14 @@ namespace SimaticML.SW.InterfaceSections
                             member.ReadXml(reader);
                             members.Add(member);
                             break;
-                        case "Sections":
+                        case nameof(Sections) :
                             var sections = new Sections_T_v3();
                             sections.ReadXml(reader);
                             Sections = sections;
+                            break;
+                        
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -168,6 +184,10 @@ namespace SimaticML.SW.InterfaceSections
                         Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var name);
                         Name = name;
                         break;
+                    
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -186,10 +206,14 @@ namespace SimaticML.SW.InterfaceSections
                             member.ReadXml(reader);
                             members.Add(member);
                             break;
-                        case "Sections":
+                        case nameof(Sections) :
                             var sections = new Sections_T_v4();
                             sections.ReadXml(reader);
                             Sections = sections;
+                            break;
+                        
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -229,6 +253,10 @@ namespace SimaticML.SW.InterfaceSections
                         Enum.TryParse<Common.SectionName_TE>(reader.ReadContentAsString(), out var name);
                         Name = name;
                         break;
+                    
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -247,10 +275,14 @@ namespace SimaticML.SW.InterfaceSections
                             member.ReadXml(reader);
                             members.Add(member);
                             break;
-                        case "Sections":
+                        case nameof(Sections) :
                             var sections = new Sections_T_v5();
                             sections.ReadXml(reader);
                             Sections = sections;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

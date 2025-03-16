@@ -96,6 +96,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     case nameof(WarningTime):
                         WarningTime = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -108,25 +112,29 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T();
                             comment.ReadXml(reader);
                             Comment = comment;
                             break;
-                        case "Actions":
+                        case nameof(Actions) :
                             var actions = new Actions_T();
                             actions.ReadXml(reader);
                             Actions = actions;
                             break;
-                        case "Supervisions":
+                        case nameof(Supervisions) :
                             var supervisions = new Supervisions_T();
                             supervisions.ReadXml(reader);
                             Supervisions = supervisions;
                             break;
-                        case "Interlocks":
+                        case nameof(Interlocks) :
                             var interlocks = new Interlocks_T();
                             interlocks.ReadXml(reader);
                             Interlocks = interlocks;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -182,6 +190,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     case nameof(WarningTime):
                         WarningTime = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -195,22 +207,22 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
                             break;
-                        case "Actions":
+                        case nameof(Actions) :
                             var actions = new Actions_T_v2();
                             actions.ReadXml(reader);
                             Actions = actions;
                             break;
-                        case "Supervisions":
+                        case nameof(Supervisions) :
                             var supervisions = new Supervisions_T_v2();
                             supervisions.ReadXml(reader);
                             Supervisions = supervisions;
                             break;
-                        case "Interlocks":
+                        case nameof(Interlocks) :
                             var interlocks = new Interlocks_T_v2();
                             interlocks.ReadXml(reader);
                             Interlocks = interlocks;
@@ -219,6 +231,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var text = new Common.MultiLanguageText_T_v2();
                             text.ReadXml(reader);
                             texts.Add(text);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -272,6 +288,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     case nameof(WarningTime):
                         WarningTime = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -285,22 +305,22 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
                             break;
-                        case "Actions":
+                        case nameof(Actions) :
                             var actions = new Actions_T_v4();
                             actions.ReadXml(reader);
                             Actions = actions;
                             break;
-                        case "Supervisions":
+                        case nameof(Supervisions) :
                             var supervisions = new Supervisions_T_v4();
                             supervisions.ReadXml(reader);
                             Supervisions = supervisions;
                             break;
-                        case "Interlocks":
+                        case nameof(Interlocks) :
                             var interlocks = new Interlocks_T_v4();
                             interlocks.ReadXml(reader);
                             Interlocks = interlocks;
@@ -309,6 +329,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var text = new Common.MultiLanguageText_T_v2();
                             text.ReadXml(reader);
                             texts.Add(text);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -362,6 +386,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     case nameof(WarningTime):
                         WarningTime = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -375,22 +403,22 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
                             break;
-                        case "Actions":
+                        case nameof(Actions) :
                             var actions = new Actions_T_v5();
                             actions.ReadXml(reader);
                             Actions = actions;
                             break;
-                        case "Supervisions":
+                        case nameof(Supervisions) :
                             var supervisions = new Supervisions_T_v5();
                             supervisions.ReadXml(reader);
                             Supervisions = supervisions;
                             break;
-                        case "Interlocks":
+                        case nameof(Interlocks) :
                             var interlocks = new Interlocks_T_v5();
                             interlocks.ReadXml(reader);
                             Interlocks = interlocks;
@@ -399,6 +427,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var text = new Common.MultiLanguageText_T_v2();
                             text.ReadXml(reader);
                             texts.Add(text);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -429,7 +461,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
     [XmlRoot("Step", IsNullable = false)]
     public class Step_T_v6 : Step_T_v5, IStep_v2
     {
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -454,6 +485,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     case nameof(WarningTime):
                         WarningTime = reader.ReadContentAsString();
                         break;
+                    
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -467,22 +502,22 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
                             break;
-                        case "Actions":
+                        case nameof(Actions) :
                             var actions = new Actions_T_v6();
                             actions.ReadXml(reader);
                             Actions = actions;
                             break;
-                        case "Supervisions":
+                        case nameof(Supervisions) :
                             var supervisions = new Supervisions_T_v6();
                             supervisions.ReadXml(reader);
                             Supervisions = supervisions;
                             break;
-                        case "Interlocks":
+                        case nameof(Interlocks) :
                             var interlocks = new Interlocks_T_v6();
                             interlocks.ReadXml(reader);
                             Interlocks = interlocks;
@@ -491,6 +526,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var text = new Common.MultiLanguageText_T_v2();
                             text.ReadXml(reader);
                             texts.Add(text);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

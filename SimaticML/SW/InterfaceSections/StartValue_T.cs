@@ -55,6 +55,10 @@ namespace SimaticML.SW.InterfaceSections
                     case nameof(Informative):
                         Informative = reader.ReadContentAsBoolean();
                         break;
+                    
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 

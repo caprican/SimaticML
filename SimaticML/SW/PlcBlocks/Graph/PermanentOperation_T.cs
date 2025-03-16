@@ -38,6 +38,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
                         ProgrammingLanguage = programmingLanguage;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -50,15 +54,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title) :
                             var title = new Common.Comment_T();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "FlgNet":
+                        case nameof(FlgNet) :
                             var flgNet = new LADFBD.FlgNet_T();
                             flgNet.ReadXml(reader);
                             FlgNet = flgNet;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -96,6 +104,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
                         ProgrammingLanguage = programmingLanguage;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -108,15 +120,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title) :
                             var title = new Common.Comment_T_v2();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "FlgNet":
+                        case nameof(FlgNet) :
                             var flgNet = new LADFBD.FlgNet_T_v2();
                             flgNet.ReadXml(reader);
                             FlgNet = flgNet;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -154,6 +170,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
                         ProgrammingLanguage = programmingLanguage;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -166,15 +186,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title):
                             var title = new Common.Comment_T_v2();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "FlgNet":
+                        case nameof(FlgNet) :
                             var flgNet = new LADFBD.FlgNet_T_v3();
                             flgNet.ReadXml(reader);
                             FlgNet = flgNet;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -212,6 +236,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
                         ProgrammingLanguage = programmingLanguage;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -224,15 +252,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title):
                             var title = new Common.Comment_T_v2();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "FlgNet":
+                        case nameof(FlgNet) :
                             var flgNet = new LADFBD.FlgNet_T_v4();
                             flgNet.ReadXml(reader);
                             FlgNet = flgNet;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -270,6 +302,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         Enum.TryParse<ProgrammingLanguage_TE>(reader.ReadContentAsString(), out var programmingLanguage);
                         ProgrammingLanguage = programmingLanguage;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -282,15 +318,19 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 {
                     switch (reader.Name)
                     {
-                        case "Title":
+                        case nameof(Title):
                             var title = new Common.Comment_T_v2();
                             title.ReadXml(reader);
                             Title = title;
                             break;
-                        case "FlgNet":
+                        case nameof(FlgNet) :
                             var flgNet = new LADFBD.FlgNet_T_v5();
                             flgNet.ReadXml(reader);
                             FlgNet = flgNet;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

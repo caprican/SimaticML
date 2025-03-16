@@ -44,6 +44,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -81,6 +85,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             var powerrail = new Powerrail_T();
                             powerrail.ReadXml(reader);
                             items.Add(powerrail);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

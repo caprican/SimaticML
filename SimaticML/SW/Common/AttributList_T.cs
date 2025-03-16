@@ -29,6 +29,16 @@ namespace SimaticML.SW.Common
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -57,6 +67,9 @@ namespace SimaticML.SW.Common
                             var stringAttr = new StringAttribute_T();
                             stringAttr.ReadXml(reader);
                             items.Add(stringAttr);
+                            break;
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -96,16 +109,18 @@ namespace SimaticML.SW.Common
     [Serializable]
     public class AttributList_T_v2 : AttributList_T, AttrbutList_T
     {
-        [XmlElement("BooleanAttribute", typeof(BooleanAttribute_T_v2))]         // A member attribute with a type restriction of boolean
-        [XmlElement("DateAttribute", typeof(DateAttribute_T_v2))]               // A member attribute with a type restriction of date.
-        [XmlElement("IntegerAttribute", typeof(IntegerAttribute_T_v2))]         // A member attribute with a type restriction of integer.
-        [XmlElement("RealAttribute", typeof(RealAttribute_T_v2))]               // A member attribute with a type restriction of real.
-        [XmlElement("StringAttribute", typeof(StringAttribute_T_v2))]           // A member attribute with a type restriction of string.
-        protected internal new AttributeBase[] Items { get; set; }
-        public new AttributeBase this[int key] { get => Items[key]; set => Items[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -140,6 +155,9 @@ namespace SimaticML.SW.Common
                             stringAttr.ReadXml(reader);
                             items.Add(stringAttr);
                             break;
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
@@ -155,14 +173,6 @@ namespace SimaticML.SW.Common
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

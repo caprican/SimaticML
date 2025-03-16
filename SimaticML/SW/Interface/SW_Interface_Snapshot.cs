@@ -7,7 +7,7 @@ namespace SimaticML.SW.Interface
 {
     public interface ISnapshotValues
     {
-        IValue[] Value { get; set; }
+        IValue[] Values { get; set; }
     }
 
     [Serializable]
@@ -15,10 +15,20 @@ namespace SimaticML.SW.Interface
     public class SnapshotValues_T : Object_G, ISnapshotValues
     {
         [XmlElement("Value")]
-        public IValue[] Value { get; set; }
+        public IValue[] Values { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -34,9 +44,13 @@ namespace SimaticML.SW.Interface
                             value.ReadXml(reader);
                             values.Add(value);
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
-                if (values.Count > 0) Value = values.ToArray();
+                if (values.Count > 0) Values = values.ToArray();
             }
 
             if (reader.IsStartElement())
@@ -83,8 +97,13 @@ namespace SimaticML.SW.Interface
                     case nameof(Type):
                         Type = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
+
             reader.MoveToContent();
 
             Value = reader.ReadInnerXml();

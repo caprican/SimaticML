@@ -79,6 +79,10 @@ namespace SimaticML.SW.Common
                         Height = reader.ReadContentAsInt();
                         HeightSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -136,6 +140,10 @@ namespace SimaticML.SW.Common
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }

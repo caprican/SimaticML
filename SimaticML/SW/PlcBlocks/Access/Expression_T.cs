@@ -43,6 +43,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -75,6 +79,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var lineComment = new Common.LineComment_T();
                             lineComment.ReadXml(reader);
                             items.Add(lineComment);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -131,6 +139,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -173,6 +185,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var newLine = new Common.NewLine_T();
                             newLine.ReadXml(reader);
                             items.Add(newLine);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -220,6 +236,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -262,6 +282,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var newLine = new Common.NewLine_T();
                             newLine.ReadXml(reader);
                             items.Add(newLine);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -309,6 +333,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -352,6 +380,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             newLine.ReadXml(reader);
                             items.Add(newLine);
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
@@ -390,8 +422,20 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
-            UIdSpecified = int.TryParse(reader.GetAttribute("UId"), out var uId);
-            if (UIdSpecified) UId = uId;
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    case nameof(UId):
+                        UId = reader.ReadContentAsInt();
+                        UIdSpecified = true;
+                        break;
+
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
 
             if (!reader.IsEmptyElement)
             {
@@ -431,6 +475,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var newLine = new Common.NewLine_T();
                             newLine.ReadXml(reader);
                             items.Add(newLine);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

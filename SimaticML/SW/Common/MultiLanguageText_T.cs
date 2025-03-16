@@ -43,6 +43,9 @@ namespace SimaticML.SW.Common
                     case nameof(Lang):
                         Lang = reader.ReadContentAsString();
                         break;
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
             reader.MoveToContent();
@@ -84,6 +87,9 @@ namespace SimaticML.SW.Common
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+                    default:
+                        reader.Skip();
                         break;
                 }
             }

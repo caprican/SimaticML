@@ -65,6 +65,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         Qualifier = qualifier;
                         QualifierSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -97,6 +101,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var token = new Common.Token_T();
                             token.ReadXml(reader);
                             items.Add(token);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -162,6 +170,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         Qualifier = qualifier;
                         QualifierSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -204,6 +216,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             items.Add(token);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -260,6 +276,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         Qualifier = qualifier;
                         QualifierSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -302,6 +322,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             items.Add(token);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -359,6 +383,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         Qualifier = qualifier;
                         QualifierSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -401,6 +429,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             items.Add(token);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -458,6 +490,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         Qualifier = qualifier;
                         QualifierSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -500,6 +536,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             items.Add(token);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

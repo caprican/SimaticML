@@ -31,6 +31,9 @@ namespace SimaticML.SW.Blocks
                         CompositionName = reader.ReadContentAsString();
                         CompositionNameSpecified = true;
                         break;
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -97,7 +100,7 @@ namespace SimaticML.SW.Blocks
 
         //[XmlElement("BlockTypeSupervisions", typeof(PlcBlocks.TypeSupervisions.BlockTypeSupervisions))]
         [DefaultValue("​no supervisions")]
-        public PlcBlocks.TypeSupervisions.BlockTypeSupervisions Supervisions { get; set; } = null;
+        public PlcBlocks.TypeSupervisions.BlockTypeSupervisions_T Supervisions { get; set; } = null;
         [XmlIgnore]
         public bool SupervisionsSpecified { get; set; }
 
@@ -227,6 +230,16 @@ namespace SimaticML.SW.Blocks
 
         public void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.Read();
 
             while (reader.MoveToContent() == XmlNodeType.Element)
@@ -334,7 +347,7 @@ namespace SimaticML.SW.Blocks
                     case nameof(Supervisions):
 
                         //[DefaultValue("​no supervisions")]
-                        var supervisions = new PlcBlocks.TypeSupervisions.BlockTypeSupervisions();
+                        var supervisions = new PlcBlocks.TypeSupervisions.BlockTypeSupervisions_T();
                         supervisions.ReadXml(reader);
 
                         Supervisions = supervisions;

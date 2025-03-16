@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
 {
-    public interface IStateStruct
+    public interface IMultiinstance
     {
         string Name { get; set; }
     }
@@ -20,21 +20,23 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class StateStruct : Object_G, IStateStruct
+    public class Multiinstance_T : Object_G, IMultiinstance
     {
         [XmlAttribute]
         public string Name { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
-            Name = reader.GetAttribute("Name");
-
             while (reader.MoveToNextAttribute())
             {
                 switch (reader.LocalName)
                 {
                     case nameof(Name):
                         Name = reader.ReadContentAsString();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }

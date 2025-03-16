@@ -26,6 +26,16 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -42,6 +52,10 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                             break;
                         case nameof(TriggeringStatus) :
                             TriggeringStatus = reader.ReadElementContentAsBoolean();
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

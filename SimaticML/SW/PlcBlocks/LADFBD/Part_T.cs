@@ -67,6 +67,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     case nameof (Version):
                         Version = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -90,7 +94,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             instance.ReadXml(reader);
                             items.Add(instance);
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -114,6 +118,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
                             items.Add(neg);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -153,9 +161,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     [XmlRoot("Part", IsNullable = false)]
     public class Part_T_v2 : Part_T, IPart
     {
-        //[XmlElement("Instance", typeof(Access.Instance_T_v2))]
-        //[XmlElement("TemplateValue", typeof(Access.TemplateValue_T_v2))]
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -173,6 +178,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         break;
                     case nameof(Version):
                         Version = reader.ReadContentAsString();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -197,7 +206,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             instance.ReadXml(reader);
                             items.Add(instance);
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -221,6 +230,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
                             items.Add(neg);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -271,6 +284,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                     case nameof(Version):
                         Version = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -294,7 +311,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             instance.ReadXml(reader);
                             items.Add(instance);
                             break;
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -318,6 +335,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
                             items.Add(neg);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -348,8 +369,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     [XmlRoot("Part", IsNullable = false)]
     public class Part_T_v4 : Part_T_v3, IPart
     {
-        //[XmlElement("Instance", typeof(Access.Instance_T_v4))]
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -367,6 +386,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         break;
                     case nameof(Version):
                         Version = reader.ReadContentAsString();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -391,7 +414,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             instance.ReadXml(reader);
                             items.Add(instance);
                             break;
-                        case "Comment":
+                        case nameof(Comment):
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -415,6 +438,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
                             items.Add(neg);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -445,8 +472,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     [XmlRoot("Part", IsNullable = false)]
     public class Part_T_v5 : Part_T_v4, IPart
     {
-        //[XmlElement("Instance", typeof(Access.Instance_T_v5))]
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -464,6 +489,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         break;
                     case nameof(Version):
                         Version = reader.ReadContentAsString();
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -488,7 +517,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             instance.ReadXml(reader);
                             items.Add(instance);
                             break;
-                        case "Comment":
+                        case nameof(Comment):
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -512,6 +541,10 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                             var neg = new Neg_T();
                             neg.ReadXml(reader);
                             items.Add(neg);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

@@ -74,6 +74,10 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                         Enum.TryParse<Type_TE>(reader.ReadContentAsString(), out var type);
                         Type = type;
                         break;
+
+                    default: 
+                        reader.Skip(); 
+                        break;
                 }
             }
 
@@ -86,25 +90,25 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                 {
                     switch (reader.Name)
                     {
-                        case "SupervisedOperand":
+                        case nameof(SupervisedOperand):
                             var supervisedOperand = new SupervisedOperand_T();
                             supervisedOperand.ReadXml(reader);
                             SupervisedOperand = supervisedOperand;
                             break;
-                        case "DelayOperand":
+                        case nameof(DelayOperand) :
                             var delayOperand = new DelayOperand_T();
                             delayOperand.ReadXml(reader);
                             DelayOperand = delayOperand;
                             break;
-                        case "SpecificField":
+                        case nameof(SpecificField):
                             var specificField = new SpecificField_T();
                             specificField.ReadXml(reader);
                             SpecificField = specificField;
                             break;
-                        case "SupervisedStatus":
+                        case nameof(SupervisedStatus):
                             SupervisedStatus = reader.ReadElementContentAsBoolean();
                             break;
-                        case "Conditions":
+                        case nameof(Conditions):
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -130,16 +134,20 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                             else
                                 reader.ReadEndElement();
                             break;
-                        case "CategoryNumber":
+                        case nameof(CategoryNumber):
                             CategoryNumber = reader.ReadElementContentAsInt();
                             break;
-                        case "SubCategory1Number":
+                        case nameof(SubCategory1Number):
                             SubCategory1Number = reader.ReadElementContentAsLong();
                             SubCategory1NumberSpecified = true;
                             break;
-                        case "SubCategory2Number":
+                        case nameof(SubCategory2Number):
                             SubCategory2Number = reader.ReadElementContentAsLong();
                             SubCategory2NumberSpecified = true;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -179,6 +187,10 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                         Enum.TryParse<Type_TE>(reader.ReadContentAsString(), out var type);
                         Type = type;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -191,25 +203,25 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                 {
                     switch (reader.Name)
                     {
-                        case "SupervisedOperand":
+                        case nameof(SupervisedOperand) :
                             var supervisedOperand = new SupervisedOperand_T();
                             supervisedOperand.ReadXml(reader);
                             SupervisedOperand = supervisedOperand;
                             break;
-                        case "DelayOperand":
+                        case nameof(DelayOperand) :
                             var delayOperand = new DelayOperand_T();
                             delayOperand.ReadXml(reader);
                             DelayOperand = delayOperand;
                             break;
-                        case "SpecificField":
+                        case nameof(SpecificField) :
                             var specificField = new SpecificField_T_v2();
                             specificField.ReadXml(reader);
                             SpecificField = specificField;
                             break;
-                        case "SupervisedStatus":
+                        case nameof(SupervisedStatus) :
                             SupervisedStatus = reader.ReadElementContentAsBoolean();
                             break;
-                        case "Conditions":
+                        case nameof(Conditions) :
                             reader.MoveToContent();
                             if (!reader.IsEmptyElement)
                             {
@@ -236,14 +248,14 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                                 reader.ReadEndElement();
 
                             break;
-                        case "CategoryNumber":
+                        case nameof(CategoryNumber):
                             CategoryNumber = reader.ReadElementContentAsInt();
                             break;
-                        case "SubCategory1Number":
+                        case nameof(SubCategory1Number):
                             SubCategory1Number = reader.ReadElementContentAsLong();
                             SubCategory1NumberSpecified = true;
                             break;
-                        case "SubCategory2Number":
+                        case nameof(SubCategory2Number):
                             SubCategory2Number = reader.ReadElementContentAsLong();
                             SubCategory2NumberSpecified = true;
                             break;

@@ -27,6 +27,16 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -46,6 +56,10 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                             var specificFieldText = new SpecificFieldText_T();
                             specificFieldText.ReadXml(reader);
                             SpecificFieldText = specificFieldText;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -75,6 +89,16 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -94,6 +118,10 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                             var specificFieldText = new SpecificFieldText_T_v2();
                             specificFieldText.ReadXml(reader);
                             SpecificFieldText = specificFieldText;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

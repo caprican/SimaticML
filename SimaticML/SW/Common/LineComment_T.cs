@@ -23,11 +23,6 @@ namespace SimaticML.SW.Common
         int? UId { get; set; }
     }
 
-    public interface ILineComment_T_v3 : ILineComment_T_v2
-    {
-
-    }
-
     /// <remarks>
     /// Schema : 
     /// <list type="bullet">
@@ -67,6 +62,10 @@ namespace SimaticML.SW.Common
                     case nameof(Inserted):
                         Inserted = reader.ReadContentAsBoolean();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -80,7 +79,7 @@ namespace SimaticML.SW.Common
                 {
                     switch (reader.Name)
                     {
-                        case "IntegerAttribute":
+                        case nameof(IntegerAttribute) :
                             var integerAttribute = new IntegerAttribute_T();
                             integerAttribute.ReadXml(reader);
                             IntegerAttribute = integerAttribute;
@@ -89,6 +88,10 @@ namespace SimaticML.SW.Common
                             var text = new Text_T();
                             text.ReadXml(reader);
                             items.Add(text);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -128,19 +131,6 @@ namespace SimaticML.SW.Common
     [XmlRoot("LineComment", IsNullable = false)]
     public class LineComment_T_v2 : LineComment_T, ILineComment_T_v2
     {
-        ///// <summary>
-        ///// For NumBLs in STL. NumBLs is the count of the blank spaces before the actual text in the LineComment.
-        ///// This is informative.
-        ///// </summary>
-        //public new IntegerAttribute_T_v2 IntegerAttribute { get; set; }
-
-        /// <summary>
-        /// the value of the comment
-        /// </summary>
-        [XmlElement("Text", typeof(Text_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
-
         [XmlAttribute]
         [DefaultValue(false)]
         public bool NoClosingBracket { get; set; } = false;
@@ -166,6 +156,9 @@ namespace SimaticML.SW.Common
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -179,7 +172,7 @@ namespace SimaticML.SW.Common
                 {
                     switch (reader.Name)
                     {
-                        case "IntegerAttribute":
+                        case nameof(IntegerAttribute) :
                             var integerAttribute = new IntegerAttribute_T_v2();
                             integerAttribute.ReadXml(reader);
                             IntegerAttribute = integerAttribute;
@@ -188,6 +181,10 @@ namespace SimaticML.SW.Common
                             var text = new Text_T_v2();
                             text.ReadXml(reader);
                             items.Add(text);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -205,14 +202,6 @@ namespace SimaticML.SW.Common
             throw new NotImplementedException();
         }
 
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
-
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
@@ -223,16 +212,8 @@ namespace SimaticML.SW.Common
     /// </remarks>
     [Serializable]
     [XmlRoot("LineComment", IsNullable = false)]
-    public class LineComment_T_v3 : LineComment_T_v2, ILineComment_T_v3
+    public class LineComment_T_v3 : LineComment_T_v2, ILineComment_T_v2
     {
-        /// <summary>
-        /// the value of the comment
-        /// </summary>
-        [XmlElement("Comment", typeof(Comment_T_v2))]
-        [XmlElement("Text", typeof(Text_T_v2))]
-        protected internal new Object_G[] Items { get; set; }
-        public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -249,6 +230,9 @@ namespace SimaticML.SW.Common
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -262,7 +246,7 @@ namespace SimaticML.SW.Common
                 {
                     switch (reader.Name)
                     {
-                        case "IntegerAttribute":
+                        case nameof(IntegerAttribute) :
                             var integerAttribute = new IntegerAttribute_T_v2();
                             integerAttribute.ReadXml(reader);
                             IntegerAttribute = integerAttribute;
@@ -276,6 +260,10 @@ namespace SimaticML.SW.Common
                             var comment = new Comment_T_v2();
                             comment.ReadXml(reader);
                             items.Add(comment);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -292,14 +280,6 @@ namespace SimaticML.SW.Common
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<Object_G> GetEnumerator()
-        //{
-        //    foreach (var item in Items)
-        //    {
-        //        yield return item;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

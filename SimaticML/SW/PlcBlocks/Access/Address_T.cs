@@ -84,6 +84,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(Informative):
                         Informative = reader.ReadContentAsBoolean();
                         break;
+                    
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -148,6 +152,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -165,6 +173,7 @@ namespace SimaticML.SW.PlcBlocks.Access
                             booleanAttr.ReadXml(reader);
                             items.Add(booleanAttr);
                             break;
+
                         default:
                             reader.Skip();
                             break;

@@ -35,6 +35,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                     case nameof(Number):
                         Number = reader.ReadContentAsInt();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 

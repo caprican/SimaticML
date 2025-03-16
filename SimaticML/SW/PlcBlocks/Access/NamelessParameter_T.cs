@@ -54,6 +54,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+                    
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -103,6 +107,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var stringAttr = new Common.StringAttribute_T_v2();
                             stringAttr.ReadXml(reader);
                             strings.Add(stringAttr);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -160,6 +168,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -210,6 +222,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             stringAttr.ReadXml(reader);
                             strings.Add(stringAttr);
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
@@ -256,6 +272,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -307,6 +327,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             stringAttr.ReadXml(reader);
                             strings.Add(stringAttr);
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
@@ -353,6 +377,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -403,6 +431,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var stringAttr = new Common.StringAttribute_T_v2();
                             stringAttr.ReadXml(reader);
                             strings.Add(stringAttr);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

@@ -77,6 +77,9 @@ namespace SimaticML.SW.Common
                     case nameof(Informative):
                         Informative = reader.ReadContentAsBoolean();
                         break;
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -95,10 +98,13 @@ namespace SimaticML.SW.Common
                             text.ReadXml(reader);
                             texts.Add(text);
                             break;
-                        case "IntegerAttribute":
+                        case nameof(IntegerAttribute) :
                             var integerAttribute = new IntegerAttribute_T();
                             integerAttribute.ReadXml(reader);
                             IntegerAttribute = integerAttribute;
+                            break;
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -139,16 +145,6 @@ namespace SimaticML.SW.Common
     [XmlRoot("Comment", IsNullable = false)]
     public class Comment_T_v2 : Comment_T, IComment_T_v2
     {
-        /// <summary>
-        /// For NumBLs. NumBLs is the count of the blank spaces before the actual text in the Comment.
-        /// This is informative.
-        /// </summary>
-        //public new IntegerAttribute_T_v2 IntegerAttribute { get; set; }
-
-        //[XmlElement("MultiLanguageText")]
-        //protected internal new MultiLanguageText_T_v2[] MultiLanguageTexts { get; set; }
-        //public new MultiLanguageText_T_v2 this[int key] { get => MultiLanguageTexts[key]; set => MultiLanguageTexts[key] = value; }
-
         [XmlAttribute]
         public int? UId { get; set; } = null;
         [XmlIgnore]
@@ -170,6 +166,9 @@ namespace SimaticML.SW.Common
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -188,10 +187,13 @@ namespace SimaticML.SW.Common
                             num.ReadXml(reader);
                             multiLanguageTests.Add(num);
                             break;
-                        case "IntegerAttribute" :
+                        case nameof(IntegerAttribute) :
                             var integerAttribute = new IntegerAttribute_T_v2();
                             integerAttribute.ReadXml(reader);
                             IntegerAttribute = integerAttribute;
+                            break;
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -208,14 +210,6 @@ namespace SimaticML.SW.Common
         {
             throw new NotImplementedException();
         }
-
-        //public new IEnumerator<IMultiLanguageText_T> GetEnumerator()
-        //{
-        //    foreach (var text in MultiLanguageTexts)
-        //    {
-        //        yield return text;
-        //    }
-        //}
 
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }

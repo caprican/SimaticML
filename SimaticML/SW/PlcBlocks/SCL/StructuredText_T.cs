@@ -47,6 +47,10 @@ namespace SimaticML.SW.PlcBlocks.SCL
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -100,6 +104,10 @@ namespace SimaticML.SW.PlcBlocks.SCL
                             token.ReadXml(reader);
                             items.Add(token);
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
@@ -146,8 +154,6 @@ namespace SimaticML.SW.PlcBlocks.SCL
         //[XmlElement("Parameter", typeof(Access.Parameter_T_v3))]
         //[XmlElement("Text", typeof(Common.Text_T_v2))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -158,6 +164,10 @@ namespace SimaticML.SW.PlcBlocks.SCL
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }
@@ -212,6 +222,10 @@ namespace SimaticML.SW.PlcBlocks.SCL
                             token.ReadXml(reader);
                             items.Add(token);
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
@@ -249,8 +263,6 @@ namespace SimaticML.SW.PlcBlocks.SCL
         //[XmlElement("Parameter", typeof(Access.Parameter_T_v4))]
         //[XmlElement("Text", typeof(Common.Text_T_v2))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -261,6 +273,10 @@ namespace SimaticML.SW.PlcBlocks.SCL
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default :
+                        reader.Skip();
                         break;
                 }
             }
@@ -315,6 +331,10 @@ namespace SimaticML.SW.PlcBlocks.SCL
                             token.ReadXml(reader);
                             items.Add(token);
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
@@ -352,8 +372,6 @@ namespace SimaticML.SW.PlcBlocks.SCL
         //[XmlElement("Parameter", typeof(Access.Parameter_T_v5))]
         //[XmlElement("Text", typeof(Common.Text_T_v2))]
         //[XmlElement("Token", typeof(Common.Token_T_v2))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
         public override void ReadXml(XmlReader reader)
         {
@@ -364,6 +382,10 @@ namespace SimaticML.SW.PlcBlocks.SCL
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default :
+                        reader.Skip();
                         break;
                 }
             }
@@ -417,6 +439,10 @@ namespace SimaticML.SW.PlcBlocks.SCL
                             var token = new Common.Token_T_v2();
                             token.ReadXml(reader);
                             items.Add(token);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

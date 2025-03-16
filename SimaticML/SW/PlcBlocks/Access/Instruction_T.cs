@@ -56,6 +56,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                     case nameof(Version):
                         Version = reader.ReadContentAsString();
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -98,6 +102,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var parameter = new Parameter_T();
                             parameter.ReadXml(reader);
                             items.Add(parameter);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -175,6 +183,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -232,6 +244,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var parameter = new Parameter_T_v2();
                             parameter.ReadXml(reader);
                             items.Add(parameter);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -291,6 +307,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -348,6 +368,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var parameter = new Parameter_T_v3();
                             parameter.ReadXml(reader);
                             items.Add(parameter);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -407,6 +431,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -464,6 +492,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var parameter = new Parameter_T_v4();
                             parameter.ReadXml(reader);
                             items.Add(parameter);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -523,6 +555,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -580,6 +616,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var parameter = new Parameter_T_v5();
                             parameter.ReadXml(reader);
                             items.Add(parameter);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

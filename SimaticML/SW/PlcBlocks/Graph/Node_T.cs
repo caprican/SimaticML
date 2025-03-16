@@ -31,6 +31,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -55,6 +65,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         case "TransitionRef":
                             Item = new TransitionRef_T();
                             Item.ReadXml(reader);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

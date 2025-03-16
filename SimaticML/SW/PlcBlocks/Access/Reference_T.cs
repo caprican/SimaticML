@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.Access
@@ -32,6 +34,16 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -71,6 +83,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var access = new Access_T_v2();
                             access.ReadXml(reader);
                             items.Add(access);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -120,6 +136,16 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -160,6 +186,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             access.ReadXml(reader);
                             items.Add(access);
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
@@ -199,6 +229,16 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -239,6 +279,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             access.ReadXml(reader);
                             items.Add(access);
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if (items.Count > 0) Items = items.ToArray();
@@ -278,6 +322,16 @@ namespace SimaticML.SW.PlcBlocks.Access
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -317,6 +371,10 @@ namespace SimaticML.SW.PlcBlocks.Access
                             var access = new Access_T_v5();
                             access.ReadXml(reader);
                             items.Add(access);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

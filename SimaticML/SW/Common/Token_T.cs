@@ -52,6 +52,10 @@ namespace SimaticML.SW.Common
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+                    
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -96,11 +100,6 @@ namespace SimaticML.SW.Common
     [XmlRoot("Token", IsNullable = false)]
     public class Token_T_v2 : Token_T, IToken
     {
-        ///// <summary>
-        ///// For NumBLs. NumBLs is the count of the blank spaces at the start.
-        ///// This is informative.
-        ///// </summary>
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -114,6 +113,10 @@ namespace SimaticML.SW.Common
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default:
+                        reader.Skip();
                         break;
                 }
             }

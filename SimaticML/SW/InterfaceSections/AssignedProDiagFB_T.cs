@@ -24,6 +24,16 @@ namespace SimaticML.SW.InterfaceSections
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             Value = reader.ReadInnerXml();
         }

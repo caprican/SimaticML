@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -29,6 +30,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -48,6 +59,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var action = new Action_T();
                             action.ReadXml(reader);
                             actions.Add(action);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -89,6 +104,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -108,6 +133,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var action = new Action_T_v2();
                             action.ReadXml(reader);
                             actions.Add(action);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -140,6 +169,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -159,6 +198,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var action = new Action_T_v4();
                             action.ReadXml(reader);
                             actions.Add(action);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -191,6 +234,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -210,6 +263,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var action = new Action_T_v5();
                             action.ReadXml(reader);
                             actions.Add(action);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -242,6 +299,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -261,6 +328,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var action = new Action_T_v6();
                             action.ReadXml(reader);
                             actions.Add(action);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

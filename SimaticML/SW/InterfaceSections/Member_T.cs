@@ -99,6 +99,10 @@ namespace SimaticML.SW.InterfaceSections
                         Enum.TryParse<Remanence_TE>(reader.ReadContentAsString(), out var remanence);
                         Remanence = remanence;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -118,7 +122,7 @@ namespace SimaticML.SW.InterfaceSections
                             Attributes = attributes.Items;
                             break;
 
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -143,6 +147,10 @@ namespace SimaticML.SW.InterfaceSections
                             var subelement = new Subelement_T();
                             subelement.ReadXml(reader);
                             items.Add(subelement);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -183,21 +191,6 @@ namespace SimaticML.SW.InterfaceSections
     [DebuggerDisplay("{Name}")]
     public class Member_T_v3 : Member_T, IMember
     {
-        //[XmlArray("AttributeList")]
-        //[XmlArrayItem("BooleanAttribute", typeof(Common.BooleanAttribute_T_v2), IsNullable = false)]
-        //[XmlArrayItem("DateAttribute", typeof(Common.DateAttribute_T_v2), IsNullable = false)]
-        //[XmlArrayItem("IntegerAttribute", typeof(Common.IntegerAttribute_T_v2), IsNullable = false)]
-        //[XmlArrayItem("RealAttribute", typeof(Common.RealAttribute_T_v2), IsNullable = false)]
-        //[XmlArrayItem("StringAttribute", typeof(Common.StringAttribute_T_v2), IsNullable = false)]
-        //public new Common.AttributeBase[] Attributes { get; set; }
-
-        //[XmlElement("Member", typeof(Member_T_v3))]
-        //[XmlElement("Sections", typeof(Sections_T_v3))]
-        //[XmlElement("StartValue", typeof(StartValue_T))]
-        //[XmlElement("Subelement", typeof(Subelement_T_v3))]
-        //protected internal new Object_G[] Items { get; set; }
-        //public new Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -224,6 +217,10 @@ namespace SimaticML.SW.InterfaceSections
                         Enum.TryParse<Remanence_TE>(reader.ReadContentAsString(), out var remanence);
                         Remanence = remanence;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -243,7 +240,7 @@ namespace SimaticML.SW.InterfaceSections
                             Attributes = attributes.Items;
                             break;
 
-                        case "Comment":
+                        case nameof(Comment) :
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -268,6 +265,10 @@ namespace SimaticML.SW.InterfaceSections
                             var subelement = new Subelement_T_v3();
                             subelement.ReadXml(reader);
                             items.Add(subelement);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -299,11 +300,6 @@ namespace SimaticML.SW.InterfaceSections
     [DebuggerDisplay("{Name}")]
     public class Member_T_v4 : Member_T_v3, IMember
     {
-        //[XmlElement("Member", typeof(Member_T_v4))]
-        //[XmlElement("Sections", typeof(Sections_T_v4))]
-        //[XmlElement("StartValue", typeof(StartValue_T))]
-        //[XmlElement("Subelement", typeof(Subelement_T_v3))]
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -330,6 +326,10 @@ namespace SimaticML.SW.InterfaceSections
                         Enum.TryParse<Remanence_TE>(reader.ReadContentAsString(), out var remanence);
                         Remanence = remanence;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -349,7 +349,7 @@ namespace SimaticML.SW.InterfaceSections
                             Attributes = attributes.Items;
                             break;
 
-                        case "Comment":
+                        case nameof(Comment):
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -374,6 +374,10 @@ namespace SimaticML.SW.InterfaceSections
                             var subelement = new Subelement_T_v3();
                             subelement.ReadXml(reader);
                             items.Add(subelement);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -404,12 +408,6 @@ namespace SimaticML.SW.InterfaceSections
     [DebuggerDisplay("{Name}")]
     public class Member_T_v5 : Member_T_v4, IMember
     {
-        //[XmlElement("AssignedProDiagFB", typeof(string))]
-        //[XmlElement("Member", typeof(Member_T_v5))]
-        //[XmlElement("Sections", typeof(Sections_T_v5))]
-        //[XmlElement("StartValue", typeof(StartValue_T))]
-        //[XmlElement("Subelement", typeof(Subelement_T_v5))]
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
@@ -436,6 +434,10 @@ namespace SimaticML.SW.InterfaceSections
                         Enum.TryParse<Remanence_TE>(reader.ReadContentAsString(), out var remanence);
                         Remanence = remanence;
                         break;
+
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
 
@@ -455,7 +457,7 @@ namespace SimaticML.SW.InterfaceSections
                             Attributes = attributes.Items;
                             break;
 
-                        case "Comment":
+                        case nameof(Comment):
                             var comment = new Common.Comment_T_v2();
                             comment.ReadXml(reader);
                             Comment = comment;
@@ -485,6 +487,10 @@ namespace SimaticML.SW.InterfaceSections
                             var subelement = new Subelement_T_v5();
                             subelement.ReadXml(reader);
                             items.Add(subelement);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

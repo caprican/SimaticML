@@ -18,13 +18,23 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class AssociatedValues : Object_G, IAssociatedValues
+    public class AssociatedValues_T : Object_G, IAssociatedValues
     {
         [XmlElement("AssociatedValue")]
         public IAssociatedValue[] AssociatedValue { get; set; }
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -39,6 +49,10 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                             var associatedValue = new AssociatedValue_T();
                             associatedValue.ReadXml(reader);
                             associatedValues.Add(associatedValue);
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

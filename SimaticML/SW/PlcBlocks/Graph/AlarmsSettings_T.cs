@@ -46,6 +46,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -71,6 +81,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                                             alarmSupervisionCategory.ReadXml(reader);
                                             alarms.Add(alarmSupervisionCategory);
                                             break;
+                                        
+                                        default:
+                                            reader.Skip();
+                                            break;
                                     }
                                 }
                                 if (alarms.Count > 0) AlarmSupervisionCategories = alarms.ToArray();
@@ -90,6 +104,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var alarmWarningCategory = new AlarmCategory_T();
                             alarmWarningCategory.ReadXml(reader);
                             AlarmWarningCategory = alarmWarningCategory;
+                            break;
+                        
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -119,6 +137,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
     {
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -144,6 +172,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                                             alarmSupervisionCategory.ReadXml(reader);
                                             alarms.Add(alarmSupervisionCategory);
                                             break;
+
+                                        default:
+                                            reader.Skip();
+                                            break;
                                     }
                                 }
                                 if (alarms.Count > 0) AlarmSupervisionCategories = alarms.ToArray();
@@ -163,6 +195,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var alarmWarningCategory = new AlarmCategory_T();
                             alarmWarningCategory.ReadXml(reader);
                             AlarmWarningCategory = alarmWarningCategory;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
@@ -208,6 +244,16 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
             {
@@ -232,6 +278,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                                             var alarmSupervisionCategory = new AlarmSupervisionCategory_T_v2();
                                             alarmSupervisionCategory.ReadXml(reader);
                                             alarms.Add(alarmSupervisionCategory);
+                                            break;
+
+                                        default:
+                                            reader.Skip();
                                             break;
                                     }
                                 }
@@ -289,6 +339,10 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var alarmSubcategory2Warning = new AlarmSubcategory_T();
                             alarmSubcategory2Warning.ReadXml(reader);
                             AlarmSubcategory2Warning = alarmSubcategory2Warning;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }
