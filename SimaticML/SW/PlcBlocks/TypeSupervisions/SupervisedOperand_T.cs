@@ -4,9 +4,8 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
-    public interface IAssociatedValueOperand
+    public interface ISupervisedOperand
     {
-        int Number { get; set; }
         string Name { get; set; }
     }
 
@@ -18,11 +17,8 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class AssociatedValueOperand : Object_G, IAssociatedValueOperand
+    public class SupervisedOperand_T : Object_G, ISupervisedOperand
     {
-        [XmlAttribute]
-        public int Number { get; set; }
-
         [XmlAttribute]
         public string Name { get; set; }
 
@@ -32,10 +28,6 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
             {
                 switch (reader.LocalName)
                 {
-                    case nameof(Number):
-                        Number = reader.ReadContentAsInt();
-                        break;
-
                     case nameof(Name):
                         Name = reader.ReadContentAsString();
                         break;

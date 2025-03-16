@@ -33,16 +33,12 @@ namespace SimaticML.SW.PlcBlocks.Graph
 
         public override void ReadXml(XmlReader reader)
         {
-            while (reader.MoveToNextAttribute())
-            {
-                switch (reader.LocalName)
-                {
-                    case nameof(LinkType):
-                        Enum.TryParse<Link_TE>(reader.ReadContentAsString(), out var linkType);
-                        LinkType = linkType;
-                        break;
-                }
-            }
+            //while (reader.MoveToNextAttribute())
+            //{
+            //    switch (reader.LocalName)
+            //    {
+            //    }
+            //}
 
             reader.MoveToContent();
             if (!reader.IsEmptyElement)
@@ -62,6 +58,11 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             var nodeTo = new Node_T();
                             nodeTo.ReadXml(reader);
                             NodeTo = nodeTo;
+                            break;
+
+                        case nameof(LinkType):
+                            Enum.TryParse<Link_TE>(reader.ReadElementContentAsString(), out var linkType);
+                            LinkType = linkType;
                             break;
                     }
                 }

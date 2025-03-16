@@ -5,14 +5,11 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-using SimaticML.SW.Common;
-
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
     [Serializable]
     public class BlockTypeSupervisions : IXmlSerializable, IEnumerable<IBlockTypeSupervision>
     {
-        //[XmlElement("BlockTypeSupervision")]
         protected internal IBlockTypeSupervision[] Items { get; set; }
         public IBlockTypeSupervision this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -43,7 +40,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                                     switch(reader.Name)
                                     {
                                         case "BlockTypeSupervision":
-                                            var block = new BlockTypeSupervision_v2();
+                                            var block = new BlockTypeSupervision_T_v2();
                                             block.ReadXml(reader);
                                             blocks.Add(block);
                                             break;

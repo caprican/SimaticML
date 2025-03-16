@@ -32,7 +32,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class BlockTypeSupervision : Object_G, IBlockTypeSupervision
+    public class BlockTypeSupervision_T : Object_G, IBlockTypeSupervision
     {
         public ISupervisedOperand SupervisedOperand { get; set; }
 
@@ -87,17 +87,17 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                     switch (reader.Name)
                     {
                         case "SupervisedOperand":
-                            var supervisedOperand = new SupervisedOperand();
+                            var supervisedOperand = new SupervisedOperand_T();
                             supervisedOperand.ReadXml(reader);
                             SupervisedOperand = supervisedOperand;
                             break;
                         case "DelayOperand":
-                            var delayOperand = new DelayOperand();
+                            var delayOperand = new DelayOperand_T();
                             delayOperand.ReadXml(reader);
                             DelayOperand = delayOperand;
                             break;
                         case "SpecificField":
-                            var specificField = new SpecificField();
+                            var specificField = new SpecificField_T();
                             specificField.ReadXml(reader);
                             SpecificField = specificField;
                             break;
@@ -116,7 +116,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                                     switch (reader.Name)
                                     {
                                         case "Condition":
-                                            var condition = new Condition();
+                                            var condition = new Condition_T();
                                             condition.ReadXml(reader);
                                             conditions.Add(condition);
                                             break;
@@ -164,7 +164,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class BlockTypeSupervision_v2 : BlockTypeSupervision, IBlockTypeSupervision
+    public class BlockTypeSupervision_T_v2 : BlockTypeSupervision_T, IBlockTypeSupervision
     {
         public override void ReadXml(XmlReader reader)
         {
@@ -192,17 +192,17 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                     switch (reader.Name)
                     {
                         case "SupervisedOperand":
-                            var supervisedOperand = new SupervisedOperand();
+                            var supervisedOperand = new SupervisedOperand_T();
                             supervisedOperand.ReadXml(reader);
                             SupervisedOperand = supervisedOperand;
                             break;
                         case "DelayOperand":
-                            var delayOperand = new DelayOperand();
+                            var delayOperand = new DelayOperand_T();
                             delayOperand.ReadXml(reader);
                             DelayOperand = delayOperand;
                             break;
                         case "SpecificField":
-                            var specificField = new SpecificField_v2();
+                            var specificField = new SpecificField_T_v2();
                             specificField.ReadXml(reader);
                             SpecificField = specificField;
                             break;
@@ -221,7 +221,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                                     switch (reader.Name)
                                     {
                                         case "Condition":
-                                            var condition = new Condition();
+                                            var condition = new Condition_T();
                                             condition.ReadXml(reader);
                                             conditions.Add(condition);
                                             break;

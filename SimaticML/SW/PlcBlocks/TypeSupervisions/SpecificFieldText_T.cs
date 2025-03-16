@@ -16,7 +16,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class SpecificFieldText : Object_G, ISpecificFieldText
+    public class SpecificFieldText_T : Object_G, ISpecificFieldText
     {
         [XmlElement("MultiLanguageText")]
         public Common.IMultiLanguageText[] MultiLanguageText { get; set; }
@@ -33,7 +33,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                 {
                     switch (reader.Name)
                     {
-                        case "MultiLanguageText":
+                        case nameof(MultiLanguageText) :
                             var value = new Common.MultiLanguageText_T();
                             value.ReadXml(reader);
                             texts.Add(value);
@@ -62,7 +62,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class SpecificFieldText_v2 : SpecificFieldText, ISpecificFieldText
+    public class SpecificFieldText_T_v2 : SpecificFieldText_T, ISpecificFieldText
     {
         public override void ReadXml(XmlReader reader)
         {
@@ -76,7 +76,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                 {
                     switch (reader.Name)
                     {
-                        case "MultiLanguageText":
+                        case nameof(MultiLanguageText) :
                             var value = new Common.MultiLanguageText_T_v2();
                             value.ReadXml(reader);
                             texts.Add(value);

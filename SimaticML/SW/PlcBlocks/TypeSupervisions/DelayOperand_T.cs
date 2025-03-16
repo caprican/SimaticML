@@ -4,11 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.TypeSupervisions
 {
-    public interface IConditionOperand
+    public interface IDelayOperand
     {
-        int Number { get; set; }
         string Name { get; set; }
     }
+
     /// <remarks>
     /// Schema : SW.PlcBlocks.TypeSupervisions (SW.Common)
     ///          SW.PlcBlocks.TypeSupervisions_v2 (SW.Common_v2)
@@ -16,12 +16,9 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     /// </remarks>
     [Serializable]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(IsNullable = false)]
-    public class ConditionOperand : Object_G, IConditionOperand
+    [XmlRoot(Namespace = "", IsNullable = false)]
+    public class DelayOperand_T : Object_G, IDelayOperand
     {
-        [XmlAttribute]
-        public int Number { get; set; }
-
         [XmlAttribute]
         public string Name { get; set; }
 
@@ -31,10 +28,6 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
             {
                 switch (reader.LocalName)
                 {
-                    case nameof(Number):
-                        Number = reader.ReadContentAsInt();
-                        break;
-
                     case nameof(Name):
                         Name = reader.ReadContentAsString();
                         break;

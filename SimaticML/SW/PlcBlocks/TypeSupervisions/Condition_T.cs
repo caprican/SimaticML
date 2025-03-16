@@ -18,7 +18,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class Condition : Object_G, ICondition
+    public class Condition_T : Object_G, ICondition
     {
         public IConditionOperand ConditionOperand { get; set; }
 
@@ -35,17 +35,16 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                 {
                     switch (reader.Name)
                     {
-                        case "ConditionOperand":
-                            var conditionOperand = new ConditionOperand();
+                        case nameof(ConditionOperand) :
+                            var conditionOperand = new ConditionOperand_T();
                             conditionOperand.ReadXml(reader);
                             ConditionOperand = conditionOperand;
                             break;
-                        case "TriggeringStatus":
+                        case nameof(TriggeringStatus) :
                             TriggeringStatus = reader.ReadElementContentAsBoolean();
                             break;
                     }
                 }
-
             }
 
             if (reader.IsStartElement())

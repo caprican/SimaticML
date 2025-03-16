@@ -36,7 +36,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                     switch (reader.Name)
                     {
                         case "AssociatedValue":
-                            var associatedValue = new AssociatedValue();
+                            var associatedValue = new AssociatedValue_T();
                             associatedValue.ReadXml(reader);
                             associatedValues.Add(associatedValue);
                             break;

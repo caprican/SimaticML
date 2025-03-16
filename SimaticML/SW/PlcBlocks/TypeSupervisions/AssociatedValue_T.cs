@@ -17,7 +17,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class AssociatedValue : Object_G, IAssociatedValue
+    public class AssociatedValue_T : Object_G, IAssociatedValue
     {
         public IAssociatedValueOperand AssociatedValueOperand { get; set; }
 
@@ -33,7 +33,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                     switch (reader.Name)
                     {
                         case "AssociatedValueOperand":
-                            var associatedValueOperand  = new AssociatedValueOperand();
+                            var associatedValueOperand  = new AssociatedValueOperand_T();
                             associatedValueOperand.ReadXml(reader);
                             AssociatedValueOperand = associatedValueOperand;
                             break;

@@ -18,7 +18,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class SpecificField : Object_G, ISpecificField
+    public class SpecificField_T : Object_G, ISpecificField
     {
         [XmlArrayItem("AssociatedValue", IsNullable = false)]
         public IAssociatedValue[] AssociatedValues { get; set; }
@@ -38,12 +38,12 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                     switch (reader.Name)
                     {
                         case "AssociatedValue":
-                            var value = new AssociatedValue();
+                            var value = new AssociatedValue_T();
                             value.ReadXml(reader);
                             associatedValues.Add(value);
                             break;
-                        case "SpecificFieldText":
-                            var specificFieldText = new SpecificFieldText();
+                        case nameof(SpecificFieldText) :
+                            var specificFieldText = new SpecificFieldText_T();
                             specificFieldText.ReadXml(reader);
                             SpecificFieldText = specificFieldText;
                             break;
@@ -71,7 +71,7 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
     [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
-    public class SpecificField_v2 : SpecificField, ISpecificField
+    public class SpecificField_T_v2 : SpecificField_T, ISpecificField
     {
         public override void ReadXml(XmlReader reader)
         {
@@ -86,12 +86,12 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                     switch (reader.Name)
                     {
                         case "AssociatedValue":
-                            var value = new AssociatedValue();
+                            var value = new AssociatedValue_T();
                             value.ReadXml(reader);
                             associatedValues.Add(value);
                             break;
-                        case "SpecificFieldText":
-                            var specificFieldText = new SpecificFieldText_v2();
+                        case nameof(SpecificFieldText) :
+                            var specificFieldText = new SpecificFieldText_T_v2();
                             specificFieldText.ReadXml(reader);
                             SpecificFieldText = specificFieldText;
                             break;
