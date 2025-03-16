@@ -388,19 +388,25 @@ namespace SimaticML.SW.PlcBlocks.Graph
                             Comment = comment;
                             break;
                         case "Steps":
-                            var steps = new List<IStep_v2>();
-                            while (reader.MoveToContent() == XmlNodeType.Element)
+                            reader.MoveToContent();
+                            if(!reader.IsEmptyElement)
                             {
-                                switch (reader.Name)
+                                reader.Read();
+
+                                var steps = new List<IStep_v2>();
+                                while (reader.MoveToContent() == XmlNodeType.Element)
                                 {
-                                    case "Step":
-                                        var step = new Step_T_v5();
-                                        step.ReadXml(reader);
-                                        steps.Add(step);
-                                        break;
+                                    switch (reader.Name)
+                                    {
+                                        case "Step":
+                                            var step = new Step_T_v5();
+                                            step.ReadXml(reader);
+                                            steps.Add(step);
+                                            break;
+                                    }
                                 }
+                                if (steps.Count > 0) Steps = steps.ToArray();
                             }
-                            if (steps.Count > 0) Steps = steps.ToArray();
                             break;
                         case "Transitions":
                             var transitions = new List<ITransition>();

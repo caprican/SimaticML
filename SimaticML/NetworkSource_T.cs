@@ -27,42 +27,93 @@ namespace SimaticML
                 var items = new List<Object_G>();
                 while (reader.MoveToContent() == XmlNodeType.Element)
                 {
-                    switch (reader.NamespaceURI)
+                    switch(reader.Name)
                     {
-                        case "http://www.siemens.com/automation/Openness/SW/NetworkSource/StatementList/v4":
-                            var stl_v4 = new SW.PlcBlocks.STL.StlStatement_T_v4();
-                            stl_v4.ReadXml(reader);
-                            items.Add(stl_v4);
-                            break;
-
-                        case "http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4":
-                            var flgNet_v4 = new SW.PlcBlocks.LADFBD.FlgNet_T_v4();
-                            flgNet_v4.ReadXml(reader);
-                            items.Add(flgNet_v4);
-                            break;
-
-                        case "http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText":
-                            var structuredText = new SW.PlcBlocks.SCL.StructuredText_T();
-                            structuredText.ReadXml(reader);
-                            items.Add(structuredText);
-                            break;
-                        case "http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v2":
-                            var structuredText_v2 = new SW.PlcBlocks.SCL.StructuredText_T_v2();
-                            structuredText_v2.ReadXml(reader);
-                            items.Add(structuredText_v2);
-                            break;
-                        case "http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3":
-                            var structuredText_v3 = new SW.PlcBlocks.SCL.StructuredText_T_v3();
-                            structuredText_v3.ReadXml(reader);
-                            items.Add(structuredText_v3);
-                            break;
-                        case "http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v4":
-                            var structuredText_v4 = new SW.PlcBlocks.SCL.StructuredText_T_v4();
-                            structuredText_v4.ReadXml(reader);
-                            items.Add(structuredText_v4);
+                        case "StatementList":
+                            var stl = new SW.PlcBlocks.STL.StatementList_T();
+                            stl.ReadXml(reader);
+                            items.Add(stl);
                             break;
                         default:
-                            reader.Skip();
+                            switch (reader.NamespaceURI)
+                            {
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet":
+                                    var flgNet = new SW.PlcBlocks.LADFBD.FlgNet_T();
+                                    flgNet.ReadXml(reader);
+                                    items.Add(flgNet);
+                                    break;
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v2":
+                                    var flgNet_v2 = new SW.PlcBlocks.LADFBD.FlgNet_T_v2();
+                                    flgNet_v2.ReadXml(reader);
+                                    items.Add(flgNet_v2);
+                                    break;
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v3":
+                                    var flgNet_v3 = new SW.PlcBlocks.LADFBD.FlgNet_T_v3();
+                                    flgNet_v3.ReadXml(reader);
+                                    items.Add(flgNet_v3);
+                                    break;
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4":
+                                    var flgNet_v4 = new SW.PlcBlocks.LADFBD.FlgNet_T_v4();
+                                    flgNet_v4.ReadXml(reader);
+                                    items.Add(flgNet_v4);
+                                    break;
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v5":
+                                    var flgNet_v5 = new SW.PlcBlocks.LADFBD.FlgNet_T_v5();
+                                    flgNet_v5.ReadXml(reader);
+                                    items.Add(flgNet_v5);
+                                    break;
+
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText":
+                                    var structuredText = new SW.PlcBlocks.SCL.StructuredText_T();
+                                    structuredText.ReadXml(reader);
+                                    items.Add(structuredText);
+                                    break;
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v2":
+                                    var structuredText_v2 = new SW.PlcBlocks.SCL.StructuredText_T_v2();
+                                    structuredText_v2.ReadXml(reader);
+                                    items.Add(structuredText_v2);
+                                    break;
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3":
+                                    var structuredText_v3 = new SW.PlcBlocks.SCL.StructuredText_T_v3();
+                                    structuredText_v3.ReadXml(reader);
+                                    items.Add(structuredText_v3);
+                                    break;
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v4":
+                                    var structuredText_v4 = new SW.PlcBlocks.SCL.StructuredText_T_v4();
+                                    structuredText_v4.ReadXml(reader);
+                                    items.Add(structuredText_v4);
+                                    break;
+
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/Graph":
+                                    var graph = new SW.PlcBlocks.Graph.Graph_T();
+                                    graph.ReadXml(reader);
+                                    items.Add(graph);
+                                    break;
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/Graph/v2":
+                                    var graph_v2 = new SW.PlcBlocks.Graph.Graph_T_v2();
+                                    graph_v2.ReadXml(reader);
+                                    items.Add(graph_v2);
+                                    break;
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/Graph/v4":
+                                    var graph_v4 = new SW.PlcBlocks.Graph.Graph_T_v4();
+                                    graph_v4.ReadXml(reader);
+                                    items.Add(graph_v4);
+                                    break;
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/Graph/v5":
+                                    var graph_v5 = new SW.PlcBlocks.Graph.Graph_T_v5();
+                                    graph_v5.ReadXml(reader);
+                                    items.Add(graph_v5);
+                                    break;
+                                case "http://www.siemens.com/automation/Openness/SW/NetworkSource/Graph/v6":
+                                    var graph_v6 = new SW.PlcBlocks.Graph.Graph_T_v6();
+                                    graph_v6.ReadXml(reader);
+                                    items.Add(graph_v6);
+                                    break;
+
+                                default:
+                                    reader.Skip();
+                                    break;
+                            }
                             break;
                     }
                 }

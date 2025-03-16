@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace SimaticML.SW.PlcBlocks.STL
 {
-    public interface IStlStatement_T : IEnumerable<Object_G>
+    public interface IStlStatement : IEnumerable<Object_G>
     {
         int? UId { get; set; }
     }
@@ -16,7 +16,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T : Object_G, IStlStatement_T
+    public class StlStatement_T : Object_G, IStlStatement
     {
         //[XmlElement("Comment", typeof(Common.Comment_T), Order = 0 | 3)]
         //[XmlElement("LineComment", typeof(Common.LineComment_T), Order = 0 | 3)]
@@ -115,7 +115,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T_v2 : StlStatement_T, IStlStatement_T
+    public class StlStatement_T_v2 : StlStatement_T, IStlStatement
     {
         //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
@@ -207,7 +207,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T_v3 : StlStatement_T_v2, IStlStatement_T
+    public class StlStatement_T_v3 : StlStatement_T_v2, IStlStatement
     {
         //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
@@ -299,7 +299,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T_v4 : StlStatement_T_v2, IStlStatement_T
+    public class StlStatement_T_v4 : StlStatement_T_v2, IStlStatement
     {
         //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
@@ -391,7 +391,7 @@ namespace SimaticML.SW.PlcBlocks.STL
     /// </remarks>
     [Serializable]
     [XmlRoot("StlStatement", IsNullable = false)]
-    public class StlStatement_T_v5 : StlStatement_T_v4, IStlStatement_T
+    public class StlStatement_T_v5 : StlStatement_T_v4, IStlStatement
     {
         //[XmlElement("Blank", typeof(Common.Blank_T), Order = 0 | 3)]
         //[XmlElement("Comment", typeof(Common.Comment_T_v2), Order = 0 | 3)]
