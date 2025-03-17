@@ -48,6 +48,8 @@ namespace SimaticML.SW.PlcBlocks.SCL
                         UIdSpecified = true;
                         break;
 
+                    case "xmlns":
+                        break;
                     default:
                         reader.Skip();
                         break;
@@ -166,6 +168,9 @@ namespace SimaticML.SW.PlcBlocks.SCL
                         UIdSpecified = true;
                         break;
 
+                    case "xmlns":
+                        break;
+
                     default:
                         reader.Skip();
                         break;
@@ -275,6 +280,9 @@ namespace SimaticML.SW.PlcBlocks.SCL
                         UIdSpecified = true;
                         break;
 
+                    case "xmlns":
+                        break;
+
                     default :
                         reader.Skip();
                         break;
@@ -382,6 +390,9 @@ namespace SimaticML.SW.PlcBlocks.SCL
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    case "xmlns":
                         break;
 
                     default :

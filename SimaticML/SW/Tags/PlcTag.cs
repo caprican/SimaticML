@@ -5,17 +5,16 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-using SimaticML.SW.Common;
-
 namespace SimaticML.SW.Tags
 {
     [Serializable]
     //[XmlType(AnonymousType = true)]
+    [XmlRoot(IsNullable = false)]
     [DebuggerDisplay("{CompositionName} ID={ID}")]
-    public class PlcUserConstant : Object_T, IXmlSerializable
+    public class PlcTag : Object_T, IXmlSerializable
     {
-        [XmlElement("AttributeList", typeof(AttributesPlcConstant))]
-        public AttributesPlcConstant Attributes { get; set; }
+        [XmlElement("AttributeList", typeof(AttributesPlcTag))]
+        public AttributesPlcTag Attributes { get; set; }
 
         public XmlSchema GetSchema() => null;
 
@@ -40,7 +39,7 @@ namespace SimaticML.SW.Tags
             reader.MoveToContent();
             if (reader.Name == "AttributeList")
             {
-                var attributes = new AttributesPlcConstant();
+                var attributes = new AttributesPlcTag();
                 attributes.ReadXml(reader);
                 Attributes = attributes;
             }
@@ -84,13 +83,17 @@ namespace SimaticML.SW.Tags
         }
     }
 
-    public class AttributesPlcConstant : IXmlSerializable
+    public class AttributesPlcTag : IXmlSerializable
     {
         public string Name { get; set; }
         public bool NameSpecified { get; set; }
 
         public string DataTypeName { get; set; }
-        public string Value {  get; set; }
+
+        public bool ExternalAccessible { get; set; }
+
+        public string LogicalAddress { get; set; }
+
 
         public XmlSchema GetSchema() => null;
 
@@ -111,8 +114,12 @@ namespace SimaticML.SW.Tags
                         DataTypeName = reader.ReadInnerXml();
                         break;
 
-                    case nameof(Value):
-                        Value = reader.ReadInnerXml();
+                    case nameof(ExternalAccessible):
+                        ExternalAccessible = reader.ReadElementContentAsBoolean();
+                        break;
+
+                    case nameof(LogicalAddress):
+                        LogicalAddress = reader.ReadInnerXml();
                         break;
 
                     default:

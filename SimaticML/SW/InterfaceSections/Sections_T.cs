@@ -280,6 +280,9 @@ namespace SimaticML.SW.InterfaceSections
                         Version = reader.ReadContentAsString();
                         break;
 
+                    case "xmlns":
+                        break;
+
                     default:
                         reader.Skip();
                         break;

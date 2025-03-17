@@ -102,7 +102,9 @@ namespace SimaticML
                             break;
 
                         case "SW.Tags.PlcTagTable":
-            throw new NotImplementedException();
+                            var plcTagTable = new SW.Tags.PlcTagTable();
+                            plcTagTable.ReadXml(reader);
+                            items.Add(plcTagTable);
                             break;
 
                         case "SW.Types.PlcStruct":
@@ -112,7 +114,9 @@ namespace SimaticML
                             break;
 
                         case "SW.WatchAndForceTables.PlcWatchTable":
-            throw new NotImplementedException();
+                            var plcWatchTables = new SW.WatchAndForceTables.PlcWatchTable();
+                            plcWatchTables.ReadXml(reader);
+                            items.Add(plcWatchTables);
                             break;
                     }
                 }

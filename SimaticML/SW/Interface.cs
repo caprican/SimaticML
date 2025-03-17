@@ -52,6 +52,10 @@ namespace SimaticML.SW
                             section_v5.ReadXml(reader);                            
                             sections.Add(section_v5);
                             break;
+
+                        default:
+                            reader.Skip();
+                            break;
                     }
                 }
                 if(sections.Count > 0) Sections = sections.ToArray();
