@@ -54,7 +54,6 @@ namespace SimaticML.SW.Common
                         break;
                     
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -73,6 +72,7 @@ namespace SimaticML.SW.Common
                             integerAttribute.ReadXml(reader);
                             IntegerAttribute = integerAttribute;
                             break;
+
                         default:
                             reader.Skip();
                             break;
@@ -116,7 +116,6 @@ namespace SimaticML.SW.Common
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -135,6 +134,7 @@ namespace SimaticML.SW.Common
                             integerAttribute.ReadXml(reader);
                             IntegerAttribute = integerAttribute;
                             break;
+
                         default:
                             reader.Skip();
                             break;

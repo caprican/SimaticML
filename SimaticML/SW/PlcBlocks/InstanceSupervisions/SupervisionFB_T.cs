@@ -36,7 +36,6 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }

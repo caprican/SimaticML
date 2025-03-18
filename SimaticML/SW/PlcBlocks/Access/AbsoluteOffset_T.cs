@@ -47,7 +47,6 @@ namespace SimaticML.SW.PlcBlocks.Access
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }

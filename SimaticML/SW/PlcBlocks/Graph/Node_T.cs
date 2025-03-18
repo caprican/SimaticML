@@ -36,7 +36,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }

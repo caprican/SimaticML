@@ -57,7 +57,6 @@ namespace SimaticML.SW.InterfaceSections
                         break;
                     
                     default:
-                        reader.Skip();
                         break;
                 }
             }

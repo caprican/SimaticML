@@ -63,8 +63,8 @@ namespace SimaticML.SW.Common
                     case nameof(SystemDefined):
                         SystemDefined = reader.ReadContentAsBoolean();
                         break;
+
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -117,7 +117,6 @@ namespace SimaticML.SW.Common
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }

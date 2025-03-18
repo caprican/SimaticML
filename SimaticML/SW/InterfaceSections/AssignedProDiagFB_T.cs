@@ -29,7 +29,6 @@ namespace SimaticML.SW.InterfaceSections
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }

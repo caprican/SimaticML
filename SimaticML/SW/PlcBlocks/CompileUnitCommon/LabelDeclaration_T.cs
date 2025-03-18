@@ -49,7 +49,6 @@ namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -154,7 +153,6 @@ namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -260,7 +258,6 @@ namespace SimaticML.SW.PlcBlocks.CompileUnitCommon
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }

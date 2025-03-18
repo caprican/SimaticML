@@ -77,8 +77,8 @@ namespace SimaticML.SW.Common
                     case nameof(Informative):
                         Informative = reader.ReadContentAsBoolean();
                         break;
+
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -103,6 +103,7 @@ namespace SimaticML.SW.Common
                             integerAttribute.ReadXml(reader);
                             IntegerAttribute = integerAttribute;
                             break;
+
                         default:
                             reader.Skip();
                             break;
@@ -166,8 +167,8 @@ namespace SimaticML.SW.Common
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
+
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -192,6 +193,7 @@ namespace SimaticML.SW.Common
                             integerAttribute.ReadXml(reader);
                             IntegerAttribute = integerAttribute;
                             break;
+
                         default:
                             reader.Skip();
                             break;

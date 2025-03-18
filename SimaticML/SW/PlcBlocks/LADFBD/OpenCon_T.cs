@@ -36,7 +36,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         UId = reader.ReadContentAsInt();
                         break;
                     default:
-                        reader.Skip();
                         break;
                 }
             }

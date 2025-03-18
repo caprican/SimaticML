@@ -65,7 +65,6 @@ namespace SimaticML.SW.PlcBlocks.STL
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -162,7 +161,6 @@ namespace SimaticML.SW.PlcBlocks.STL
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -261,7 +259,6 @@ namespace SimaticML.SW.PlcBlocks.STL
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }

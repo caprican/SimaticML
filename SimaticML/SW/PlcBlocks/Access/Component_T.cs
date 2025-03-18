@@ -66,7 +66,6 @@ namespace SimaticML.SW.PlcBlocks.Access
                         break;
                     
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -176,7 +175,6 @@ namespace SimaticML.SW.PlcBlocks.Access
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -295,7 +293,6 @@ namespace SimaticML.SW.PlcBlocks.Access
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -414,7 +411,6 @@ namespace SimaticML.SW.PlcBlocks.Access
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -533,7 +529,6 @@ namespace SimaticML.SW.PlcBlocks.Access
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }

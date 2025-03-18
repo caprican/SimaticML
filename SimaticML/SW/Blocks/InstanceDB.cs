@@ -31,8 +31,8 @@ namespace SimaticML.SW.Blocks
                         CompositionName = reader.ReadContentAsString();
                         CompositionNameSpecified = true;
                         break;
+
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -51,32 +51,8 @@ namespace SimaticML.SW.Blocks
             {
                 reader.Read();
 
-                var items = new List<Object_T>();
-                while (reader.MoveToContent() == XmlNodeType.Element)
-                {
-                    switch (reader.Name)
-                    {
-                        case "MultilingualText":
-                            var text = new MultilingualText_T();
-                            text.ReadXml(reader);
-                            items.Add(text);
-                            break;
-                        case "SW.Blocks.CompileUnit":
-                            var compileUnit = new CompileUnit();
-                            compileUnit.ReadXml(reader);
-                            items.Add(compileUnit);
-                            break;
-                        case "MultilingualTextItem":
-                            var textItem = new MultilingualTextItem_T();
-                            textItem.ReadXml(reader);
-                            items.Add(textItem);
-                            break;
-                        default:
-                            reader.Skip();
-                            break;
-                    }
-                }
-                if (items.Count > 0) Items = items.ToArray();
+                var items = Helpers.ObjectListHelper.Read(reader);
+                if (items.Length > 0) Items = items;
             }
 
             reader.ReadEndElement();
@@ -135,7 +111,6 @@ namespace SimaticML.SW.Blocks
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }

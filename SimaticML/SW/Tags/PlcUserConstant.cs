@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-using SimaticML.SW.Common;
-
 namespace SimaticML.SW.Tags
 {
     [Serializable]
-    //[XmlType(AnonymousType = true)]
     [DebuggerDisplay("{CompositionName} ID={ID}")]
     public class PlcUserConstant : Object_T, IXmlSerializable
     {
@@ -50,30 +46,8 @@ namespace SimaticML.SW.Tags
             {
                 reader.Read();
 
-                var items = new List<Object_T>();
-                while (reader.MoveToContent() == XmlNodeType.Element)
-                {
-                    switch (reader.Name)
-                    {
-                        case "MultilingualText":
-                            var text = new MultilingualText_T();
-                            text.ReadXml(reader);
-                            items.Add(text);
-                            break;
-                        case "MultilingualTextItem":
-                            var textItem = new MultilingualTextItem_T();
-                            textItem.ReadXml(reader);
-                            items.Add(textItem);
-                            break;
-
-                        default:
-                            reader.Skip();
-                            break;
-                    }
-                }
-
-                if (items.Count > 0) Items = items.ToArray();
-                reader.ReadEndElement();
+                var items = Helpers.ObjectListHelper.Read(reader);
+                if (items.Length > 0) Items = items;
             }
             reader.ReadEndElement();
         }

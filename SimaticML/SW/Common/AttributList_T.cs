@@ -34,7 +34,6 @@ namespace SimaticML.SW.Common
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -68,6 +67,7 @@ namespace SimaticML.SW.Common
                             stringAttr.ReadXml(reader);
                             items.Add(stringAttr);
                             break;
+
                         default:
                             reader.Skip();
                             break;
@@ -116,7 +116,6 @@ namespace SimaticML.SW.Common
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -155,6 +154,7 @@ namespace SimaticML.SW.Common
                             stringAttr.ReadXml(reader);
                             items.Add(stringAttr);
                             break;
+
                         default:
                             reader.Skip();
                             break;

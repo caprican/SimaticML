@@ -33,7 +33,6 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }

@@ -21,11 +21,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     [XmlRoot("FlgNet", IsNullable = false)]
     internal class FlgNet_T : Object_G, IFlgNet_T
     {
-        //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T))]
-        //[XmlElement("Access", typeof(Access.Access_T), IsNullable = false)]
-        //[XmlElement("Call", typeof(Call_T), IsNullable = false)]
-        //[XmlElement("Part", typeof(Part_T), IsNullable = false)]
-        //[XmlElement("Wire", typeof(Wire_T))]
         protected internal Object_G[] Items { get; set; }
         public Object_G this[int key] { get => Items[key]; set => Items[key] = value; }
 
@@ -35,10 +30,7 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
             {
                 switch (reader.LocalName)
                 {
-                    case "xmlns":
-                        break;
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -167,22 +159,13 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     [XmlRoot("FlgNet", IsNullable = false)]
     internal class FlgNet_T_v2 : FlgNet_T, IFlgNet_T
     {
-        //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v2))]
-
-        //[XmlElement("Access", typeof(Access.Access_T_v2), IsNullable = false)]
-        //[XmlElement("Call", typeof(Call_T_v2), IsNullable = false)]
-        //[XmlElement("Part", typeof(Part_T_v2), IsNullable = false)]
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
             {
                 switch (reader.LocalName)
                 {
-                    case "xmlns":
-                        break;
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -301,20 +284,13 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     [XmlRoot("FlgNet", IsNullable = false)]
     internal class FlgNet_T_v3 : FlgNet_T_v2, IFlgNet_T
     {
-        //[XmlArrayItem("Access", typeof(Access.Access_T_v3), IsNullable = false)]
-        //[XmlArrayItem("Call", typeof(Call_T_v3), IsNullable = false)]
-        //[XmlArrayItem("Part", typeof(Part_T_v3), IsNullable = false)]
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
             {
                 switch (reader.LocalName)
                 {
-                    case "xmlns":
-                        break;
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -433,21 +409,13 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     [XmlRoot("FlgNet", IsNullable = false)]
     internal class FlgNet_T_v4 : FlgNet_T_v3, IFlgNet_T
     {
-        //[XmlElement("LabelDeclaration", typeof(CompileUnitCommon.LabelDeclaration_T_v4))]
-        //[XmlArrayItem("Access", typeof(Access.Access_T_v4), IsNullable = false)]
-        //[XmlArrayItem("Call", typeof(Call_T_v4), IsNullable = false)]
-        //[XmlArrayItem("Part", typeof(Part_T_v4), IsNullable = false)]
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
             {
                 switch (reader.LocalName)
                 {
-                    case "xmlns":
-                        break;
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -566,21 +534,13 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
     [XmlRoot("FlgNet", IsNullable = false)]
     internal class FlgNet_T_v5 : FlgNet_T_v4, IFlgNet_T
     {
-        //[XmlArrayItem("Access", typeof(Access.Access_T_v5), IsNullable = false)]
-        //[XmlArrayItem("Call", typeof(Call_T_v5), IsNullable = false)]
-        //[XmlArrayItem("Part", typeof(Part_T_v5), IsNullable = false)]
-        //public new Object_G[] Parts { get; set; }
-
         public override void ReadXml(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
             {
                 switch (reader.LocalName)
                 {
-                    case "xmlns":
-                        break;
                     default:
-                        reader.Skip();
                         break;
                 }
             }

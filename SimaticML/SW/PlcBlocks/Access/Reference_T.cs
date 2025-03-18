@@ -39,7 +39,6 @@ namespace SimaticML.SW.PlcBlocks.Access
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -141,7 +140,6 @@ namespace SimaticML.SW.PlcBlocks.Access
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -234,7 +232,6 @@ namespace SimaticML.SW.PlcBlocks.Access
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -327,7 +324,6 @@ namespace SimaticML.SW.PlcBlocks.Access
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }

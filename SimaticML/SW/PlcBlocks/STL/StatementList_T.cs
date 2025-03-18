@@ -31,7 +31,6 @@ namespace SimaticML.SW.PlcBlocks.STL
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }

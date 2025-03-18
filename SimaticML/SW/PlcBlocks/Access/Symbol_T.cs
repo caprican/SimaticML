@@ -62,7 +62,6 @@ namespace SimaticML.SW.PlcBlocks.Access
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -172,14 +171,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                         Scope = scope;
                         ScopeSpecified = true;
                         break;
-
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -292,14 +289,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                         Scope = scope;
                         ScopeSpecified = true;
                         break;
-
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -410,14 +405,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                         Scope = scope;
                         ScopeSpecified = true;
                         break;
-
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -533,14 +526,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                         Scope = scope;
                         ScopeSpecified = true;
                         break;
-
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }

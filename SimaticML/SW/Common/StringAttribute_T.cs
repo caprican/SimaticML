@@ -67,7 +67,6 @@ namespace SimaticML.SW.Common
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -121,7 +120,6 @@ namespace SimaticML.SW.Common
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }

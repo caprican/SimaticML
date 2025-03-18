@@ -48,10 +48,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
                         UIdSpecified = true;
                         break;
 
-                    case "xmlns":
-                        break;
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -168,11 +165,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
                         UIdSpecified = true;
                         break;
 
-                    case "xmlns":
-                        break;
-
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -280,11 +273,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
                         UIdSpecified = true;
                         break;
 
-                    case "xmlns":
-                        break;
-
                     default :
-                        reader.Skip();
                         break;
                 }
             }
@@ -392,11 +381,7 @@ namespace SimaticML.SW.PlcBlocks.SCL
                         UIdSpecified = true;
                         break;
 
-                    case "xmlns":
-                        break;
-
                     default :
-                        reader.Skip();
                         break;
                 }
             }

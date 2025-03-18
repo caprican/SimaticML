@@ -76,7 +76,6 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                         break;
 
                     default: 
-                        reader.Skip(); 
                         break;
                 }
             }
@@ -189,7 +188,6 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -258,6 +256,10 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                         case nameof(SubCategory2Number):
                             SubCategory2Number = reader.ReadElementContentAsLong();
                             SubCategory2NumberSpecified = true;
+                            break;
+
+                        default:
+                            reader.Skip();
                             break;
                     }
                 }

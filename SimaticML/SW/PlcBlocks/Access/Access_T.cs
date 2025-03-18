@@ -79,14 +79,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                         Enum.TryParse<Scope_TE>(reader.ReadContentAsString(), out var scope);
                         Scope = scope;
                         break;
-
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -226,14 +224,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                         Enum.TryParse<Scope_TE_v2>(reader.ReadContentAsString(), out var scope);
                         Scope = scope;
                         break;
-
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -388,14 +384,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                         Enum.TryParse<Scope_TE_v2>(reader.ReadContentAsString(), out var scope);
                         Scope = scope;
                         break;
-
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -550,14 +544,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                         Enum.TryParse<Scope_TE_v2>(reader.ReadContentAsString(), out var scope);
                         Scope = scope;
                         break;
-
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -715,14 +707,12 @@ namespace SimaticML.SW.PlcBlocks.Access
                         Enum.TryParse<Scope_TE_v5>(reader.ReadContentAsString(), out var scope);
                         Scope = scope;
                         break;
-
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }

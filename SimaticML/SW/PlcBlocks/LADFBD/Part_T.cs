@@ -69,7 +69,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -181,7 +180,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -286,7 +284,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -389,7 +386,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -492,7 +488,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }

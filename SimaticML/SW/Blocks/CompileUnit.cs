@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
 using System.Xml.Schema;
@@ -8,7 +7,6 @@ using System.Xml.Serialization;
 namespace SimaticML.SW.Blocks
 {
     [Serializable]
-    //[XmlType(AnonymousType = true)]
     [XmlRoot(IsNullable = false)]
     [DebuggerDisplay("{CompositionName} ID={ID}")]
     public class CompileUnit : Object_T, IXmlSerializable
@@ -32,6 +30,9 @@ namespace SimaticML.SW.Blocks
                         CompositionName = reader.ReadContentAsString();
                         CompositionNameSpecified = true;
                         break;
+
+                    default:
+                        break;
                 }
             }
 
@@ -49,34 +50,8 @@ namespace SimaticML.SW.Blocks
             {
                 reader.Read();
 
-                var items = new List<Object_T>();
-                while (reader.MoveToContent() == XmlNodeType.Element)
-                {
-                    switch (reader.Name)
-                    {
-                        case "MultilingualText":
-                            var text = new MultilingualText_T();
-                            text.ReadXml(reader);
-                            items.Add(text);
-                            break;
-                        case "SW.Blocks.CompileUnit":
-                            var compileUnit = new CompileUnit();
-                            compileUnit.ReadXml(reader);
-                            items.Add(compileUnit);
-                            break;
-                        case "MultilingualTextItem":
-                            var textItem = new MultilingualTextItem_T();
-                            textItem.ReadXml(reader);
-                            items.Add(textItem);
-                            break;
-                        default:
-                            reader.Skip();
-                            break;
-                    }
-                }
-
-                if(items.Count > 0) Items = items.ToArray();
-                reader.ReadEndElement();
+                var items = Helpers.ObjectListHelper.Read(reader);
+                if (items.Length > 0) Items = items;
             }
             reader.ReadEndElement();
         }
@@ -95,6 +70,15 @@ namespace SimaticML.SW.Blocks
 
         public void ReadXml(XmlReader reader)
         {
+            while (reader.MoveToNextAttribute())
+            {
+                switch (reader.LocalName)
+                {
+                    default:
+                        break;
+                }
+            }
+
             reader.Read();
 
             while (reader.MoveToContent() == XmlNodeType.Element)
@@ -195,7 +179,7 @@ namespace SimaticML.SW.Blocks
                         NetworkSource = new NetworkSource_T();
                         NetworkSource.ReadXml(reader);
                         break;
-              
+
                     default:
                         reader.Skip();
                         break;

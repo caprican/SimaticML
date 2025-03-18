@@ -37,7 +37,6 @@ namespace SimaticML.SW.PlcBlocks.InstanceSupervisions
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }

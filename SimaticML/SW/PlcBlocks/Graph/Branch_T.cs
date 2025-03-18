@@ -52,7 +52,6 @@ namespace SimaticML.SW.PlcBlocks.Graph
                         break;
                     
                     default:
-                        reader.Skip();
                         break;
                 }
             }

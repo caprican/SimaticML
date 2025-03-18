@@ -33,7 +33,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -116,7 +115,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -190,7 +188,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -264,7 +261,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -338,7 +334,6 @@ namespace SimaticML.SW.PlcBlocks.LADFBD
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }

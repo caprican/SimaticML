@@ -65,6 +65,9 @@ namespace SimaticML.SW.Common
                     case nameof(SystemDefined):
                         SystemDefined = reader.ReadContentAsBoolean();
                         break;
+
+                    default:
+                        break;
                 }
             }
 
@@ -114,6 +117,9 @@ namespace SimaticML.SW.Common
                     case nameof(UId):
                         UId = reader.ReadContentAsInt();
                         UIdSpecified = true;
+                        break;
+
+                    default:
                         break;
                 }
 

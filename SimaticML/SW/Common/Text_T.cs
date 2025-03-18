@@ -37,7 +37,6 @@ namespace SimaticML.SW.Common
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -81,7 +80,6 @@ namespace SimaticML.SW.Common
                         break;
 
                     default:
-                        reader.Skip();
                         break;
                 }
             }

@@ -32,7 +32,6 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }
@@ -94,7 +93,6 @@ namespace SimaticML.SW.PlcBlocks.TypeSupervisions
                 switch (reader.LocalName)
                 {
                     default:
-                        reader.Skip();
                         break;
                 }
             }
