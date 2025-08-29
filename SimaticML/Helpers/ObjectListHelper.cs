@@ -32,7 +32,7 @@ namespace SimaticML.Helpers
                         items.Add(compileUnit);
                         break;
                     case "SW.Tags.PlcTag":
-                        var plcTag = new PlcTagTable();
+                        var plcTag = new PlcTag();
                         plcTag.ReadXml(reader);
                         items.Add(plcTag);
                         break;
