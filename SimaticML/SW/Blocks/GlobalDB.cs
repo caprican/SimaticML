@@ -49,6 +49,8 @@ namespace SimaticML.SW.Blocks
             reader.MoveToContent();
             if (reader.Name == "ObjectList")
             {
+                reader.Read();
+
                 var items = Helpers.ObjectListHelper.Read(reader);
                 if (items.Length > 0) Items = items;
             }
